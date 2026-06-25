@@ -1386,7 +1386,7 @@
         <div class="hero-float hero-float--bot">
           <span class="hero-float-dot"></span>
           <span class="hero-float-label">Audience</span>
-          <span class="hero-float-val" id="float-bot-val">n = 1,200 donors</span>
+          <span class="hero-float-val" id="float-bot-val">Sample size: 1,200 donors</span>
         </div>
         <div class="results-panel">
           <div class="sector-tabs" id="sectorTabs">
@@ -1398,7 +1398,7 @@
           <div class="panel-content" id="panelContent">
             <div class="rp-header">
               <div>
-                <div class="rp-eyebrow" id="rp-eyebrow">Fundraising Appeal · n=1,200</div>
+                <div class="rp-eyebrow" id="rp-eyebrow">Fundraising Appeal · Sample: 1,200</div>
                 <div class="rp-question" id="rp-question">Which message inspires first-time donors?</div>
               </div>
               <div class="sig-badge"><span class="sig-dot"></span>Significant</div>
@@ -1944,10 +1944,10 @@
 <script>
   /* ── Hero rotating panel ── */
   const sectors = [
-    { tab:'Nonprofits', eyebrow:'Fundraising Appeal · n=1,200', question:'Which message inspires first-time donors?', frameA:'Donor impact story', pctA:'+21 pts', wA:'86%', frameB:'Community outcomes', pctB:'+8 pts', wB:'44%', frameC:'Control', pctC:'—', wC:'22%', insight:'<strong>Strategist note:</strong> The donor impact story drove strongest lift among 35–54 lapsed donors — recommend leading with this frame in reactivation emails.', floatTop:'+21 pts lift', floatBot:'n = 1,200 donors' },
-    { tab:'Advocacy',   eyebrow:'Policy Campaign · n=1,400',    question:'What moves undecided voters on housing?',    frameA:'Values frame',        pctA:'+17 pts', wA:'78%', frameB:'Urgency frame',      pctB:'+5 pts',  wB:'38%', frameC:'Control', pctC:'—', wC:'25%', insight:'<strong>Strategist note:</strong> Values frame outperformed among suburban independents by 22 pts. Urgency framing showed backlash among 55+ audiences — avoid in that segment.', floatTop:'+17 pts lift', floatBot:'n = 1,400 voters' },
-    { tab:'Campaigns',  eyebrow:'Voter Outreach · n=1,600',     question:'Which message drives early vote intent?',    frameA:'Personal story',      pctA:'+18 pts', wA:'82%', frameB:'Economic impact',    pctB:'+6 pts',  wB:'41%', frameC:'Control', pctC:'—', wC:'28%', insight:'<strong>Strategist note:</strong> Personal story frame overperformed with women 45–64 by 27 pts. Recommend prioritising in pre-roll targeting for that segment.', floatTop:'+18 pts lift', floatBot:'n = 1,600 voters' },
-    { tab:'Labor',      eyebrow:'Member Mobilization · n=1,100', question:'Which message increases contract campaign support?', frameA:'Dignity & respect',   pctA:'+24 pts', wA:'89%', frameB:'Wages & benefits',   pctB:'+11 pts', wB:'56%', frameC:'Control', pctC:'—', wC:'27%', insight:'<strong>Strategist note:</strong> Dignity framing outperformed wages messaging across all age cohorts. Especially strong among members who joined in the last 2 years.', floatTop:'+24 pts lift', floatBot:'n = 1,100 members' }
+    { tab:'Nonprofits', eyebrow:'Fundraising Appeal · Sample: 1,200', question:'Which message inspires first-time donors?', frameA:'Donor impact story', pctA:'+21 pts', wA:'86%', frameB:'Community outcomes', pctB:'+8 pts', wB:'44%', frameC:'Control', pctC:'—', wC:'22%', insight:'<strong>Strategist note:</strong> The donor impact story drove strongest lift among 35–54 lapsed donors — recommend leading with this frame in reactivation emails.', floatTop:'+21 pts lift', floatBot:'Sample size: 1,200 donors' },
+    { tab:'Advocacy',   eyebrow:'Policy Campaign · Sample: 1,400',    question:'What moves undecided voters on housing?',    frameA:'Values frame',        pctA:'+17 pts', wA:'78%', frameB:'Urgency frame',      pctB:'+5 pts',  wB:'38%', frameC:'Control', pctC:'—', wC:'25%', insight:'<strong>Strategist note:</strong> Values frame outperformed among suburban independents by 22 pts. Urgency framing showed backlash among 55+ audiences — avoid in that segment.', floatTop:'+17 pts lift', floatBot:'Sample size: 1,400 voters' },
+    { tab:'Campaigns',  eyebrow:'Voter Outreach · Sample: 1,600',     question:'Which message drives early vote intent?',    frameA:'Personal story',      pctA:'+18 pts', wA:'82%', frameB:'Economic impact',    pctB:'+6 pts',  wB:'41%', frameC:'Control', pctC:'—', wC:'28%', insight:'<strong>Strategist note:</strong> Personal story frame overperformed with women 45–64 by 27 pts. Recommend prioritising in pre-roll targeting for that segment.', floatTop:'+18 pts lift', floatBot:'Sample size: 1,600 voters' },
+    { tab:'Labor',      eyebrow:'Member Mobilization · Sample: 1,100', question:'Which message increases contract campaign support?', frameA:'Dignity & respect',   pctA:'+24 pts', wA:'89%', frameB:'Wages & benefits',   pctB:'+11 pts', wB:'56%', frameC:'Control', pctC:'—', wC:'27%', insight:'<strong>Strategist note:</strong> Dignity framing outperformed wages messaging across all age cohorts. Especially strong among members who joined in the last 2 years.', floatTop:'+24 pts lift', floatBot:'Sample size: 1,100 members' }
   ];
   let heroCurrent = 0, heroTimer = null;
 
