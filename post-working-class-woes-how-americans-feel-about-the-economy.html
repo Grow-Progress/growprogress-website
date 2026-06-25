@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Working-Class Woes: How Americans Feel About the Economy — Grow Progress</title>
+  <meta name="description" content="72% of working-class Americans are critical of the economy and don't feel the system works for everyone. Here's what our Audience Understanding Survey found.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --shadow-sm:0 1px 3px rgba(31,22,40,.08),0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:0 2px 8px rgba(31,22,40,.1),0 12px 40px rgba(31,22,40,.08);
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.08s;} .reveal-delay-2{transition-delay:.16s;} .reveal-delay-3{transition-delay:.24s;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s;}
+    .nav.scrolled{background:rgba(242,242,253,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .nav-links a.active{color:var(--purple);font-weight:600;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:var(--muted);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    .has-dropdown{position:relative;}
+    .has-dropdown > a{display:flex;align-items:center;gap:.3rem;}
+    .has-dropdown > a svg{width:12px;height:12px;transition:transform .2s;}
+    .has-dropdown:hover > a svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(-8px);width:640px;background:#fff;border:1px solid rgba(67,44,151,.1);border-radius:1.25rem;box-shadow:0 8px 40px rgba(31,22,40,.12);padding:.75rem 1.25rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:200;}
+    .has-dropdown:hover .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav-dropdown--single{width:280px;grid-template-columns:1fr;}
+    .nav-dd-item{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem;border-radius:.75rem;text-decoration:none;transition:background .15s;}
+    .nav-dd-item:hover{background:rgba(67,44,151,.05);}
+    .nav-dd-icon{width:36px;height:36px;border-radius:.5rem;background:var(--ghost);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-dd-icon svg{width:18px;height:18px;color:var(--purple);}
+    .nav-dd-text{display:flex;flex-direction:column;gap:.2rem;}
+    .nav-dd-label{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:var(--ink);}
+    .nav-dd-desc{font-size:.78rem;color:var(--faint);line-height:1.4;}
+    .nav-dd-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+    .nav-dd-item--method{background:linear-gradient(135deg,rgba(67,44,151,.06) 0%,rgba(108,155,255,.04) 100%);border:1px solid rgba(67,44,151,.1);border-radius:.75rem;}
+    .nav-dd-item--method .nav-dd-icon{background:var(--purple);}
+    .nav-dd-item--method .nav-dd-icon svg{color:#fff;}
+    .nav-dd-item--method .nav-dd-label{color:var(--purple);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── POST HERO ── */
+    .post-hero{padding:8.5rem 0 4rem;background:linear-gradient(160deg,#fafafe 0%,#f0eef9 100%);position:relative;overflow:hidden;}
+    .post-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(67,44,151,.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+    .post-hero::after{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(108,155,255,.12) 0%,transparent 65%);pointer-events:none;}
+    .post-hero-inner{position:relative;z-index:1;max-width:760px;}
+    .post-type-chip{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border-radius:2rem;margin-bottom:1.25rem;}
+    .post-type-chip--research{background:#e0e7ff;color:#3730a3;}
+    .post-h1{font-family:var(--font-h);font-weight:900;font-size:clamp(1.875rem,4vw,2.875rem);letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin-bottom:1.125rem;}
+    .post-author-row{display:flex;align-items:center;gap:.875rem;}
+    .author-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--mid));display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:800;font-size:.8125rem;color:#fff;flex-shrink:0;}
+    .author-name{font-family:var(--font-h);font-weight:700;font-size:.9375rem;color:var(--ink);}
+    .author-meta{font-size:.8125rem;color:var(--faint);}
+    .author-meta-sep{margin:0 .375rem;opacity:.4;}
+
+    /* Cover image */
+    .post-cover-wrap{margin-top:2.5rem;position:relative;z-index:1;}
+    .post-cover{width:100%;height:400px;border-radius:var(--r-xl);overflow:hidden;background:linear-gradient(135deg,rgba(67,44,151,.07) 0%,rgba(108,155,255,.07) 100%);display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(67,44,151,.09);}
+    .post-cover img{width:100%;height:100%;object-fit:cover;display:block;}
+    .post-cover img[src=""]{display:none;}
+    .post-cover-ph{font-family:var(--font-h);font-weight:900;font-size:7rem;letter-spacing:-.06em;opacity:.1;color:var(--purple);user-select:none;pointer-events:none;}
+    .post-cover-caption{font-size:.8rem;color:var(--faint);margin-top:.625rem;text-align:center;font-style:italic;}
+
+    /* ── POST LAYOUT ── */
+    .post-layout-section{padding:4rem 0 5rem;background:var(--white);}
+    .post-layout{display:grid;grid-template-columns:1fr 260px;gap:3.5rem;align-items:start;}
+
+    /* ── KEY STATS CALLOUT ── */
+    .key-stats-callout{background:linear-gradient(135deg,rgba(55,48,163,.07),rgba(91,93,192,.04));border:1.5px solid rgba(55,48,163,.18);border-radius:1rem;padding:1.5rem 1.75rem;margin:0 0 2.5rem;}
+    .key-stats-callout-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3730a3;margin-bottom:1rem;}
+    .key-stats-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+    .key-stats-list li{display:flex;align-items:flex-start;gap:.75rem;font-size:.9375rem;line-height:1.55;color:var(--text);}
+    .key-stats-list li::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:#3730a3;flex-shrink:0;margin-top:.55em;}
+
+    /* ── ARTICLE BODY ── */
+    .post-body{font-size:1.0625rem;line-height:1.8;color:var(--text);}
+    .post-body h2{font-family:var(--font-h);font-weight:800;font-size:1.5rem;color:var(--ink);margin:2.5rem 0 .875rem;letter-spacing:-.02em;}
+    .post-body p{margin-bottom:1.25rem;}
+    .post-body blockquote{border-left:3px solid var(--purple);padding:1rem 1.5rem;margin:2rem 0;background:rgba(67,44,151,.04);border-radius:0 .75rem .75rem 0;font-family:var(--font-h);font-weight:700;font-size:1.125rem;color:var(--purple);font-style:italic;line-height:1.5;}
+    .post-body ul{padding-left:1.5rem;margin-bottom:1.25rem;}
+    .post-body ol{padding-left:1.5rem;margin-bottom:1.25rem;}
+    .post-body li{margin-bottom:.5rem;}
+
+    /* ── SIDEBAR ── */
+    .post-sidebar{position:sticky;top:88px;}
+    .sidebar-card{background:var(--ghost);border:1.5px solid rgba(67,44,151,.09);border-radius:var(--r-lg);padding:1.25rem;margin-bottom:1.25rem;}
+    .sidebar-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:.875rem;}
+    .sidebar-meta-row{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.125rem;}
+    .sidebar-meta-item{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted);}
+    .sidebar-meta-badge{display:inline-block;background:#e0e7ff;color:#3730a3;font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:2rem;}
+    .sidebar-cta{background:linear-gradient(135deg,var(--purple),var(--mid));border-radius:var(--r-lg);padding:1.375rem;text-align:center;}
+    .sidebar-cta-h{font-family:var(--font-h);font-weight:800;font-size:1rem;color:#fff;margin-bottom:.375rem;line-height:1.25;}
+    .sidebar-cta-sub{font-size:.8125rem;color:rgba(255,255,255,.75);line-height:1.5;margin-bottom:1rem;}
+    .sidebar-cta-btn{display:inline-block;padding:.6rem 1.125rem;background:#fff;color:var(--purple);font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:.5rem;text-decoration:none;transition:background .15s,transform .15s;}
+    .sidebar-cta-btn:hover{background:var(--lavender);transform:translateY(-1px);}
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section{background:var(--ghost);padding:4rem 0;border-top:1px solid rgba(67,44,151,.08);}
+    .newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .newsletter-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+    .newsletter-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:nlPulse 2s infinite;}
+    @keyframes nlPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+    .newsletter-sub{font-size:.9375rem;line-height:1.65;color:var(--muted);}
+    .newsletter-form{display:flex;flex-direction:column;gap:.75rem;}
+    .nl-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+    .nl-input{width:100%;padding:.75rem 1rem;font-family:var(--font-b);font-size:.9375rem;color:var(--ink);background:#fff;border:1.5px solid rgba(67,44,151,.15);border-radius:.625rem;outline:none;transition:border-color .15s,box-shadow .15s;}
+    .nl-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(67,44,151,.1);}
+    .nl-input::placeholder{color:var(--faint);}
+    .nl-submit{width:100%;padding:.875rem;font-family:var(--font-h);font-weight:700;font-size:1rem;color:#fff;background:var(--purple);border:none;border-radius:.625rem;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .nl-submit:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,44,151,.4);}
+    .nl-privacy{font-size:.72rem;color:var(--faint);text-align:center;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .post-layout{grid-template-columns:1fr;}
+      .post-sidebar{position:static;}
+      .footer-top{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:640px){
+      .container{padding:0 1.25rem;}
+      .post-hero{padding:7rem 0 3rem;}
+      .post-cover{height:240px;}
+      .post-cover-ph{font-size:4.5rem;}
+      .newsletter-inner{grid-template-columns:1fr;gap:2rem;}
+      .nl-row{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-dark.svg" alt="Grow Progress" class="nav-gp-logo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Rapid Message Testing</span><span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span></div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Audience Understanding</span><span class="nav-dd-desc">Map who your audience is and what they believe</span></div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Pulse Surveys</span><span class="nav-dd-desc">Real-time opinion tracking as events unfold</span></div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Library</span><span class="nav-dd-desc">500+ studies searchable by topic and audience</span></div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-eyebrow">Methodology</span><span class="nav-dd-label">How It Works</span><span class="nav-dd-desc">The RCT science behind every GP study</span></div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Sandbox</span><span class="nav-dd-desc">Self-serve message testing — launch in minutes</span></div>
+        </a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">Who We Serve
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown nav-dropdown--single">
+        <a href="politics.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span></div>
+        </a>
+        <a href="advocacy.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="6" y1="1" x2="6" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="10" y1="1" x2="10" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="14" y1="1" x2="14" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span></div>
+        </a>
+        <a href="nonprofits.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span></div>
+        </a>
+        <a href="labor.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span></div>
+        </a>
+      </div>
+    </li>
+    <li><a href="insights.html" style="font-weight:600;" class="active">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Log in</a>
+    <a href="demo.html" class="btn-nav">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- POST HERO -->
+<section class="post-hero">
+  <div class="container">
+    <div class="post-hero-inner reveal">
+      <div class="post-type-chip post-type-chip--research">Research</div>
+      <h1 class="post-h1">Working-Class Woes: How Americans Feel About the Economy</h1>
+      <div class="post-author-row">
+        <div class="author-avatar">GP</div>
+        <div>
+          <div class="author-name">The GP Team</div>
+          <div class="author-meta">May 14, 2025<span class="author-meta-sep">·</span>Research</div>
+        </div>
+      </div>
+    </div>
+    <!-- Cover zone -->
+    <div class="post-cover-wrap reveal reveal-delay-1">
+      <div class="post-cover">
+        <span class="post-cover-ph">Economy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POST BODY -->
+<section class="post-layout-section">
+  <div class="container">
+    <div class="post-layout">
+
+      <!-- MAIN ARTICLE -->
+      <article class="post-body reveal">
+
+        <!-- Key Stats Callout -->
+        <div class="key-stats-callout">
+          <div class="key-stats-callout-label">Key Findings</div>
+          <ul class="key-stats-list">
+            <li>72% of working-class Americans are critical of the economy and don't feel the system works for everyone</li>
+            <li>42% say the economy is broken and only benefits the rich and corporations</li>
+            <li>30% say the economy works for some but leaves too many people behind</li>
+            <li>17% say they don't think about the economy — they're just focused on getting by</li>
+          </ul>
+        </div>
+
+        <p>Navigating the financial struggles and disillusionment in today's economy.</p>
+
+<p>2025 has been a rough year for the economy. Older Americans who have reached or are nearing retirement have seen, in some cases, their 401(k) portfolios drop tens of thousands of dollars as the recent tariffs have put the stock market into turmoil. This has left many fearing how to make ends meet and whether they can afford to stay retired.</p>
+
+<p>Millennials, who have already experienced four "once in a generation" economic crises, are buying houses in record-low numbers thanks to a combination of higher-than-ever college costs and debt, median housing prices costing over five times as much as the median salary, wages not keeping up with the cost of living, and housing shortages.</p>
+
+<p>Even necessities like gas, groceries, and insurance continue to rise, leaving many families, especially those in vulnerable financial situations, wondering how they will make ends meet. Inflation and the cost of everyday items were already a top issue for voters last November, which is why Trump campaigned on a promise to lower prices. However, for working-class families, many of whom voted for Trump, President Trump's tariff plan will likely increase prices and appear to contradict a key campaign pledge.</p>
+
+<p>Amidst this turbulent economic time, we wanted to know: how do working-class Americans feel about the state of the U.S. economy?</p>
+
+<h2 id="how-we-tested">How We Tested</h2>
+
+<p>Using the Grow Progress Audience Understanding Survey tool, we surveyed over 1,500 working-class Americans. We were able to target working-class Americans through a combination of demographics, geographics, and household income factors.</p>
+
+<p>We asked them, "Which of the following best describes your feelings about the U.S. economy, even if none are completely accurate?"</p>
+
+<ul>
+<li>The economy works as it should: it rewards hard work and personal responsibility.</li>
+<li>The economy works well for some, but too many people are left behind.</li>
+<li>The economy is broken: it only works for large corporations and the wealthy with too much power.</li>
+<li>I don't think much about how the economy works—I just focus on getting by.</li>
+</ul>
+
+<p>Afterward, we asked them to explain why they selected that option in their own words via an open-ended question, as well as several questions about their thoughts and emotions regarding the economy and their political beliefs. In less than 48 hours, we had the following results.</p>
+
+<h2 id="topline-results">Topline Results</h2>
+
+<p>Overall, 42% of the respondents felt that the economy is broken and only benefits the rich and corporations. The next highest segment, at 30%, was those who felt the economy worked for a select few but left too many people behind. Next, 17% said they don't think about how the economy works; they're just focused on getting by. At 11%, the lowest percentile felt that the economy works as intended and rewards those working hard.</p>
+
+<p>The majority (72%) of working-class people are critical of the economy in some way and don't feel our system works for everyone. Furthermore, with less than 20% reporting that they don't think about the economy, this suggests that the vast majority of working-class people in the U.S., approximately 8 out of every 10, are concerned about the economy and its impact on them.</p>
+
+<p>While most people likely share a similar high-level view on economic issues, namely that they want prices to decrease and personal wealth to increase, how they internalize this view may differ significantly based on their worldviews, socioeconomic opinions, and political attitudes. Grow Progress's Audience Understanding Survey shows us this greater level of nuance.</p>
+
+<h2 id="broken-vs-works-for-some">Completely Broken vs. Works For Some Comparison</h2>
+
+<p>The way we framed the issues with the economy—completely broken versus a lighter tone that works for some but not all—resulted in different types of interesting responses. As these are the two most significant segments, at 42% and 30%, we wanted to compare them to better understand the key differences.</p>
+
+<p>Those who felt the economy was "completely broken" leaned more towards being independent and moderate, and mostly voted Democrat. Those who thought it was "working for some" were pretty evenly split on party identification, but the majority voted Republican in 2024. Both of these segments were critical of Republicans and Democrats for not doing enough to help the poor and working class; however, the "working for some" segment is more hopeful about the current administration and less critical of Republicans.</p>
+
+<p>Both segments generally feel that the economy is being set up to favor the wealthy and is tough for lower-income individuals. Their open-ended responses acknowledge and discuss systemic economic issues that benefit the wealthy and leave the lower and middle classes behind. However, the "completely broken" segment is more upset about this inequality and seems overall more frustrated, using more critical and negative language and getting more specific about structural issues.</p>
+
+<p>In contrast, the "works for some" segment, while concerned that the working and middle classes don't benefit as much, is less critical of the system, viewing it as a "fact of life" and focusing more on how the economy operates overall. One respondent noted: "The economy works for the upper middle class, I think, but not as well for the lower part of the middle class. It works, but not as well, since it's too expensive. Still, I believe in time it will even out for most."</p>
+
+<h2 id="key-opinion-segments">Key Opinion Segments</h2>
+
+<p>Our team of Research Strategists examined each key opinion segment ("the economy is broken," "the economy works well for some," "the economy is working as intended," "I don't think about the economy") to better understand the people who answered the main question, "Which of the following best describes your feelings about the U.S. economy, even if none are completely accurate?"</p>
+
+<p>We also analyzed its general demographic makeup, values, and reasons for answering the way it did. We achieve this by utilizing our Grow Progress Value Scores. Each respondent is asked how well 17 universally held human values, such as Achievement, Equality, and Patriotism, apply to them. Their responses are calculated into value scores corresponding to Grow Progress Values Segments.</p>
+
+<p>Lastly, to hear from respondents in their own words, we asked them an open-ended question about why they answered the way they did.</p>
+
+<h2 id="economy-is-broken">The Economy is Broken</h2>
+
+<h2>Demographic Highlights</h2>
+
+<ul>
+<li>40% voted Democrat in 2024</li>
+<li>35% are registered Democrats</li>
+<li>57% were women</li>
+<li>45% are aged 55+</li>
+</ul>
+
+<p>When we dug into the segment that frames the economy as broken (42%), we saw they were primarily independent and moderate, and the majority voted Democratic in 2024. We asked each answer segment to describe their class, and 65% of the respondents in this category described themselves as working class, which they categorized as:</p>
+
+<ul>
+<li>Blue collar</li>
+<li>Living paycheck to paycheck</li>
+<li>Low income</li>
+<li>Have full-time jobs</li>
+</ul>
+
+<h2>Values Highlights</h2>
+
+<p>In the "economy is broken" segment, we see a more critical view of the world and political systems. They agree with statements like:</p>
+
+<ul>
+<li>Politicians don't really care about people like me</li>
+<li>Government should do more to solve problems and help meet the needs of people</li>
+<li>The world is becoming a more and more dangerous place</li>
+</ul>
+
+<h2>Open-Ended Responses</h2>
+
+<p>Respondents in this segment frequently discussed the cost of living and their personal experiences with cost-of-living issues. One respondent said: "Everything costs so much more these days. Food went up 30 percent at the beginning of the year..."</p>
+
+<p>Observers noted several variations of the sentiment that the rich continue to get richer at the expense of the poor: "The economy works well for the rich and wealthy. They get all the tax breaks while the middle-class..."</p>
+
+<p>This segment was also vocal in their opinions about how the Government isn't doing its job and criticized it for not handling the systemic issues: "The Government has forgotten what our founding fathers created the Government for..."</p>
+
+<h2 id="works-for-some">The Economy Works Well for Some</h2>
+
+<h2>Demographic Highlights</h2>
+
+<ul>
+<li>43% voted Republican in 2024</li>
+<li>54% were men</li>
+<li>25% regularly attend church</li>
+<li>33% are aged 18-34</li>
+</ul>
+
+<p>The segment that states the economy works well for some but leaves too many behind (30%) is fairly evenly split on overall party identification; however, the majority voted Republican in 2024. When asked whether they consider themselves working-class, 53% agreed.</p>
+
+<h2>Values Highlights</h2>
+
+<p>This segment of respondents tends to value optimism, social trust, strength, and tradition. They showed agreement with more optimistic statements, such as:</p>
+
+<ul>
+<li>Most people can be trusted</li>
+<li>I think we can make a better world for future generations in our country</li>
+<li>Most people who want to get ahead can make it if they're willing to work hard</li>
+</ul>
+
+<h2>Open-Ended Responses</h2>
+
+<p>People in this segment spoke about the systemic issues they see that result in the economy lopsidedly favoring the already rich over the lower and middle class. One person noted: "I think the economy does or has worked well for those who work hard, but it seems that it takes the help of generational wealth..."</p>
+
+<p>Another shared: "I have seen 'regular people' achieve great success with hard work and dedication, but I have also seen hardworking people who cannot get ahead..."</p>
+
+<p>As mentioned earlier, this segment features more optimistic messages about the economy's improvement. Several participants expressed feelings of hopefulness while acknowledging that times are still tough: "Some people are thriving, and many are struggling, but I feel things are improving..."</p>
+
+<h2 id="works-as-intended">The Economy Works as it Should</h2>
+
+<h2>Demographic Highlights</h2>
+
+<ul>
+<li>61% voted Republican in 2024</li>
+<li>54% are registered Republicans</li>
+<li>65% were men</li>
+<li>49% were Evangelical</li>
+</ul>
+
+<p>The small portion (11%) of respondents who said the economy works as it should is distinctly more Republican, a majority male, and 63% say that the Republican party helps the economy work better for them.</p>
+
+<h2>Values Highlights</h2>
+
+<p>Like the previous segment, these respondents value tradition, social trust, and optimism, and believe hard work pays off and can lead to a better future.</p>
+
+<p>This segment agreed with the statements that:</p>
+
+<ul>
+<li>Traditions are important for an orderly society</li>
+<li>You can get ahead if you work hard enough</li>
+<li>Most people can be trusted</li>
+</ul>
+
+<h2>Open-Ended Responses</h2>
+
+<p>Several people in this segment mention the American Dream, and we saw several variations on the idea that "the U.S. is truly the land of opportunity, where if you work hard and play by the rules, you can succeed and will be rewarded."</p>
+
+<p>They also spoke about the opposite side of that coin, saying: "I find that a lot of people are left behind because they make poor choices when young and have a hard time catching up. Some people are just lazy."</p>
+
+<p>Many were enthusiastic about President Trump's role in the economy. One person said: "We are in the midst of an economic revolution, which is intended to make that statement more true than ever."</p>
+
+<p>Another told us: "The thing that's saving the US economy is the fact that we have a president who actually cares about getting rid of wasteful spending..."</p>
+
+<h2 id="just-getting-by">I Don't Think About the Economy—I'm Just Trying to Get By</h2>
+
+<h2>Demographic Highlights</h2>
+
+<ul>
+<li>56% did not vote in 2024</li>
+<li>56% are Independent or Other</li>
+<li>75% have a High School education or less</li>
+<li>60% were women</li>
+</ul>
+
+<p>The 17% of respondents who don't think much about the economy show lower levels of education than other segments, and they don't believe either party helps the economy work better for them. They also identify as the most politically uninformed, so we can infer that this segment likely doesn't vote or follow news and policies around the economy as frequently as the other segments.</p>
+
+<h2>Values Highlights</h2>
+
+<p>This segment, who says they don't think about the economy much and are just trying to get by, tend to agree with statements and values around individualism and tradition, such as:</p>
+
+<ul>
+<li>Traditional families should get more respect and support</li>
+<li>The Government should prioritize individual freedom above all else</li>
+</ul>
+
+<h2>Open-Ended Responses</h2>
+
+<p>This segment of people shared with us that they feel a great deal of pessimism and reluctant acceptance that things will not change for them, regardless of who is in office. One person said: "Every time there is a presidential election, the candidate claims to have a plan to fix the economy..."</p>
+
+<p>We also saw many variations of: "It is useless to worry about things I can't change like the economy, so I focus on my own situation," and "I could care less about the economy. There's nothing I can do about it."</p>
+
+<p>Many in this group also said they are more concerned with dealing with their immediate needs, saying: "I'm just trying to survive," and "I have no money for extras. I can not fully pay my bills each month."</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>It's clear that most working-class Americans are feeling let down by the economy. The survey showed that 72% view the system as flawed, with approximately three out of four working-class people believing it mostly benefits the wealthy at the expense of the lower and middle classes. Those who think the economy is broken are particularly frustrated and are calling for real change.</p>
+
+<p>On the other hand, those who feel the economy works for some seem more accepting of the inequalities, but they still want improvements. Meanwhile, those who believe it's working as intended tend to attribute others' lack of success to their own individual shortcomings, which they need to address and take personal responsibility for.</p>
+
+<p>This survey highlights the range of opinions within the working class and the nuances of how different people see their economic struggles. Leaders and policymakers seeking to enact change and instill hope in the people must collect and listen to these concerns to better understand and address their target audiences' various needs and values.</p>
+
+<p>Instead of treating the working class as one monolithic group with a shared experience and worldview, Audience Understanding Surveys unlock the insights needed to understand and speak to people's motivations and struggles on a deeper, more personal level.</p>
+
+<p>Ready to find the messaging that resonates with your audiences? Learn more about Grow Progress' Audience Understanding Surveys and Rapid Message Tests, and be sure to sign up for our newsletter and never miss a beat.</p>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="post-sidebar reveal reveal-delay-2">
+
+        <div class="sidebar-card">
+          <p class="sidebar-label">About this article</p>
+          <div class="sidebar-meta-row">
+            <div class="sidebar-meta-item">
+              <span class="sidebar-meta-badge">Research</span>
+            </div>
+            <div class="sidebar-meta-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;color:var(--faint)"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="1.75"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="1.75"/></svg>
+              May 14, 2025
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <p class="sidebar-label">In this article</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.1rem;">
+            <li><a href="#how-we-tested" style="display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;">How We Tested</a></li>
+            <li><a href="#topline-results" style="display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;">Topline Results</a></li>
+            <li><a href="#broken-vs-works-for-some" style="display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;">Broken vs. Works for Some</a></li>
+            <li><a href="#key-opinion-segments" style="display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;">Key Opinion Segments</a></li>
+            <li><a href="#economy-is-broken" style="display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;">The Economy is Broken</a></li>
+            <li><a href="#works-for-some" style="display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;">Works Well for Some</a></li>
+            <li><a href="#works-as-intended" style="display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;">Works as it Should</a></li>
+            <li><a href="#just-getting-by" style="display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;">Just Trying to Get By</a></li>
+            <li><a href="#conclusion" style="display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;">Conclusion</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-cta">
+          <div class="sidebar-cta-h">Run your own test</div>
+          <div class="sidebar-cta-sub">Understand what your audience really thinks — and what messaging moves them.</div>
+          <a href="rapid-message-testing.html" class="sidebar-cta-btn">Run your own test →</a>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="reveal">
+        <div class="newsletter-eyebrow">
+          <span class="newsletter-eyebrow-dot"></span>
+          Grow Progress Newsletter
+        </div>
+        <p class="newsletter-sub">Monthly insights from 500+ studies — what moves people, what does not, and what it means for your next campaign.</p>
+      </div>
+      <form class="newsletter-form reveal reveal-delay-1" onsubmit="return false;">
+        <div class="nl-row">
+          <input class="nl-input" type="text" placeholder="First name" autocomplete="given-name">
+          <input class="nl-input" type="text" placeholder="Last name" autocomplete="family-name">
+        </div>
+        <input class="nl-input" type="email" placeholder="Work email" autocomplete="email">
+        <button class="nl-submit" type="submit">Subscribe</button>
+        <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div>
+          <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        </div>
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+  if (window.scrollY > 20) nav.classList.add('scrolled');
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Sidebar active TOC link on scroll
+  const headings = document.querySelectorAll('.post-body h2[id]');
+  const tocLinks = document.querySelectorAll('.post-sidebar a[href^="#"]');
+  if (headings.length && tocLinks.length) {
+    const headingObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          tocLinks.forEach(link => {
+            link.style.color = link.getAttribute('href') === '#' + id ? 'var(--purple)' : '';
+            link.style.fontWeight = link.getAttribute('href') === '#' + id ? '600' : '';
+          });
+        }
+      });
+    }, {rootMargin:'-20% 0px -70% 0px'});
+    headings.forEach(h => headingObserver.observe(h));
+  }
+</script>
+</body>
+</html>

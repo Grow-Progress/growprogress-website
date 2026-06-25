@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Use — Grow Progress</title>
+  <meta name="description" content="Grow Progress Terms of Use — effective October 30, 2023.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --shadow-sm:0 1px 3px rgba(31,22,40,.08),0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:0 2px 8px rgba(31,22,40,.1),0 12px 40px rgba(31,22,40,.08);
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s;background:rgba(242,242,253,.95);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .has-dropdown{position:relative;}
+    .has-dropdown>a{display:flex;align-items:center;gap:.3rem;}
+    .has-dropdown>a svg{width:12px;height:12px;transition:transform .2s;flex-shrink:0;}
+    .has-dropdown:hover>a svg,.has-dropdown:focus-within>a svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:640px;background:#fff;border:1px solid rgba(67,44,151,.1);border-radius:1.25rem;box-shadow:0 8px 40px rgba(31,22,40,.12),0 2px 12px rgba(31,22,40,.06);padding:.75rem 1.25rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-8px);transition:opacity .18s ease,transform .18s ease;z-index:200;}
+    .has-dropdown:hover .nav-dropdown,.has-dropdown:focus-within .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav-dd-item{display:flex;align-items:flex-start;gap:.875rem;padding:.875rem;border-radius:.75rem;text-decoration:none;transition:background .15s;}
+    .nav-dd-item:hover{background:rgba(67,44,151,.05);}
+    .nav-dd-icon{width:36px;height:36px;border-radius:.625rem;background:rgba(67,44,151,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-dd-icon svg{width:18px;height:18px;color:#432C97;}
+    .nav-dd-text{display:flex;flex-direction:column;gap:.2rem;}
+    .nav-dd-label{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:#1F1628;line-height:1;}
+    .nav-dd-desc{font-size:.75rem;color:rgba(31,22,40,.45);line-height:1.4;}
+    .nav-dd-item.active{background:rgba(67,44,151,.07);}
+    .nav-dd-item.active .nav-dd-label{color:#432C97;}
+    .nav-dd-item--method{background:linear-gradient(135deg,rgba(67,44,151,.06) 0%,rgba(108,155,255,.04) 100%);border:1px solid rgba(67,44,151,.1);border-radius:.75rem;}
+    .nav-dd-item--method:hover{background:linear-gradient(135deg,rgba(67,44,151,.1) 0%,rgba(108,155,255,.08) 100%);}
+    .nav-dd-item--method .nav-dd-icon{background:var(--purple);}
+    .nav-dd-item--method .nav-dd-icon svg{color:#fff;}
+    .nav-dd-item--method .nav-dd-label{color:var(--purple);}
+    .nav-dd-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+    .nav-dropdown--single{width:280px;grid-template-columns:1fr;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:var(--muted);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── LEGAL CONTENT ── */
+    .legal-hero{padding:9rem 0 4rem;border-bottom:1px solid rgba(67,44,151,.08);}
+    .legal-eyebrow{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;display:block;}
+    .legal-hero h1{font-family:var(--font-h);font-weight:900;font-size:clamp(2.5rem,4vw,3.5rem);letter-spacing:-.035em;line-height:1.05;color:var(--ink);margin-bottom:.875rem;}
+    .legal-date{font-size:.9375rem;color:var(--muted);}
+
+    .legal-body{max-width:780px;padding:4rem 0 6rem;}
+    .legal-body h2{font-family:var(--font-h);font-weight:800;font-size:1.375rem;color:var(--ink);margin:3rem 0 .875rem;letter-spacing:-.02em;line-height:1.2;}
+    .legal-body h2:first-child{margin-top:0;}
+    .legal-body p{font-size:1rem;line-height:1.85;color:var(--muted);margin-bottom:1.25rem;}
+    .legal-body p:last-child{margin-bottom:0;}
+    .legal-body ol,.legal-body ul{padding-left:1.5rem;margin-bottom:1.25rem;display:flex;flex-direction:column;gap:.625rem;}
+    .legal-body li{font-size:1rem;line-height:1.75;color:var(--muted);}
+    .legal-body address{font-style:normal;font-size:1rem;line-height:1.85;color:var(--muted);margin-bottom:1.25rem;}
+    .legal-body .caps{text-transform:uppercase;font-weight:600;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+    @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:640px){.container{padding:0 1.25rem;}.footer-top{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-dark.svg" alt="Grow Progress" class="nav-gp-logo" id="navLogo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Rapid Message Testing</span><span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span></div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Audience Understanding</span><span class="nav-dd-desc">Map who your audience is and what they believe</span></div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Pulse Surveys</span><span class="nav-dd-desc">Real-time opinion tracking as events unfold</span></div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Library</span><span class="nav-dd-desc">500+ studies searchable by topic and audience</span></div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-eyebrow">Methodology</span><span class="nav-dd-label">How It Works</span><span class="nav-dd-desc">The RCT science behind every GP study</span></div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Sandbox</span><span class="nav-dd-desc">Self-serve message testing — launch in minutes</span></div>
+        </a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">Who We Serve
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown nav-dropdown--single">
+        <a href="politics.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span><span class="nav-dd-desc">Campaigns, PACs &amp; party committees</span></div>
+        </a>
+        <a href="advocacy.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span><span class="nav-dd-desc">Issue campaigns &amp; policy fights</span></div>
+        </a>
+        <a href="nonprofits.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span><span class="nav-dd-desc">Donors, programs &amp; community impact</span></div>
+        </a>
+        <a href="labor.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span><span class="nav-dd-desc">Contract campaigns &amp; member mobilization</span></div>
+        </a>
+      </div>
+    </li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Sign In</a>
+    <a href="demo.html" class="btn-nav">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <div class="container">
+    <span class="legal-eyebrow">Legal</span>
+    <h1>Terms of Use</h1>
+    <p class="legal-date">Effective Date: October 30, 2023</p>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+  <div class="legal-body">
+
+    <h2>User Representations</h2>
+    <p>You represent and warrant that: (1) you have the legal capacity and you agree to comply with these Terms of Use; (2) you are not a minor in the jurisdiction in which you reside; (3) you will not use the Site, Content, and Services for any illegal or unauthorized purpose; and (4) your use of the Site, Content, and Services will not violate any applicable law or regulation.</p>
+
+    <h2>Ownership</h2>
+    <p>All right, title, and interest in and to the Site, Content, and Services are and will remain the exclusive property of Grow Progress and its licensors. The Site, Content, and Services are protected by copyright, trademark, and other laws of both the United States and foreign countries. Except as expressly permitted in these Terms of Use, you may not reproduce, modify or prepare derivative works based upon, distribute, sell, transfer, publicly display, publicly perform, transmit, or otherwise use the Site, Content, or Services. You may not copy or modify the HTML code used to generate web pages on the Site.</p>
+
+    <h2>User Data</h2>
+    <p>We will maintain certain data that you transmit to the Site or Services for the purpose of managing the performance of the Site or Services, as well as data relating to your use of the Site or Services. Although we perform regular routine backups of data, you are solely responsible for all data that you transmit or that relates to any activity you have undertaken using the Site or Services. You agree that we shall have no liability to you for any loss or corruption of any such data, and you hereby waive any right of action against us arising from any such loss or corruption of such data.</p>
+
+    <h2>Online Submissions</h2>
+    <p>By directly sending us any question, comment, suggestion, idea, feedback, or other information about the Services, or uploading any data in the Platform ("Submissions"), you agree to assign to us all Intellectual Property Rights in such Submission. You agree that we shall own this Submission and be entitled to its unrestricted use and dissemination for any lawful purpose, commercial or otherwise, without acknowledgment or compensation to you. You are solely responsible for your Submissions and you expressly agree to reimburse us for any and all losses that we may suffer because of your breach of (i) this section, (ii) any third party's intellectual property rights, or (iii) applicable law.</p>
+
+    <h2>Acceptable Use</h2>
+    <p>When you use our Site, Content, or Services, you warrant that you will comply with these Terms of Use and with all applicable laws.</p>
+    <p>You also acknowledge that you may not:</p>
+    <ol type="a">
+      <li>Systematically retrieve data or other content from the Site, Content, or Services to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.</li>
+      <li>Make any unauthorized use of the Site, Content, or Services, including collecting usernames and/or email addresses of users by electronic or other means for the purpose of sending unsolicited email, or creating user accounts by automated means or under false pretenses.</li>
+      <li>Circumvent, disable, or otherwise interfere with security-related features of the Services, including features that prevent or restrict the use or copying of any Content or enforce limitations on the use of the Services and/or the Content contained therein.</li>
+      <li>Engage in unauthorized framing of or linking to the Services.</li>
+      <li>Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.</li>
+      <li>Make improper use of our Services, including our support services or submit false reports of abuse or misconduct.</li>
+      <li>Engage in any automated use of the Services, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.</li>
+      <li>Interfere with, disrupt, or create an undue burden on the Services or the networks or the Services connected.</li>
+      <li>Attempt to impersonate another user or person or use the username of another user.</li>
+      <li>Use any information obtained from the Services in order to harass, abuse, or harm another person.</li>
+      <li>Use the Services as part of any effort to compete with us or otherwise use the Services and/or the Content for any revenue-generating endeavor or commercial enterprise.</li>
+      <li>Decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Services, except as expressly permitted by applicable law.</li>
+      <li>Attempt to bypass any measures of the Services designed to prevent or restrict access to the Services, or any portion of the Services.</li>
+    </ol>
+
+    <h2>Services Management</h2>
+    <p>We reserve the right, but not the obligation, to: (1) monitor the Site, Content, and Services for violations of these Terms of Use; (2) take appropriate legal action against anyone who, in our sole discretion, violates the law or these Terms of Use, including without limitation, reporting such user to law enforcement authorities; (3) in our sole discretion and without limitation, refuse, restrict access to, limit the availability of, or disable (to the extent technologically feasible) any of your Submissions or any portion thereof; and (4) otherwise manage the Site, Content, and Services in a manner designed to protect our rights and property and to facilitate the proper functioning of the Services.</p>
+
+    <h2>Privacy</h2>
+    <p>We care about data privacy and security. By using the Services, you agree to be bound by our Privacy Policy posted on the Site, which is incorporated into these Terms of Use. Please be advised the Services are hosted in the United States. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United States, then through your continued use of the Services, you are transferring your data to the United States, and you expressly consent to have your data transferred to and processed in the United States.</p>
+
+    <h2>Digital Millennium Copyright Act Compliance</h2>
+    <p>We respect the intellectual property rights of others and expects users of the Site to do the same. At our sole discretion and in appropriate circumstances, we may terminate our agreements with companies of users or prevent access to the Site by users who infringe the intellectual property rights of others.</p>
+    <p>Pursuant to 17 USC 512(c)(2) (Digital Millennium Copyright Act of 1998), our designated agent for notice of alleged copyright infringement appearing on the Site is:</p>
+    <address>
+      Attn: Legal – DMCA Notices<br>
+      Grow Progress, Inc.<br>
+      1201 Connecticut Ave NW, Suite 600<br>
+      Washington, DC 20036<br>
+      email: <a href="mailto:legal@growprogress.ai">legal@growprogress.ai</a>
+    </address>
+    <p>Filing a notice of infringement with Grow Progress requires compliance with the requirements specified in Title II of the Digital Millennium Copyright Act of 1998.</p>
+
+    <h2>Third-Party Links</h2>
+    <p>The Site may contain links to third-party websites or resources. You acknowledge and agree that we are not responsible or liable for: (i) the availability or accuracy of such websites or resources; or (ii) the content, products, or services on or available from such websites or resources. Links to such websites or resources do not imply any endorsement by us of such websites or resources or the content, products, or services available from such websites or resources. You acknowledge sole responsibility for and assume all risk arising from your use of any such websites or resources.</p>
+
+    <h2>Termination</h2>
+    <p>If you violate any of these Terms of Use, your permission to use the Site, Content, and Services will automatically terminate. We reserve the right to revoke your access to and use of the Site, Content, and Services at any time, with or without cause. We also reserve the right to cease providing or to change the Site, Content, or Services at any time and without notice.</p>
+
+    <h2>Use of the Site at Your Own Risk</h2>
+    <p>Your access to and use of the Site, Content, and Services is at your own risk. We will have no responsibility for any harm to your computer system, loss of data, or other harm that results from your access to or use of the Site, Content, or Services.</p>
+
+    <h2>The Site is Available "AS-IS"</h2>
+    <p class="caps">The site, content, and services are provided "as is", without warranty or condition of any kind, either express or implied. Without limiting the foregoing, grow progress explicitly disclaims any warranties of merchantability, fitness for a particular purpose, quiet enjoyment or non-infringement.</p>
+    <p class="caps">Grow Progress makes no warranty that the site, content, or services will meet your requirements or be available on an uninterrupted, secure, or error-free basis. Grow Progress makes no warranty regarding the quality of any products, services, or information purchased or obtained through the site, content or services, or the accuracy, timeliness, truthfulness, completeness or reliability of any information obtained through the site, content or services.</p>
+    <p>No advice or information, whether oral or written, obtained from grow progress or through the site, content, or services, will create any warranty not expressly made herein.</p>
+
+    <h2>Indemnity</h2>
+    <p>You agree to defend, indemnify, and hold harmless Grow Progress, its officers, directors, employees and agents, from and against any third-party claims, liabilities, damages, losses, and expenses, including, without limitation, reasonable legal and companying fees, arising out of or in any way connected with your access to or use of the Site, Content, or Services, or your violation of these Terms of Use.</p>
+
+    <h2>Limitation of Liability</h2>
+    <p class="caps">To the maximum extent permitted by applicable law, neither grow progress nor any other party involved in creating, producing, or delivering the site, content, or services will be liable for any incidental, special, consequential or punitive damages resulting from your access to or use of, or inability to access or use, the site, content, or services, whether based on warranty, contract, tort (including negligence) or any other legal theory, whether or not grow progress has been informed of the possibility of such damage, even if a remedy set forth herein is found to have failed of its essential purpose. You specifically acknowledge that Grow Progress is not liable for the defamatory, offensive or illegal conduct of other users or third parties and that the risk of injury from the foregoing rests entirely with you. Further, Grow Progress will have no liability to you or to any third party for any third-party content uploaded onto or downloaded from the site or through the services.</p>
+    <p>To the extent permitted by law, you agree that the aggregate liability of Grow Progress to you for any and all claims arising from your use of the site, content or services, or grow progress's use of information you have provided to it, will at all times be limited to the amount paid, if any, by you to us during the six (6) month period prior to any cause of action arising or, if no fees apply, one hundred ($100) U.S. Dollars.</p>
+
+    <h2>Electronic Communications, Transactions and Signatures</h2>
+    <p>Visiting the Site, Content, or Services, sending us emails, and completing online forms constitute electronic communications. You consent to receive electronic communications, and you agree that all agreements, notices, disclosures, and other communications we provide to you electronically, via email and on the Services, satisfy any legal requirement that such communication be in writing. <span class="caps">YOU HEREBY AGREE TO THE USE OF ELECTRONIC SIGNATURES, CONTRACTS, ORDERS, AND OTHER RECORDS, AND TO ELECTRONIC DELIVERY OF NOTICES, POLICIES, AND RECORDS OF TRANSACTIONS INITIATED OR COMPLETED BY US OR VIA THE SERVICES.</span> You hereby waive any rights or requirements under any statutes, regulations, rules, ordinances, or other laws in any jurisdiction which require an original signature or delivery or retention of non-electronic record.</p>
+
+    <h2>Severability</h2>
+    <p>In the event that any provision of these Terms of Use is held to be invalid or unenforceable, the remaining provisions of these Terms of Use will remain in full force and effect.</p>
+
+    <h2>Waiver</h2>
+    <p>The failure of Grow Progress to enforce any right or provision of these Terms of Use will not be deemed a waiver of such right or provision.</p>
+
+    <h2>Governing Law</h2>
+    <p>These Terms of Use shall be governed by and defined following the laws of the District of Columbia without regard to the principles of conflicts of law. Unless otherwise elected by Grow Progress, you irrevocably consent that the courts of the District of Columbia shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these Terms.</p>
+
+    <h2>Dispute Resolution</h2>
+    <p>Any claim, dispute, or controversy raised by either you or Grow Progress against the other arising from these Terms of Use or your use of the Site and/or Services or any information you receive from Grow Progress (the "Claim" or "Claims") shall be resolved through binding arbitration with the American Arbitration Association ("AAA"), regardless of the particular legal theory of the Claim or Claims or the remedy sought by you. Moreover, in no case will the Claim or Claims in the arbitration be permitted to proceed on a class or representative basis or to be consolidated with any other arbitration proceeding, and to the extent that you might otherwise be able to join or proceed in a class action against or sue Grow Progress in a representative capacity, such as under a private attorney general provision, you hereby expressly and knowingly waive such Claim or Claims. The arbitration shall be before a single arbitrator, and the arbitrator will apply Columbia substantive law (regardless of the substantive law that might be applied under choice of law principles). The arbitrator will have the power to award to a party any remedies provided for under applicable law, except that you and Grow Progress agree that in no case shall either party be liable for exemplary or punitive damages. All costs and fees, including reasonable attorneys' fees, will be allocated in accordance with the AAA rules. The Federal Arbitration Act, and not state law, shall govern the arbitrability of all Claims between you and Grow Progress including any and all claims or disputes concerning the validity, construction, and performance of this arbitration provision. Any Claim or dispute as to the enforceability of this arbitration provision's restrictions on your right to participate in or pursue a class action or class-wide arbitration shall be decided by a court and not an arbitrator, and shall be brought only in a United States District Court located in Washington, District of Columbia.</p>
+
+    <h2>Modifications and Interruptions</h2>
+    <p>Except as provided herein, we reserve the right to change, modify, or remove the contents of the Site, Content, and Services at any time or for any reason at our sole discretion without notice. However, we have no obligation to update any information on our Site, Content, and Services. We will not be liable to you or any third party for any modification, price change, suspension, or discontinuance of the Site, Content, and Services.</p>
+    <p>We cannot guarantee that access to the Site, Content, or the Services in general will be available at all times. We may experience hardware, software, or other problems or need to perform maintenance related to the Site, Content, or Services, resulting in interruptions, delays, or errors. We reserve the right to change, revise, update, suspend, discontinue, or otherwise modify the Site, Content, and Services at any time or for any reason without notice to you. You agree that we have no liability whatsoever for any loss, damage, or inconvenience caused by your inability to access or use the Site, Content, and Services during any downtime or their discontinuance.</p>
+
+    <h2>Entire Agreement</h2>
+    <p>These Terms of Use are the entire and exclusive agreement between Grow Progress and you regarding the Site, Content, and Services, and these Terms of Use supersede and replace any prior agreements between Grow Progress and you regarding the Site, Content, and Services. This section shall not apply if you have previously entered into an agreement with Grow Progress regarding your use of the Site, Content, or Services, including the Customer Terms and Conditions and Privacy Policy.</p>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="code-of-conduct.html">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

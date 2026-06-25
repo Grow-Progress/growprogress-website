@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Labor Unions — Grow Progress</title>
+  <meta name="description" content="Grow Progress helps labor unions test the messages that move members, activate fence-sitters, and win public support — with the same RCT methodology used by the country's largest campaigns.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --shadow-sm:0 1px 3px rgba(31,22,40,.08),0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:0 2px 8px rgba(31,22,40,.1),0 12px 40px rgba(31,22,40,.08);
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+    .section{padding:6rem 0;}
+    .chip{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.375rem .875rem;border-radius:2rem;}
+    .chip-purple{color:var(--purple);background:rgba(67,44,151,.08);border:1px solid rgba(67,44,151,.15);}
+    .chip-light{color:var(--lavender);background:rgba(220,210,255,.1);border:1px solid rgba(220,210,255,.2);}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.1s;} .reveal-delay-2{transition-delay:.2s;} .reveal-delay-3{transition-delay:.3s;} .reveal-delay-4{transition-delay:.4s;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s;}
+    .nav.scrolled{background:rgba(242,242,253,.95);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    .nav-logo{display:flex;align-items:center;gap:.625rem;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-logo img{height:28px;width:auto;}
+    .nav-wordmark{font-family:var(--font-h);font-weight:800;font-size:1.125rem;color:var(--ink);letter-spacing:-.01em;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;color:rgba(255,255,255,.85);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,.1);}
+    .nav-links a.active{color:var(--purple);font-weight:600;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:rgba(255,255,255,.75);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:#fff;}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── Platform dropdown ── */
+    .has-dropdown { position: relative; }
+    .has-dropdown > a { display: flex; align-items: center; gap: .3rem; color: rgba(255,255,255,.85); }
+    .has-dropdown > a svg { width: 12px; height: 12px; transition: transform .2s; flex-shrink: 0; }
+    .has-dropdown:hover > a svg,
+    .has-dropdown:focus-within > a svg { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 640px;
+      background: #fff;
+      border: 1px solid rgba(67,44,151,.1);
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 40px rgba(31,22,40,.12), 0 2px 12px rgba(31,22,40,.06);
+      padding: .75rem 1.25rem 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(-8px);
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 200;
+    }
+    .has-dropdown:hover .nav-dropdown,
+    .has-dropdown:focus-within .nav-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dd-item {
+      display: flex;
+      align-items: flex-start;
+      gap: .875rem;
+      padding: .875rem;
+      border-radius: .75rem;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .nav-dd-item:hover { background: rgba(67,44,151,.05); }
+    .nav-dd-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: .625rem;
+      background: rgba(67,44,151,.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-dd-icon svg { width: 18px; height: 18px; color: #432C97; }
+    .nav-dd-text { display: flex; flex-direction: column; gap: .2rem; }
+    .nav-dd-label { font-family: var(--font-h); font-weight: 700; font-size: .875rem; color: #1F1628; line-height: 1; }
+    .nav-dd-desc { font-size: .75rem; color: rgba(31,22,40,.45); line-height: 1.4; }
+    .nav-dd-item--method { background: linear-gradient(135deg, rgba(67,44,151,.06) 0%, rgba(108,155,255,.04) 100%); border: 1px solid rgba(67,44,151,.1); border-radius: .75rem; }
+    .nav-dd-item--method:hover { background: linear-gradient(135deg, rgba(67,44,151,.1) 0%, rgba(108,155,255,.08) 100%); }
+    .nav-dd-item--method .nav-dd-icon { background: var(--purple); }
+    .nav-dd-item--method .nav-dd-icon svg { color: #fff; }
+    .nav-dd-item--method .nav-dd-label { color: var(--purple); }
+    .nav-dd-eyebrow { font-size: .6rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); margin-bottom: .2rem; }
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-weight:700;text-decoration:none;border:none;cursor:pointer;border-radius:var(--r-sm);transition:all .2s;}
+    .btn-primary{padding:.875rem 2rem;font-size:1rem;background:var(--blue);color:var(--ink);box-shadow:0 4px 20px rgba(108,155,255,.35);}
+    .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 28px rgba(108,155,255,.45);}
+    .btn-ghost-dark{padding:.875rem 1.75rem;font-size:1rem;background:var(--blue);color:var(--ink);border:1.5px solid var(--blue);}
+    .btn-ghost-dark:hover{background:#5a8fff;border-color:#5a8fff;transform:translateY(-2px);}
+    .btn-outline-purple{padding:.75rem 1.5rem;font-size:.9375rem;background:transparent;color:var(--purple);border:2px solid var(--purple);}
+    .btn-outline-purple:hover{background:var(--purple);color:#fff;}
+    .btn-white{padding:.875rem 2rem;font-size:1rem;background:#fff;color:var(--purple);box-shadow:0 4px 20px rgba(0,0,0,.15);}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2);}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;display:flex;align-items:center;padding:8rem 0 6rem;position:relative;overflow:hidden;background:linear-gradient(135deg,#2D1F5E 0%,#432C97 60%,#5B5DC0 100%);}
+    .hero-bg-photo{position:absolute;inset:0;background-image:url('photo-crowd.png');background-size:cover;background-position:center 25%;opacity:.5;}
+    .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(31,22,40,.82) 0%,rgba(45,31,94,.65) 40%,rgba(67,44,151,.35) 70%,rgba(91,93,192,.1) 100%);}
+    .hero-grid-bg{position:absolute;inset:0;background-image:radial-gradient(rgba(108,155,255,.15) 1px,transparent 1px);background-size:30px 30px;mask-image:radial-gradient(ellipse 70% 70% at 30% 50%,black 20%,transparent 80%);opacity:.5;}
+    .hero .container{position:relative;z-index:1;}
+    .hero-layout{max-width:680px;}
+    .hero-eyebrow{margin-bottom:1.5rem;}
+    h1{font-family:var(--font-h);font-weight:900;font-size:clamp(2.75rem,5.5vw,4.5rem);line-height:1.02;letter-spacing:-.03em;color:#fff;margin-bottom:1.5rem;}
+    h1 em{font-style:italic;color:#fff;}
+    h1 .accent{background:linear-gradient(120deg,var(--blue) 0%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .hero-sub{font-size:1.125rem;line-height:1.7;color:#fff;max-width:560px;margin-bottom:2.5rem;}
+    .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
+
+    /* ── LOGO PANEL ── */
+    .logo-panel{background:var(--white);border-bottom:1px solid rgba(67,44,151,.08);padding:2rem 0;}
+    .logo-panel-label{font-size:.7rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:1.25rem;text-align:center;}
+    .logo-panel-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.75rem 3.5rem;}
+    .logo-panel-row img{height:42px;width:auto;object-fit:contain;filter:grayscale(100%) opacity(.5);transition:filter .2s;}
+    .logo-panel-row img:hover{filter:grayscale(100%) opacity(.75);}
+
+    /* ── SECTION HEADER ── */
+    .sh{margin-bottom:3.5rem;}
+    .sh .chip{margin-bottom:.875rem;}
+    .sh h2{font-family:var(--font-h);font-weight:900;font-size:clamp(2rem,3.5vw,2.875rem);letter-spacing:-.025em;line-height:1.07;color:var(--text);}
+    .sh h2 em{font-style:normal;color:var(--purple);}
+    .sh p{margin-top:1rem;font-size:1.0625rem;line-height:1.7;color:var(--muted);max-width:560px;}
+    .sh-center{text-align:center;} .sh-center h2{margin-left:auto;margin-right:auto;} .sh-center p{margin:1rem auto 0;}
+
+    /* ══════════════════════════════════════
+       MERGED: THE PROBLEM + THE SCIENCE
+    ═══════════════════════════════════════ */
+    .ps-section{background:var(--white);padding:6rem 0 5rem;}
+
+    /* Top: 3 problem pills */
+    .problem-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3.5rem;}
+    .prob-pill{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.875rem;padding:1.75rem 1.5rem;border-radius:var(--r-lg);border:1.5px solid transparent;transition:border-color .2s,box-shadow .2s,transform .2s;}
+    .prob-pill > div{width:100%;}
+    .prob-pill:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);}
+    .pp-1{background:rgba(239,68,68,.04);border-color:rgba(239,68,68,.1);}
+    .pp-2{background:rgba(234,179,8,.04);border-color:rgba(234,179,8,.12);}
+    .pp-3{background:rgba(67,44,151,.04);border-color:rgba(67,44,151,.1);}
+    .pp-1:hover{border-color:rgba(239,68,68,.25);}
+    .pp-2:hover{border-color:rgba(234,179,8,.3);}
+    .pp-3:hover{border-color:rgba(67,44,151,.25);}
+    .prob-icon{width:36px;height:36px;flex-shrink:0;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;}
+    .pp-1 .prob-icon{background:rgba(239,68,68,.1);color:#dc2626;}
+    .pp-2 .prob-icon{background:rgba(234,179,8,.1);color:#ca8a04;}
+    .pp-3 .prob-icon{background:rgba(67,44,151,.08);color:var(--purple);}
+    .prob-icon svg{width:17px;height:17px;}
+    .prob-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem;text-align:center;}
+    .pp-1 .prob-label{color:#dc2626;} .pp-2 .prob-label{color:#ca8a04;} .pp-3 .prob-label{color:var(--purple);}
+    .prob-title{font-family:var(--font-h);font-weight:800;font-size:.9375rem;color:var(--text);line-height:1.25;text-align:center;}
+    .prob-body{font-size:.84rem;line-height:1.6;color:var(--muted);margin-top:.3rem;text-align:center;}
+
+    /* Divider with label */
+    .ps-divider{display:flex;align-items:center;gap:1rem;margin-bottom:2.75rem;}
+    .ps-divider-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(67,44,151,.15),rgba(67,44,151,.05));}
+    .ps-divider-label{font-family:var(--font-h);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);white-space:nowrap;}
+
+    /* Comparison grid */
+    .compare-grid{display:grid;grid-template-columns:1fr 48px 1fr;gap:0;align-items:stretch;}
+    .compare-col{background:var(--ghost);border-radius:var(--r-xl);padding:2rem 2.25rem;}
+    .compare-bad{border:1.5px solid rgba(239,68,68,.12);}
+    .compare-good{border:1.5px solid rgba(5,150,105,.15);background:rgba(5,150,105,.025);}
+    .compare-header{display:flex;align-items:center;gap:.875rem;margin-bottom:1.5rem;}
+    .compare-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .compare-icon-red{background:rgba(239,68,68,.1);color:#dc2626;}
+    .compare-icon-green{background:rgba(5,150,105,.1);color:#059669;}
+    .compare-label{font-family:var(--font-h);font-weight:800;font-size:1rem;color:var(--text);}
+    .compare-sublabel{font-size:.8rem;color:var(--faint);margin-top:.125rem;}
+    .compare-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;}
+    .compare-list li{font-size:.9375rem;line-height:1.55;color:var(--muted);padding-left:1.25rem;position:relative;}
+    .compare-list li::before{content:'';position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:rgba(67,44,151,.2);}
+    .compare-good .compare-list li::before{background:rgba(5,150,105,.3);}
+    .compare-list li strong{color:var(--text);}
+    .compare-list li em{font-style:normal;color:var(--purple);}
+    .compare-divider{display:flex;align-items:center;justify-content:center;}
+    .compare-vs{width:36px;height:36px;border-radius:50%;background:var(--white);border:2px solid rgba(67,44,151,.15);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:800;font-size:.75rem;color:var(--faint);}
+
+    /* ══════════════════════════════════════
+       AUDIENCE TARGETING
+    ═══════════════════════════════════════ */
+    .audience-targets-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:3rem;}
+    .at-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-xl);padding:2rem;transition:border-color .2s,background .2s;display:flex;flex-direction:column;align-items:center;text-align:center;}
+    .at-card:hover{border-color:rgba(108,155,255,.3);background:rgba(255,255,255,.08);}
+    .at-icon{width:52px;height:52px;border-radius:.875rem;background:rgba(108,155,255,.15);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;flex-shrink:0;}
+    .at-icon svg{width:24px;height:24px;color:var(--blue);}
+    .at-title{font-family:var(--font-h);font-weight:800;font-size:1.0625rem;color:#fff;margin-bottom:.5rem;}
+    .at-body{font-size:.9rem;line-height:1.65;color:rgba(255,255,255,.5);}
+
+    /* ══════════════════════════════════════
+       CAMPAIGN TIMELINE
+    ═══════════════════════════════════════ */
+    .timeline-section{background:var(--white);padding:6rem 0;}
+
+    .tl-stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;position:relative;margin-top:3.5rem;}
+
+    .tl-stage-grid::before{
+      content:'';
+      position:absolute;
+      top:54px;
+      left:calc(12.5% + 1px);
+      right:calc(12.5% + 1px);
+      height:2px;
+      background:linear-gradient(90deg,rgba(67,44,151,.2),var(--blue),rgba(67,44,151,.2));
+      z-index:0;
+    }
+
+    .tl-stage{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      position:relative;
+      z-index:1;
+      opacity:0;
+      transform:translateY(32px);
+      transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),box-shadow .25s;
+    }
+    .tl-stage.visible{opacity:1;transform:translateY(0);}
+    .tl-stage:nth-child(1){transition-delay:.05s;}
+    .tl-stage:nth-child(2){transition-delay:.15s;}
+    .tl-stage:nth-child(3){transition-delay:.25s;}
+    .tl-stage:nth-child(4){transition-delay:.35s;}
+
+    .tl-badge{
+      width:54px;height:54px;
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-family:var(--font-h);font-weight:900;font-size:.875rem;
+      color:#fff;
+      position:relative;
+      margin-bottom:1.5rem;
+      flex-shrink:0;
+      transition:transform .3s,box-shadow .3s;
+    }
+    .tl-stage:hover .tl-badge{transform:scale(1.12);}
+
+    .tl-s1 .tl-badge{background:linear-gradient(135deg,#432C97,#5B5DC0);box-shadow:0 0 0 6px rgba(67,44,151,.12),0 4px 16px rgba(67,44,151,.3);}
+    .tl-s2 .tl-badge{background:linear-gradient(135deg,#5B5DC0,#6C9BFF);box-shadow:0 0 0 6px rgba(91,93,192,.12),0 4px 16px rgba(91,93,192,.3);}
+    .tl-s3 .tl-badge{background:linear-gradient(135deg,#6C9BFF,#85B4FF);box-shadow:0 0 0 6px rgba(108,155,255,.12),0 4px 16px rgba(108,155,255,.3);}
+    .tl-s4 .tl-badge{background:linear-gradient(135deg,#85B4FF,#a78bfa);box-shadow:0 0 0 6px rgba(133,180,255,.12),0 4px 16px rgba(133,180,255,.3);}
+
+    .tl-badge::after{
+      content:'';position:absolute;inset:-6px;
+      border-radius:50%;
+      border:2px solid currentColor;
+      opacity:0;
+      transition:opacity .3s;
+    }
+    .tl-s1 .tl-badge::after{color:rgba(67,44,151,.35);}
+    .tl-s2 .tl-badge::after{color:rgba(91,93,192,.35);}
+    .tl-s3 .tl-badge::after{color:rgba(108,155,255,.35);}
+    .tl-s4 .tl-badge::after{color:rgba(133,180,255,.35);}
+    .tl-stage:hover .tl-badge::after{opacity:1;}
+
+    .tl-card{
+      width:100%;
+      background:var(--ghost);
+      border:1.5px solid rgba(67,44,151,.07);
+      border-radius:var(--r-xl);
+      padding:1.75rem 1.5rem;
+      transition:border-color .25s,transform .25s,box-shadow .25s;
+      position:relative;
+      overflow:hidden;
+    }
+    .tl-stage:hover .tl-card{
+      border-color:rgba(67,44,151,.2);
+      transform:translateY(-4px);
+      box-shadow:var(--shadow-md);
+    }
+    .tl-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r-xl) var(--r-xl) 0 0;
+    }
+    .tl-s1 .tl-card::before{background:linear-gradient(90deg,#432C97,#5B5DC0);}
+    .tl-s2 .tl-card::before{background:linear-gradient(90deg,#5B5DC0,#6C9BFF);}
+    .tl-s3 .tl-card::before{background:linear-gradient(90deg,#6C9BFF,#85B4FF);}
+    .tl-s4 .tl-card::before{background:linear-gradient(90deg,#85B4FF,#a78bfa);}
+
+    .tl-stage-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;margin-bottom:.625rem;}
+    .tl-s1 .tl-stage-label{color:#432C97;} .tl-s2 .tl-stage-label{color:#5B5DC0;} .tl-s3 .tl-stage-label{color:#6C9BFF;} .tl-s4 .tl-stage-label{color:#85B4FF;}
+    .tl-card h4{font-family:var(--font-h);font-weight:800;font-size:1rem;color:var(--text);margin-bottom:.5rem;line-height:1.25;text-align:left;}
+    .tl-card p{font-size:.84rem;line-height:1.65;color:var(--muted);text-align:left;}
+    .tl-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.875rem;}
+    .tl-tags span{font-size:.7rem;font-weight:600;color:var(--purple);background:rgba(67,44,151,.07);padding:.2rem .55rem;border-radius:2rem;}
+
+    /* ══════════════════════════════════════
+       CASE STUDIES — PEEK CAROUSEL
+    ═══════════════════════════════════════ */
+    .case-section{background:var(--ghost);padding:6rem 0;}
+    .case-carousel-outer{position:relative;}
+    .case-stack{display:flex;gap:1.5rem;overflow:hidden;cursor:grab;}
+    .case-card{background:var(--white);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-sm);display:grid;grid-template-columns:380px 1fr;flex:0 0 100%;min-width:0;height:360px;transition:box-shadow .2s;}
+    .case-image{position:relative;background:linear-gradient(145deg,#1F1628,#2D1F5E);overflow:hidden;}
+    .case-image img{width:100%;height:100%;object-fit:cover;display:block;}
+    .case-content{padding:2.25rem 2.5rem;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;}
+    .case-tag{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);background:rgba(67,44,151,.08);padding:.25rem .625rem;border-radius:2rem;display:inline-block;margin-bottom:.75rem;}
+    .case-title{font-family:var(--font-h);font-weight:900;font-size:1.25rem;color:var(--text);margin-bottom:.625rem;line-height:1.25;}
+    .case-body{font-size:.875rem;line-height:1.65;color:var(--muted);}
+    .case-stats{display:flex;gap:2.5rem;padding-top:1.25rem;border-top:1px solid rgba(67,44,151,.08);}
+    .cso-item{display:flex;flex-direction:column;}
+    .cso-num{font-family:var(--font-h);font-weight:900;font-size:1.625rem;color:var(--purple);letter-spacing:-.025em;line-height:1;}
+    .cso-lbl{font-size:.7rem;color:var(--muted);margin-top:.3rem;line-height:1.3;}
+    .case-nav{display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem;}
+    .case-nav-dots{display:flex;gap:.5rem;}
+    .case-nav-dot{width:8px;height:8px;border-radius:50%;background:rgba(67,44,151,.18);border:none;cursor:pointer;padding:0;transition:background .2s,width .2s,border-radius .2s;}
+    .case-nav-dot.active{background:var(--purple);width:22px;border-radius:4px;}
+    .case-nav-btn{width:44px;height:44px;border-radius:50%;background:var(--white);border:1.5px solid rgba(67,44,151,.15);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+    .case-nav-btn:hover{background:var(--purple);border-color:var(--purple);}
+    .case-nav-btn:hover svg{stroke:#fff;}
+    .case-nav-btn svg{width:18px;height:18px;stroke:var(--purple);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s;}
+    .case-nav-btn:disabled{opacity:.35;cursor:default;}
+
+    /* ── WHAT YOU CAN TEST ── */
+    .test-section{background:var(--white);}
+    .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
+    .test-card{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem;border:1.5px solid rgba(67,44,151,.09);border-radius:var(--r-lg);transition:all .2s;}
+    .test-card:hover{border-color:var(--purple);background:var(--ghost);transform:translateY(-2px);}
+    .test-icon{width:38px;height:38px;flex-shrink:0;background:var(--ghost);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;transition:background .2s;}
+    .test-card:hover .test-icon{background:rgba(67,44,151,.08);}
+    .test-icon svg{width:18px;height:18px;color:var(--purple);}
+    .test-label{font-family:var(--font-h);font-weight:700;font-size:.9375rem;color:var(--text);}
+
+    /* ── CTA ── */
+    .cta-section{background:var(--ink);text-align:center;padding:7rem 0;position:relative;overflow:hidden;}
+    .cta-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(108,155,255,.08) 1px,transparent 1px);background-size:28px 28px;}
+    .cta-inner{position:relative;z-index:1;}
+    .cta-h{font-family:var(--font-h);font-weight:900;font-size:clamp(2.25rem,4vw,3.5rem);letter-spacing:-.03em;line-height:1.05;color:#fff;max-width:640px;margin:.875rem auto 1.25rem;}
+    .cta-sub{font-size:1.0625rem;line-height:1.65;color:rgba(255,255,255,.5);max-width:500px;margin:0 auto 2.75rem;}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-brand-name{font-family:var(--font-h);font-weight:800;font-size:1.0625rem;color:#fff;margin:.75rem 0 .625rem;}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .case-card{grid-template-columns:1fr;}
+      .case-image{min-height:240px;}
+      .tl-stage-grid{grid-template-columns:repeat(2,1fr);}
+      .tl-stage-grid::before{display:none;}
+    }
+    @media(max-width:900px){
+      .compare-grid{grid-template-columns:1fr;}.compare-divider{display:none;}
+      .audience-targets-grid{grid-template-columns:1fr;}
+      .problem-row{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:640px){
+      .container{padding:0 1.25rem;}.section{padding:4rem 0;}
+      .tl-stage-grid{grid-template-columns:1fr;}
+      .test-grid{grid-template-columns:1fr 1fr;}
+      .footer-top{grid-template-columns:1fr;}
+    }
+    .nav-dropdown--single { width: 280px; grid-template-columns: 1fr; }
+  
+    /* ── NEWSLETTER STRIP ── */
+    .newsletter-section{background:var(--ghost);padding:4rem 0;border-top:1px solid rgba(67,44,151,.08);}
+    .newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .newsletter-copy{}
+    .newsletter-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+    .newsletter-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:nlPulse 2s infinite;}
+     nlPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+    .newsletter-sub{font-size:.9375rem;line-height:1.65;color:var(--muted);}
+    .newsletter-form{display:flex;flex-direction:column;gap:.75rem;}
+    .nl-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+    .nl-input{width:100%;padding:.75rem 1rem;font-family:var(--font-b);font-size:.9375rem;color:var(--ink);background:#fff;border:1.5px solid rgba(67,44,151,.15);border-radius:.625rem;outline:none;transition:border-color .15s,box-shadow .15s;}
+    .nl-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(67,44,151,.1);}
+    .nl-input::placeholder{color:var(--faint);}
+    .nl-submit{width:100%;padding:.875rem;font-family:var(--font-h);font-weight:700;font-size:1rem;color:#fff;background:var(--purple);border:none;border-radius:.625rem;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .nl-submit:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,44,151,.4);}
+    .nl-privacy{font-size:.72rem;color:var(--faint);text-align:center;}
+    (max-width:768px){.newsletter-inner{grid-template-columns:1fr;gap:2rem;}.nl-row{grid-template-columns:1fr;}}
+
+    
+    /* ── NAV DARK-HERO OVERRIDE ── */
+    .nav--hero-dark {
+      background: rgba(22,14,42,.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(255,255,255,.06);
+    }
+    .nav--hero-dark .nav-links a { color: rgba(255,255,255,.8); }
+    .nav--hero-dark .nav-links a:hover { color: #fff; background: rgba(255,255,255,.1); }
+    .nav--hero-dark .has-dropdown > a { color: rgba(255,255,255,.8); }
+    .nav--hero-dark .has-dropdown > a:hover { color: #fff; background: rgba(255,255,255,.1); }
+    .nav--hero-dark .nav-signin { color: rgba(255,255,255,.7); }
+    .nav--hero-dark .nav-signin:hover { color: #fff; }
+    .nav--hero-dark .btn-nav { background: #fff; color: var(--purple); box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+    .nav--hero-dark .btn-nav:hover { background: rgba(255,255,255,.92); }
+    .nav--hero-dark .has-dropdown > a svg { opacity: .8; }
+    /* Scrolled state overrides the dark hero styles */
+    .nav.scrolled { background: rgba(242,242,253,.97) !important; backdrop-filter: blur(20px); box-shadow: 0 1px 0 rgba(67,44,151,.08) !important; }
+    .nav.scrolled .nav-links a { color: var(--muted); }
+    .nav.scrolled .nav-links a:hover { color: var(--ink); background: rgba(67,44,151,.06); }
+    .nav.scrolled .has-dropdown > a { color: var(--muted); }
+    .nav.scrolled .nav-signin { color: var(--muted); }
+    .nav.scrolled .btn-nav { background: var(--purple); color: #fff; box-shadow: 0 4px 14px rgba(67,44,151,.3); }
+    .nav.scrolled .has-dropdown > a svg { opacity: 1; }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav nav--hero-dark" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-light.svg" alt="Grow Progress" class="nav-gp-logo" id="navLogo">
+    <span class="nav-wordmark">Grow Progress</span>
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Rapid Message Testing</span>
+            <span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span>
+          </div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Audience Understanding</span>
+            <span class="nav-dd-desc">Map who your audience is and what they believe</span>
+          </div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Pulse Surveys</span>
+            <span class="nav-dd-desc">Real-time opinion tracking as events unfold</span>
+          </div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Persuasion Library</span>
+            <span class="nav-dd-desc">500+ studies searchable by topic and audience</span>
+          </div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-eyebrow">Methodology</span>
+            <span class="nav-dd-label">How It Works</span>
+            <span class="nav-dd-desc">The RCT science behind every GP study</span>
+          </div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Persuasion Sandbox</span>
+            <span class="nav-dd-desc">Self-serve message testing — launch in minutes</span>
+          </div>
+        </a>
+
+      </div>
+    </li>
+    <li class="has-dropdown">
+  <a href="#">Who we serve
+    <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <div class="nav-dropdown nav-dropdown--single">
+    <a href="politics.html" class="nav-dd-item">
+      <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span><span class="nav-dd-desc">Campaigns, PACs &amp; party committees</span></div>
+    </a>
+    <a href="advocacy.html" class="nav-dd-item">
+      <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span><span class="nav-dd-desc">Issue campaigns &amp; policy fights</span></div>
+    </a>
+    <a href="nonprofits.html" class="nav-dd-item">
+      <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+      <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span><span class="nav-dd-desc">Donors, programs &amp; community impact</span></div>
+    </a>
+    <a href="labor.html" class="nav-dd-item active">
+      <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+      <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span><span class="nav-dd-desc">Contract campaigns &amp; member mobilization</span></div>
+    </a>
+  </div>
+</li>
+    <li><a href="index.html#resources">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Sign In</a>
+    <a href="demo.html" class="btn-nav">Request a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-photo"></div>
+  <div class="hero-bg-overlay"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-eyebrow">
+        <span class="chip chip-light">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3" fill="currentColor"/><circle cx="5" cy="5" r="4.5" stroke="currentColor" stroke-width="1" opacity=".4"/></svg>
+          Who We Serve · Labor Unions
+        </span>
+      </div>
+      <h1>Win contracts. Build power.<br><em>Message with certainty.</em></h1>
+      <p class="hero-sub">Grow Progress helps labor unions test the messages that move members, activate fence-sitters, and win public support — with the same RCT methodology used by the country's largest campaigns.</p>
+      <div class="hero-ctas">
+        <a href="#case-study" class="btn btn-ghost-dark">See a Case Study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO PANEL -->
+<div class="logo-panel">
+  <div class="container">
+    <p class="logo-panel-label">Trusted by unions and labor organizations across the country</p>
+    <div class="logo-panel-row">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/SEIU.png" alt="SEIU">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/NEA-341x115.webp" alt="NEA">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/CWA.png" alt="CWA">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/UFCW.png" alt="UFCW">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/AFSCME.png" alt="AFSCME">
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     RESEARCH GAP — MERGED PROBLEM + DIFFERENCE
+════════════════════════════════════════ -->
+<section class="ps-section">
+  <div class="container">
+
+    <!-- Section header -->
+    <div class="sh sh-center reveal">
+      <span class="chip chip-purple">The Challenge</span>
+      <h2 style="max-width:680px;text-wrap:balance;">Member mobilization campaigns rely on gut instinct over messages that have <em>actually been tested.</em></h2>
+    </div>
+
+    <!-- 3 Problem pills -->
+    <div class="problem-row">
+      <div class="prob-pill pp-1 reveal reveal-delay-1">
+        <div class="prob-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+          <div class="prob-label">Misdiagnosis</div>
+          <div class="prob-title">Traditional polling measures opinion, not persuasion</div>
+          <div class="prob-body">Knowing what members already believe doesn't tell you which message will move fence-sitters or win public sympathy when it counts.</div>
+        </div>
+      </div>
+      <div class="prob-pill pp-2 reveal reveal-delay-2">
+        <div class="prob-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="prob-label">No evidence</div>
+          <div class="prob-title">Gut instinct drives message choice — not evidence</div>
+          <div class="prob-body">Contract campaigns, organizing drives, and public fights are decided by message discipline — but most unions pick frames by committee, not data.</div>
+        </div>
+      </div>
+      <div class="prob-pill pp-3 reveal reveal-delay-3">
+        <div class="prob-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div>
+          <div class="prob-label">Too late</div>
+          <div class="prob-title">You find out what worked after the campaign ends</div>
+          <div class="prob-body">Post-campaign analysis tells you what happened, not what you should have said. By then, the contract deadline has passed.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="ps-divider reveal">
+      <div class="ps-divider-line"></div>
+      <div class="ps-divider-label">The Grow Progress difference</div>
+      <div class="ps-divider-line" style="background:linear-gradient(90deg,rgba(67,44,151,.05),rgba(67,44,151,.15));"></div>
+    </div>
+
+    <!-- Comparison grid -->
+    <div class="compare-grid reveal">
+      <div class="compare-col compare-bad">
+        <div class="compare-header">
+          <div class="compare-icon compare-icon-red">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <div>
+            <div class="compare-label">Without Grow Progress</div>
+            <div class="compare-sublabel">Instinct-driven · Results unknown</div>
+          </div>
+        </div>
+        <ul class="compare-list">
+          <li><strong>Survey members</strong> on what they care about</li>
+          <li><strong>Craft messages</strong> based on field instinct</li>
+          <li><strong>Track turnout</strong> and hope messaging worked</li>
+        </ul>
+      </div>
+      <div class="compare-divider">
+        <div class="compare-vs">vs</div>
+      </div>
+      <div class="compare-col compare-good">
+        <div class="compare-header">
+          <div class="compare-icon compare-icon-green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div class="compare-label">With Grow Progress</div>
+            <div class="compare-sublabel">RCT-powered · Results in 24 hours</div>
+          </div>
+        </div>
+        <ul class="compare-list">
+          <li>Run <em>RCTs</em> to find which frame <strong>actually changes support</strong></li>
+          <li>Test <em>dignity, economic, and solidarity</em> frames head-to-head</li>
+          <li>Know <strong>causal lift</strong> before you spend a dollar on outreach</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     AUDIENCE TARGETING
+════════════════════════════════════════ -->
+<section class="section" style="background:var(--ink);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(108,155,255,.1) 1px,transparent 1px);background-size:28px 28px;"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="sh sh-center reveal">
+      <span class="chip chip-light">Audience Targeting</span>
+      <h2 style="color:#fff;">Reach the right members<br>with the <em style="color:var(--blue);">right message.</em></h2>
+      <p style="color:rgba(255,255,255,.5);">Not every member responds to the same frame. GP helps you identify which messages move stewards, new members, fence-sitters, and public-facing audiences — and tailor your outreach accordingly.</p>
+    </div>
+    <div class="audience-targets-grid reveal">
+      <div class="at-card">
+        <div class="at-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
+        <h4 class="at-title">New Members</h4>
+        <p class="at-body">Build early commitment with frames that connect union values to personal benefit — so new members become active supporters, not passive cardholders.</p>
+      </div>
+      <div class="at-card">
+        <div class="at-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4 class="at-title">Fence-Sitters</h4>
+        <p class="at-body">Identify the exact message that converts skeptical members into active supporters. Stop guessing which frame moves hesitant workers and start knowing.</p>
+      </div>
+      <div class="at-card">
+        <div class="at-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        <h4 class="at-title">Shop Stewards</h4>
+        <p class="at-body">Equip your organizers with tested talking points that hold up in 1-on-1 conversations on the shop floor — not just in rally speeches.</p>
+      </div>
+      <div class="at-card">
+        <div class="at-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h4 class="at-title">Public Audiences</h4>
+        <p class="at-body">Win community support with frames that resonate beyond the membership — and shift public opinion before the legislature acts or the press narrative sets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CAMPAIGN TIMELINE — ANIMATED CARDS
+════════════════════════════════════════ -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="sh sh-center reveal">
+      <span class="chip chip-purple">Campaign Timeline</span>
+      <h2>From contract fight to public campaign —<br>research at <em>every stage.</em></h2>
+      <p>The strongest unions build a continuous feedback loop from contract prep through ratification.</p>
+    </div>
+
+    <div class="tl-stage-grid" id="tlGrid">
+
+      <div class="tl-stage tl-s1">
+        <div class="tl-badge">01</div>
+        <div class="tl-card">
+          <div class="tl-stage-label">Contract Campaign</div>
+          <h4>Find the frame that builds solidarity</h4>
+          <p>Test which economic and dignity frames drive member solidarity and public sympathy before the contract deadline.</p>
+          <div class="tl-tags">
+            <span>Economic frames</span><span>Dignity messaging</span><span>Public framing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-stage tl-s2">
+        <div class="tl-badge">02</div>
+        <div class="tl-card">
+          <div class="tl-stage-label">Authorization Vote</div>
+          <h4>Convert fence-sitters before the vote</h4>
+          <p>Identify the messages that convert fence-sitters and move hesitant members to YES — before the vote, not after.</p>
+          <div class="tl-tags">
+            <span>Persuasion frames</span><span>Mobilization appeals</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-stage tl-s3">
+        <div class="tl-badge">03</div>
+        <div class="tl-card">
+          <div class="tl-stage-label">Strike Readiness</div>
+          <h4>Sustain resolve and build public support</h4>
+          <p>Understand what sustains member resolve and builds public support if a work stoppage becomes necessary.</p>
+          <div class="tl-tags">
+            <span>Solidarity framing</span><span>Community support</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-stage tl-s4">
+        <div class="tl-badge">04</div>
+        <div class="tl-card">
+          <div class="tl-stage-label">Contract Win</div>
+          <h4>Maximize buy-in at ratification</h4>
+          <p>Test ratification messaging to maximize member satisfaction and set the foundation for the next campaign.</p>
+          <div class="tl-tags">
+            <span>Ratification frames</span><span>Long-term gains</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CASE STUDIES — CAROUSEL (4 slides)
+════════════════════════════════════════ -->
+<section class="case-section" id="case-study">
+  <div class="container">
+    <div class="sh reveal" style="margin-bottom:2rem;">
+      <span class="chip chip-purple">Case Studies</span>
+      <h2>Real unions. <em>Real results.</em></h2>
+    </div>
+
+    <div class="case-carousel-outer reveal">
+      <div class="case-stack" id="caseScroll">
+
+        <!-- Card 1: Member Mobilization -->
+        <div class="case-card">
+          <div class="case-image" style="background:linear-gradient(145deg,#1F1628,#2D1F5E);">
+            <div class="case-stats">
+              <div class="cso-item"><div class="cso-num">+20 pts</div><div class="cso-lbl">mobilization lift</div></div>
+              <div class="cso-item"><div class="cso-num">2x</div><div class="cso-lbl">vs wages frame</div></div>
+              <div class="cso-item"><div class="cso-num">200</div><div class="cso-lbl">stewards retrained</div></div>
+            </div>
+          </div>
+          <div class="case-content">
+            <span class="case-tag">Member Mobilization · Healthcare Local</span>
+            <h3 class="case-title">Dignity framing outperformed wages messaging across every member demographic</h3>
+            <p class="case-body">In a contract campaign for a major healthcare local, GP tested three message frames. The dignity and respect frame drove a 20-point lift in member mobilization intent — double the lift of the wages-and-benefits frame. The local used the findings to retrain 200 shop stewards before the authorization vote.</p>
+            <div class="case-result">
+              <div class="case-result-label">The outcome</div>
+              <div class="case-result-text">The dignity frame outperformed wages messaging by 20 points in mobilization intent — delivering a clear playbook for steward training and member outreach ahead of the authorization vote.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Public Support -->
+        <div class="case-card">
+          <div class="case-image" style="background:linear-gradient(145deg,#1A1030,#2D1F5E);">
+            <div class="case-stats">
+              <div class="cso-item"><div class="cso-num">+16 pts</div><div class="cso-lbl">public opinion shift</div></div>
+              <div class="cso-item"><div class="cso-num">1</div><div class="cso-lbl">winning frame identified</div></div>
+              <div class="cso-item"><div class="cso-num">24h</div><div class="cso-lbl">results turnaround</div></div>
+            </div>
+          </div>
+          <div class="case-content">
+            <span class="case-tag">Public Support · State Employees</span>
+            <h3 class="case-title">Tested frames shifted public opinion on pension fights by 16 points</h3>
+            <p class="case-body">When a state employees union faced a hostile legislature, GP tested public-facing messages. A frame connecting pension security to teacher retention outperformed the standard "promise kept" frame by 16 points — shifting the public narrative before the legislative session.</p>
+            <div class="case-result">
+              <div class="case-result-label">The outcome</div>
+              <div class="case-result-text">The teacher retention frame moved public support by 16 points — giving the union a tested message to lead with in press, digital, and grassroots outreach before the legislative fight began.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Strike Authorization -->
+        <div class="case-card">
+          <div class="case-image" style="background:linear-gradient(145deg,#1F2A1F,#2D5E3A);">
+            <div class="case-stats">
+              <div class="cso-item"><div class="cso-num">+22 pts</div><div class="cso-lbl">authorization lift</div></div>
+              <div class="cso-item"><div class="cso-num">87%</div><div class="cso-lbl">member support</div></div>
+              <div class="cso-item"><div class="cso-num">6</div><div class="cso-lbl">frames tested</div></div>
+            </div>
+          </div>
+          <div class="case-content">
+            <span class="case-tag">Strike Authorization · Healthcare Workers</span>
+            <h3 class="case-title">Member solidarity messaging drove 22-point lift in strike authorization support</h3>
+            <p class="case-body">GP tested six message frames ahead of a high-stakes authorization vote. Solidarity framing — emphasizing that "when one of us is under attack, all of us are" — produced the strongest lift. The local went on to win authorization with 87% member support.</p>
+            <div class="case-result">
+              <div class="case-result-label">The outcome</div>
+              <div class="case-result-text">Solidarity framing drove a 22-point lift in authorization support. The local won the authorization vote with 87% member backing — equipped with tested language that unified the membership.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Ratification -->
+        <div class="case-card">
+          <div class="case-image" style="background:linear-gradient(145deg,#1F1628,#432C97);">
+            <div class="case-stats">
+              <div class="cso-item"><div class="cso-num">+14 pts</div><div class="cso-lbl">member satisfaction</div></div>
+              <div class="cso-item"><div class="cso-num">✓</div><div class="cso-lbl">strong ratification</div></div>
+              <div class="cso-item"><div class="cso-num">24h</div><div class="cso-lbl">turnaround</div></div>
+            </div>
+          </div>
+          <div class="case-content">
+            <span class="case-tag">Ratification · Teachers Union</span>
+            <h3 class="case-title">Contract ratification messaging drove 14-point improvement in member satisfaction</h3>
+            <p class="case-body">After a lengthy negotiation, GP tested how to frame the final contract to maximize member buy-in. Messages emphasizing long-term gains outperformed deficit-focused frames, helping the union ratify with strong approval despite a contentious bargaining year.</p>
+            <div class="case-result">
+              <div class="case-result-label">The outcome</div>
+              <div class="case-result-text">Long-term gains framing improved member satisfaction scores by 14 points over the deficit frame — delivering a ratification playbook that secured strong approval after a difficult negotiation.</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /case-stack -->
+    </div><!-- /case-carousel-outer -->
+
+    <div class="case-nav">
+      <div class="case-nav-dots" id="caseNavDots">
+        <button class="case-dot active" data-idx="0"></button>
+        <button class="case-dot" data-idx="1"></button>
+        <button class="case-dot" data-idx="2"></button>
+        <button class="case-dot" data-idx="3"></button>
+      </div>
+      <div class="case-nav-arrows">
+        <button class="case-nav-btn" id="casePrev" aria-label="Previous">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4l-5 5 5 5"/></svg>
+        </button>
+        <button class="case-nav-btn" id="caseNext" aria-label="Next">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 4l5 5-5 5"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHAT YOU CAN TEST -->
+<section class="test-section section">
+  <div class="container">
+    <div class="sh sh-center reveal">
+      <span class="chip chip-purple">What You Can Test</span>
+      <h2>What labor unions test<br>with <em>Grow Progress.</em></h2>
+      <p>If your union uses it to move members or win public support, you can test it.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal reveal-delay-1">
+        <div class="test-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <span class="test-label">Contract campaign frames</span>
+      </div>
+      <div class="test-card reveal reveal-delay-2">
+        <div class="test-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span class="test-label">Strike authorization messaging</span>
+      </div>
+      <div class="test-card reveal reveal-delay-3">
+        <div class="test-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span class="test-label">Member mobilization appeals</span>
+      </div>
+      <div class="test-card reveal reveal-delay-1">
+        <div class="test-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <span class="test-label">Public solidarity messages</span>
+      </div>
+      <div class="test-card reveal reveal-delay-2">
+        <div class="test-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <span class="test-label">Anti-union inoculation</span>
+      </div>
+      <div class="test-card reveal reveal-delay-3">
+        <div class="test-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </div>
+        <span class="test-label">Ratification framing</span>
+      </div>
+      <div class="test-card reveal reveal-delay-1">
+        <div class="test-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        </div>
+        <span class="test-label">New member recruitment</span>
+      </div>
+      <div class="test-card reveal reveal-delay-2">
+        <div class="test-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <span class="test-label">Legislative campaign messages</span>
+      </div>
+      <div class="test-card reveal reveal-delay-3">
+        <div class="test-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span class="test-label">Community support building</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="demo">
+  <div class="container cta-inner">
+    <span class="chip chip-light">Get Started</span>
+    <h2 class="cta-h">Ready to test before the<br>campaign begins?</h2>
+    <p class="cta-sub">GP delivers statistically significant results in 24 hours — fast enough for contract fights, organizing drives, and public campaigns.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn btn-white">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Request a Demo
+      </a>
+      <a href="how-it-works.html" class="btn btn-ghost-dark">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="newsletter-copy">
+        <div class="newsletter-eyebrow">
+          <span class="newsletter-eyebrow-dot"></span>
+          Grow Progress Newsletter
+        </div>
+        <p class="newsletter-sub">Monthly insights from 500+ studies — what moves people, what does not, and what it means for your next campaign.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="return false;">
+        <div class="nl-row">
+          <input class="nl-input" type="text" placeholder="First name" autocomplete="given-name">
+          <input class="nl-input" type="text" placeholder="Last name" autocomplete="family-name">
+        </div>
+        <input class="nl-input" type="email" placeholder="Work email" autocomplete="email">
+        <button class="nl-submit" type="submit">Subscribe</button>
+        <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div>
+          <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        </div>
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="code-of-conduct.html">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll behavior
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+  if (window.scrollY > 20) nav.classList.add('scrolled');
+
+  // Generic scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, {threshold:0.1});
+  revealEls.forEach(el => obs.observe(el));
+
+  // Timeline card reveal
+  const tlStages = document.querySelectorAll('.tl-stage');
+  const tlObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); tlObs.unobserve(e.target); }});
+  }, {threshold:0.15});
+  tlStages.forEach(el => tlObs.observe(el));
+
+  // Case study peek-carousel
+  (function(){
+    const scroll = document.getElementById('caseScroll');
+    const dots   = document.querySelectorAll('#caseNavDots .case-dot');
+    const cards  = scroll.querySelectorAll('.case-card');
+
+    function goTo(idx) {
+      const card = cards[idx];
+      scroll.scrollTo({left: card.offsetLeft, behavior: 'smooth'});
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    }
+
+    scroll.addEventListener('scroll', () => {
+      let closest = 0, min = Infinity;
+      cards.forEach((c,i) => {
+        const dist = Math.abs(c.offsetLeft - scroll.scrollLeft);
+        if (dist < min) { min = dist; closest = i; }
+      });
+      dots.forEach((d,i) => d.classList.toggle('active', i === closest));
+    }, {passive: true});
+
+    document.getElementById('casePrev').addEventListener('click', () => {
+      const cur = [...dots].findIndex(d => d.classList.contains('active'));
+      goTo(Math.max(0, cur - 1));
+    });
+    document.getElementById('caseNext').addEventListener('click', () => {
+      const cur = [...dots].findIndex(d => d.classList.contains('active'));
+      goTo(Math.min(cards.length - 1, cur + 1));
+    });
+    dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
+  })();
+</script>
+</body>
+</html>

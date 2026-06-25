@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Terms &amp; Conditions — Grow Progress</title>
+  <meta name="description" content="Grow Progress Customer Terms and Conditions — effective October 30, 2023.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(242,242,253,.95);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .has-dropdown{position:relative;}
+    .has-dropdown>a{display:flex;align-items:center;gap:.3rem;}
+    .has-dropdown>a svg{width:12px;height:12px;transition:transform .2s;flex-shrink:0;}
+    .has-dropdown:hover>a svg,.has-dropdown:focus-within>a svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:640px;background:#fff;border:1px solid rgba(67,44,151,.1);border-radius:1.25rem;box-shadow:0 8px 40px rgba(31,22,40,.12),0 2px 12px rgba(31,22,40,.06);padding:.75rem 1.25rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-8px);transition:opacity .18s ease,transform .18s ease;z-index:200;}
+    .has-dropdown:hover .nav-dropdown,.has-dropdown:focus-within .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav-dd-item{display:flex;align-items:flex-start;gap:.875rem;padding:.875rem;border-radius:.75rem;text-decoration:none;transition:background .15s;}
+    .nav-dd-item:hover{background:rgba(67,44,151,.05);}
+    .nav-dd-icon{width:36px;height:36px;border-radius:.625rem;background:rgba(67,44,151,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-dd-icon svg{width:18px;height:18px;color:#432C97;}
+    .nav-dd-text{display:flex;flex-direction:column;gap:.2rem;}
+    .nav-dd-label{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:#1F1628;line-height:1;}
+    .nav-dd-desc{font-size:.75rem;color:rgba(31,22,40,.45);line-height:1.4;}
+    .nav-dd-item--method{background:linear-gradient(135deg,rgba(67,44,151,.06) 0%,rgba(108,155,255,.04) 100%);border:1px solid rgba(67,44,151,.1);border-radius:.75rem;}
+    .nav-dd-item--method:hover{background:linear-gradient(135deg,rgba(67,44,151,.1) 0%,rgba(108,155,255,.08) 100%);}
+    .nav-dd-item--method .nav-dd-icon{background:var(--purple);}
+    .nav-dd-item--method .nav-dd-icon svg{color:#fff;}
+    .nav-dd-item--method .nav-dd-label{color:var(--purple);}
+    .nav-dd-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+    .nav-dropdown--single{width:280px;grid-template-columns:1fr;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:var(--muted);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── LEGAL HERO ── */
+    .legal-hero{padding:9rem 0 4rem;border-bottom:1px solid rgba(67,44,151,.08);}
+    .legal-eyebrow{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;display:block;}
+    .legal-hero h1{font-family:var(--font-h);font-weight:900;font-size:clamp(2.5rem,4vw,3.5rem);letter-spacing:-.035em;line-height:1.05;color:var(--ink);margin-bottom:.875rem;}
+    .legal-date{font-size:.9375rem;color:var(--muted);}
+    .legal-date-note{font-size:.875rem;color:var(--faint);margin-top:.375rem;}
+
+    /* ── TOC ── */
+    .toc{background:var(--ghost);border:1.5px solid rgba(67,44,151,.08);border-radius:var(--r-lg);padding:2rem 2.25rem;margin:3rem 0 0;max-width:780px;}
+    .toc-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:1rem;}
+    .toc-list{list-style:none;display:flex;flex-direction:column;gap:.375rem;}
+    .toc-list a{font-size:.9375rem;color:var(--purple);text-decoration:none;transition:color .15s;}
+    .toc-list a:hover{color:var(--ink);text-decoration:underline;}
+
+    /* ── BODY ── */
+    .legal-body{max-width:780px;padding:4rem 0 6rem;}
+    .legal-body h2{font-family:var(--font-h);font-weight:800;font-size:1.25rem;color:var(--ink);margin:3.5rem 0 1rem;letter-spacing:-.015em;line-height:1.2;}
+    .legal-body h2:first-child{margin-top:0;}
+    .legal-body h3{font-family:var(--font-h);font-weight:700;font-size:1rem;color:var(--ink);margin:1.75rem 0 .5rem;}
+    .legal-body p{font-size:.9375rem;line-height:1.85;color:var(--muted);margin-bottom:1.125rem;}
+    .legal-body p.caps{text-transform:uppercase;font-weight:600;font-size:.875rem;letter-spacing:.01em;line-height:1.75;}
+    .legal-body ol,.legal-body ul{padding-left:1.5rem;margin-bottom:1.125rem;display:flex;flex-direction:column;gap:.625rem;}
+    .legal-body li{font-size:.9375rem;line-height:1.75;color:var(--muted);}
+    .legal-body li ol,.legal-body li ul{margin-top:.5rem;margin-bottom:0;}
+    .legal-body a{color:var(--purple);}
+    .legal-body dl{margin-bottom:1.25rem;display:flex;flex-direction:column;gap:1.125rem;}
+    .legal-body dt{font-family:var(--font-h);font-weight:700;font-size:.9375rem;color:var(--ink);}
+    .legal-body dd{font-size:.9375rem;line-height:1.75;color:var(--muted);margin-left:0;margin-top:.25rem;}
+    .legal-body .section-divider{border:none;border-top:1px solid rgba(67,44,151,.08);margin:3.5rem 0 0;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;flex-wrap:wrap;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+    @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:640px){.container{padding:0 1.25rem;}.footer-top{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-dark.svg" alt="Grow Progress" class="nav-gp-logo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Rapid Message Testing</span><span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span></div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Audience Understanding</span><span class="nav-dd-desc">Map who your audience is and what they believe</span></div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Pulse Surveys</span><span class="nav-dd-desc">Real-time opinion tracking as events unfold</span></div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Library</span><span class="nav-dd-desc">500+ studies searchable by topic and audience</span></div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-eyebrow">Methodology</span><span class="nav-dd-label">How It Works</span><span class="nav-dd-desc">The RCT science behind every GP study</span></div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Sandbox</span><span class="nav-dd-desc">Self-serve message testing — launch in minutes</span></div>
+        </a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">Who We Serve
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown nav-dropdown--single">
+        <a href="politics.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span><span class="nav-dd-desc">Campaigns, PACs &amp; party committees</span></div>
+        </a>
+        <a href="advocacy.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span><span class="nav-dd-desc">Issue campaigns &amp; policy fights</span></div>
+        </a>
+        <a href="nonprofits.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span><span class="nav-dd-desc">Donors, programs &amp; community impact</span></div>
+        </a>
+        <a href="labor.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span><span class="nav-dd-desc">Contract campaigns &amp; member mobilization</span></div>
+        </a>
+      </div>
+    </li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Sign In</a>
+    <a href="demo.html" class="btn-nav">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <div class="container">
+    <span class="legal-eyebrow">Legal</span>
+    <h1>Customer Terms &amp; Conditions</h1>
+    <p class="legal-date">Effective Date: October 30, 2023</p>
+    <p class="legal-date-note">Section numbering change on February 29, 2024</p>
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-label">Contents</p>
+      <ol class="toc-list">
+        <li><a href="#our-services">1. Our Services</a></li>
+        <li><a href="#restrictions">2. Restrictions and Responsibilities</a></li>
+        <li><a href="#ip">3. Intellectual Property Rights</a></li>
+        <li><a href="#confidentiality">4. Confidentiality</a></li>
+        <li><a href="#privacy">5. Privacy and Data</a></li>
+        <li><a href="#compliance">6. Compliance with Laws</a></li>
+        <li><a href="#payment">7. Payment of Fees</a></li>
+        <li><a href="#termination">8. Term and Termination</a></li>
+        <li><a href="#warranties">9. Warranties and Disclaimer</a></li>
+        <li><a href="#indemnification">10. Indemnification</a></li>
+        <li><a href="#liability">11. Limitation of Liability</a></li>
+        <li><a href="#general">12. General Provisions</a></li>
+        <li><a href="#changes">13. Changes and Updates</a></li>
+        <li><a href="#definitions">14. Definitions</a></li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+  <div class="legal-body">
+
+    <h2 id="our-services">1. OUR SERVICES</h2>
+
+    <h3>a. Services.</h3>
+    <p>The Services shall include access to the Platform and managed services related to survey design, survey programming, translation, data analysis, data presentation and reporting, obtaining registrants and participants for surveys and survey panels, assistance with advertising effectiveness campaigns, other advertising research services, and/or similar services, as well as any service as set forth in any applicable Order or technical support provided by Grow Progress during the Subscription Term.</p>
+
+    <h3>b. Becoming a Customer.</h3>
+    <p>You will be granted access to the Services as a Customer by executing an Order, agreeing to pay any applicable Fees described in the Order, and satisfying any of the company's credit processes.</p>
+
+    <h3>c. Availability of Services.</h3>
+    <p>The company will:</p>
+    <ol>
+      <li>Allow you and your Users access to the Platform pursuant to this Agreement during the applicable Subscription Term(s) once you have purchased the Services via an Order</li>
+      <li>Use commercially reasonable efforts to make the Services available 24 hours a day, 7 days a week in the Public Cloud, except for:
+        <ul>
+          <li>Downtime for Scheduled Maintenance or emergency maintenance</li>
+          <li>Any unavailability caused by circumstances beyond reasonable control, including Force Majeure Events or Internet service provider failure or delay</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>d. Scheduled Maintenance and Emergency Maintenance.</h3>
+    <p>Grow Progress will attempt to provide at least three (3) days advance written notice (via electronic notice to Users either through the Platform or email) of any scheduled maintenance, including the time and length of the scheduled maintenance period. If the company deems it necessary to perform emergency maintenance on the Platform, Grow Progress will use commercially reasonable efforts to provide 24-hour notice via electronic notice to Users either through the Platform or email.</p>
+
+    <h3>e. Security Measures.</h3>
+    <p>To protect the integrity and quality of the Services, or any aspect of the Platform or the Grow Progress Technology, Grow Progress may, without liability, suspend or terminate any or all access to the Services by revoking integration keys or restricting User login(s) in the following circumstances:</p>
+    <ol>
+      <li>Following a possible or actual security breach or cyber-attack on the Services or Public Cloud</li>
+      <li>To protect Grow Progress's network in the Public Cloud</li>
+      <li>If required by a governmental entity or law enforcement agency</li>
+      <li>If you or a User or Respondent is causing technical or other problems to the Public Cloud</li>
+      <li>Upon the termination or expiration of a Subscription Term</li>
+      <li>As otherwise allowed under this Agreement</li>
+    </ol>
+
+    <h3>f. Updates; Upgrades.</h3>
+    <p>From time to time, Grow Progress may provide upgrades, modifications, patches, enhancements, or fixes for the Services to its customers generally without additional charge ("Updates"). Such Updates will become part of the Services and subject to this Agreement; provided that:</p>
+    <ul>
+      <li>Grow Progress shall have no obligation under this Agreement or otherwise to provide any such Updates</li>
+      <li>Grow Progress shall not materially reduce the functionality of the Service in the aggregate</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <h2 id="restrictions">2. RESTRICTIONS AND RESPONSIBILITIES</h2>
+
+    <h3>a. Restrictions.</h3>
+    <p>Your use of the Services shall not include service bureau use, reselling, renting, distributing, sublicensing, or otherwise commercially exploiting or making available to any third party the Services, the Grow Progress Technology, and any Product Data.</p>
+    <p>In addition to the restrictions described in the Terms of Use, Customer shall not and shall not permit any User, Affiliate or any third party to:</p>
+    <ol>
+      <li>"Frame" or "mirror" the Platform or Grow Progress Technology on any other server or wireless or Internet-based device</li>
+      <li>Access, penetrate, probe or scan the Services or Grow Progress Technology for purposes of monitoring availability, performance or functionality, or for any other benchmarking or competitive purposes</li>
+      <li>Identify the Respondents or otherwise publish material on the Platform that is intended to identify or otherwise collect personally identifiable information ("PII") about or from the Respondents</li>
+      <li>Use the Services to conduct fraudulent or otherwise illegal behavior</li>
+      <li>Use the Grow Progress Services for the purpose of building a similar or competitive product or service</li>
+    </ol>
+
+    <h3>b. Customer Responsibilities.</h3>
+    <p>Customer represents, covenants, and warrants that Customer and its Users will:</p>
+    <ol>
+      <li>Use the Platform or any part of the Services only in compliance with any documentation, Grow Progress's standard published policies then in effect, and all applicable local, state, national and foreign laws, treaties and regulations in connection with Customer's use of the Services (including those related to data privacy, international communications, export laws and the transmission of technical or personal data laws)</li>
+      <li>Not use the Platform or any part of the Services in a manner that violates any third-party intellectual property, contractual or other proprietary rights</li>
+      <li>Cooperate with Grow Progress and provide all assistance, resources, data, people, information, facilities, access, and documentation that is reasonably necessary to enable the company to provide the Platform or any part of the Services, and as otherwise requested, from time to time, and in a timely manner</li>
+      <li>Be responsible for obtaining any consents, licenses, authorities, and permissions from other parties necessary for the Platform or any part of the Services to be provided in accordance with these Terms, at its cost, and for providing Grow Progress with the necessary consents, licenses, authorities, and permissions</li>
+      <li>Grant the right to access the Service only to Users of your organization to use the Platform or any part of the Services in accordance with these Terms</li>
+      <li>Not implement the Platform or any part of the Services or combine it with the services of another provider without obtaining express written decryption authorization</li>
+    </ol>
+
+    <h3>c. Responsibility for Authorized Users.</h3>
+    <p>Customer acknowledges and agrees that:</p>
+    <ol>
+      <li>It is liable for all Users' use of the Platform or Services and compliance with these Terms</li>
+      <li>It shall retain control over each User's level of access to the Platform or Services at all times, and revoke and change such access, or level of access, at any time and for any reason, in which case that a person or entity will cease to be a User, as applicable, or must have that different level of access, as the case may be</li>
+      <li>Any User's license to access the Platform or Services will terminate upon the termination of the Customer's license to access the Platform or Services</li>
+    </ol>
+
+    <h3>d. Account Management.</h3>
+    <p>Customer, in designating any User, acknowledges that it authorized such User to:</p>
+    <ol>
+      <li>Act on Customer's behalf</li>
+      <li>Provide information on Customer's behalf</li>
+      <li>Bind Customer and/or Customer's business with respect to the Services</li>
+    </ol>
+    <p>Customer is solely responsible for all actions taken under any account to which Customer has access. Any actions taken under such actions will be deemed authorized by Customer, regardless of Customer's knowledge of such actions. Notwithstanding anything to the contrary, Customer shall be responsible for its User's access to and use of the Platform and Services. Customer is responsible for the activities of all Users, including ensuring that all Users will comply with the terms and conditions of this Agreement, any applicable policies by Grow Progress, and applicable law. Customer acknowledges that it remains liable for the acts and omissions of any third party that Customer allows, enables, or otherwise provides access to the Services, whether or not such access was expressly permitted by Grow Progress.</p>
+
+    <h3>e. Operating Environment.</h3>
+    <p>Customer shall be responsible for maintaining the security of the Operating Environment (as defined below), Customer credentials, passwords (including but not limited to administrative and user passwords) and files, and for all uses of Customer account or the Operating Environment with or without Customer's knowledge or consent in relation to the Platform or Services, including but not limited to uploading Customer Data (as defined below) onto the Service. Grow Progress is not responsible for Users inability to access or use the Platform or Services arising from any issue with the Operating Environment.</p>
+
+    <h3>f. Code of Conduct.</h3>
+    <p>Grow Progress and Customers are independent entities, but the business practices and actions of Customers may significantly impact or reflect upon Grow Progress's reputation and ability to provide the Services. Accordingly, Grow Progress requires all Customers and their Users to adhere to Grow Progress's Code of Conduct ("Code") while using the Platform. You agree to ensure that your Users understand and comply with the Code through education, training, and awareness. The Code is available at: <a href="code-of-conduct.html">growprogress.ai/code-of-conduct</a>.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="ip">3. INTELLECTUAL PROPERTY RIGHTS</h2>
+
+    <h3>a. Grow Progress Intellectual Property.</h3>
+    <p>Customer acknowledges that all the Intellectual Property Rights, including but not limited to any patents, copyrights, trademarks, service marks, trade secrets or other proprietary rights in and to the Service (including the Platform) and the Grow Progress Technology, and any proprietary voter models (collectively, "Grow Progress Intellectual Property") are owned by and shall remain property of Grow Progress, Grow Progress's licensors or suppliers. Subject to the foregoing, during the Subscription Term, Grow Progress grants Customer the limited, revocable right to access and use the Services (including the Platform). Customer shall not:</p>
+    <ol>
+      <li>Exploit or use the Services except as expressly provided herein</li>
+      <li>Modify or create derivative works of the Services or merge any software therein with other software</li>
+      <li>Disassemble, decompile or otherwise reverse engineer the Services or attempt to derive any of its source code, in whole or in part, except to the extent such activities are expressly permitted by law notwithstanding this prohibition</li>
+      <li>Modify, obscure or delete any proprietary rights notices included in or on the Services</li>
+    </ol>
+
+    <h3>b. Customer Intellectual Property.</h3>
+    <p>Customer retains all right, title, interest and responsibility in and to any and all content or data it uploads using the Services (collectively, "Customer Data"). Grow Progress and its licensors exclusively own all right, title and interest in and to all other content or data. Customer grants Grow Progress a worldwide, non-exclusive, irrevocable, transferable, sublicensable, royalty-free license to use, copy, modify, transmit, publicly and digitally display and perform and distribute any Customer Data, including, unless otherwise agreed in writing by Customer and Grow Progress, Customer's logo, trademarks and/or service marks ("Customer Intellectual Property"), that Customer provides to Grow Progress or shares or transmits to the Platform for Grow Progress's internal business or development purposes, or to provide the services to Customer, or to prevent or address service or technical problems under this Agreement, or as may be required by law.</p>
+
+    <h3>c. Product Data.</h3>
+    <p>Grow Progress shall own and retain all rights, title and interest in any product, information, data, or results created and/or delivered pursuant to the Services, as well as any information or data generated by Customer by using the Services (the "Product Data"). Grow Progress grants Customer a limited, non-exclusive, non-transferable, non-sublicensable, license to use such Product Data applicable to Customer and relating to Customer's use or access of the Services, as determined by Grow Progress in its discretion, and subject to the purpose and the terms of this Agreement. Product Data shall include Respondent Data and Opinion Measurement Data.</p>
+
+    <h3>d. Service Data.</h3>
+    <p>Notwithstanding anything to the contrary, Grow Progress may collect and use Service Data to develop, improve, support, and operate the Services. Grow Progress may not share any Service Data that includes Customer's Confidential Information with a third party except:</p>
+    <ol>
+      <li>In accordance with Section 4 (Confidential Information) of this Agreement, or</li>
+      <li>To the extent the Service Data is aggregated and anonymized such that Customer and Customer's Users cannot be identified</li>
+    </ol>
+
+    <h3>e. Feedback.</h3>
+    <p>To the extent that you or your Users provide any suggestions, comments or other feedback related to the Services or the Grow Progress Technology (collectively, "Feedback"), you grant Grow Progress a worldwide, non-exclusive, perpetual, irrevocable, royalty-free, sublicensable, transferable license to use such Feedback or subject matter thereof in any way and without limitation.</p>
+
+    <h3>f. Publicity.</h3>
+    <p>Neither Party shall, except as otherwise required by Applicable Law or stock exchange requirements, issue or release any announcement, statement, press release or other publicity or marketing materials relating to this Agreement or otherwise use the other Party's marks or logos without the prior written consent of the other Party; provided, however that Grow Progress may use Customer's company name and logo as a reference for marketing or promotional purposes on our website and in other public or private communications with our existing or potential customers, subject to your standard trademark usage guidelines as provided to us.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="confidentiality">4. CONFIDENTIALITY</h2>
+
+    <h3>a. Definition of Confidential Information.</h3>
+    <p>As used herein, "Confidential Information" means all confidential information disclosed by one Party ("Disclosing Party") to the other Party ("Receiving Party"), whether orally or in writing, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and the circumstances of disclosure. However, Confidential Information shall not include any information that:</p>
+    <ol>
+      <li>Is or becomes generally known to the public without breach of any obligation owed to the Disclosing Party</li>
+      <li>Was known to the Receiving Party prior to its disclosure by the Disclosing Party without breach of any obligation owed to the Disclosing Party</li>
+      <li>Is received from a third party without breach of any obligation owed to the Disclosing Party</li>
+      <li>Was independently developed by the Receiving Party without access to, or use of, the Disclosing Party's Confidential Information</li>
+    </ol>
+
+    <h3>b. Protection of Confidential Information.</h3>
+    <p>Except as otherwise permitted in writing by the Disclosing Party, the Receiving Party shall use the same degree of care that it uses to protect the confidentiality of its own confidential information of like kind (but in no event less than reasonable care) and shall not disclose or use any Confidential Information of the Disclosing Party for any purpose outside the scope of this Agreement, and the Receiving Party shall only disclose the Confidential Information of the Disclosing Party to those of the Receiving Party's employees, contractors and agents who need such access to perform obligations or exercise rights under this Agreement and who have signed confidentiality agreements with the Receiving Party containing protections no less stringent than those herein.</p>
+
+    <h3>c. Unauthorized Disclosure of Confidential Information.</h3>
+    <p>The Receiving Party hereby acknowledges that the unauthorized use or disclosure of any Confidential Information of the Disclosing Party may cause irreparable harm to Disclosing Party. Accordingly, the Receiving Party agrees that the Disclosing Party shall be entitled to seek equitable relief, including injunctive relief, in addition to all other remedies available at law for any threatened or actual breach of this Section or any threatened or actual unauthorized use or disclosure of Confidential Information. If the Receiving Party becomes aware of a threatened, suspected or actual breach of its confidentiality obligations set forth herein, the Receiving Party shall immediately (but in no event more than 24 hours from the time that it reasonably believes such a threatened, suspected or actual breach has occurred) so notify the Disclosing Party.</p>
+
+    <h3>d. Compelled Disclosure.</h3>
+    <p>Except as set forth above, the Receiving Party shall not voluntarily provide the Disclosing Party's Confidential Information to any third party unless authorized in writing by the Disclosing Party. Notwithstanding the foregoing, unless expressly prohibited by law, if the Receiving Party is required by a court of competent jurisdiction (including by subpoena in a civil case) or regulatory authority to disclose the Disclosing Party's Confidential Information, it shall:</p>
+    <ol>
+      <li>Immediately notify the Disclosing Party in writing upon receiving notice of such requirement</li>
+      <li>Consult with the Disclosing Party regarding the Receiving Party's response to any such request</li>
+      <li>Cooperate with the Disclosing Party's reasonable requests in connection with efforts by the Disclosing Party to intervene and/or quash or modify the legal order, demand, or request</li>
+      <li>Upon the Disclosing Party's request, supply the Disclosing Party with a copy of the Receiving Party's response (including a copy of the information it proposes to provide) prior to providing it to the requesting party</li>
+    </ol>
+
+    <hr class="section-divider">
+
+    <h2 id="privacy">5. PRIVACY AND DATA</h2>
+
+    <p>In order to be entitled to use or continue to use the Services, you acknowledge and you warrant that you comply and shall continue to comply with these Terms and the Applicable Law. More specifically, you agree that:</p>
+    <ol type="a">
+      <li>You shall maintain all appropriate technical and organizational measures to prevent non-authorized third parties from accessing or using any password protected portion of the Platform or any aspect of the Services using your name, username, or password.</li>
+      <li>You will comply with all personal data protection/privacy legislation applicable to your business and processing operations, including, as applicable the CCPA or the GDPR.</li>
+      <li>Where applicable, and unless otherwise permitted under these Terms, you will not ask or formulate questions to directly obtain or procure real identifiers or personally identifiable information of a Respondent, such as surname or full name, address, telephone number, billing address, e-mail, identity card number, insurance number, driver's license number, passport number, social security number, credit/debit card number and/or any similar identifiers which are able to lead directly to the real-life identity of a data subject.</li>
+      <li>Unless otherwise permitted under this Agreement, you will not use the Services, any Product Data, or any aspect of the Grow Progress Technology to identify, authenticate or contact any person.</li>
+      <li>Except as expressly agreed between the Parties, you will not process any Product Data, including any Respondent Data, for direct marketing, promotional, or selling.</li>
+      <li>You will not process Product Data to allow any Respondent to be de-anonymized, i.e., associated or identified with real-life identifiers, such as: full name, address, identity number, social security number or other similar identifiers.</li>
+      <li>Except where expressly permitted under this Agreement, you will not further transfer any Respondent Data to third parties unless such third parties provide the same level of protection as set-out in this Agreement. Any such transfer shall be in accordance with Applicable Law, including applicable laws and regulations on onward data transfers.</li>
+    </ol>
+
+    <hr class="section-divider">
+
+    <h2 id="compliance">6. COMPLIANCE WITH LAWS</h2>
+
+    <h3>a. Compliance with Laws.</h3>
+    <p>You will be solely responsible for compliance with any and all applicable laws, rules and regulations affecting your business, and any use you make of the Services. In addition, Customer is responsible for ensuring that its employees, contractors, and Users comply with applicable laws while using the Services, including the intellectual property and third-party rights of others.</p>
+
+    <h3>b. Use of Persuasion Library.</h3>
+    <p>Grow Progress may make the Persuasion Library available to Customer that allows Customer to run any tests and optionally publish the results of such tests to make such results accessible to other users. Customer acknowledges that the sharing of any information in the Persuasion Library is not mandatory and that Customer's access is not conditioned on Customer's sharing of any information. By publishing or posting any such information, Customer agrees that such information is Customer Data in accordance to Section 3(b) for which Grow Progress has license to use. Customer further acknowledges that:</p>
+    <ol>
+      <li>Your access and/or use of the Persuasion Library is voluntary and that your access or use does not violate the rights of any third-party or any contractual obligation you may have</li>
+      <li>You are solely responsible for the content you publish and the consequences of posting it</li>
+      <li>You have absolute control of the content you publish and you have the ability to remove any content from the Persuasion Library at any time</li>
+      <li>Grow Progress shall not be responsible for any access or use by any user of the Persuasion Library and its contents or for any breach of these Terms</li>
+    </ol>
+
+    <h3>c.</h3>
+    <p>Where Customer is accessing information made available in the Persuasion Library, Customer acknowledges that such information belongs to a third-party and the publication of such information does not constitute any endorsement by Grow Progress. Any such information is made available for your own, personal use and any reliance you make on such information is at your own risk. Notwithstanding anything to the contrary, you confirm that you are prohibited from copying, reproducing, distributing, or otherwise sharing such third-party content without the prior written consent of its owner and Grow Progress.</p>
+
+    <h3>d.</h3>
+    <p>Notwithstanding anything to the contrary, Customer is responsible for ensuring that its posting and/or use of any information made available in the Persuasion Library complies with applicable law, including, without limitation, Federal Election Commission ("FEC") regulations, election laws, Federal campaign finance rules, and firewall rules or regulations governing coordinated communications. For the avoidance of doubt, Customer agrees to defend, indemnify, and hold Grow Progress harmless for any violation of this Section by Customer.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="payment">7. PAYMENT OF FEES</h2>
+
+    <h3>a. Fees.</h3>
+    <p>Customer will pay Company the applicable Fees in accordance with these Terms and applicable Order. Any cost, fee, or other charges applicable on the payment of the Fees must be paid by the Customer. If Customer's use of the Services exceeds the service capacity or the usage limitations, if applicable and set forth in the Order, or otherwise requires the payment of additional fees (per the terms of this Agreement), Customer shall be billed for such usage and Customer agrees to pay the additional fees in the manner provided herein. To the extent permitted by law, any Fees paid hereunder are non-refundable and Grow Progress does not provide refunds or credits should the Customer cancel the Service during the Subscription Term.</p>
+
+    <h3>b. Payment Terms.</h3>
+    <p>Except as otherwise provided in an Order, all Fees must be paid in U.S. dollars and within thirty (30) days of invoice. If you believe that Grow Progress has billed you incorrectly, you must contact the company no later than thirty (30) days of invoice setting forth the nature and amount of the requested correction directed to <a href="mailto:billing@growprogress.ai">billing@growprogress.ai</a>. Otherwise, invoices are final. Unpaid undisputed amounts are subject to a finance charge of 1.5% per month on any outstanding balance, or the maximum permitted by law, whichever is lower, plus all expenses of collection. Company reserves the right to suspend or terminate Customer's access to the Services due to non-payment at its sole discretion.</p>
+
+    <h3>c. Taxes.</h3>
+    <p>Customer agrees that the Fees and any other charges, rates or levy made by Grow Progress are exclusive of all applicable taxes. Customer acknowledges that Customer shall be responsible for all transaction taxes levied on Customer's use of the Services, including without limitation any sales tax, use tax, excise tax, value added tax (VAT), goods and services tax (GST), consumption tax, business tax, service tax, product sales tax and similar taxes.</p>
+
+    <h3>d. Revision.</h3>
+    <p>Grow Progress reserves the right to change the Fees or applicable charges and to institute new charges and Fees at the end of the ongoing Subscription Term, upon thirty (30) days prior notice to Customer (which may be sent by email).</p>
+
+    <hr class="section-divider">
+
+    <h2 id="termination">8. TERM AND TERMINATION</h2>
+
+    <h3>a. Subscription Term.</h3>
+    <p>Unless otherwise specified in the Order, these Terms shall commence on the earliest of the following dates:</p>
+    <ol>
+      <li>The date Customer first accesses the Platform</li>
+      <li>The date Customer executes an Order</li>
+      <li>The date Customer otherwise first agrees to these Terms</li>
+    </ol>
+    <p>(collectively, the "Effective Date"). The term of this Agreement will continue through the Subscription Term or earlier termination of the last Order to be in effect. Except as otherwise set forth in an Order, subscriptions will automatically renew for additional periods equal to the then-expiring Subscription Term. You may cancel the automatic renewal of a Subscription Term by providing written notice of non-renewal at least thirty (30) days before the end of the relevant Subscription Term.</p>
+
+    <h3>b. Termination for Breach.</h3>
+    <p>In addition to any other remedies it may have, in case of a material breach of this Agreement, the non-breaching Party may terminate this Agreement upon furnishing a written notice on the breaching Party, provided that the breaching Party does not materially cure such breach within thirty (30) days of receipt of such notice where the breach can be remedied. For breach of provisions such as Section 2 (Restrictions and Responsibilities), Section 4 (Confidentiality), Section 5 (Privacy and Data), non-payment of Fees under Section 7 for more than sixty (60) days, or any other form of misuse of the Services by Customer or its representatives, Grow Progress shall have the right to terminate the Agreement with immediate notice to the Customer.</p>
+
+    <h3>c. Suspension of Services.</h3>
+    <p>Without limiting the foregoing, Grow Progress, without any responsibility or liability to Customer or any third party, may terminate this Agreement, or suspend or limit Customer's access to or use of the Services if:</p>
+    <ol>
+      <li>Customer's account is more than thirty (30) days past due</li>
+      <li>Customer's use of the Service results in (or is reasonably likely to result in) damage to or material degradation of the Services which interferes with Grow Progress's ability to provide access to the Services to other customers; provided that in the case of subsection (b):
+        <ul>
+          <li>(i) Grow Progress shall use reasonable good faith efforts to work with Customer to resolve or mitigate the damage or degradation in order to resolve the issue without resorting to suspension or limitation</li>
+          <li>(ii) Prior to any such suspension or limitation, Grow Progress shall use commercially reasonable efforts to provide notice to Customer describing the nature of the damage or degradation</li>
+          <li>(iii) Grow Progress shall reinstate Customer's use of or access to the Services, as applicable, if Customer remedies the issue within thirty (30) days of receipt of such notice</li>
+        </ul>
+      </li>
+      <li>Such suspension is necessary for maintenance of the Services</li>
+      <li>There is any access error which needs to be remedied by Grow Progress or there is any error in the servers or local connections of the Customer</li>
+      <li>Customer or any of its directors or officers have engaged or are alleged to have engaged in fraudulent or illegal conduct which, in Grow Progress's good faith determination, materially affects Grow Progress's general reputation or would harm Grow Progress's reputation by its continued association with Customer</li>
+      <li>Based on information about Customer not known to Grow Progress, Grow Progress concludes in its sole discretion that a continued association with Customer is inconsistent with its values or could otherwise adversely affect its reputation</li>
+    </ol>
+
+    <h3>d. Effects of Termination.</h3>
+    <p>Upon termination of this Agreement, your right to access or use the Services immediately ceases, and Grow Progress shall have no obligation to store, maintain, forward, or otherwise restore any data other than whatever data was previously downloaded by you. The termination of this Agreement for any reason shall not affect:</p>
+    <ol>
+      <li>Obligations of the Parties to account for and pay to one another amounts owed under this Agreement for activity that occurred on the Platform (whether before or after the notice of termination)</li>
+      <li>Any other obligation or liability which either you or Grow Progress has to the other under this Agreement and which, by its nature, would reasonably be expected to survive termination</li>
+    </ol>
+    <p>For the avoidance of doubt, and notwithstanding anything to the contrary, no Fees paid to Grow Progress under this Agreement shall be refundable, other than as set forth in Section 10(b), subsection (c).</p>
+
+    <hr class="section-divider">
+
+    <h2 id="warranties">9. WARRANTIES AND DISCLAIMER</h2>
+
+    <h3>a.</h3>
+    <p>You represent and warrant that:</p>
+    <ol>
+      <li>You have validly entered into this Agreement and have the legal power to do so</li>
+      <li>You and your Users, in accessing and using the Services, do so only in strict compliance with Applicable Laws and any terms of use that have been published by Grow Progress generally relating to the Services, as amended from time to time</li>
+    </ol>
+    <p>Not more than once a year and at Grow Progress's own expense, the company reserves the right to audit your compliance with the warranties in this Section 9, and you shall provide relevant documentation in order for Grow Progress to conclude such audit.</p>
+
+    <h3>b. DISCLAIMER.</h3>
+    <p class="caps">THE SERVICES, INCLUDING THE PLATFORM AND PRODUCT DATA, ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE BASIS" "WITH ALL FAULTS" AND WITHOUT WARRANTY OF ANY KIND. TO THE FULL EXTENT PERMITTED BY LAW, GROW PROGRESS DISCLAIMS ALL WARRANTIES AND REPRESENTATIONS OF ANY KIND, EXPRESS OR IMPLIED, OR STATUTORY, INCLUDING WITHOUT LIMITATION ALL WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY, AND SYSTEM INTEGRATION OR COMPATIBILITY. WITHOUT LIMITING THE FOREGOING, GROW PROGRESS DOES NOT WARRANT OR REPRESENT THAT THE SERVICES WILL BE CONTINUOUS, SECURE, RELIABLE, ACCESSIBLE, UNINTERRUPTED, OR ERROR-FREE. THE SERVICES MAY BE SUBJECT TO LIMITATIONS, DELAYS, AND OTHER PROBLEMS INHERENT IN THE USE OF THE INTERNET AND ELECTRONIC COMMUNICATIONS. GROW PROGRESS IS NOT RESPONSIBLE FOR ANY DELAYS, DELIVERY FAILURES, OR OTHER DAMAGE RESULTING FROM SUCH PROBLEMS BEYOND ITS CONTROL.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="indemnification">10. INDEMNIFICATION</h2>
+
+    <h3>a. Indemnification by Customer.</h3>
+    <p>Customer shall indemnify and hold Grow Progress, and its subsidiaries, Affiliates, officers, directors, employees, attorneys and agents harmless from and against any and all damages, liability, claims, losses, awards, judgments, settlements, expenses and costs (including reasonable attorneys' fees and costs of defense) and defend Grow Progress against any actions, suits, litigation, claims, demands, arbitration or proceeding, and any threats thereof, resulting from or in connection with:</p>
+    <ol>
+      <li>Any breach of any warranty, representation, covenant, or agreement made by Customer in this Agreement</li>
+      <li>Any misuse of the Services or any Product Data by Customer or its Users</li>
+      <li>Any claim alleging that the Opinion Measurement Data or any data published on the Platform by Customer or its Users infringes the rights of, or has caused harm to, a third party</li>
+      <li>Any violation of all and any Applicable Laws, including applicable legislation on personal data protection</li>
+    </ol>
+
+    <h3>b. Indemnification by Grow Progress.</h3>
+    <p>Subject to your lawful use of the Services, Grow Progress shall defend you and your Affiliates, officers, directors, employees, attorneys, and agents from and against any claim by a third party alleging that any Service or Product Data, when used as authorized under this Agreement, infringes a U.S. patent, copyright, or trademark and will indemnify and hold you harmless from and against any damages and costs awarded against you or agreed in settlement by Grow Progress (including reasonable attorneys' fees) resulting from such claim. If Customer's use of the Services or Product Data is (or in Grow Progress's opinion is likely to be) enjoined, if required by settlement or if Grow Progress determines such actions are reasonably necessary to avoid material liability, Grow Progress may, in its sole discretion, either:</p>
+    <ol>
+      <li>Substitute substantially functionally similar products or services</li>
+      <li>Procure for Customer the right to continue using the Services or Product Data</li>
+      <li>If (a) and (b) are not commercially reasonable, terminate this Agreement and refund to Customer the Fees paid by Customer for the Services or Product Data that were prepaid but not used by Customer</li>
+    </ol>
+    <p>The foregoing indemnification obligation of Grow Progress will not apply to the extent the applicable claim is attributable to:</p>
+    <ol>
+      <li>The modification of the Services or Product Data by any party other than Grow Progress or its contractors or based on Customer's specifications or requirements</li>
+      <li>The combination of the Services or Product Data with products or processes licensed or procured from a party other than Grow Progress</li>
+      <li>Any unauthorized use of the Services or Product Data by Customer or its Users</li>
+      <li>Any action arising as a result of Customer Data, or any deliverables or components not provided by Grow Progress</li>
+    </ol>
+    <p class="caps">THIS SECTION SETS FORTH GROW PROGRESS'S SOLE LIABILITY AND CUSTOMER'S SOLE AND EXCLUSIVE REMEDY WITH RESPECT TO ANY CLAIM OF INTELLECTUAL PROPERTY INFRINGEMENT.</p>
+
+    <h3>c. Indemnification Procedures and Survival.</h3>
+    <p>In the event of a potential indemnity obligation under this Section 10, the indemnified Party shall:</p>
+    <ol>
+      <li>Promptly give written notice of the claim to the indemnifying Party</li>
+      <li>Allow the indemnifying Party sole control of the defense and settlement of the claim (provided that the indemnifying Party may not settle or defend any claim unless it unconditionally releases the indemnified Party of all liability)</li>
+      <li>Upon request of the indemnifying Party, cooperate in all reasonable respects, at the indemnifying Party's cost and expense, with the indemnifying Party in the investigation, trial, and defense, of such claim and any appeal arising therefrom</li>
+    </ol>
+    <p>The indemnification obligations under this Section 10 are expressly conditioned upon the indemnified Party's compliance with this Section 10(c) except that failure to notify the indemnifying Party of such claim shall not relieve that Party of its obligations under this Section 10 but such claim shall be reduced to the extent of any damages attributable to such failure.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="liability">11. LIMITATION OF LIABILITY</h2>
+
+    <h3>a. EXCLUSIONS.</h3>
+    <p class="caps">IN NO EVENT WILL GROW PROGRESS OR ITS DIRECTORS, SHAREHOLDERS, EMPLOYEES, AGENTS, PARTNERS, SUPPLIERS OR AFFILIATES, BE LIABLE UNDER CONTRACT, TORT, STRICT LIABILITY, NEGLIGENCE OR ANY OTHER LEGAL OR EQUITABLE THEORY WITH RESPECT TO THE SUBJECT MATTER OF THIS AGREEMENT (A) FOR ANY CONSEQUENTIAL, INCIDENTAL, SPECIAL, INDIRECT OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOST PROFITS, LOST REVENUE, LOSSES AND DAMAGES THAT RESULT FROM INCONVENIENCE, DELAY OR LOSS OF USE OF ANY INFORMATION OR DATA OR OF THE GROW PROGRESS TECHNOLOGY OR RELATED SERVICES, EVEN IF GROW PROGRESS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR LOSSES, OR (B) FOR ANY BUGS, VIRUSES, TROJAN HORSES, OR THE LIKE (REGARDLESS OF THE SOURCE OF ORIGINATION), OR (C) FOR DELAY OR FAILURE TO SUPPLY THE SERVICES CAUSED BY ANY FORCE MAJEURE EVENT, OR (D) FOR ANY LIABILITY TO THE EXTENT THAT CUSTOMER CONTRIBUTED TO THE LIABILITY, OR (E) FOR ALL LIABILITY FOR ANYTHING THAT CUSTOMER HAS BEEN AWARE OF FOR LONGER THAN SIX (6) MONTHS AND HAS NOT COMMENCED A CLAIM IN A COURT OF COMPETENT JURISDICTION.</p>
+
+    <h3>b. LIMITATION OF LIABILITY.</h3>
+    <p class="caps">NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, THE MAXIMUM LIABILITY OF EITHER PARTY TO THE OTHER PARTY FOR ANY CAUSE WHATSOEVER AND REGARDLESS OF THE FORM OF THE ACTION, WILL AT ALL TIMES BE LIMITED TO THE AMOUNT PAID BY YOU TO US DURING THE SIX (6) MONTH PERIOD IMMEDIATELY PRECEDING THE DATE NOTICE OF THE CLAIM IS GIVEN. NOTWITHSTANDING THE FOREGOING, NEITHER PARTY SHALL BE LIABLE TO THE OTHER PARTY TO THE EXTENT SUCH LIABILITY WOULD NOT HAVE OCCURRED BUT FOR THE OTHER PARTY'S FAILURE TO COMPLY WITH THIS AGREEMENT.</p>
+
+    <h3>c. EXCEPTIONS.</h3>
+    <p class="caps">THE LIMITATIONS OF LIABILITY SET FORTH IN THIS SECTION 11(b) SHALL NOT APPLY TO (I) THE FEES DUE UNDER THIS AGREEMENT, (II) A BREACH OF SECTIONS 2, 4, OR 5 OF THIS AGREEMENT, OR (III) EITHER PARTY'S INDEMNITY OBLIGATIONS UNDER SECTION 10.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="general">12. GENERAL PROVISIONS</h2>
+
+    <h3>a. Notice.</h3>
+    <p>Except as otherwise specified in this Agreement, all notices, demands or other communications to be given or delivered under or by reason of the provisions of this Agreement shall be in writing and shall be deemed to have been given to a Party when delivered personally to such Party or sent to such Party by reputable express courier service (charges prepaid), or mailed to such Party by certified or registered mail, return receipt requested and postage prepaid, to such Party's address on the Order or any other address that such Party has identified as the address for notices by written notice hereunder to the other Party at least thirty (30) days prior to such other Party's notice.</p>
+
+    <h3>b. Entire Agreement.</h3>
+    <p>These Terms, any Order(s), and any policies or operating rules posted by us on the Services or in respect to the Services constitute the entire agreement and understanding between you and us.</p>
+
+    <h3>c. Governing Law; Dispute Resolution.</h3>
+    <p>This Agreement and any dispute arising out of or in connection with this Agreement will be governed as to all matters, including, but not limited to the validity, construction and performance of this Agreement, by and under the laws of the District of Columbia, United States of America, without giving effect to conflicts of law principles thereof and excluding the U.N. Convention on the International Sale of Goods.</p>
+    <p>The Parties agree to maintain the confidential nature of all disputes and disagreements between them, including, but not limited to, informal negotiations, mediation or arbitration, except as may be necessary to prepare for or conduct these dispute resolution procedures or unless otherwise required by law or judicial decision.</p>
+    <p>Except as provided below, each Party agrees that before it seeks mediation, arbitration, or any other form of legal relief, it shall provide written notice to the other of the specific issues in dispute (and referencing the specific portion of any contract between the Parties and which are allegedly being breached). Within thirty (30) days after such notice, knowledgeable executives of the Parties shall hold at least one meeting (in person or by video- or teleconference) for the purpose of attempting in good faith to resolve the dispute.</p>
+    <p>Except as provided below, any and all disputes, claims or controversies arising out of or relating to this Agreement shall be submitted to Judicial Arbitration/Mediation Services ("JAMS") for mediation before arbitration or any other form of legal relief may be instituted. Mediation may be commenced by a Party providing JAMS a written request for mediation setting forth the subject of the dispute and the relief requested. The Parties will cooperate with JAMS in selecting a single mediator and scheduling a mediation, which should take place within forty-five (45) days following a request for mediation. The mediator shall be a retired judge who has had experience with technology disputes, but the mediator shall not have the authority to award punitive or exemplary damages. The Parties agree that they will participate in good faith and share equally in its costs. The mediation shall take place in the District of Columbia.</p>
+    <p>The dispute resolution procedures in this Agreement shall not apply prior to a Party seeking a provisional remedy related to claims of misappropriation or ownership of intellectual property, trade secrets, or Confidential Information.</p>
+
+    <h3>d. Relationship of the Parties.</h3>
+    <p>The Parties are independent contractors. This Agreement does not create a partnership, franchise, joint venture, agency, and fiduciary or employment relationship between you and Grow Progress.</p>
+
+    <h3>e. Assignment.</h3>
+    <p>You may not assign any of its rights or delegate any of its obligations under this Agreement without Grow Progress's prior written consent, which consent shall not be unreasonably withheld, conditioned or delayed. Any attempted assignment, delegation or transfer in violation of the foregoing will be null and void. Grow Progress may assign this Agreement or any of its rights under this Agreement to an Affiliate, or any third party with or without your written consent. This Agreement shall be binding upon the successors, legal representatives and permitted assigns of the Parties.</p>
+
+    <h3>f. Expenses.</h3>
+    <p>Except as otherwise provided herein, all expenses incurred by each Party in performing its obligations hereunder shall be borne by the Party incurring the expense.</p>
+
+    <h3>g. Severability.</h3>
+    <p>If any provision of this Agreement is held by a court of competent jurisdiction to be contrary to law, the provision shall be modified by the court and interpreted so as best to accomplish the objectives of the original provision to the fullest extent permitted by law, and the remaining provisions of this Agreement shall remain in effect.</p>
+
+    <h3>h. No Third-Party Beneficiaries.</h3>
+    <p>Unless expressly set forth herein, nothing in this Agreement is intended to nor shall it confer upon any person or entity, other than the Parties or their respective permitted assigns, successors and legal representatives, any rights, remedies, obligations or liabilities under or by reason of this Agreement.</p>
+
+    <h3>i. Rights and Remedies Cumulative.</h3>
+    <p>Unless expressly stated otherwise herein, all rights and remedies provided for in these Terms shall be cumulative and in addition to, and not in lieu of, any other remedies available to either Party at law, in equity or otherwise.</p>
+
+    <h3>j. Force Majeure.</h3>
+    <p>Except for Customer's obligations to pay any amounts due under these Terms, neither Party will be liable to the other for, or be considered to be in breach of or default under these Terms on account of, any delay or failure to perform as required by these Terms as a result of any cause or condition beyond such party's reasonable control including, without limitation, the elements; fire; flood; severe weather; earthquake; vandalism; accidents; sabotage; power failure; denial of service attacks or similar attacks; Internet failure; acts of God and the public enemy; acts of war; acts of terrorism; riots; civil or public disturbances; strikes lock-outs or labor disruptions; pandemic, epidemic and quarantine restrictions; any laws, orders, rules, regulations, acts or restraints of any government or governmental body or authority, civil or military, including the orders and judgments of courts (each a "Force Majeure Event").</p>
+    <p>In the event that any Force Majeure Event as stated prevails for a continuous period of more than three (3) months, these Terms may be terminated by either Party by providing a written notice to the other Party.</p>
+
+    <h3>k. Headings.</h3>
+    <p>The headings in this Agreement are for reference only and shall not limit or otherwise affect any of the meanings or interpretations of this Agreement.</p>
+
+    <h3>l. Questions.</h3>
+    <p>Any questions regarding this Agreement should be directed to <a href="mailto:legal@growprogress.ai">legal@growprogress.ai</a>.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="changes">13. CHANGES AND UPDATES TO THIS AGREEMENT</h2>
+
+    <p>Grow Progress reserves the right to modify the terms and conditions of this Agreement. You are responsible for ensuring that you will regularly review the present Agreement. If you choose to continue using the Services after any modifications to the present terms are made, you will be considered to have fully and unconditionally accepted the aforementioned modifications to this Agreement.</p>
+
+    <hr class="section-divider">
+
+    <h2 id="definitions">14. DEFINITIONS</h2>
+
+    <dl>
+      <div>
+        <dt>a. Affiliate</dt>
+        <dd>means any entity that directly or indirectly controls, is controlled by, or is under common control with the subject entity, which means direct or indirect ownership or control of more than 50% of the voting interests of the subject entity.</dd>
+      </div>
+      <div>
+        <dt>b. Applicable Laws</dt>
+        <dd>means any and all governmental laws, rules, directives, regulations or orders that are applicable to a particular Party's performance under these Terms.</dd>
+      </div>
+      <div>
+        <dt>c. Intellectual Property Rights</dt>
+        <dd>means any copyrights (including, without limitation, the exclusive right to use, reproduce, modify, distribute, publicly display and publicly perform the copyrighted work), trademark rights (including, without limitation, trade names, trademarks, service marks, and trade dress), and patent rights (including, without limitation, the exclusive right to make, use and sell), trade secrets, moral rights, right of publicity, authors' rights, contract and licensing rights, goodwill and all other intellectual property rights (whether registered or not) as may exist now and hereafter come into existence and all renewals and extensions thereof, regardless of whether such rights arise under the law of the United States or any other state, country, or jurisdiction.</dd>
+      </div>
+      <div>
+        <dt>d. Fees</dt>
+        <dd>means the price for the Services including Opinion Measurement Costs, as well as any other fees (or components thereof) charged by Grow Progress for the Services.</dd>
+      </div>
+      <div>
+        <dt>e. Grow Progress Technology</dt>
+        <dd>means Grow Progress's proprietary technology (including software, hardware, APIs, products, processes, algorithms, user interfaces, know-how, techniques, designs, and other tangible or intangible technical material or information) underlying the Platform.</dd>
+      </div>
+      <div>
+        <dt>f. Operating Environment</dt>
+        <dd>includes any equipment, ancillary services and other operating environment used by the Users to connect to, access or otherwise use the Platform or Services, including, without limitation, modems, hardware, servers, software, operating systems, networking, web servers and the like.</dd>
+      </div>
+      <div>
+        <dt>g. Opinion Measurement</dt>
+        <dd>means a test, survey, poll, campaign, or other project defined by a Customer, to measure opinion through Grow Progress Services or the Platform.</dd>
+      </div>
+      <div>
+        <dt>h. Opinion Measurement Cost</dt>
+        <dd>means the price you agree to pay for Opinion Measurement.</dd>
+      </div>
+      <div>
+        <dt>i. Opinion Measurement Data</dt>
+        <dd>means any data entered or provided by Respondents to Grow Progress via a Survey Question Platform utilized by Grow Progress to collect Opinion Measurement.</dd>
+      </div>
+      <div>
+        <dt>j. Order</dt>
+        <dd>means an online or offline document specifying the Grow Progress Services to be purchased hereunder during the Subscription Term, including payment terms, applicable taxes, and payment method, that is executed by you and Grow Progress, including any addenda and supplements thereto.</dd>
+      </div>
+      <div>
+        <dt>k. Product Data</dt>
+        <dd>means any data, metadata or other information that is learned, gathered, published, indexed, uploaded, created, bought or stored on the Platform. Product Data shall include Respondent Data and Opinion Measurement Data.</dd>
+      </div>
+      <div>
+        <dt>l. Platform</dt>
+        <dd>means the Public Cloud platform and application of Grow Progress based on Grow Progress Technology that is used to facilitate Opinion Measurement.</dd>
+      </div>
+      <div>
+        <dt>m. Public Cloud</dt>
+        <dd>means the cloud-based Grow Progress Services provided by Grow Progress (and its third party sub-processors) on servers located in the United States.</dd>
+      </div>
+      <div>
+        <dt>n. Respondent(s)</dt>
+        <dd>means a natural individual who has consented to participate in Opinion Measurement.</dd>
+      </div>
+      <div>
+        <dt>o. Respondent Data</dt>
+        <dd>means all data supplied, indexed, or otherwise transmitted by Respondents for the purpose of asking and answering questions in an attempt to complete an Opinion Measurement, which information is then stored by Grow Progress or its sub-processors in the Public Cloud.</dd>
+      </div>
+      <div>
+        <dt>p. Service Data</dt>
+        <dd>means query logs, and any data (other than Customer Data) relating to the operation, support and/or about Customer's use of the Services.</dd>
+      </div>
+      <div>
+        <dt>q. Subscription Term</dt>
+        <dd>means the period during which Customer may access and use the Platform and/or the Services.</dd>
+      </div>
+      <div>
+        <dt>r. Users</dt>
+        <dd>mean your employees, representatives, consultants, contractors or agents who have been granted access to use the Platform and/or the Services on your behalf.</dd>
+      </div>
+    </dl>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="customer-terms.html">Customer Terms</a>
+        <a href="code-of-conduct.html">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

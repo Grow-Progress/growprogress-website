@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study: Student Loan Cancellation — Grow Progress</title>
+  <meta name="description" content="Can Democrats' public statements about student loan cancellation affect public opinion? A Rapid Message Test gathered over 1,000 responses within hours on September 7, 2022.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --shadow-sm:0 1px 3px rgba(31,22,40,.08),0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:0 2px 8px rgba(31,22,40,.1),0 12px 40px rgba(31,22,40,.08);
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.08s;} .reveal-delay-2{transition-delay:.16s;} .reveal-delay-3{transition-delay:.24s;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s;}
+    .nav.scrolled{background:rgba(242,242,253,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .nav-links a.active{color:var(--purple);font-weight:600;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:var(--muted);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    .has-dropdown{position:relative;}
+    .has-dropdown > a{display:flex;align-items:center;gap:.3rem;}
+    .has-dropdown > a svg{width:12px;height:12px;transition:transform .2s;}
+    .has-dropdown:hover > a svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(-8px);width:640px;background:#fff;border:1px solid rgba(67,44,151,.1);border-radius:1.25rem;box-shadow:0 8px 40px rgba(31,22,40,.12);padding:.75rem 1.25rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:200;}
+    .has-dropdown:hover .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav-dropdown--single{width:280px;grid-template-columns:1fr;}
+    .nav-dd-item{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem;border-radius:.75rem;text-decoration:none;transition:background .15s;}
+    .nav-dd-item:hover{background:rgba(67,44,151,.05);}
+    .nav-dd-icon{width:36px;height:36px;border-radius:.5rem;background:var(--ghost);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-dd-icon svg{width:18px;height:18px;color:var(--purple);}
+    .nav-dd-text{display:flex;flex-direction:column;gap:.2rem;}
+    .nav-dd-label{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:var(--ink);}
+    .nav-dd-desc{font-size:.78rem;color:var(--faint);line-height:1.4;}
+    .nav-dd-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+    .nav-dd-item--method{background:linear-gradient(135deg,rgba(67,44,151,.06) 0%,rgba(108,155,255,.04) 100%);border:1px solid rgba(67,44,151,.1);border-radius:.75rem;}
+    .nav-dd-item--method .nav-dd-icon{background:var(--purple);}
+    .nav-dd-item--method .nav-dd-icon svg{color:#fff;}
+    .nav-dd-item--method .nav-dd-label{color:var(--purple);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── POST HERO ── */
+    .post-hero{padding:8.5rem 0 4rem;background:linear-gradient(160deg,#fafafe 0%,#f0eef9 100%);position:relative;overflow:hidden;}
+    .post-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(67,44,151,.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+    .post-hero::after{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(108,155,255,.12) 0%,transparent 65%);pointer-events:none;}
+    .post-hero-inner{position:relative;z-index:1;max-width:760px;}
+    .post-type-chip{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border-radius:2rem;margin-bottom:1.25rem;}
+    .post-type-chip--case-study{background:#d1fae5;color:#065f46;}
+    .post-type-chip--blog{background:#ede9fe;color:#4c1d95;}
+    .post-type-chip--research{background:#e0e7ff;color:#3730a3;}
+    .post-h1{font-family:var(--font-h);font-weight:900;font-size:clamp(1.875rem,4vw,2.875rem);letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin-bottom:1.125rem;}
+    .post-subhead{font-size:1.0625rem;line-height:1.7;color:var(--muted);max-width:640px;margin-bottom:2rem;}
+    .post-author-row{display:flex;align-items:center;gap:.875rem;}
+    .author-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--mid));display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:800;font-size:.8125rem;color:#fff;flex-shrink:0;}
+    .author-name{font-family:var(--font-h);font-weight:700;font-size:.9375rem;color:var(--ink);}
+    .author-meta{font-size:.8125rem;color:var(--faint);}
+    .author-meta-sep{margin:0 .375rem;opacity:.4;}
+
+    /* Cover image / placeholder */
+    .post-cover-wrap{margin-top:2.5rem;position:relative;z-index:1;}
+    .post-cover{width:100%;height:400px;border-radius:var(--r-xl);overflow:hidden;background:linear-gradient(135deg,rgba(67,44,151,.07) 0%,rgba(108,155,255,.07) 100%);display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(67,44,151,.09);}
+    .post-cover img{width:100%;height:100%;object-fit:cover;display:block;}
+    .post-cover img[src=""]{display:none;}
+    .post-cover-ph{font-family:var(--font-h);font-weight:900;font-size:7rem;letter-spacing:-.06em;opacity:.1;color:var(--purple);user-select:none;pointer-events:none;}
+    .ins-card-cover--placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:900;font-size:6rem;letter-spacing:-.06em;opacity:.12;color:var(--purple);user-select:none;pointer-events:none;text-align:center;padding:2rem;}
+    .post-cover-caption{font-size:.8rem;color:var(--faint);margin-top:.625rem;text-align:center;font-style:italic;}
+
+    /* ── POST LAYOUT ── */
+    .post-layout-section{padding:4rem 0 5rem;background:var(--white);}
+    .post-layout{display:grid;grid-template-columns:1fr 260px;gap:3.5rem;align-items:start;}
+
+    /* ── ARTICLE BODY ── */
+    .post-body{font-size:1.0625rem;line-height:1.8;color:var(--text);}
+    .post-body h2{font-family:var(--font-h);font-weight:800;font-size:1.5rem;color:var(--ink);margin:2.5rem 0 .875rem;letter-spacing:-.02em;}
+    .post-body p{margin-bottom:1.25rem;}
+    .post-body ul,.post-body ol{padding-left:1.5rem;margin-bottom:1.25rem;}
+    .post-body li{margin-bottom:.5rem;}
+    .post-body blockquote{border-left:3px solid var(--purple);padding:1rem 1.5rem;margin:2rem 0;background:rgba(67,44,151,.04);border-radius:0 .75rem .75rem 0;font-family:var(--font-h);font-weight:700;font-size:1.0625rem;color:var(--purple);font-style:italic;line-height:1.6;}
+    .key-finding{background:linear-gradient(135deg,rgba(67,44,151,.06),rgba(108,155,255,.04));border:1.5px solid rgba(67,44,151,.15);border-radius:1rem;padding:1.5rem;margin:2rem 0;}
+    .kf-num{font-family:var(--font-h);font-weight:900;font-size:2.5rem;letter-spacing:-.04em;color:var(--purple);line-height:1;margin-bottom:.375rem;}
+    .kf-text{font-size:.9375rem;line-height:1.6;color:var(--muted);}
+
+    /* Key stats callout */
+    .key-stats-callout{background:linear-gradient(135deg,rgba(5,95,70,.05),rgba(16,185,129,.04));border:1.5px solid rgba(5,95,70,.15);border-radius:1rem;padding:1.5rem 1.75rem;margin:2.25rem 0;}
+    .key-stats-callout-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#065f46;margin-bottom:1rem;}
+    .key-stats-callout ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.75rem;}
+    .key-stats-callout ul li{display:flex;align-items:flex-start;gap:.75rem;font-size:.9375rem;line-height:1.55;color:var(--text);}
+    .key-stats-callout ul li::before{content:'';display:block;width:8px;height:8px;border-radius:50%;background:#059669;flex-shrink:0;margin-top:.45em;}
+
+    /* ── SIDEBAR ── */
+    .post-sidebar{position:sticky;top:88px;}
+    .sidebar-card{background:var(--ghost);border:1.5px solid rgba(67,44,151,.09);border-radius:var(--r-lg);padding:1.25rem;margin-bottom:1.25rem;}
+    .sidebar-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:.875rem;}
+    .sidebar-meta-row{display:flex;flex-direction:column;gap:.5rem;}
+    .sidebar-meta-item{display:flex;align-items:center;gap:.5rem;font-size:.875rem;color:var(--muted);}
+    .sidebar-meta-chip{display:inline-block;font-family:var(--font-h);font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;background:rgba(67,44,151,.08);color:var(--purple);padding:.2rem .55rem;border-radius:2rem;}
+    .sidebar-toc{list-style:none;display:flex;flex-direction:column;gap:.1rem;}
+    .sidebar-toc a{display:block;padding:.4rem .5rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:.375rem;transition:color .15s,background .15s;line-height:1.4;}
+    .sidebar-toc a:hover{color:var(--purple);background:rgba(67,44,151,.06);}
+    .sidebar-related{display:flex;flex-direction:column;gap:.625rem;}
+    .sidebar-rel-item{display:flex;flex-direction:column;gap:.25rem;padding:.75rem;background:#fff;border:1.5px solid rgba(67,44,151,.09);border-radius:.75rem;text-decoration:none;transition:border-color .15s,background .15s;}
+    .sidebar-rel-item:hover{border-color:rgba(67,44,151,.22);background:rgba(67,44,151,.025);}
+    .sidebar-rel-type{font-family:var(--font-h);font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);}
+    .sidebar-rel-title{font-family:var(--font-h);font-weight:700;font-size:.8125rem;color:var(--ink);line-height:1.3;}
+    .sidebar-cta{background:linear-gradient(135deg,var(--purple),var(--mid));border-radius:var(--r-lg);padding:1.375rem;text-align:center;}
+    .sidebar-cta-h{font-family:var(--font-h);font-weight:800;font-size:1rem;color:#fff;margin-bottom:.375rem;line-height:1.25;}
+    .sidebar-cta-sub{font-size:.8125rem;color:rgba(255,255,255,.75);line-height:1.5;margin-bottom:1rem;}
+    .sidebar-cta-btn{display:inline-block;padding:.6rem 1.125rem;background:#fff;color:var(--purple);font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:.5rem;text-decoration:none;transition:background .15s,transform .15s;}
+    .sidebar-cta-btn:hover{background:var(--lavender);transform:translateY(-1px);}
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section{background:var(--ghost);padding:4rem 0;border-top:1px solid rgba(67,44,151,.08);}
+    .newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .newsletter-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+    .newsletter-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:nlPulse 2s infinite;}
+    @keyframes nlPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+    .newsletter-sub{font-size:.9375rem;line-height:1.65;color:var(--muted);}
+    .newsletter-form{display:flex;flex-direction:column;gap:.75rem;}
+    .nl-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+    .nl-input{width:100%;padding:.75rem 1rem;font-family:var(--font-b);font-size:.9375rem;color:var(--ink);background:#fff;border:1.5px solid rgba(67,44,151,.15);border-radius:.625rem;outline:none;transition:border-color .15s,box-shadow .15s;}
+    .nl-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(67,44,151,.1);}
+    .nl-input::placeholder{color:var(--faint);}
+    .nl-submit{width:100%;padding:.875rem;font-family:var(--font-h);font-weight:700;font-size:1rem;color:#fff;background:var(--purple);border:none;border-radius:.625rem;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .nl-submit:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,44,151,.4);}
+    .nl-privacy{font-size:.72rem;color:var(--faint);text-align:center;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .post-layout{grid-template-columns:1fr;}
+      .post-sidebar{position:static;}
+      .footer-top{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:640px){
+      .container{padding:0 1.25rem;}
+      .post-hero{padding:7rem 0 3rem;}
+      .post-cover{height:240px;}
+      .ins-card-cover--placeholder{font-size:3.5rem;}
+      .newsletter-inner{grid-template-columns:1fr;gap:2rem;}
+      .nl-row{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-dark.svg" alt="Grow Progress" class="nav-gp-logo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Rapid Message Testing</span><span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span></div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Audience Understanding</span><span class="nav-dd-desc">Map who your audience is and what they believe</span></div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Pulse Surveys</span><span class="nav-dd-desc">Real-time opinion tracking as events unfold</span></div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Library</span><span class="nav-dd-desc">500+ studies searchable by topic and audience</span></div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-eyebrow">Methodology</span><span class="nav-dd-label">How It Works</span><span class="nav-dd-desc">The RCT science behind every GP study</span></div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Sandbox</span><span class="nav-dd-desc">Self-serve message testing — launch in minutes</span></div>
+        </a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">Who We Serve
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown nav-dropdown--single">
+        <a href="politics.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span></div>
+        </a>
+        <a href="advocacy.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="6" y1="1" x2="6" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="10" y1="1" x2="10" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="14" y1="1" x2="14" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span></div>
+        </a>
+        <a href="nonprofits.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span></div>
+        </a>
+        <a href="labor.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span></div>
+        </a>
+      </div>
+    </li>
+    <li><a href="insights.html" style="font-weight:600;" class="active">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Log in</a>
+    <a href="demo.html" class="btn-nav">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- POST HERO -->
+<section class="post-hero">
+  <div class="container">
+    <div class="post-hero-inner reveal">
+      <div class="post-type-chip post-type-chip--case-study">Case Study</div>
+      <h1 class="post-h1">Case Study: Student Loan Cancellation</h1>
+      <div class="post-author-row">
+        <div class="author-avatar">JB</div>
+        <div>
+          <div class="author-name">Josh Berezin</div>
+          <div class="author-meta">September 14, 2022<span class="author-meta-sep">·</span>Electoral</div>
+        </div>
+      </div>
+    </div>
+    <!-- Cover -->
+    <div class="post-cover-wrap reveal reveal-delay-1">
+      <div class="post-cover">
+        <div class="ins-card-cover--placeholder">Student Loans</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POST BODY -->
+<section class="post-layout-section">
+  <div class="container">
+    <div class="post-layout">
+
+      <!-- MAIN ARTICLE -->
+      <article class="post-body reveal">
+
+        <!-- Key stats callout -->
+        <div class="key-stats-callout">
+          <div class="key-stats-callout-label">Key Findings</div>
+          <ul>
+            <li>Over 1,000 responses gathered within hours on September 7, 2022</li>
+            <li>Biden's message built trust on student debt and college affordability without increasing overall policy support</li>
+            <li>Biden's message was especially effective with women, lower-income individuals, rural residents, and moderates</li>
+            <li>Warren's message reduced 'very motivated' voters among both Democrats and Republicans</li>
+          </ul>
+        </div>
+
+        <h2 id="question">Question</h2><p>Can Democrats' public statements about student loan cancellation affect public opinion?</p><p>The researchers sought to determine if Democratic statements could increase support for student loan cancellation, boost trust in Democrats on college affordability, and influence voting motivation in November.</p><h2 id="approach">Approach</h2><p>A Rapid Message Test presented respondents with single public statements from prominent Democrats or a placebo message, followed by topical follow-up questions. Testing occurred among U.S. adults on Wednesday, September 7, 2022, gathering over 1,000 responses within hours.</p><h2 id="messages">Messages</h2><p>Four Democratic leaders provided statements following President Biden's executive action:</p><ul><li><strong>Biden's message</strong> emphasized achieving a middle-class life and business ownership</li><li><strong>Warnock's statement</strong> shared his personal connection to student loans</li><li><strong>Warren's remarks</strong> highlighted diverse worker categories benefiting from the policy</li><li><strong>Warren/Schumer's joint statement</strong> stressed the historic scale of the President's action</li></ul><h2 id="what-worked">What Worked?</h2><p>While none increased policy support, "President Biden's message persuaded people" that Democrats could be trusted on student debt and college affordability.</p><p>Biden's message proved especially effective with women, lower-income individuals, rural residents, and moderates.</p><p>Regarding voting motivation, Senator Warren's message reduced "very motivated" voters among both Democrats and Republicans, while other messages showed no effect.</p><h2 id="next-steps">Next Steps</h2><p>Researchers suggested testing different excerpts from Biden's full remarks to determine whether the messenger or specific language drove effectiveness.</p><h2 id="appendix">Appendix: Message Text</h2><p><strong>Biden: I made a commitment</strong></p><blockquote>"The burden of college debt is so heavy that even if you graduate, you may not have access to the middle-class life that the college degree once provided. A lot of folks are even putting off starting families because of the cost. And the dream of starting or owning your business is just way off in the distance with the debt that so many are saddled with. When I campaigned for President, I made a commitment that we'd provide student debt relief. And I'm honoring that commitment today."</blockquote><p><strong>Warnock: Personal for me</strong></p><blockquote>"This is personal for me because I'm a product of good public policy. I attended college on Pell grants and student scholarships, and I know the doors that higher education can open–when you can afford it. This announcement will help many Georgians, some of whom have been struggling with debt for decades, get their financial footing, and it will help keep our economy strong and growing."</blockquote><p><strong>Warren: Day of joy and relief</strong></p><blockquote>"Today is a day of joy and relief because President Biden has canceled a big chunk of student debt for as many as 43 million Americans. The President has taken a powerful step to help rebuild the middle class. Student loan debt has held millions of Americans back from starting a family, buying a home, saving for retirement, or creating their own businesses. With the President's action, millions of workers–educators; municipal employees; auto workers; food and retail workers; flight attendants; medical workers; care workers; and many more–will breathe a little easier knowing this burden will be lifted."</blockquote><p><strong>Schumer/Warren: Flick of a pen</strong></p><blockquote>"With the flick of a pen, President Biden has taken a giant step forward in addressing the student debt crisis by canceling significant amounts of student debt for millions of borrowers. The positive impacts of this move will be felt by families across the country, particularly in minority communities, and is the single most effective action that the President can take on his own to help working families and the economy. No president or Congress has done more to relieve the burden of student debt and help millions of Americans make ends meet. Make no mistake, the work – our work – will continue as we pursue every available path to address the student debt crisis, help close the racial wealth gap for borrowers, and keep our economy growing."</blockquote>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="post-sidebar reveal reveal-delay-2">
+
+        <div class="sidebar-card">
+          <p class="sidebar-label">About this case study</p>
+          <div class="sidebar-meta-row">
+            <div class="sidebar-meta-item">
+              <span>Sector:</span>
+              <span class="sidebar-meta-chip">Electoral</span>
+            </div>
+            <div class="sidebar-meta-item" style="color:var(--faint);font-size:.8125rem;">
+              September 14, 2022
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <p class="sidebar-label">In this case study</p>
+          <ul class="sidebar-toc">
+            <li><a href="#question">Question</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#messages">Messages</a></li>
+            <li><a href="#what-worked">What Worked?</a></li>
+            <li><a href="#next-steps">Next Steps</a></li>
+            <li><a href="#appendix">Appendix: Message Text</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-cta">
+          <div class="sidebar-cta-h">Run your own test</div>
+          <div class="sidebar-cta-sub">Get causal proof for your message in 24 hours — before you spend on media.</div>
+          <a href="rapid-message-testing.html" class="sidebar-cta-btn">Run your own test →</a>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="reveal">
+        <div class="newsletter-eyebrow">
+          <span class="newsletter-eyebrow-dot"></span>
+          Grow Progress Newsletter
+        </div>
+        <p class="newsletter-sub">Monthly insights from 500+ studies — what moves people, what does not, and what it means for your next campaign.</p>
+      </div>
+      <form class="newsletter-form reveal reveal-delay-1" onsubmit="return false;">
+        <div class="nl-row">
+          <input class="nl-input" type="text" placeholder="First name" autocomplete="given-name">
+          <input class="nl-input" type="text" placeholder="Last name" autocomplete="family-name">
+        </div>
+        <input class="nl-input" type="email" placeholder="Work email" autocomplete="email">
+        <button class="nl-submit" type="submit">Subscribe</button>
+        <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div>
+          <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        </div>
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+  if (window.scrollY > 20) nav.classList.add('scrolled');
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Sidebar active TOC link on scroll
+  const headings = document.querySelectorAll('.post-body h2[id]');
+  const tocLinks = document.querySelectorAll('.sidebar-toc a');
+  if (headings.length && tocLinks.length) {
+    const headingObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          tocLinks.forEach(link => {
+            link.style.color = link.getAttribute('href') === '#' + id ? 'var(--purple)' : '';
+            link.style.fontWeight = link.getAttribute('href') === '#' + id ? '600' : '';
+          });
+        }
+      });
+    }, {rootMargin:'-20% 0px -70% 0px'});
+    headings.forEach(h => headingObserver.observe(h));
+  }
+</script>
+</body>
+</html>

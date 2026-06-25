@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Grow Progress</title>
+  <meta name="description" content="Grow Progress Privacy Policy — updated October 30, 2023.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --shadow-sm:0 1px 3px rgba(31,22,40,.08),0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:0 2px 8px rgba(31,22,40,.1),0 12px 40px rgba(31,22,40,.08);
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(242,242,253,.95);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .has-dropdown{position:relative;}
+    .has-dropdown>a{display:flex;align-items:center;gap:.3rem;}
+    .has-dropdown>a svg{width:12px;height:12px;transition:transform .2s;flex-shrink:0;}
+    .has-dropdown:hover>a svg,.has-dropdown:focus-within>a svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:640px;background:#fff;border:1px solid rgba(67,44,151,.1);border-radius:1.25rem;box-shadow:0 8px 40px rgba(31,22,40,.12),0 2px 12px rgba(31,22,40,.06);padding:.75rem 1.25rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-8px);transition:opacity .18s ease,transform .18s ease;z-index:200;}
+    .has-dropdown:hover .nav-dropdown,.has-dropdown:focus-within .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav-dd-item{display:flex;align-items:flex-start;gap:.875rem;padding:.875rem;border-radius:.75rem;text-decoration:none;transition:background .15s;}
+    .nav-dd-item:hover{background:rgba(67,44,151,.05);}
+    .nav-dd-icon{width:36px;height:36px;border-radius:.625rem;background:rgba(67,44,151,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-dd-icon svg{width:18px;height:18px;color:#432C97;}
+    .nav-dd-text{display:flex;flex-direction:column;gap:.2rem;}
+    .nav-dd-label{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:#1F1628;line-height:1;}
+    .nav-dd-desc{font-size:.75rem;color:rgba(31,22,40,.45);line-height:1.4;}
+    .nav-dd-item--method{background:linear-gradient(135deg,rgba(67,44,151,.06) 0%,rgba(108,155,255,.04) 100%);border:1px solid rgba(67,44,151,.1);border-radius:.75rem;}
+    .nav-dd-item--method:hover{background:linear-gradient(135deg,rgba(67,44,151,.1) 0%,rgba(108,155,255,.08) 100%);}
+    .nav-dd-item--method .nav-dd-icon{background:var(--purple);}
+    .nav-dd-item--method .nav-dd-icon svg{color:#fff;}
+    .nav-dd-item--method .nav-dd-label{color:var(--purple);}
+    .nav-dd-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+    .nav-dropdown--single{width:280px;grid-template-columns:1fr;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:var(--muted);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── LEGAL HERO ── */
+    .legal-hero{padding:9rem 0 4rem;border-bottom:1px solid rgba(67,44,151,.08);}
+    .legal-eyebrow{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;display:block;}
+    .legal-hero h1{font-family:var(--font-h);font-weight:900;font-size:clamp(2.5rem,4vw,3.5rem);letter-spacing:-.035em;line-height:1.05;color:var(--ink);margin-bottom:.875rem;}
+    .legal-date{font-size:.9375rem;color:var(--muted);}
+
+    /* ── BODY ── */
+    .legal-body{max-width:780px;padding:4rem 0 6rem;}
+    .legal-body h2{font-family:var(--font-h);font-weight:800;font-size:1.375rem;color:var(--ink);margin:3rem 0 .875rem;letter-spacing:-.02em;line-height:1.2;}
+    .legal-body h2:first-child{margin-top:0;}
+    .legal-body h3{font-family:var(--font-h);font-weight:700;font-size:1rem;color:var(--ink);margin:1.75rem 0 .5rem;letter-spacing:-.01em;}
+    .legal-body p{font-size:.9375rem;line-height:1.85;color:var(--muted);margin-bottom:1.125rem;}
+    .legal-body p:last-child{margin-bottom:0;}
+    .legal-body ul,.legal-body ol{padding-left:1.5rem;margin-bottom:1.125rem;display:flex;flex-direction:column;gap:.5rem;}
+    .legal-body li{font-size:.9375rem;line-height:1.75;color:var(--muted);}
+    .legal-body a{color:var(--purple);}
+    .legal-body .callout{background:rgba(67,44,151,.04);border:1.5px solid rgba(67,44,151,.1);border-radius:var(--r-md);padding:1.25rem 1.5rem;margin-bottom:1.125rem;}
+    .legal-body .callout p{margin-bottom:0;font-style:italic;}
+    .legal-body .section-divider{border:none;border-top:1px solid rgba(67,44,151,.08);margin:3rem 0 0;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+    @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:640px){.container{padding:0 1.25rem;}.footer-top{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-dark.svg" alt="Grow Progress" class="nav-gp-logo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Rapid Message Testing</span><span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span></div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Audience Understanding</span><span class="nav-dd-desc">Map who your audience is and what they believe</span></div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Pulse Surveys</span><span class="nav-dd-desc">Real-time opinion tracking as events unfold</span></div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Library</span><span class="nav-dd-desc">500+ studies searchable by topic and audience</span></div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-eyebrow">Methodology</span><span class="nav-dd-label">How It Works</span><span class="nav-dd-desc">The RCT science behind every GP study</span></div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Sandbox</span><span class="nav-dd-desc">Self-serve message testing — launch in minutes</span></div>
+        </a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">Who We Serve
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown nav-dropdown--single">
+        <a href="politics.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span><span class="nav-dd-desc">Campaigns, PACs &amp; party committees</span></div>
+        </a>
+        <a href="advocacy.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span><span class="nav-dd-desc">Issue campaigns &amp; policy fights</span></div>
+        </a>
+        <a href="nonprofits.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span><span class="nav-dd-desc">Donors, programs &amp; community impact</span></div>
+        </a>
+        <a href="labor.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span><span class="nav-dd-desc">Contract campaigns &amp; member mobilization</span></div>
+        </a>
+      </div>
+    </li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Sign In</a>
+    <a href="demo.html" class="btn-nav">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="legal-hero">
+  <div class="container">
+    <span class="legal-eyebrow">Legal</span>
+    <h1>Privacy Policy</h1>
+    <p class="legal-date">Updated Date: October 30, 2023</p>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+  <div class="legal-body">
+
+    <h2>Introduction</h2>
+    <p>Grow Progress, Inc. cares about your privacy and security of your data. The policy governs collection of information through Grow Progress Products, including the website, software applications, and associated services.</p>
+    <p>"Personal information" means information that identifies, relates to, describes, or could reasonably be linked with a particular individual, including demographic information, location data, and IP addresses.</p>
+    <p>Contact: <a href="mailto:privacy@growprogress.ai">privacy@growprogress.ai</a></p>
+
+    <hr class="section-divider">
+
+    <h2>Information We Collect</h2>
+
+    <h3>Automatically when you visit our site or use our services:</h3>
+    <ul>
+      <li>What you view on the site</li>
+      <li>Date and time of access</li>
+      <li>Duration of use</li>
+      <li>Web browser and device type</li>
+      <li>Internet Protocol address</li>
+      <li>Geolocation and network activity data</li>
+    </ul>
+
+    <h3>Directly From You:</h3>
+    <ul>
+      <li>Identifiers (name, email, mailing address)</li>
+      <li>Demographic characteristics (age, gender)</li>
+      <li>Professional information</li>
+      <li>Commercial information</li>
+      <li>Any voluntarily provided information</li>
+    </ul>
+    <p>Specifically collected when you:</p>
+    <ul>
+      <li>Create or update a registered account</li>
+      <li>Request services or features</li>
+      <li>Contact Grow Progress for support</li>
+      <li>Participate in surveys</li>
+    </ul>
+
+    <h3>From Third Parties:</h3>
+    <ul>
+      <li>Licensed information from private sources</li>
+      <li>Public sources (census data, property records, voter data)</li>
+      <li>Information from clients about your membership or activity</li>
+      <li>Information subject to third-party privacy policies and terms</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <h2>How We Use Your Information</h2>
+    <p>Grow Progress processes information based on legitimate business interests, contract fulfillment, legal compliance, and/or your consent.</p>
+    <p>Uses include:</p>
+    <ul>
+      <li>Providing services and product information</li>
+      <li>Delivering targeted advertising and marketing</li>
+      <li>Requesting feedback</li>
+      <li>Ensuring security of Grow Progress Products</li>
+      <li>Responding to legal requests and preventing harm</li>
+      <li>Data analysis, usage trends, effectiveness evaluation, and website improvement</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <h2>How We Share Your Information</h2>
+    <p>Grow Progress shares information in these situations:</p>
+    <ul>
+      <li>With survey respondents' consent, personal information associated with survey results shared with clients on an aggregate and anonymized basis</li>
+      <li>With service providers and contractors who require access to perform work, subject to confidentiality and security agreements</li>
+      <li>Where legally required to comply with law, governmental requests, court orders, or subpoenas</li>
+      <li>Where necessary to investigate violations, prevent fraud, address safety threats, or illegal activities</li>
+      <li>In event of merger, acquisition, or asset sale</li>
+    </ul>
+    <div class="callout">
+      <p>We do not sell your information. We do not share your personal information from our services to third parties other than as outlined in this Policy.</p>
+    </div>
+
+    <hr class="section-divider">
+
+    <h2>Data Security and Your Controls and Choices</h2>
+    <p>Grow Progress has implemented reasonable controls to safeguard collected information. However, no security measures are perfect, and we cannot assure you that information that we collect will never be accessed or used in an unauthorized way.</p>
+    <p>Recommendations:</p>
+    <ul>
+      <li>Use complex passwords where offered</li>
+      <li>Do not reuse passwords from other services</li>
+      <li>Do not share passwords with unauthorized persons</li>
+    </ul>
+
+    <hr class="section-divider">
+
+    <h2>Opting-Out of Marketing</h2>
+    <p>Users may unsubscribe from marketing communications by clicking "unsubscribe" or contacting <a href="mailto:privacy@growprogress.ai">privacy@growprogress.ai</a>. Account and transactional communications will continue.</p>
+
+    <hr class="section-divider">
+
+    <h2>Cookies and Other Tracking Technologies</h2>
+    <p>Grow Progress and service providers use:</p>
+
+    <h3>Cookies</h3>
+    <p>Text files transferred to your device for record-keeping. Users can prevent acceptance, receive notification, or disable cookies through browser settings, though this may limit site functionality.</p>
+
+    <h3>Clear GIFs</h3>
+    <p>Tiny graphics with unique identifiers embedded invisibly on web pages to track visitor activities, manage content, and compile usage statistics.</p>
+
+    <h3>Embedded Scripts</h3>
+    <p>Code collecting information about visitor interactions and referral sources.</p>
+
+    <h3>Third-party Analytics</h3>
+    <p>Providers like Google Analytics evaluate site and service usage.</p>
+
+    <p>These entities may use cookies, web beacons, and clear GIFs to perform their services.</p>
+
+    <hr class="section-divider">
+
+    <h2>Third-Party Websites</h2>
+    <p>Grow Progress Products may link to or incorporate third-party tools, services, APIs, SDKs, and widgets not owned or controlled by Grow Progress. The company is not responsible for third-party safety, content, privacy practices, or policies. Users should review third-party policies directly.</p>
+
+    <hr class="section-divider">
+
+    <h2>Keeping Your Information</h2>
+    <p>Grow Progress retains information as long as necessary to fulfill stated purposes unless longer retention is required by law. When no ongoing legitimate business need exists, information is deleted or anonymized, or securely stored and isolated from further processing until deletion becomes possible.</p>
+
+    <hr class="section-divider">
+
+    <h2>Changes to this Privacy Policy</h2>
+    <p>The policy may change at any time. Changes will be posted on this page with an updated date and appropriate notifications.</p>
+
+    <hr class="section-divider">
+
+    <h2>Minors</h2>
+    <p>Grow Progress does not collect personal data from anyone under 13 years old. Any unknowingly received information from children under 13 will be promptly deleted.</p>
+
+    <hr class="section-divider">
+
+    <h2>Information for California Residents</h2>
+    <p>The California Consumer Privacy Act provides California residents rights to know, access, and delete personal information, opt out of sales, and be free from discrimination for exercising privacy rights.</p>
+
+    <h3>Rights include:</h3>
+    <ul>
+      <li>Right to know categories and specific pieces of collected personal information</li>
+      <li>Right to know collection sources, business purposes, and sharing categories</li>
+      <li>Right to request access and/or deletion</li>
+    </ul>
+
+    <h3>Exceptions to deletion</h3>
+    <p>Information may be retained when necessary to:</p>
+    <ul>
+      <li>Complete a transaction</li>
+      <li>Provide access to Grow Progress Products</li>
+      <li>Perform a contract</li>
+      <li>Protect security and prosecute breaches</li>
+      <li>Fix system bugs</li>
+      <li>Comply with California Electronic Communications Privacy Act</li>
+      <li>Comply with legal obligations</li>
+      <li>Make lawful internal uses compatible with provided context</li>
+    </ul>
+
+    <h3>Additional provisions:</h3>
+    <ul>
+      <li>Users may designate authorized agents with written authorization</li>
+      <li>Deletion may negatively affect service provision or research participation</li>
+      <li>Grow Progress may request verification information</li>
+      <li>Disclosures apply only to the preceding 12 months</li>
+      <li>Users may request disclosure twice per 12-month period</li>
+      <li>No discrimination against users exercising CCPA rights</li>
+    </ul>
+    <p>Contact provided below for requests.</p>
+
+    <hr class="section-divider">
+
+    <h2>Information for Users in Europe</h2>
+    <p>European individuals have data subject rights subject to limitations/restrictions. Provided identity verification occurs and Grow Progress is the data controller, rights may include:</p>
+    <ul>
+      <li>Right to request access, rectification, or erasure of personal data</li>
+      <li>Right to restrict or object to processing</li>
+      <li>Right to data portability</li>
+    </ul>
+    <p>Contact Grow Progress as provided below. Compliance occurs within 30 days of identity verification. If Grow Progress is the data processor, the appropriate data controller will be notified.</p>
+    <p>European individuals may lodge complaints with their local data protection authority.</p>
+    <p>The company remains open to dialogue and third-party neutral dispute resolution.</p>
+
+    <hr class="section-divider">
+
+    <h2>Contact Us</h2>
+    <p>To access or request changes to personal information, or express questions or concerns:</p>
+    <p>Email: <a href="mailto:privacy@growprogress.ai">privacy@growprogress.ai</a></p>
+    <p>Specify the reason for communication.</p>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="customer-terms.html">Customer Terms</a>
+        <a href="code-of-conduct.html">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

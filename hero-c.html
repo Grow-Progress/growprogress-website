@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Option C — Browser Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{font-size:16px;}
+    body{font-family:var(--font-b);background:var(--ghost);-webkit-font-smoothing:antialiased;min-height:100vh;}
+
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 2.5rem;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(242,242,253,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(67,44,151,.08);}
+    .nav-brand{display:flex;align-items:center;gap:.625rem;text-decoration:none;}
+    .nav-brand svg{width:30px;height:30px;}
+    .nav-brand span{font-family:var(--font-h);font-weight:800;font-size:1.0625rem;color:var(--ink);}
+    .nav-links{display:flex;gap:.25rem;list-style:none;}
+    .nav-links a{padding:.5rem .9rem;font-size:.875rem;color:rgba(31,22,40,.5);text-decoration:none;border-radius:.4rem;transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:rgba(31,22,40,.5);text-decoration:none;padding:.5rem .875rem;border-radius:.4rem;transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .nav-cta{padding:.5625rem 1.25rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:.5rem;text-decoration:none;transition:background .15s,transform .15s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .nav-cta:hover{background:#5038b0;transform:translateY(-1px);}
+
+    /* ── HERO ── */
+    .hero{
+      min-height:100vh;
+      padding:8rem 2.5rem 4rem;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:4rem;
+      align-items:center;
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    /* ── LEFT ── */
+    .hero-copy{animation:fadeUp .7s cubic-bezier(.22,1,.36,1) both;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+    .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);background:rgba(67,44,151,.08);border:1px solid rgba(67,44,151,.15);padding:.375rem .875rem;border-radius:2rem;margin-bottom:1.75rem;}
+
+    h1{font-family:var(--font-h);font-weight:900;font-size:clamp(2.75rem,4vw,4rem);line-height:1.02;letter-spacing:-.03em;color:var(--ink);margin-bottom:1.375rem;}
+    h1 em{font-style:normal;color:var(--purple);}
+    .sub{font-size:1.0625rem;line-height:1.7;color:rgba(31,22,40,.55);max-width:460px;margin-bottom:2.5rem;}
+
+    .ctas{display:flex;gap:.875rem;flex-wrap:wrap;margin-bottom:3rem;}
+    .btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:1rem;border-radius:.5rem;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(67,44,151,.3);}
+    .btn-primary:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 28px rgba(67,44,151,.4);}
+    .btn-ghost{display:inline-flex;align-items:center;gap:.5rem;padding:.875rem 1.75rem;background:transparent;color:var(--ink);font-family:var(--font-h);font-weight:600;font-size:1rem;border-radius:.5rem;border:1.5px solid rgba(67,44,151,.2);text-decoration:none;transition:border-color .2s;}
+    .btn-ghost:hover{border-color:var(--purple);}
+
+    /* Trust strip */
+    .trust{display:flex;flex-direction:column;gap:.75rem;}
+    .trust-label{font-size:.75rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(31,22,40,.35);}
+    .trust-logos{display:flex;flex-wrap:wrap;gap:.375rem;}
+    .trust-logo{font-family:var(--font-h);font-weight:700;font-size:.8125rem;color:rgba(31,22,40,.4);background:rgba(67,44,151,.05);border:1px solid rgba(67,44,151,.08);padding:.3rem .75rem;border-radius:2rem;}
+
+    /* ── RIGHT: Browser mockup ── */
+    .hero-right{
+      position:relative;
+      animation:slideUp .8s .15s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes slideUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+
+    /* Glow behind browser */
+    .hero-right::before{
+      content:''; position:absolute;
+      top:10%; left:5%; right:5%; bottom:-5%;
+      background:radial-gradient(ellipse, rgba(67,44,151,.2) 0%, transparent 70%);
+      filter:blur(40px);
+      z-index:0;
+    }
+
+    .browser{
+      position:relative; z-index:1;
+      background:#fff;
+      border-radius:1.25rem;
+      overflow:hidden;
+      box-shadow:
+        0 0 0 1px rgba(67,44,151,.1),
+        0 4px 8px rgba(31,22,40,.06),
+        0 24px 60px rgba(31,22,40,.14),
+        0 48px 100px rgba(67,44,151,.1);
+    }
+
+    /* Browser bar */
+    .browser-bar{
+      background:#f5f3ff;
+      border-bottom:1px solid rgba(67,44,151,.08);
+      padding:.625rem 1rem;
+      display:flex; align-items:center; gap:.875rem;
+    }
+    .dots{display:flex;gap:.3rem;}
+    .dots span{width:10px;height:10px;border-radius:50%;}
+    .dot-r{background:#ff5f57;}
+    .dot-y{background:#ffbd2e;}
+    .dot-g{background:#28c840;}
+    .url-bar{
+      flex:1; max-width:300px;
+      background:#fff; border:1px solid rgba(67,44,151,.12);
+      border-radius:1rem; padding:.3rem 1rem;
+      font-size:.75rem; color:rgba(31,22,40,.4); letter-spacing:.01em;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .url-lock{width:10px;height:10px;color:rgba(31,22,40,.3);}
+    .browser-actions{display:flex;gap:.375rem;margin-left:auto;}
+    .bact{width:24px;height:24px;background:rgba(67,44,151,.06);border-radius:.3rem;display:flex;align-items:center;justify-content:center;}
+    .bact svg{width:12px;height:12px;color:rgba(31,22,40,.3);}
+
+    /* Screenshot inside browser */
+    .browser-screen{
+      position:relative;
+      overflow:hidden;
+    }
+    .browser-screen img{
+      width:100%; display:block;
+      transform:scale(1.02);
+      animation:subtleZoom 8s ease-in-out infinite alternate;
+    }
+    @keyframes subtleZoom{
+      from{transform:scale(1.02) translateY(0);}
+      to{transform:scale(1.02) translateY(-1%);}
+    }
+
+    /* Overlay shimmer on screenshot */
+    .screen-overlay{
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, transparent 60%, rgba(242,242,253,.15) 100%);
+      pointer-events:none;
+    }
+
+    /* Floating result badge */
+    .result-badge{
+      position:absolute;
+      bottom:1.5rem; right:-1.5rem;
+      background:#fff;
+      border:1px solid rgba(67,44,151,.1);
+      border-radius:1rem;
+      padding:1rem 1.25rem;
+      box-shadow:0 8px 32px rgba(31,22,40,.12), 0 2px 8px rgba(31,22,40,.06);
+      animation:badgeFloat 5s ease-in-out infinite;
+      z-index:2;
+    }
+    @keyframes badgeFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+    .badge-top{display:flex;align-items:center;gap:.5rem;margin-bottom:.375rem;}
+    .badge-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.5);}}
+    .badge-status{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#059669;}
+    .badge-val{font-family:var(--font-h);font-weight:900;font-size:1.75rem;color:var(--ink);letter-spacing:-.03em;line-height:1;}
+    .badge-lbl{font-size:.7rem;color:rgba(31,22,40,.45);margin-top:.2rem;}
+
+    /* Floating time chip */
+    .time-chip{
+      position:absolute;
+      top:1.25rem; left:-1.5rem;
+      background:var(--purple);
+      border-radius:.875rem;
+      padding:.625rem 1rem;
+      box-shadow:0 4px 16px rgba(67,44,151,.4);
+      animation:badgeFloat 6s ease-in-out infinite 1.5s;
+      z-index:2;
+    }
+    .time-label{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.2rem;}
+    .time-val{font-family:var(--font-h);font-weight:800;font-size:1rem;color:#fff;}
+
+    @media(max-width:960px){.hero{grid-template-columns:1fr;padding-top:6rem;}.result-badge,.time-chip{display:none;}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand">
+    <svg viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="15" fill="rgba(67,44,151,.1)"/><path d="M15 6L11 13H15L12 24L22 13H17L20 6H15Z" fill="#432C97"/><path d="M9 10L6 16H10L8 24L16 15H11L13 10H9Z" fill="#DCD2FF" opacity=".6"/></svg>
+    <span>Grow Progress</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Platform</a></li>
+    <li><a href="#">Who we serve</a></li>
+    <li><a href="#">Insights</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Sign In</a>
+    <a href="#" class="nav-cta">Request a Demo</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <!-- LEFT copy -->
+  <div class="hero-copy">
+    <div class="eyebrow">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="3" fill="currentColor"/><circle cx="6" cy="6" r="5.5" stroke="currentColor" stroke-width="1" opacity=".35"/></svg>
+      Message testing for campaigns, nonprofits &amp; advocacy
+    </div>
+    <h1>Stop guessing.<br>Start <em>persuading.</em></h1>
+    <p class="sub">Grow Progress helps campaigns, nonprofits, and advocacy organizations discover what actually persuades their audiences — with rigorous research in days, not months.</p>
+    <div class="ctas">
+      <a href="#" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Request a Demo
+      </a>
+      <a href="#" class="btn-ghost">See Case Studies</a>
+    </div>
+    <div class="trust">
+      <p class="trust-label">Trusted by 500+ organizations</p>
+      <div class="trust-logos">
+        <span class="trust-logo">Harris for President</span>
+        <span class="trust-logo">SEIU</span>
+        <span class="trust-logo">Gates Foundation</span>
+        <span class="trust-logo">NEA</span>
+        <span class="trust-logo">Earthjustice</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: browser mockup -->
+  <div class="hero-right">
+    <div class="time-chip">
+      <div class="time-label">Results ready in</div>
+      <div class="time-val">24 hours</div>
+    </div>
+
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="dots">
+          <span class="dot-r"></span>
+          <span class="dot-y"></span>
+          <span class="dot-g"></span>
+        </div>
+        <div class="url-bar">
+          <svg class="url-lock" viewBox="0 0 10 12" fill="none"><rect x="1" y="5" width="8" height="7" rx="1.5" stroke="currentColor" stroke-width="1.25"/><path d="M3 5V3.5a2 2 0 0 1 4 0V5" stroke="currentColor" stroke-width="1.25"/></svg>
+          app.growprogress.ai
+        </div>
+        <div class="browser-actions">
+          <div class="bact"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg></div>
+          <div class="bact"><svg viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.25"/></svg></div>
+        </div>
+      </div>
+      <div class="browser-screen">
+        <img
+          src="https://growprogress.ai/wp-content/uploads/2024/06/Homepage-Speed-787x520.webp"
+          alt="Grow Progress platform dashboard"
+        >
+        <div class="screen-overlay"></div>
+      </div>
+    </div>
+
+    <div class="result-badge">
+      <div class="badge-top">
+        <span class="badge-dot"></span>
+        <span class="badge-status">Statistically significant</span>
+      </div>
+      <div class="badge-val">+18 <span style="font-size:1.25rem;color:rgba(31,22,40,.45);">pts</span></div>
+      <div class="badge-lbl">lift vs. control group</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

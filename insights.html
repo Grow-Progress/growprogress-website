@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights — Grow Progress</title>
+  <meta name="description" content="Research, case studies, and thinking on what actually moves people — and how to know before you spend.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --shadow-sm:0 1px 3px rgba(31,22,40,.08),0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:0 2px 8px rgba(31,22,40,.1),0 12px 40px rgba(31,22,40,.08);
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.08s;} .reveal-delay-2{transition-delay:.16s;} .reveal-delay-3{transition-delay:.24s;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s;}
+    .nav.scrolled{background:rgba(242,242,253,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .nav-links a.active{color:var(--purple);font-weight:600;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:var(--muted);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    .has-dropdown{position:relative;}
+    .has-dropdown > a{display:flex;align-items:center;gap:.3rem;}
+    .has-dropdown > a svg{width:12px;height:12px;transition:transform .2s;}
+    .has-dropdown:hover > a svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(-8px);width:640px;background:#fff;border:1px solid rgba(67,44,151,.1);border-radius:1.25rem;box-shadow:0 8px 40px rgba(31,22,40,.12);padding:.75rem 1.25rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:200;}
+    .has-dropdown:hover .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav-dropdown--single{width:280px;grid-template-columns:1fr;}
+    .nav-dd-item{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem;border-radius:.75rem;text-decoration:none;transition:background .15s;}
+    .nav-dd-item:hover{background:rgba(67,44,151,.05);}
+    .nav-dd-icon{width:36px;height:36px;border-radius:.5rem;background:var(--ghost);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-dd-icon svg{width:18px;height:18px;color:var(--purple);}
+    .nav-dd-text{display:flex;flex-direction:column;gap:.2rem;}
+    .nav-dd-label{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:var(--ink);}
+    .nav-dd-desc{font-size:.78rem;color:var(--faint);line-height:1.4;}
+    .nav-dd-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+    .nav-dd-item--method{background:linear-gradient(135deg,rgba(67,44,151,.06) 0%,rgba(108,155,255,.04) 100%);border:1px solid rgba(67,44,151,.1);border-radius:.75rem;}
+    .nav-dd-item--method .nav-dd-icon{background:var(--purple);}
+    .nav-dd-item--method .nav-dd-icon svg{color:#fff;}
+    .nav-dd-item--method .nav-dd-label{color:var(--purple);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── HERO ── */
+    .insights-hero{padding:9rem 0 5rem;background:linear-gradient(160deg,#fafafe 0%,#f0eef9 100%);position:relative;overflow:hidden;}
+    .insights-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(67,44,151,.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+    .insights-hero::after{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(108,155,255,.12) 0%,transparent 65%);pointer-events:none;}
+    .hero-inner{position:relative;z-index:1;max-width:720px;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:1rem;}
+    .hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--purple);}
+    .hero-h{font-family:var(--font-h);font-weight:900;font-size:clamp(2.25rem,4.5vw,3.375rem);letter-spacing:-.03em;line-height:1.08;color:var(--ink);margin-bottom:1.125rem;}
+    .hero-h em{font-style:italic;color:var(--purple);}
+    .hero-sub{font-size:1.0625rem;line-height:1.7;color:var(--muted);max-width:580px;margin-bottom:2.25rem;}
+
+    /* Filter buttons */
+    .filter-bar{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+    .filter-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.125rem;font-family:var(--font-h);font-size:.8125rem;font-weight:700;border-radius:2rem;border:1.5px solid rgba(67,44,151,.15);background:#fff;color:var(--muted);cursor:pointer;transition:all .18s;letter-spacing:.01em;}
+    .filter-btn:hover{border-color:var(--purple);color:var(--purple);background:rgba(67,44,151,.04);}
+    .filter-btn.active{background:var(--purple);border-color:var(--purple);color:#fff;box-shadow:0 4px 14px rgba(67,44,151,.25);}
+
+
+    /* Card cover image */
+    .ins-card-cover{width:100%;height:160px;overflow:hidden;flex-shrink:0;position:relative;}
+    .ins-card-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s cubic-bezier(.22,1,.36,1);}
+    .ins-card:hover .ins-card-cover img{transform:scale(1.05);}
+    .ins-card-cover--placeholder{display:flex;align-items:center;justify-content:center;}
+    .ins-card--blog .ins-card-cover--placeholder{background:linear-gradient(135deg,rgba(67,44,151,.07) 0%,rgba(108,155,255,.07) 100%);}
+    .ins-card--case-study .ins-card-cover--placeholder{background:linear-gradient(135deg,rgba(5,150,105,.07) 0%,rgba(52,211,153,.05) 100%);}
+    .ins-card--research .ins-card-cover--placeholder{background:linear-gradient(135deg,rgba(124,58,237,.07) 0%,rgba(167,139,250,.05) 100%);}
+    .ins-card-ph-metric{font-family:var(--font-h);font-weight:900;font-size:3.5rem;letter-spacing:-.04em;opacity:.15;user-select:none;}
+    .ins-card--blog .ins-card-ph-metric{color:var(--purple);}
+    .ins-card--case-study .ins-card-ph-metric{color:#059669;}
+    .ins-card--research .ins-card-ph-metric{color:#7c3aed;}
+
+    /* ── CONTENT GRID ── */
+    .content-section{padding:4rem 0 6rem;background:var(--white);}
+    .content-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;}
+
+    /* Cards */
+    .ins-card{background:#fff;border:1.5px solid rgba(67,44,151,.09);border-radius:var(--r-xl);overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s,box-shadow .2s;cursor:pointer;}
+    .ins-card:hover{border-color:rgba(67,44,151,.22);transform:translateY(-4px);box-shadow:var(--shadow-md);}
+    .ins-card[data-hidden]{display:none;}
+
+    /* Card accent bar */
+    .ins-card-accent{height:4px;width:100%;}
+    .ins-card--blog .ins-card-accent{background:linear-gradient(90deg,#432C97,#6C9BFF);}
+    .ins-card--case-study .ins-card-accent{background:linear-gradient(90deg,#059669,#34d399);}
+    .ins-card--research .ins-card-accent{background:linear-gradient(90deg,#7c3aed,#a78bfa);}
+
+    .ins-card-body{padding:1.5rem 1.5rem 1.25rem;flex:1;display:flex;flex-direction:column;}
+
+    /* Type + date row */
+    .ins-card-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;}
+    .ins-card-type{font-family:var(--font-h);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .625rem;border-radius:2rem;}
+    .ins-card--blog .ins-card-type{color:var(--purple);background:rgba(67,44,151,.08);}
+    .ins-card--case-study .ins-card-type{color:#059669;background:rgba(5,150,105,.08);}
+    .ins-card--research .ins-card-type{color:#7c3aed;background:rgba(124,58,237,.08);}
+    .ins-card-date{font-size:.75rem;color:var(--faint);}
+
+    /* Metric callout */
+    .ins-card-metric{font-family:var(--font-h);font-weight:900;font-size:2rem;letter-spacing:-.04em;line-height:1;margin-bottom:.625rem;}
+    .ins-card--blog .ins-card-metric{color:var(--purple);}
+    .ins-card--case-study .ins-card-metric{color:#059669;}
+    .ins-card--research .ins-card-metric{color:#7c3aed;}
+
+    .ins-card-title{font-family:var(--font-h);font-weight:800;font-size:1rem;color:var(--ink);line-height:1.3;margin-bottom:.625rem;}
+    .ins-card-desc{font-size:.875rem;line-height:1.65;color:var(--muted);flex:1;}
+    .ins-card-footer{padding:.875rem 1.5rem;border-top:1px solid rgba(67,44,151,.07);display:flex;align-items:center;justify-content:space-between;}
+    .ins-card-sector{font-size:.72rem;font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.07em;}
+    .ins-card-arrow{width:28px;height:28px;border-radius:50%;background:rgba(67,44,151,.07);display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s;}
+    .ins-card:hover .ins-card-arrow{background:var(--purple);transform:translateX(2px);}
+    .ins-card-arrow svg{width:13px;height:13px;color:var(--purple);}
+    .ins-card:hover .ins-card-arrow svg{color:#fff;}
+
+    /* Empty state */
+    .no-results{display:none;grid-column:1/-1;text-align:center;padding:4rem 0;color:var(--faint);}
+    .no-results.visible{display:block;}
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section{background:var(--ghost);padding:4rem 0;border-top:1px solid rgba(67,44,151,.08);}
+    .newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .newsletter-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+    .newsletter-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:nlPulse 2s infinite;}
+    @keyframes nlPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+    .newsletter-sub{font-size:.9375rem;line-height:1.65;color:var(--muted);}
+    .newsletter-form{display:flex;flex-direction:column;gap:.75rem;}
+    .nl-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+    .nl-input{width:100%;padding:.75rem 1rem;font-family:var(--font-b);font-size:.9375rem;color:var(--ink);background:#fff;border:1.5px solid rgba(67,44,151,.15);border-radius:.625rem;outline:none;transition:border-color .15s,box-shadow .15s;}
+    .nl-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(67,44,151,.1);}
+    .nl-input::placeholder{color:var(--faint);}
+    .nl-submit{width:100%;padding:.875rem;font-family:var(--font-h);font-weight:700;font-size:1rem;color:#fff;background:var(--purple);border:none;border-radius:.625rem;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .nl-submit:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,44,151,.4);}
+    .nl-privacy{font-size:.72rem;color:var(--faint);text-align:center;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px){.content-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:640px){
+      .container{padding:0 1.25rem;}
+      .content-grid{grid-template-columns:1fr;}
+      .newsletter-inner{grid-template-columns:1fr;gap:2rem;}
+      .nl-row{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr;}
+      .insights-hero{padding:7rem 0 3.5rem;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-dark.svg" alt="Grow Progress" class="nav-gp-logo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Rapid Message Testing</span><span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span></div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Audience Understanding</span><span class="nav-dd-desc">Map who your audience is and what they believe</span></div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Pulse Surveys</span><span class="nav-dd-desc">Real-time opinion tracking as events unfold</span></div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Library</span><span class="nav-dd-desc">500+ studies searchable by topic and audience</span></div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-eyebrow">Methodology</span><span class="nav-dd-label">How It Works</span><span class="nav-dd-desc">The RCT science behind every GP study</span></div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Sandbox</span><span class="nav-dd-desc">Self-serve message testing — launch in minutes</span></div>
+        </a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">Who We Serve
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown nav-dropdown--single">
+        <a href="politics.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span></div>
+        </a>
+        <a href="advocacy.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="6" y1="1" x2="6" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="10" y1="1" x2="10" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="14" y1="1" x2="14" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span></div>
+        </a>
+        <a href="nonprofits.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span></div>
+        </a>
+        <a href="labor.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span></div>
+        </a>
+      </div>
+    </li>
+    <li><a href="insights.html" class="active">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Log in</a>
+    <a href="demo.html" class="btn-nav">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="insights-hero">
+  <div class="container">
+    <div class="hero-inner reveal">
+      <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Research &amp; Insights</div>
+      <h1 class="hero-h">What actually moves people —<br>and <em>how to know</em> before you spend.</h1>
+      <p class="hero-sub">Research, case studies, and thinking from 500+ message tests across campaigns, unions, advocacy, and nonprofits.</p>
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-filter="all">
+          All
+        </button>
+        <button class="filter-btn" data-filter="blog">
+          Blogs
+        </button>
+        <button class="filter-btn" data-filter="case-study">
+          Case Studies
+        </button>
+        <button class="filter-btn" data-filter="research">
+          Product &amp; Research
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT GRID -->
+<section class="content-section">
+  <div class="container">
+    <div class="content-grid" id="contentGrid">
+
+      <!-- CASE STUDIES / CLIENT SPOTLIGHTS -->
+      <div class="ins-card ins-card--case-study reveal" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Turnout</span><img src="" alt="" style="display:none"><!-- replace src --></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">Jun 9, 2026</span></div>
+          <h3 class="ins-card-title">How American Independent Radio Inspired Voter Turnout in the 2024 election</h3>
+          <p class="ins-card-desc">Rather than predicting turnout directly, AIR and Grow Progress tested whether messages successfully shifted the specific attitudes that might drive voting behavior — across 10 scripts and 3 message frames.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Client Spotlight</span><a href="post-air-turnout.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-1" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">CLF</span><img src="" alt="" style="display:none"><!-- replace src --></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">May 29, 2026</span></div>
+          <h3 class="ins-card-title">Conservation Law Foundation: From Gut Instinct to Research-Backed Climate Messaging</h3>
+          <p class="ins-card-desc">CLF used RMTs and Audience Understanding surveys to move beyond academic framing and find what actually moves New England audiences on climate — including a winning message still in use 3 years later.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Nonprofit</span><a href="post-clf-climate.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-2" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Virginia</span><img src="" alt="" style="display:none"><!-- replace src --></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">May 11, 2026</span></div>
+          <h3 class="ins-card-title">Forward Majority Helped Flip Four House Seats in Virginia With Grow Progress</h3>
+          <p class="ins-card-desc">Forward Majority built a systematic, iterative testing framework — testing 15–20 text variants, moving to video, refining under competitive conditions — that helped power a Democratic sweep of Virginia's state elections.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Client Spotlight</span><a href="post-forward-majority.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">ICE</span><img src="" alt="" style="display:none"><!-- replace src --></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">Feb 10, 2026</span></div>
+          <h3 class="ins-card-title">New Research Shows Even Trump Voters Are Rethinking ICE</h3>
+          <p class="ins-card-desc">Grow Progress partnered with American Immigration Council and IRAP to test 8 message campaigns on ICE enforcement. The most successful messaging moved Trump voters +18 points and Republicans +19 points.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Immigration</span><a href="post-ice-research.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <!-- BLOGS / INSIGHTS -->
+      <div class="ins-card ins-card--blog reveal reveal-delay-1" data-type="blog">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Contrast</span><img src="" alt="" style="display:none"><!-- replace src --></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Blog</span><span class="ins-card-date">May 6, 2026</span></div>
+          <h3 class="ins-card-title">Contrast, Don't Just Criticize: How the Latest Grow Progress Research Could Help Democrats Win Voters</h3>
+          <p class="ins-card-desc">6,000 adults. 7 groups. 3 message tones. Contrast messaging — pairing Republican failures with specific Democratic action — outperformed both positive and negative messaging on vote choice, favorability, and unfavorability.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-contrast-messaging.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--blog reveal reveal-delay-2" data-type="blog">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">AI</span><img src="" alt="" style="display:none"><!-- replace src --></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Blog</span><span class="ins-card-date">Apr 10, 2026</span></div>
+          <h3 class="ins-card-title">Audience Research Insights: What a New Survey Reveals About AI Data Centers</h3>
+          <p class="ins-card-desc">Nearly 6 in 10 Americans support AI data center development — but only with strong safeguards. Electricity costs are the top concern across all groups, including supporters. Public opinion is still forming.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Audience Research</span><a href="post-ai-data-centers.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <!-- PRODUCT & FEATURE RELEASES -->
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Pulse</span><img src="" alt="" style="display:none"><!-- replace src --></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Product Release</span><span class="ins-card-date">May 28, 2026</span></div>
+          <h3 class="ins-card-title">Introducing Pulse Surveys: Fast, Credible Audience Insight When Decisions Can't Wait</h3>
+          <p class="ins-card-desc">Pulse Surveys deliver credible audience data in days — not weeks. You write up to 15 questions; Grow Progress handles recruitment, targeting, fielding, and results. Includes live findings from a 5-question national survey on the Iran war and cost of living.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-pulse-surveys.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Segments</span><img src="" alt="" style="display:none"><!-- replace src --></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Product Release</span><span class="ins-card-date">Feb 26, 2026</span></div>
+          <h3 class="ins-card-title">How to Combine Audience Data to Strengthen Your Messaging Strategy</h3>
+          <p class="ins-card-desc">The new Combined Key Opinion Segments feature lets you merge related audience segments directly in Audience Understanding Surveys — increasing sample size, reducing noise, and clarifying broader messaging opportunities.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-combined-segments.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Precision</span><img src="" alt="" style="display:none"><!-- replace src --></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Product Release</span><span class="ins-card-date">Jan 26, 2026</span></div>
+          <h3 class="ins-card-title">Even Greater Precision in Reaching Audiences Whose Insights Matter Most</h3>
+          <p class="ins-card-desc">You can now build precise audiences — layering demographic, socioeconomic, lifestyle, and political attributes — directly inside Rapid Message Tests and Audience Understanding Surveys without leaving your workflow.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-audience-precision.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Vaccine</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">October 22, 2021</span></div>
+          <h3 class="ins-card-title">Employer Vaccine Mandates</h3>
+          <p class="ins-card-desc">A rapid message test exploring which pro-vaccine-mandate messages could persuade Republican and conservative voters, conducted in partnership with Strategic Victory Fund. The study found promising evidence that a "respect the rules" strict mom message moved Trump voter support for employer vaccine mandates from 21% to 50%.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Advocacy</span><a href="post-2021-employer-vaccine-mandates.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Vaccine</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">October 26, 2021</span></div>
+          <h3 class="ins-card-title">One more finding on employer vaccine mandates</h3>
+          <p class="ins-card-desc">A rapid message test examining how Ted Cruz's anti-vaccine mandate message and a "stern mom" counter-message affected opinions on employer COVID vaccine mandates. The study found Cruz's message polarized audiences — moving Republicans 19 points toward believing mandates would hurt the economy while moving Democrats 14 points in the opposite direction.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-one-more-finding-on-employer-vaccine-mandates.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">IRS</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">October 29, 2021</span></div>
+          <h3 class="ins-card-title">Biden Tax Compliance Proposal</h3>
+          <p class="ins-card-desc">Republican messaging opposing the Biden tax compliance proposal proved potent and effective, though misleading, increasing opposition by 9 points. Senator Ron Wyden's message, which explained both the problem and Democratic solutions, successfully countered Republican arguments and produced support 5 points higher than the placebo group.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-2021-biden-tax-compliance-proposal.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">CRT Bans</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">November 5, 2021</span></div>
+          <h3 class="ins-card-title">"Critical Race Theory" Bans</h3>
+          <p class="ins-card-desc">Grow Progress tested eight messages with over 2,000 respondents to identify effective framings for shifting public opinion against laws banning teaching about systemic racism and slavery's ongoing effects in K-12 schools. Three messages — "Not politicians," "Education is good," and "Divide us" — proved particularly effective, especially among Republican and Trump-voting audiences.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Education</span><a href="post-2021-critical-race-theory-bans.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Inflation</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">November 12, 2021</span></div>
+          <h3 class="ins-card-title">Rising Prices</h3>
+          <p class="ins-card-desc">None of 8 tested messages successfully reduced public blame on the Biden administration for rising prices, with some messages causing significant backlash. The study tested 1,889 respondents across 8 messages and a placebo control, finding that every message backfired among 2020 Biden voters.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-2021-rising-prices.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Facebook</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">November 22, 2021</span></div>
+          <h3 class="ins-card-title">Regulating Facebook</h3>
+          <p class="ins-card-desc">This study examined how right-wing messaging portraying Facebook whistleblower Frances Haugen as a Democratic operative affected Republican support for stricter Facebook regulation. It tested pro-regulation counter-messages and found that those anchored in conservative values or featuring a Republican Senator messenger effectively reversed the anti-regulation effect among Trump voters.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-2021-regulating-facebook.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Vigilantism</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">December 3, 2021</span></div>
+          <h3 class="ins-card-title">Rittenhouse and Vigilantism</h3>
+          <p class="ins-card-desc">Research examining public attitudes toward vigilante law enforcement found that messaging highlighting neo-Nazi support for the Rittenhouse verdict substantially reduced endorsement of private citizens enforcing the law. The study tested five messages on a nationally balanced sample of 1,181 adults and found the neo-Nazi framing cut vigilantism support to roughly half the placebo rate, even among conservatives.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-rittenhouse-and-vigilantism.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Economy</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">December 13, 2021</span></div>
+          <h3 class="ins-card-title">The Economy</h3>
+          <p class="ins-card-desc">A rapid message test conducted in partnership with Strategic Victory Fund testing four messages aimed at improving Biden's economic approval ratings. None of the four messages significantly moved opinions, though the "big corporations" message showed differential effects by age group.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-2021-the-economy.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Workers' Rights</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">December 17, 2021</span></div>
+          <h3 class="ins-card-title">Workers' Rights and Protections</h3>
+          <p class="ins-card-desc">Support for increased workers' rights is high at 65%, but drops sharply when pitted against concerns about inflation. Two messages — "Trust" and "Full time" — showed promise at moving key subgroups toward supporting new workers' rights and protections.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Labor</span><a href="post-2021-workers-rights-and-protections.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Voting Rights</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">January 14, 2022</span></div>
+          <h3 class="ins-card-title">Voting Rights</h3>
+          <p class="ins-card-desc">This study tested messaging for the Freedom to Vote Act, finding that a "Merit" message emphasizing patriotism and hard work increased support among white respondents by 14 percentage points and among Republicans and conservatives, though it had negative effects among people of color. Conducted in partnership with Strategic Victory Fund, the research combined an audience understanding survey and a rapid message test with nearly 1,000 respondents.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-2022-voting-rights.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Gun Violence</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">May 25, 2022</span></div>
+          <h3 class="ins-card-title">The effects of Steve Kerr's remarks on gun violence</h3>
+          <p class="ins-card-desc">A Rapid Message Test evaluated whether Steve Kerr's passionate postgame remarks about gun violence persuaded viewers to support stricter firearm laws. The test found his video increased support for stricter firearm sales laws by 14 percentage points and support for universal background checks by 7 points, with no demographic backlash.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Gun Violence</span><a href="post-the-effects-of-steve-kerrs-remarks-on-gun-violence.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-2" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Student Loans</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">September 14, 2022</span></div>
+          <h3 class="ins-card-title">Case Study: Student Loan Cancellation</h3>
+          <p class="ins-card-desc">A Rapid Message Test examined whether Democratic public statements about student loan cancellation could shift public opinion, gathering over 1,000 responses within hours on September 7, 2022. The study found that Biden's message built trust on student debt and college affordability — particularly among women, lower-income individuals, and moderates — while none of the four tested messages increased overall policy support.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-student-loan-collection.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Climate</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">September 27, 2022</span></div>
+          <h3 class="ins-card-title">Case Study: Climate Messaging</h3>
+          <p class="ins-card-desc">This case study examines how different climate messages affect public opinion, finding that language linking recent storms (Hurricane Fiona, Alaskan floods) to climate change produced an 11-point increase in urgency and a 7-point increase in support for federal climate action. Two alternative messages from the League of Conservation Voters and the Conservative Climate Caucus showed limited or subgroup-specific effects.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Climate</span><a href="post-climate-messaging.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-1" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Tobacco Ban</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">October 6, 2022</span></div>
+          <h3 class="ins-card-title">Flavored Tobacco Ban Ballot Measure</h3>
+          <p class="ins-card-desc">A message highlighting the tobacco companies funding opposition to California's Proposition 31 increased support for the flavored tobacco sales ban by 18 percentage points. Grow Progress used its Rapid Message Testing tool to evaluate four Facebook messages supporting Prop 31, finding all were highly effective with the "Funders" message producing the strongest net effect of 28 points.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-flavored-tabacco-ban-ballot-measure.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-2" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">AI Voices</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">Oct 11, 2022</span></div>
+          <h3 class="ins-card-title">Can AI Voices Persuade Voters?</h3>
+          <p class="ins-card-desc">Grow Progress and Trilogy Interactive tested AI-generated voiceovers against human voiceovers in political ads on drug prices and abortion, using randomized controlled experiments. Results challenged conventional messaging wisdom, finding that AI male voices matched or outperformed human voices on drug prices while voiceover effects on abortion ads were highly dependent on audience gender.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-can-ai-voices-persuade-voters.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Renewable Energy</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">Jan 20, 2023</span></div>
+          <h3 class="ins-card-title">Case Study: Innovation Ohio and Message Development</h3>
+          <p class="ins-card-desc">Innovation Ohio used Grow Progress's Audience Understanding tool to develop more persuasive messaging grounded in voter priorities. By surfacing the concern that Ohioans feared "brain drain" among youth, they crafted a renewable energy message that achieved a 9-point increase in support for candidates backing renewables — and an 18-point lift among self-identified conservatives.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Advocacy</span><a href="post-innovation-ohio-and-message-development.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">IRS</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">May 22, 2023</span></div>
+          <h3 class="ins-card-title">Republicans' "Defund the IRS" Bill</h3>
+          <p class="ins-card-desc">A Washington Post editorial proved highly effective at increasing opposition to House Republicans' "Defund the IRS" bill (HR 23), achieving a 16 percentage point net effect toward opposition. Political messages from Democratic leaders including Pelosi, Schumer, and Harris had no meaningful net effects and actually increased support for the bill more than opposition.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-republicans-defund-the-irs-bill.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-2" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Latino Voters</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">Aug 16, 2023</span></div>
+          <h3 class="ins-card-title">Case Study: Optimizing Campaign Messaging with Key Voting Demographics</h3>
+          <p class="ins-card-desc">Precision Strategies used Grow Progress' Rapid Message Testing to identify the most persuasive economic message for Latino voters in Colorado during the 2022 gubernatorial race. The winning message increased Governor Polis' vote share among Latinos by 9 percentage points, contributing to his nearly 20-point reelection victory.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-precision-strategies.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--blog reveal" data-type="blog">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Persuasion</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Blog</span><span class="ins-card-date">February 28, 2024</span></div>
+          <h3 class="ins-card-title">How Well Do Political Practitioners Actually Persuade the Public?</h3>
+          <p class="ins-card-desc">Research by Broockman, Kalla, Caballero, and Easton found that political practitioners and laypeople both perform barely better than chance at predicting which messages will be persuasive. The article argues that data-driven testing — rather than expert intuition — is essential for effective political messaging.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-are-political-practitioners-persuasive.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-1" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Ballot Measure</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">May 2024</span></div>
+          <h3 class="ins-card-title">Case Study: How a Leading Research Firm Optimized Messaging to Win 67% of the Vote and Pass a $4.2 Billion Ballot Measure</h3>
+          <p class="ins-card-desc">An environmental coalition partnered with a leading public opinion research firm to develop persuasive messaging for New York's $4.2 billion Environmental Bond Act. Using Grow Progress's Rapid Message Testing platform, they identified the most effective message — increasing net support by 7 points — and the measure ultimately passed with 67% of the vote.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-case-study-4-2-billion-ballot-measure.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Values</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">May 2024</span></div>
+          <h3 class="ins-card-title">Beyond Demographics: The Key to Winning Hearts & Minds Lies in Understanding Values</h3>
+          <p class="ins-card-desc">This article introduces Grow Progress' 8 Values Segments, which divide the American electorate by shared worldviews and values rather than demographics. It explains how predictive modeling is used to estimate values for voters, enabling campaigns and advocates to craft messages that resonate with specific values clusters.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-political-messaging-values.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Persuasion</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">July 2024</span></div>
+          <h3 class="ins-card-title">Masses vs. Margins: Differences in National and Battleground Persuasion Testing</h3>
+          <p class="ins-card-desc">Grow Progress conducted two Rapid Message Tests — one among a national audience and one among a presidential battleground state audience — to evaluate whether voters in battleground states respond differently to persuasive messages than voters nationally. The study found that both tested ads moved vote choice toward Biden more effectively with national audiences than battleground audiences, with notably weaker or unmeasurable effects on Biden favorability in battleground states.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-differences-in-national-and-battleground.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Favorability</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">July 23, 2024</span></div>
+          <h3 class="ins-card-title">Vice President Harris Favorability</h3>
+          <p class="ins-card-desc">An Audience Understanding Survey measuring public opinion of Vice President Kamala Harris, conducted July 21-22, 2024 with 572 national respondents. The survey found evenly split sentiment (42% favorable, 42% unfavorable, 16% neutral) and identified uncertainty and lack of information as the primary persuasion opportunity among soft-opinion and undecided voters.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-vice-president-harris-favorability.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Debate</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">September 12, 2024</span></div>
+          <h3 class="ins-card-title">Harris's Debate Performance Proved Persuasive in Grow Progress's Rapid Message Test</h3>
+          <p class="ins-card-desc">Grow Progress tested nine moments from the 2024 Harris-Trump debate using a rapid message test with 6,000 battleground state respondents. Two Harris debate clips each moved voters toward Harris by 6 percentage points, with results delivered within hours of the debate.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-kamala-harris-debate-performance.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">VP Debate</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">September 2024</span></div>
+          <h3 class="ins-card-title">Ahead of the Vice Presidential Debate: What Messages are Moving the Needle?</h3>
+          <p class="ins-card-desc">Grow Progress tested VP candidate messages ahead of the 2024 debate, finding that Walz's 'Freedom' message boosted his favorability by 6 points while Vance's 'Immigration and Housing' message had a 9 point positive effect on Trump's margin. The research examines which messages moved voter preferences and favorability across key demographic subgroups.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-ahead-of-the-vice-presidential-debate-what-messages-are-moving-the-needle.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Persuasion</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Product Release</span><span class="ins-card-date">November 2024</span></div>
+          <h3 class="ins-card-title">Filtering for Success: Discover Messaging Trends with Persuasion Library</h3>
+          <p class="ins-card-desc">This article announces the new Persuasion Trends and Benchmarking features in Grow Progress' Persuasion Library, which allow clients to filter by topic, value, or emotion to discover messaging trends and benchmark message performance. The features help communicators find data-driven inspiration and systematically improve their messages by comparing performance against similar messages in the library.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-messaging-trends-with-persuasion-library.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-2" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Housing</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">November 2024</span></div>
+          <h3 class="ins-card-title">Client Spotlight: Greater New Orleans Housing Alliance</h3>
+          <p class="ins-card-desc">The Greater New Orleans Housing Alliance used Rapid Message Testing to identify the most persuasive message for a ballot measure establishing a Housing Trust Fund. Their winning message moved respondents 13 percentage points, helping the measure pass with 75% support and securing $17 million annually for affordable housing — the largest such investment in New Orleans history.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Nonprofit</span><a href="post-client-spotlight-gnoha.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Clean Water</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">December 2024</span></div>
+          <h3 class="ins-card-title">Testing the Waters of Clean Water Messaging</h3>
+          <p class="ins-card-desc">American Rivers Action Fund tested clean water-focused video ads in Michigan and New Jersey congressional districts to measure their impact on Vote Choice and Favorability. Both videos ranked in the top 25% of Grow Progress' Persuasion Library, with the Michigan ad outperforming 90% of tested messages on Vote Choice and the New Jersey ad surpassing 91% on Favorability.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Climate</span><a href="post-testing-the-waters-of-clean-water-messaging.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-1" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Donor Giving</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">January 27, 2025</span></div>
+          <h3 class="ins-card-title">Tapping the Well of Donor Generosity</h3>
+          <p class="ins-card-desc">Grow Progress tested two Charity: Water video ads — one data-driven ("Waterborne Illnesses") and one narrative-based ("An Endless Cycle Broken") — using a randomized controlled trial with over 1,200 US adults to measure their impact on brand favorability, mission alignment, and donation intent. The data-driven ad outperformed the narrative ad on mission alignment and high-dollar donation intent, particularly among non-donors and lower-income households.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Nonprofit</span><a href="post-tapping-the-well-of-donor-generosity.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Climate Action</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">February 7, 2025</span></div>
+          <h3 class="ins-card-title">Rising Flames: A Call for Bold Action Against Climate Change</h3>
+          <p class="ins-card-desc">Grow Progress tested four messages about the 2025 LA wildfires and climate change with over 3,500 US adults using randomized controlled trials. The study found that personal loss and community harm narratives were most effective at persuading people — including conservatives and Republicans — that climate change requires bold government action.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Climate</span><a href="post-case-study-california-wildfires.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Funding Freeze</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">February 24, 2025</span></div>
+          <h3 class="ins-card-title">Testing Opposition to Trump's Funding Freeze</h3>
+          <p class="ins-card-desc">Grow Progress ran a Rapid Message Test to identify the most persuasive reasons to oppose President Trump's executive order freezing most federal grant funding. The study tested nine messages with 6,000 respondents, finding that messages about food safety, Head Start and child care, and women and girls were most persuasive across demographic and partisan groups.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Nonprofit</span><a href="post-trumps-funding-freeze.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Donations</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">March 5, 2025</span></div>
+          <h3 class="ins-card-title">The Generational Shift: Navigating the Future of Donations</h3>
+          <p class="ins-card-desc">Grow Progress surveyed 600 Americans aged 18-54 to understand their donation habits as a historic $30-84 trillion generational wealth transfer approaches. The research explores why 39% of younger adults did not donate at all, breaks down giving patterns by age, income, and gender, and identifies the values and motivations that drive different donor segments.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Nonprofit</span><a href="post-the-future-of-donations.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-2" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Organizing</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">March 2025</span></div>
+          <h3 class="ins-card-title">Values-Based Organizing: United Steelworkers Learned How to Truly Meet Workers Where They Are</h3>
+          <p class="ins-card-desc">The United Steelworkers partnered with Grow Progress to use Audience Understanding Surveys and Rapid Message Tests to identify that 42% of blue collar workers would remain neutral on unionization. They discovered that nostalgia-based messaging — framing unions as a path back to the "good old days" — was the most effective approach for persuading neutral workers.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Labor</span><a href="post-values-based-organizing-united-steelworkers.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Proxy Voting</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">April 4, 2025</span></div>
+          <h3 class="ins-card-title">Support for Proxy Voting in Congress for New Parents</h3>
+          <p class="ins-card-desc">A rapid message test conducted by Paid Leave for All Action and Grow Progress found that messages about proxy voting for new parents in Congress increased support by 12–14 points, with a swing of up to 23 points toward support. The study tested three messages against a control across a nationally representative sample of 3,000 participants, finding consistent gains across demographic groups with no backlash.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Advocacy</span><a href="post-support-for-proxy-voting-in-congress-for-new-parents.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Pre-Testing</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">May 14, 2025</span></div>
+          <h3 class="ins-card-title">Grow Progress 101: A Creative Pre-Testing Primer</h3>
+          <p class="ins-card-desc">An overview of how the Grow Progress suite of tools — Audience Understanding Surveys, Persuasion Sandbox, Rapid Message Testing, and Persuasion Library — works together to help strategists create evidence-based campaigns. The article walks through each product's role in understanding audiences, drafting messages, testing at scale, and learning from past results.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-grow-progress-101-a-creative-pre-testing-primer.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Economy</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">May 14, 2025</span></div>
+          <h3 class="ins-card-title">Working-Class Woes: How Americans Feel About the Economy</h3>
+          <p class="ins-card-desc">Using Grow Progress's Audience Understanding Survey tool, this article examines how over 1,500 working-class Americans feel about the U.S. economy. It finds that 72% are critical of the economic system, with 42% viewing it as broken and rigged to benefit only the wealthy and corporations, and breaks down key opinion segments by demographics, values, and open-ended responses.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Labor</span><a href="post-working-class-woes-how-americans-feel-about-the-economy.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Survey Design</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Product Release</span><span class="ins-card-date">June 3, 2025</span></div>
+          <h3 class="ins-card-title">Unlock Smarter Survey Design: The Power of Multi-Select and Randomized Answer Options</h3>
+          <p class="ins-card-desc">Grow Progress users can now ask multi-select custom segment questions that allow respondents to choose all answers that apply. The update also adds the ability to randomize question and answer order in Rapid Message Tests for cleaner, more reliable data.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-the-power-of-multi-select-and-randomized-answer-options.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-1" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Wisconsin</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">June 11, 2025</span></div>
+          <h3 class="ins-card-title">From Risk to Winning Strategy: How Testing Helped A Better Wisconsin Together Win Big</h3>
+          <p class="ins-card-desc">A Better Wisconsin Together Political Fund used Grow Progress rapid message testing to pivot to anti-Musk ads in the final weeks of the Wisconsin Supreme Court race, helping Susan Crawford defeat Brad Schimel and maintain a liberal 4-3 majority. The case study shows how data-backed message testing enabled confident strategic decisions, donor justification, and a winning campaign outcome.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-from-risk-to-winning-strategy-how-testing-helped-a-better-wisconsin-together-win-big.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Storytelling</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">June 18, 2025</span></div>
+          <h3 class="ins-card-title">Hope, Humanity & Possibility: The Power of Stories for Nonprofits</h3>
+          <p class="ins-card-desc">Grow Progress partnered with Refugees International and Wide Eye to run a Rapid Message Test identifying which messages most effectively restore support for the US Refugee Admissions and Resettlement programs. The research found that hope-based individual stories dramatically outperformed statistics-driven or anti-Trump narratives, with one refugee's story more persuasive than 98% of content tested on the platform since the election.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Nonprofit</span><a href="post-hope-humanity-possibility-the-power-of-stories-for-nonprofits.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Parental Status</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">June 23, 2025</span></div>
+          <h3 class="ins-card-title">The Power of Niche Targeting: New Parental Status</h3>
+          <p class="ins-card-desc">Grow Progress now supports Parental Status as an audience refinement option in Rapid Message Tests, allowing users to target parents or non-parents as a distinct segment. This niche targeting capability enables more efficient testing, deeper analysis, and more effective messaging outreach.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-the-power-of-niche-targeting-new-parental-status.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Audience</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">June 25, 2025</span></div>
+          <h3 class="ins-card-title">Three Reasons You Need Audience Understanding Surveys in Your Creative Toolkit</h3>
+          <p class="ins-card-desc">This article explains three reasons why communicators should use Grow Progress Audience Understanding Surveys (AUS) in their creative toolkit. It argues that AUS uncovers the values, motivations, and identity-based drivers behind audience behavior — delivering focus-group-quality strategic insights at polling speeds.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-three-reasons-you-need-audience-understanding-surveys-in-your-creative-toolkit.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Audience Insights</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">July 2025</span></div>
+          <h3 class="ins-card-title">You Ran an Audience Understanding Survey — Now What?</h3>
+          <p class="ins-card-desc">A practical guide for teams who have completed an Audience Understanding Survey with Grow Progress, outlining the most high-value steps to turn survey data into action. It covers how to identify key findings, interpret results, and pair Audience Understanding Surveys with Rapid Message Testing to validate persuasive messaging.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Audience Understanding</span><a href="post-you-ran-an-audience-understanding-survey-now-what.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Downballot</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">July 2025</span></div>
+          <h3 class="ins-card-title">Building a Downballot Testing Plan</h3>
+          <p class="ins-card-desc">Downballot races show wider ad performance variance than presidential contests, with the gap between strong and weak ads roughly 40% wider for House races. This article explains how campaigns can leverage collective movement data through tools like Persuasion Library and Persuasion Trends to build effective testing plans despite limited budgets.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-building-a-downballot-plan.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--blog reveal reveal-delay-1" data-type="blog">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Ad Testing</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Blog</span><span class="ins-card-date">July 17, 2025</span></div>
+          <h3 class="ins-card-title">Ad Testing Isn't Just for Ads</h3>
+          <p class="ins-card-desc">Many campaigns wait until an ad is fully produced before testing, but by then it's too late to develop more persuasive messages. This article explains how systematic iterative testing — starting with values frames before creative execution — can help campaigns build more effective messaging from the ground up.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-ad-testing-isnt-just-for-ads.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Public Opinion</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">August 15, 2025</span></div>
+          <h3 class="ins-card-title">Measuring Public Opinion on Early Trump Administration Actions in 2025 Across Battleground States</h3>
+          <p class="ins-card-desc">Grow Progress surveyed 788 swing-state voters across 7 battleground states to assess sentiment on early Trump administration policies including ICE enforcement, Medicaid cuts, and the Epstein files decision. The research finds 52% of respondents disapprove of administration actions overall, and identifies healthcare access and government transparency as key persuasion opportunities for advocates.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-measuring-public-opinion-trump-administration-actions-in-2025.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Shutdown</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">September 2025</span></div>
+          <h3 class="ins-card-title">Health Care and Education Messages Prove Most Persuasive in Shutdown Debate</h3>
+          <p class="ins-card-desc">A Rapid Message Test conducted in partnership with Data for Progress examined which messages most effectively persuade voters to support congressional Democrats in the context of a government funding debate. Health care and education messages proved most persuasive, moving persuadable voters by double digits and showing strong effects among Moderates, Independents, and even Republican voters.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-congress-shutdown.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--blog reveal reveal-delay-1" data-type="blog">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Message Testing</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Blog</span><span class="ins-card-date">Sep 23, 2025</span></div>
+          <h3 class="ins-card-title">Stop Guessing & Test Before You Invest</h3>
+          <p class="ins-card-desc">Most testing tells you what worked after you've already spent the money. This article explains how Grow Progress's Rapid Message Testing helps communicators and strategists validate their messaging before launch using randomized controlled trials, so they can pick the right message with confidence before investing in paid media.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-test-before-you-invest.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Open-Ended</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Product Release</span><span class="ins-card-date">Sep 24, 2025</span></div>
+          <h3 class="ins-card-title">Open-Ended Themes for Audience Understanding Surveys: Uncover Open-Ended Insights at a Glance</h3>
+          <p class="ins-card-desc">Grow Progress introduces AI-powered automated open-ended response synthesis for Audience Understanding Surveys, which automatically groups and summarizes qualitative survey responses into themes. This feature drastically reduces time to analysis while maintaining research quality, allowing teams to move directly to interpreting insights that drive strategic decisions.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-open-ended-themes-uncover-open-ended-insights-at-a-glance.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Breakthrough</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">October 21, 2025</span></div>
+          <h3 class="ins-card-title">Standing Out From the Noise: Measuring Breakthrough in Video Testing</h3>
+          <p class="ins-card-desc">This article introduces Grow Progress's Video Breakthrough test, a new ad testing method that measures whether video ads maintain their persuasive impact when shown alongside competing ads in a clutter reel. A case study comparing a Starbucks campaign ad and a political election administration ad demonstrates that while both ads still moved key outcomes in cluttered conditions, the Starbucks ad retained ~74% of its original impact versus just 51% for the election ad.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-measuring-breakthrough-in-video-testing.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Parental Status</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">June 23, 2025</span></div>
+          <h3 class="ins-card-title">The Power of Niche Targeting: New Parental Status</h3>
+          <p class="ins-card-desc">Grow Progress now supports Parental Status as an audience refinement option in Rapid Message Tests, allowing users to target parents or non-parents as a distinct segment. The post explains how niche targeting enables more efficient testing, deeper analysis, and more effective communication with specific audiences.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-the-power-of-niche-targeting-urbanicity.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--case-study reveal reveal-delay-2" data-type="case-study">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Gun Safety</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Case Study</span><span class="ins-card-date">October 30, 2025</span></div>
+          <h3 class="ins-card-title">Helping Brady United Challenge Trump's "Tough on Crime" Rhetoric with Message Testing</h3>
+          <p class="ins-card-desc">Brady United partnered with Grow Progress to rapidly test reframed messages challenging Trump's "tough on crime" positioning on gun safety. The message tests, completed in under two hours, achieved 15 and 18-point perception shifts and revealed which frames resonated most with key subgroups including moderates, independents, and women.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Nonprofit</span><a href="post-brady-united-challenge-trumps-tough-on-crime-rhetoric.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Skip Rate</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">Oct 30, 2025</span></div>
+          <h3 class="ins-card-title">The Problem in the Bottom Right Corner of Your Ad: Pre-testing for Skippable Video Platforms</h3>
+          <p class="ins-card-desc">Grow Progress introduces the Skippable Video test format, which mirrors platforms like YouTube to measure both persuasion and attention simultaneously before campaigns air. A pilot study with Delegate Joshua Cole's 2025 Virginia race found that the most persuasive ad is not always the one that retains the most attention, underscoring the need to measure both metrics together.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-pre-testing-for-skippable-video-platforms.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--blog reveal reveal-delay-1" data-type="blog">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Q4 Testing</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Blog</span><span class="ins-card-date">November 2025</span></div>
+          <h3 class="ins-card-title">Getting the Jump on 2026: Why Testing in Q4 is a Strategic Advantage</h3>
+          <p class="ins-card-desc">This article makes the case for why Q4 is the optimal time to build a message testing plan, arguing that layered, iterative research conducted now creates a strategic advantage heading into 2026. It covers how to understand the current social landscape, conduct rapid A/B message tests, and build institutional knowledge that enables faster, data-backed decisions when campaign season begins.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-why-testing-in-q4-is-a-strategic-advantage.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Persuasion</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">December 17, 2025</span></div>
+          <h3 class="ins-card-title">2025 Grow Progress Wrapped: The Year in Persuasion</h3>
+          <p class="ins-card-desc">A year-in-review look at Grow Progress's 2025 data, covering 1.9 million interviews and 869 Rapid Message Tests across clients. It highlights the persuasion patterns, issue-area shifts, and messaging strategies that proved most effective throughout the year.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Research</span><a href="post-2025-grow-progress-wrapped.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Voter Sentiment</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">December 18, 2025</span></div>
+          <h3 class="ins-card-title">Motivated or "Meh": How Democratic and Independent Voters Feel Post-November Elections</h3>
+          <p class="ins-card-desc">Grow Progress surveyed nearly 1,000 Americans in the aftermath of the November 4th, 2025 elections to understand how Democratic and Independent voters felt about the country's direction. Despite sweeping Democratic wins, over 60% of Democrats and 54% of Independents said the country was still headed in the wrong direction.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-how-democratic-and-independent-voters-feel-november-elections.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-1" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Democracy</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Research</span><span class="ins-card-date">January 13, 2026</span></div>
+          <h3 class="ins-card-title">2026 Midterm Talking Point: Are Our Fundamental Democratic Principles Under Threat By Authoritarianism?</h3>
+          <p class="ins-card-desc">Grow Progress partnered with the Raikes Foundation to survey 997 Americans on whether recent government actions threaten democratic principles, finding 63% agree while deep partisan divisions shape starkly different narratives. The research reveals key audience segments, their demographics, and messaging implications for the 2026 midterms.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Electoral</span><a href="post-2026-midterm-talking-point-are-our-fundamental-democratic-principles-under-threat-by-authoritarianism.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <div class="ins-card ins-card--research reveal reveal-delay-2" data-type="research">
+        <div class="ins-card-cover ins-card-cover--placeholder"><span class="ins-card-ph-metric">Open-Ended</span><img src="" alt="" style="display:none"></div>
+        <div class="ins-card-accent"></div>
+        <div class="ins-card-body">
+          <div class="ins-card-meta"><span class="ins-card-type">Product Release</span><span class="ins-card-date">January 2026</span></div>
+          <h3 class="ins-card-title">Open-Ended Themes for Rapid Message Tests: Qualitative Insights At a Glance</h3>
+          <p class="ins-card-desc">This product release announces AI-powered automated open-ended response synthesis for Rapid Message Tests, which automatically groups and summarizes audience responses into themes. The feature eliminates manual analysis effort and delivers qualitative insights alongside quantitative results so teams can move faster from data to strategic decisions.</p>
+        </div>
+        <div class="ins-card-footer"><span class="ins-card-sector">Product Release</span><a href="post-open-ended-themes-for-rapid-message-tests.html" class="ins-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="no-results" id="noResults">No results for this filter.</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="reveal">
+        <div class="newsletter-eyebrow">
+          <span class="newsletter-eyebrow-dot"></span>
+          Grow Progress Newsletter
+        </div>
+        <p class="newsletter-sub">Monthly insights from 500+ studies — what moves people, what does not, and what it means for your next campaign.</p>
+      </div>
+      <form class="newsletter-form reveal reveal-delay-1" onsubmit="return false;">
+        <div class="nl-row">
+          <input class="nl-input" type="text" placeholder="First name" autocomplete="given-name">
+          <input class="nl-input" type="text" placeholder="Last name" autocomplete="family-name">
+        </div>
+        <input class="nl-input" type="email" placeholder="Work email" autocomplete="email">
+        <button class="nl-submit" type="submit">Subscribe</button>
+        <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div>
+          <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        </div>
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+  if (window.scrollY > 20) nav.classList.add('scrolled');
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Filter logic
+  const cards = document.querySelectorAll('.ins-card');
+  const btns  = document.querySelectorAll('.filter-btn');
+  const noResults = document.getElementById('noResults');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      // Toggle active button
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show/hide cards
+      let visible = 0;
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.type === filter;
+        if (match) {
+          card.removeAttribute('data-hidden');
+          visible++;
+        } else {
+          card.setAttribute('data-hidden', '');
+        }
+      });
+
+      noResults.classList.toggle('visible', visible === 0);
+    });
+  });
+</script>
+</body>
+</html>

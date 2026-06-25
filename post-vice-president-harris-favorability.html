@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vice President Harris Favorability — Grow Progress</title>
+  <meta name="description" content="Audience Understanding Survey on VP Kamala Harris favorability. 42% favorable, 42% unfavorable — with key persuasion opportunities among uncertain and soft-opinion voters.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --shadow-sm:0 1px 3px rgba(31,22,40,.08),0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:0 2px 8px rgba(31,22,40,.1),0 12px 40px rgba(31,22,40,.08);
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.08s;} .reveal-delay-2{transition-delay:.16s;} .reveal-delay-3{transition-delay:.24s;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s;}
+    .nav.scrolled{background:rgba(242,242,253,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .nav-links a.active{color:var(--purple);font-weight:600;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:var(--muted);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    .has-dropdown{position:relative;}
+    .has-dropdown > a{display:flex;align-items:center;gap:.3rem;}
+    .has-dropdown > a svg{width:12px;height:12px;transition:transform .2s;}
+    .has-dropdown:hover > a svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(-8px);width:640px;background:#fff;border:1px solid rgba(67,44,151,.1);border-radius:1.25rem;box-shadow:0 8px 40px rgba(31,22,40,.12);padding:.75rem 1.25rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:200;}
+    .has-dropdown:hover .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav-dropdown--single{width:280px;grid-template-columns:1fr;}
+    .nav-dd-item{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem;border-radius:.75rem;text-decoration:none;transition:background .15s;}
+    .nav-dd-item:hover{background:rgba(67,44,151,.05);}
+    .nav-dd-icon{width:36px;height:36px;border-radius:.5rem;background:var(--ghost);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-dd-icon svg{width:18px;height:18px;color:var(--purple);}
+    .nav-dd-text{display:flex;flex-direction:column;gap:.2rem;}
+    .nav-dd-label{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:var(--ink);}
+    .nav-dd-desc{font-size:.78rem;color:var(--faint);line-height:1.4;}
+    .nav-dd-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+    .nav-dd-item--method{background:linear-gradient(135deg,rgba(67,44,151,.06) 0%,rgba(108,155,255,.04) 100%);border:1px solid rgba(67,44,151,.1);border-radius:.75rem;}
+    .nav-dd-item--method .nav-dd-icon{background:var(--purple);}
+    .nav-dd-item--method .nav-dd-icon svg{color:#fff;}
+    .nav-dd-item--method .nav-dd-label{color:var(--purple);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── POST HERO ── */
+    .post-hero{padding:8.5rem 0 4rem;background:linear-gradient(160deg,#fafafe 0%,#f0eef9 100%);position:relative;overflow:hidden;}
+    .post-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(67,44,151,.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+    .post-hero::after{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(108,155,255,.12) 0%,transparent 65%);pointer-events:none;}
+    .post-hero-inner{position:relative;z-index:1;max-width:760px;}
+    .post-type-chip{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border-radius:2rem;margin-bottom:1.25rem;}
+    .post-type-chip--research{background:#e0e7ff;color:#3730a3;}
+    .post-h1{font-family:var(--font-h);font-weight:900;font-size:clamp(1.875rem,4vw,2.875rem);letter-spacing:-.03em;line-height:1.1;color:var(--ink);margin-bottom:1.125rem;}
+    .post-subhead{font-size:1.0625rem;line-height:1.7;color:var(--muted);max-width:640px;margin-bottom:2rem;}
+    .post-author-row{display:flex;align-items:center;gap:.875rem;}
+    .author-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--mid));display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:800;font-size:.8125rem;color:#fff;flex-shrink:0;}
+    .author-name{font-family:var(--font-h);font-weight:700;font-size:.9375rem;color:var(--ink);}
+    .author-meta{font-size:.8125rem;color:var(--faint);}
+    .author-meta-sep{margin:0 .375rem;opacity:.4;}
+
+    /* Cover image */
+    .post-cover-wrap{margin-top:2.5rem;position:relative;z-index:1;}
+    .post-cover{width:100%;height:400px;border-radius:var(--r-xl);overflow:hidden;background:linear-gradient(135deg,rgba(67,44,151,.07) 0%,rgba(108,155,255,.07) 100%);display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(67,44,151,.09);}
+    .post-cover img{width:100%;height:100%;object-fit:cover;display:block;}
+    .post-cover img[src=""]{display:none;}
+    .ins-card-cover--placeholder{font-family:var(--font-h);font-weight:900;font-size:7rem;letter-spacing:-.06em;opacity:.1;color:var(--purple);user-select:none;pointer-events:none;}
+
+    /* ── POST LAYOUT ── */
+    .post-layout-section{padding:4rem 0 5rem;background:var(--white);}
+    .post-layout{display:grid;grid-template-columns:1fr 260px;gap:3.5rem;align-items:start;}
+
+    /* ── ARTICLE BODY ── */
+    .post-body{font-size:1.0625rem;line-height:1.8;color:var(--text);}
+    .post-body h2{font-family:var(--font-h);font-weight:800;font-size:1.5rem;color:var(--ink);margin:2.5rem 0 .875rem;letter-spacing:-.02em;}
+    .post-body p{margin-bottom:1.25rem;}
+    .post-body ul{padding-left:1.5rem;margin-bottom:1.25rem;}
+    .post-body ol{padding-left:1.5rem;margin-bottom:1.25rem;}
+    .post-body li{margin-bottom:.5rem;}
+    .post-body blockquote{border-left:3px solid var(--purple);padding:1rem 1.5rem;margin:1rem 0;background:rgba(67,44,151,.04);border-radius:0 .75rem .75rem 0;font-family:var(--font-b);font-weight:400;font-size:.9375rem;color:var(--muted);font-style:italic;line-height:1.6;}
+
+    /* Key stats callout */
+    .key-stats-box{background:linear-gradient(135deg,rgba(55,48,163,.06),rgba(91,93,192,.04));border:1.5px solid rgba(55,48,163,.15);border-radius:1rem;padding:1.5rem 1.75rem;margin:0 0 2.5rem;}
+    .key-stats-box-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#3730a3;margin-bottom:1rem;}
+    .key-stats-box ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.625rem;}
+    .key-stats-box li{font-size:.9375rem;line-height:1.55;color:var(--text);padding-left:1.25rem;position:relative;}
+    .key-stats-box li::before{content:'';position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:#3730a3;opacity:.5;}
+
+    /* ── SIDEBAR ── */
+    .post-sidebar{position:sticky;top:88px;}
+    .sidebar-card{background:var(--ghost);border:1.5px solid rgba(67,44,151,.09);border-radius:var(--r-lg);padding:1.25rem;margin-bottom:1.25rem;}
+    .sidebar-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:.875rem;}
+    .sidebar-meta-row{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem;}
+    .sidebar-meta-item{display:flex;flex-direction:column;gap:.15rem;}
+    .sidebar-meta-key{font-family:var(--font-h);font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);}
+    .sidebar-meta-val{font-size:.875rem;font-weight:500;color:var(--ink);}
+    .sidebar-sector-chip{display:inline-flex;align-items:center;font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;background:#e0e7ff;color:#3730a3;padding:.25rem .625rem;border-radius:2rem;}
+    .sidebar-cta{background:linear-gradient(135deg,var(--purple),var(--mid));border-radius:var(--r-lg);padding:1.375rem;text-align:center;}
+    .sidebar-cta-h{font-family:var(--font-h);font-weight:800;font-size:1rem;color:#fff;margin-bottom:.375rem;line-height:1.25;}
+    .sidebar-cta-sub{font-size:.8125rem;color:rgba(255,255,255,.75);line-height:1.5;margin-bottom:1rem;}
+    .sidebar-cta-btn{display:inline-block;padding:.6rem 1.125rem;background:#fff;color:var(--purple);font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:.5rem;text-decoration:none;transition:background .15s,transform .15s;}
+    .sidebar-cta-btn:hover{background:var(--lavender);transform:translateY(-1px);}
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section{background:var(--ghost);padding:4rem 0;border-top:1px solid rgba(67,44,151,.08);}
+    .newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .newsletter-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+    .newsletter-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:nlPulse 2s infinite;}
+    @keyframes nlPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+    .newsletter-sub{font-size:.9375rem;line-height:1.65;color:var(--muted);}
+    .newsletter-form{display:flex;flex-direction:column;gap:.75rem;}
+    .nl-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+    .nl-input{width:100%;padding:.75rem 1rem;font-family:var(--font-b);font-size:.9375rem;color:var(--ink);background:#fff;border:1.5px solid rgba(67,44,151,.15);border-radius:.625rem;outline:none;transition:border-color .15s,box-shadow .15s;}
+    .nl-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(67,44,151,.1);}
+    .nl-input::placeholder{color:var(--faint);}
+    .nl-submit{width:100%;padding:.875rem;font-family:var(--font-h);font-weight:700;font-size:1rem;color:#fff;background:var(--purple);border:none;border-radius:.625rem;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .nl-submit:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,44,151,.4);}
+    .nl-privacy{font-size:.72rem;color:var(--faint);text-align:center;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .post-layout{grid-template-columns:1fr;}
+      .post-sidebar{position:static;}
+      .footer-top{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:640px){
+      .container{padding:0 1.25rem;}
+      .post-hero{padding:7rem 0 3rem;}
+      .post-cover{height:240px;}
+      .ins-card-cover--placeholder{font-size:4.5rem;}
+      .newsletter-inner{grid-template-columns:1fr;gap:2rem;}
+      .nl-row{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-dark.svg" alt="Grow Progress" class="nav-gp-logo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Rapid Message Testing</span><span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span></div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Audience Understanding</span><span class="nav-dd-desc">Map who your audience is and what they believe</span></div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Pulse Surveys</span><span class="nav-dd-desc">Real-time opinion tracking as events unfold</span></div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Library</span><span class="nav-dd-desc">500+ studies searchable by topic and audience</span></div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-eyebrow">Methodology</span><span class="nav-dd-label">How It Works</span><span class="nav-dd-desc">The RCT science behind every GP study</span></div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Sandbox</span><span class="nav-dd-desc">Self-serve message testing — launch in minutes</span></div>
+        </a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">Who We Serve
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown nav-dropdown--single">
+        <a href="politics.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span></div>
+        </a>
+        <a href="advocacy.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="6" y1="1" x2="6" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="10" y1="1" x2="10" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="14" y1="1" x2="14" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span></div>
+        </a>
+        <a href="nonprofits.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span></div>
+        </a>
+        <a href="labor.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span></div>
+        </a>
+      </div>
+    </li>
+    <li><a href="insights.html" style="font-weight:600;">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Log in</a>
+    <a href="demo.html" class="btn-nav">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- POST HERO -->
+<section class="post-hero">
+  <div class="container">
+    <div class="post-hero-inner reveal">
+      <div class="post-type-chip post-type-chip--research">Research</div>
+      <h1 class="post-h1">Vice President Harris Favorability</h1>
+      <div class="post-author-row">
+        <div class="author-avatar">GP</div>
+        <div>
+          <div class="author-name">The GP Team</div>
+          <div class="author-meta">July 23, 2024<span class="author-meta-sep">·</span>Audience Understanding<span class="author-meta-sep">·</span>Electoral</div>
+        </div>
+      </div>
+    </div>
+    <!-- Cover -->
+    <div class="post-cover-wrap reveal reveal-delay-1">
+      <div class="post-cover">
+        <div class="ins-card-cover--placeholder">Favorability</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POST BODY -->
+<section class="post-layout-section">
+  <div class="container">
+    <div class="post-layout">
+
+      <!-- MAIN ARTICLE -->
+      <article class="post-body reveal">
+
+        <!-- Key Stats Callout -->
+        <div class="key-stats-box">
+          <div class="key-stats-box-label">Key Findings</div>
+          <ul>
+            <li>42% favorable, 42% unfavorable, 16% neutral opinions of VP Harris</li>
+            <li>24% very favorable vs. 26% very unfavorable — strongly held opinions are polarized</li>
+            <li>68% of the neither favorable nor unfavorable segment identifies as independent</li>
+            <li>Biggest persuasion theme: uncertainty — voters feel they lack enough information on Harris</li>
+          </ul>
+        </div>
+
+        <h2>Survey Details</h2>
+<ul>
+<li><strong>Audience:</strong> National, general population</li>
+<li><strong>Sample size:</strong> 572 (total), 262 (voter file matched)</li>
+<li><strong>Dates in field:</strong> July 21 and 22, 2024</li>
+<li><strong>Weighting factors:</strong> age, education, gender, party, race, and 2020 vote choice</li>
+</ul>
+
+<h2>Background and Purpose</h2>
+<p>When messages are grounded in people's real concerns, thoughts, and understanding of the issues, they are more likely to persuade. An Audience Understanding Survey from Grow Progress is a large-scale qualitative tool that allows you to identify what truly motivates people by hearing from them in their own words.</p>
+<p>Audience Understanding Surveys collect demographic information from participants such as race and ethnicity, gender, age, and education, as well as questions related to their personal values and beliefs about society. Every Audience Understanding Survey focuses on one Key Opinion Question, in this case:</p>
+<p><strong>Do you have a favorable or unfavorable opinion of Vice President Kamala Harris?</strong></p>
+
+<h2>Key Takeaways</h2>
+<p>Sentiment is split evenly between favorable (42%) and unfavorable (42%) opinions of Vice President Kamala Harris. The balance of respondents (16%) have neutral opinions.</p>
+<p>A deeper look at opinions within the three middle segments (somewhat favorable, neither favorable nor unfavorable, and somewhat unfavorable) reveals opportunities for persuasion. The biggest theme among these segments is uncertainty — people feel as though they don't have enough information on Harris, haven't seen enough of her track record or wins as vice president, or have non-specific feelings about her character.</p>
+
+<h2>Findings</h2>
+<h2>Key Opinion Question Results</h2>
+<ul>
+<li><strong>Very favorable</strong> – 24%</li>
+<li><strong>Somewhat favorable</strong> – 18%</li>
+<li><strong>Neither favorable nor unfavorable</strong> – 16%</li>
+<li><strong>Somewhat unfavorable</strong> – 16%</li>
+<li><strong>Very unfavorable</strong> – 26%</li>
+</ul>
+
+<h2>How respondents see themselves and the world</h2>
+<p>The Grow Progress platform visually highlights demographic and attitudinal differences among the segments using respondents' answers to questions about their values and worldview.</p>
+<ul>
+<li><strong>Very favorable:</strong> This segment is overwhelmingly Democratic — 71% self-identify as Democrats and 77% voted Democratic in 2020. They have an optimistic and trusting view of the world, believe it is important to trust other people, view themselves as optimistic, and agree with statements about political correctness helping vulnerable people be treated fairly.</li>
+<li><strong>Somewhat favorable:</strong> This segment is roughly half Democrats but also includes many moderates and independents. They index high on social trust and believe in political correctness and making the world a better place. They show more cautious tendencies than the very favorable group, such as agreeing that rule following is important, and agreeing that slow, gradual change helps prevent catastrophes and mistakes.</li>
+<li><strong>Neither favorable nor unfavorable:</strong> This segment is largely independent (68%) and over half is made up of young people (18-34 year olds) and people who did not vote in 2020. They index high on humor and enjoyment, and in addition to agreeing with many of the same views of the world that the favorable segments do, they agree that politicians don't really care about people like them.</li>
+<li><strong>Somewhat unfavorable:</strong> This segment is nearly half independents and more than one-third Republican. They value the importance of taking care of their family and friends, rule following, and agree that politicians don't really care about people like them, as well as statements about tradition such as traditional families deserving more respect and support.</li>
+<li><strong>Very unfavorable:</strong> This segment is mostly Republican — 62% self-identify as Republicans and 70% voted Republican in 2020 — and skews older (55+). They index high on tradition and religion and also agree with statements on tradition, politicians not caring about people like them, and statements such as things being better in "the good old days."</li>
+</ul>
+
+<h2>Additional findings</h2>
+<p>In addition to the Key Opinion Question (Harris favorability), follow-up questions in the survey included to what extent people feel informed about politics and current events. In general, people with more strongly held opinions when it comes to favorability also consider themselves more informed on politics and current events.</p>
+<ul>
+<li><strong>Very favorable:</strong> Very informed 46%, Somewhat informed 40%, Somewhat uninformed 7%, Very uninformed 4%</li>
+<li><strong>Somewhat favorable:</strong> Very informed 19%, Somewhat informed 46%, Somewhat uninformed 23%, Very uninformed 9%</li>
+<li><strong>Neither fav nor unfav:</strong> Very informed 11%, Somewhat informed 32%, Somewhat uninformed 39%, Very uninformed 8%</li>
+<li><strong>Somewhat unfavorable:</strong> Very informed 18%, Somewhat informed 62%, Somewhat uninformed 11%, Very uninformed 5%</li>
+<li><strong>Very unfavorable:</strong> Very informed 39%, Somewhat informed 40%, Somewhat uninformed 9%, Very uninformed 9%</li>
+</ul>
+
+<h2>In respondents' own words</h2>
+<p>Respondents' answers to open-ended questions allow us to better understand the sentiment of people in the three middle segments (somewhat favorable, neither favorable nor unfavorable, and somewhat unfavorable). These are the segments most likely to be persuadable, making their responses especially valuable when identifying messaging tactics. We found some interesting themes in respondents answers:</p>
+
+<h2>Neither favorable nor unfavorable</h2>
+<p><strong>Generally positive but uncertain or non-specific</strong></p>
+<ul>
+<li><blockquote>"I have a good impression of Kamala Harris."</blockquote></li>
+<li><blockquote>"She says the right things and I liked her toughness when she was a senator. Being elevated as she is now, I have to see more."</blockquote></li>
+<li><blockquote>"I hate to admit this, but I'm lacking in my due diligence of keeping up with politics. Ever since that bastard Trump became president (and is now up for reelection what the hell?!) I kind of lost faith in American politics. I will say I am glad that we have a woman as vice president because I am sick and tired of seeing old, white men in political positions."</blockquote></li>
+</ul>
+<p><strong>Lack of interest/knowledge</strong></p>
+<ul>
+<li><blockquote>"I guess I don't know anything about her."</blockquote></li>
+<li><blockquote>"I'm not familiar with her beliefs."</blockquote></li>
+<li><blockquote>"I don't have any strong feelings about or follow her."</blockquote></li>
+</ul>
+
+<h2>Somewhat favorable</h2>
+<p><strong>Uncertain of transition from VP to President</strong></p>
+<ul>
+<li><blockquote>"Well for President not as much for Vice President more scrutiny is sought about their character, morals and habits or should be, for Vice President not so much, Vice President doesn't tell what it is that they would do if they were president while in the current job, I know she was a celebrated prosecutor mostly, African American, she's cool"</blockquote></li>
+<li><blockquote>"it has been an okay not as bad vice president that maybe could do a better job as the future president"</blockquote></li>
+</ul>
+<p><strong>Generally like her character</strong></p>
+<ul>
+<li><blockquote>"She is smart, young, and practical."</blockquote></li>
+<li><blockquote>"She smiles a lot so she seems genuine"</blockquote></li>
+<li><blockquote>"She has proven very competent"</blockquote></li>
+<li><blockquote>"She is assertive and tells it"</blockquote></li>
+<li><blockquote>"Good speaker, debater, knows how to assert herself."</blockquote></li>
+</ul>
+<p><strong>Good track record</strong></p>
+<ul>
+<li><blockquote>"Her experience as a US senator, Vice President and an attorney. I've also seen interviews with her, she's smart and articulate!"</blockquote></li>
+<li><blockquote>"She has been a loyal vice president. She was an effective prosecutor. Her parents are both very accomplished."</blockquote></li>
+<li><blockquote>"You can tell that she actually cares about the American people. She actively goes out in the community and she inputs on policies that are important."</blockquote></li>
+</ul>
+
+<h2>Somewhat unfavorable</h2>
+<p><strong>Comments about her character and stereotyping</strong></p>
+<ul>
+<li><blockquote>"I'm not sure, I didn't like her from the start. The way she laughs when important people ask her serious questions might have something to do with it. She generally sounds like she did very well in her public speaking class, but not in any other. And she just doesn't have the 'charisma.' Also, I don't think that Americans are ready to vote for a female president…"</blockquote></li>
+<li><blockquote>"I think she's fake and I don't trust her. And I believe she was being groomed since she was elected as vice-president to become President. Biden was just a puppet used until Americans got used to the idea of a woman president."</blockquote></li>
+<li><blockquote>"She is incompetent and laughs when it is inappropriate."</blockquote></li>
+<li><blockquote>"She is not strong enough to be president; women like Hillary Clinton or Michelle Obama are more experienced."</blockquote></li>
+<li><blockquote>"I have an unfavorable opinion about Kamala Harris because she seems kind of ditzy and seems to make up excuses for Biden, doesn't seem like she's taking her political role seriously, always laughing and joking."</blockquote></li>
+</ul>
+<p><strong>Haven't heard enough/don't feel she's done enough as VP</strong></p>
+<ul>
+<li><blockquote>"I haven't heard many positive things she has done as vice president. However, maybe the media just hasn't reported anything."</blockquote></li>
+<li><blockquote>"Because the whole time that she's been in office we never hear about much that she is working on."</blockquote></li>
+<li><blockquote>"I feel like she has zero presence. She just stands there like an empty shell, with zero to say."</blockquote></li>
+<li><blockquote>"Hasn't done anything while in office."</blockquote></li>
+</ul>
+<p><strong>Don't like her policies and record</strong></p>
+<ul>
+<li><blockquote>"Just don't like that she will raise taxes which will cause the poor to have to pay more money for things like milk and eggs."</blockquote></li>
+<li><blockquote>"Haven't been impressed by what she has done while Vice President."</blockquote></li>
+<li><blockquote>"She's to liberal, extreme, for high taxes, cost of living and inflation."</blockquote></li>
+</ul>
+<p><strong>Don't agree with how she's handled immigration/border</strong></p>
+<ul>
+<li><blockquote>"She had 1 job to do and that was to watch over the border and she failed miserably"</blockquote></li>
+<li><blockquote>"I haven't seen her do much and her visit to the border was a total fail."</blockquote></li>
+<li><blockquote>"Been out of sight. Border situation is awful."</blockquote></li>
+</ul>
+
+<p>We also asked survey participants what has worried them most in the last month to better understand their day-to-day concerns and anxieties. Across segments, people brought up a general concern about war (both current and potential for future war). People in the <strong>neither favorable nor unfavorable</strong> segment largely brought up personal economic issues (jobs, housing, price of gas and groceries, etc.). Some also voiced that they worry about the presidential election and the future of the country. The <strong>somewhat favorable</strong> segment also overwhelmingly talked about personal economic issues, but many more respondents talked about the upcoming election and Trump as key concerns. They also brought up more policy issues, such as immigration and abortion access. The <strong>somewhat unfavorable</strong> segment was also mostly concerned about personal economic issues, along with some concerns about the election and policy concerns.</p>
+
+<h2>Summary</h2>
+<p>This survey identified several themes with potential to persuade key voter segments. These themes are helpful places to start when creating messaging and content that speak to people who are unsure or hold a soft opinion of Harris. Many people are uncertain or feel they don't have enough information on Harris, her wins, and her platform, indicating opportunities for persuasion rooted in education.</p>
+<p>Reach out to Grow Progress if you're interested in learning more about Audience Understanding Surveys or Rapid Message Testing.</p>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="post-sidebar reveal reveal-delay-2">
+
+        <div class="sidebar-card">
+          <p class="sidebar-label">About this article</p>
+          <div class="sidebar-meta-row">
+            <div class="sidebar-meta-item">
+              <span class="sidebar-meta-key">Sector</span>
+              <span class="sidebar-meta-val"><span class="sidebar-sector-chip">Electoral</span></span>
+            </div>
+            <div class="sidebar-meta-item">
+              <span class="sidebar-meta-key">Published</span>
+              <span class="sidebar-meta-val">July 23, 2024</span>
+            </div>
+            <div class="sidebar-meta-item">
+              <span class="sidebar-meta-key">Type</span>
+              <span class="sidebar-meta-val">Audience Understanding Survey</span>
+            </div>
+            <div class="sidebar-meta-item">
+              <span class="sidebar-meta-key">Sample size</span>
+              <span class="sidebar-meta-val">572 respondents</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-cta">
+          <div class="sidebar-cta-h">Run your own test</div>
+          <div class="sidebar-cta-sub">Get causal proof for your message in 24 hours — before you spend on media.</div>
+          <a href="rapid-message-testing.html" class="sidebar-cta-btn">Run your own test →</a>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="reveal">
+        <div class="newsletter-eyebrow">
+          <span class="newsletter-eyebrow-dot"></span>
+          Grow Progress Newsletter
+        </div>
+        <p class="newsletter-sub">Monthly insights from 500+ studies — what moves people, what does not, and what it means for your next campaign.</p>
+      </div>
+      <form class="newsletter-form reveal reveal-delay-1" onsubmit="return false;">
+        <div class="nl-row">
+          <input class="nl-input" type="text" placeholder="First name" autocomplete="given-name">
+          <input class="nl-input" type="text" placeholder="Last name" autocomplete="family-name">
+        </div>
+        <input class="nl-input" type="email" placeholder="Work email" autocomplete="email">
+        <button class="nl-submit" type="submit">Subscribe</button>
+        <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div>
+          <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        </div>
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), {passive:true});
+  if (window.scrollY > 20) nav.classList.add('scrolled');
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

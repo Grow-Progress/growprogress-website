@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grow Progress — Message Testing & Audience Research</title>
+  <meta name="description" content="Grow Progress is the leading message testing and audience research platform for campaigns, nonprofits, and advocacy organizations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────
+       TOKENS
+    ───────────────────────────────────────── */
+    :root {
+      --ink:        #1F1628;
+      --purple:     #432C97;
+      --mid:        #5B5DC0;
+      --blue:       #6C9BFF;
+      --blue-bright:#85B4FF;
+      --lavender:   #DCD2FF;
+      --ghost:      #F2F2FD;
+      --sky:        #D7E8F8;
+      --white:      #FFFFFF;
+      --text:       #1F1628;
+      --muted:      #6B5E8A;
+      --faint:      #9B8FBA;
+
+      --grad-hero: linear-gradient(135deg, #1F1628 0%, #2A1A45 50%, #1A1235 100%);
+      --grad-blue: linear-gradient(135deg, #432C97, #6C9BFF);
+      --grad-card: linear-gradient(145deg, rgba(108,155,255,.07), rgba(67,44,151,.04));
+
+      --r-sm: .5rem;
+      --r-md: 1rem;
+      --r-lg: 1.5rem;
+      --r-xl: 2rem;
+
+      --shadow-sm:  0 1px 3px rgba(31,22,40,.08), 0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:  0 2px 8px rgba(31,22,40,.1),  0 12px 40px rgba(31,22,40,.08);
+      --shadow-glow:0 0 40px rgba(108,155,255,.25);
+
+      --font-h: 'Barlow', sans-serif;
+      --font-b: 'Work Sans', sans-serif;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; font-size:16px; }
+    body {
+      font-family: var(--font-b);
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─────────────────────────────────────────
+       UTILITIES
+    ───────────────────────────────────────── */
+    .container { max-width:1160px; margin:0 auto; padding:0 2rem; }
+    .section { padding:7rem 0; }
+
+    .chip {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-family:var(--font-h); font-size:.875rem; font-weight:700;
+      letter-spacing:.08em; text-transform:uppercase;
+      padding:.5rem 1.125rem; border-radius:2rem;
+    }
+    .chip-blue { color:var(--blue); background:rgba(108,155,255,.15); border:1px solid rgba(108,155,255,.35); box-shadow:0 0 20px rgba(108,155,255,.15); }
+    .chip-purple { color:var(--purple); background:rgba(67,44,151,.08); border:1px solid rgba(67,44,151,.15); }
+    .chip-light { color:var(--lavender); background:rgba(220,210,255,.1); border:1px solid rgba(220,210,255,.2); }
+
+    .section-label { margin-bottom:.875rem; }
+    .section-h {
+      font-family:var(--font-h); font-weight:900;
+      font-size:clamp(2rem,3.5vw,3rem);
+      letter-spacing:-.025em; line-height:1.05;
+      color:var(--text);
+    }
+    .section-h em { font-style:normal; color:var(--purple); }
+    .section-sub {
+      margin-top:1.125rem;
+      font-size:1.0625rem; line-height:1.7;
+      color:var(--muted); max-width:560px;
+    }
+
+    /* Buttons */
+    .btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-family:var(--font-h); font-weight:700;
+      text-decoration:none; border:none; cursor:pointer;
+      border-radius:var(--r-sm); transition:all .2s;
+      position:relative; overflow:hidden;
+    }
+    .btn::after {
+      content:''; position:absolute; inset:0;
+      background:rgba(255,255,255,.12); opacity:0;
+      transition:opacity .2s;
+    }
+    .btn:hover::after { opacity:1; }
+    .btn-cta {
+      padding:.875rem 2rem; font-size:1rem;
+      background:var(--blue); color:var(--ink);
+      box-shadow:0 4px 24px rgba(108,155,255,.4);
+    }
+    .btn-cta:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(108,155,255,.5); }
+    .btn-ghost {
+      padding:.875rem 2rem; font-size:1rem;
+      background:transparent; color:var(--white);
+      border:1.5px solid rgba(255,255,255,.25);
+    }
+    .btn-ghost:hover { border-color:rgba(255,255,255,.6); }
+    .btn-outline {
+      padding:.75rem 1.5rem; font-size:.9375rem;
+      background:transparent; color:var(--purple);
+      border:2px solid var(--purple);
+    }
+    .btn-outline:hover { background:var(--purple); color:var(--white); }
+    .btn-sm { padding:.5rem 1.125rem; font-size:.875rem; }
+
+    /* Scroll-reveal */
+    .reveal {
+      opacity:0; transform:translateY(28px);
+      transition:opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-delay-1 { transition-delay:.1s; }
+    .reveal-delay-2 { transition-delay:.2s; }
+    .reveal-delay-3 { transition-delay:.3s; }
+    .reveal-delay-4 { transition-delay:.4s; }
+    .reveal-left {
+      opacity:0; transform:translateX(-28px);
+      transition:opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal-left.visible { opacity:1; transform:translateX(0); }
+    .reveal-right {
+      opacity:0; transform:translateX(28px);
+      transition:opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal-right.visible { opacity:1; transform:translateX(0); }
+
+    /* ─────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────── */
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      height:68px; padding:0 2rem;
+      display:flex; align-items:center; justify-content:space-between;
+      transition:background .35s, box-shadow .35s, backdrop-filter .35s;
+    }
+    .nav.scrolled {
+      background:rgba(31,22,40,.88);
+      backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+      box-shadow:0 1px 0 rgba(255,255,255,.07);
+    }
+
+    .nav-logo { display:flex; align-items:center; text-decoration:none; }
+    .nav-gp-logo { height:36px; width:auto; display:block; }
+
+    .nav-links { display:flex; align-items:center; gap:.125rem; list-style:none; }
+    .nav-links a {
+      padding:.5rem .9rem; font-size:.875rem; font-weight:600;
+      color:rgba(255,255,255,.85); text-decoration:none;
+      border-radius:var(--r-sm); transition:color .15s, background .15s;
+    }
+    .nav-links a:hover { color:var(--white); background:rgba(255,255,255,.07); }
+
+    /* ── Platform dropdown ── */
+    .has-dropdown { position: relative; }
+    .has-dropdown > a { display: flex; align-items: center; gap: .3rem; }
+    .has-dropdown > a svg { width: 12px; height: 12px; transition: transform .2s; flex-shrink: 0; }
+    .has-dropdown:hover > a svg,
+    .has-dropdown:focus-within > a svg { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 580px;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(67,44,151,.12);
+      border-radius: 1rem;
+      box-shadow: 0 6px 32px rgba(31,22,40,.14), 0 1px 6px rgba(31,22,40,.06);
+      padding: .5rem .75rem .75rem;
+      padding-top: calc(.5rem + 8px);
+      margin-top: -8px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .25rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(-4px);
+      transition: opacity .15s ease, transform .15s ease;
+      z-index: 200;
+    }
+    .has-dropdown:hover .nav-dropdown,
+    .has-dropdown:focus-within .nav-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dd-item {
+      display: flex;
+      align-items: center;
+      gap: .625rem;
+      padding: .5rem .625rem;
+      border-radius: .625rem;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .nav-dd-item:hover { background: rgba(67,44,151,.06); }
+    .nav-dd-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: .375rem;
+      background: rgba(67,44,151,.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-dd-icon svg { width: 14px; height: 14px; color: #432C97; }
+    .nav-dd-text { display: flex; flex-direction: column; gap: .1rem; }
+    .nav-dd-label { font-family: var(--font-h); font-weight: 700; font-size: .8125rem; color: #1F1628; line-height: 1.2; }
+    .nav-dd-desc { font-size: .7rem; color: rgba(31,22,40,.4); line-height: 1.3; }
+    /* Active/current page highlight */
+    .nav-dd-item.active { background: rgba(67,44,151,.07); }
+    .nav-dd-item.active .nav-dd-label { color: #432C97; }
+    /* How it works row spans full width */
+    .nav-dd-item--method { background: linear-gradient(135deg, rgba(67,44,151,.06) 0%, rgba(108,155,255,.04) 100%); border: 1px solid rgba(67,44,151,.1); border-radius: .75rem; }
+    .nav-dd-item--method:hover { background: linear-gradient(135deg, rgba(67,44,151,.1) 0%, rgba(108,155,255,.08) 100%); }
+    .nav-dd-item--method .nav-dd-icon { background: var(--purple); }
+    .nav-dd-item--method .nav-dd-icon svg { color: #fff; }
+    .nav-dd-item--method .nav-dd-label { color: var(--purple); }
+    .nav-dd-eyebrow { font-size: .6rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); margin-bottom: .2rem; }
+
+    .nav-right { display:flex; align-items:center; gap:.75rem; }
+    .nav-signin {
+      font-size:.875rem; font-weight:400;
+      color:rgba(255,255,255,.6); text-decoration:none;
+      padding:.5rem .9rem; border-radius:var(--r-sm);
+      transition:color .15s;
+    }
+    .nav-signin:hover { color:var(--white); }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      min-height:100vh;
+      background: linear-gradient(135deg, #1A1030 0%, #2D1F5E 45%, #1F1628 100%);
+      display:flex; flex-direction:column; justify-content:center;
+      padding:8rem 0 5rem;
+      position:relative; overflow:hidden;
+    }
+
+    /* Animated gradient orbs */
+    .hero-orb {
+      position:absolute; border-radius:50%;
+      filter:blur(80px); pointer-events:none;
+    }
+    .orb-1 {
+      width:800px; height:800px;
+      top:-200px; right:-150px;
+      background:radial-gradient(circle, rgba(108,155,255,.25) 0%, transparent 70%);
+      animation:orbFloat 12s ease-in-out infinite;
+    }
+    .orb-2 {
+      width:600px; height:600px;
+      bottom:-100px; left:-80px;
+      background:radial-gradient(circle, rgba(91,93,192,.3) 0%, transparent 70%);
+      animation:orbFloat 16s ease-in-out infinite reverse;
+    }
+    .orb-3 {
+      width:400px; height:400px;
+      top:40%; left:40%;
+      background:radial-gradient(circle, rgba(67,44,151,.35) 0%, transparent 70%);
+      animation:orbFloat 20s ease-in-out infinite 4s;
+    }
+    @keyframes orbFloat {
+      0%,100% { transform:translate(0,0) scale(1); }
+      33%      { transform:translate(30px,-40px) scale(1.05); }
+      66%      { transform:translate(-20px,20px) scale(.97); }
+    }
+
+    /* Dot grid pattern */
+    .hero-grid {
+      position:absolute; inset:0; pointer-events:none;
+      background-image:radial-gradient(rgba(108,155,255,.18) 1px, transparent 1px);
+      background-size:36px 36px;
+      mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+      animation:gridPulse 8s ease-in-out infinite;
+    }
+    @keyframes gridPulse {
+      0%,100% { opacity:.4; }
+      50%      { opacity:.7; }
+    }
+
+    .hero .container { position:relative; z-index:2; }
+    .hero-layout {
+      display:grid; grid-template-columns:1fr 500px;
+      gap:6rem; align-items:center;
+    }
+
+    .hero-eyebrow { margin-bottom:1.75rem; }
+    .hero-left-text { text-align:left; display:flex; flex-direction:column; align-items:flex-start; }
+    .hero-left-text .hero-h1 { font-size:clamp(2.25rem, 4vw, 3.5rem); }
+    .hero-left-text .hero-sub { color:rgba(255,255,255,.92); text-shadow:0 1px 12px rgba(0,0,0,.5); }
+    .hero-left-text .chip-blue { color:#fff; background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.3); text-shadow:0 1px 8px rgba(0,0,0,.4); }
+    .hero-h1 {
+      font-family:var(--font-h); font-weight:900;
+      font-size:clamp(3rem,6.5vw,5.25rem);
+      letter-spacing:-.03em; line-height:1;
+      color:var(--white); margin-bottom:1.625rem;
+    }
+    .hero-h1 .grad-text {
+      background:linear-gradient(135deg, var(--blue) 0%, #a78bfa 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .hero-sub {
+      font-size:1.1875rem; line-height:1.65;
+      color:rgba(255,255,255,.6); max-width:520px;
+      margin-bottom:2.5rem;
+    }
+    .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; }
+
+    /* ── Rotating results panel ── */
+    .hero-card-wrap { position:relative; padding:2rem 1.5rem 2rem 1.5rem; }
+
+
+    /* Floating accent chips */
+    .hero-float {
+      position:absolute; z-index:2; pointer-events:none;
+      display:flex; align-items:center; gap:.625rem;
+      padding:.75rem 1.25rem;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:2rem;
+      backdrop-filter:blur(16px);
+      font-family:var(--font-h); font-weight:700;
+      white-space:nowrap;
+    }
+    .hero-float-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+    .hero-float-label { font-size:.875rem; letter-spacing:.03em; }
+    .hero-float-val { font-size:1.0625rem; }
+
+    /* Top-right chip — 24hr turnaround */
+    .hero-float--top {
+      top:-1rem; right:-1.25rem;
+      animation:floatBob 5s ease-in-out infinite;
+    }
+    .hero-float--top .hero-float-dot { background:#4ade80; box-shadow:0 0 6px rgba(74,222,128,.6); }
+    .hero-float--top .hero-float-label { color:rgba(255,255,255,.55); }
+    .hero-float--top .hero-float-val { color:#4ade80; }
+
+    /* Bottom-left chip — sample size */
+    .hero-float--bot {
+      bottom:-.5rem; left:-1.25rem;
+      animation:floatBob 6s ease-in-out infinite 1.5s;
+    }
+    .hero-float--bot .hero-float-dot { background:var(--blue); box-shadow:0 0 6px rgba(108,155,255,.5); }
+    .hero-float--bot .hero-float-label { color:rgba(255,255,255,.55); }
+    .hero-float--bot .hero-float-val { color:var(--blue); }
+
+    @keyframes floatBob {
+      0%,100% { transform:translateY(0); }
+      50%      { transform:translateY(-6px); }
+    }
+
+    .results-panel {
+      background:#fff;
+      border:1px solid rgba(67,44,151,.1);
+      border-radius:var(--r-xl); padding:1.75rem;
+      box-shadow:0 32px 80px rgba(0,0,0,.22), 0 4px 24px rgba(67,44,151,.12);
+    }
+
+    .sector-tabs { display:flex; gap:.375rem; margin-bottom:1.5rem; }
+    .sector-tab {
+      flex:1; padding:.5rem .75rem; text-align:center;
+      font-family:var(--font-h); font-weight:700; font-size:.72rem;
+      letter-spacing:.05em; text-transform:uppercase;
+      color:rgba(31,22,40,.35);
+      background:rgba(67,44,151,.04);
+      border:1px solid rgba(67,44,151,.08);
+      border-radius:.625rem; cursor:pointer; transition:all .2s;
+    }
+    .sector-tab.active { color:var(--purple); background:rgba(67,44,151,.08); border-color:rgba(67,44,151,.2); }
+    .sector-tab:hover:not(.active) { color:rgba(31,22,40,.6); background:rgba(67,44,151,.06); }
+
+    /* Progress bar inside active tab */
+    .sector-tab { overflow:hidden; }
+    .sector-tab::after {
+      content:''; position:absolute; bottom:0; left:0;
+      height:2px; width:0; border-radius:0 0 .625rem .625rem;
+      background:linear-gradient(90deg, var(--blue), #a78bfa);
+      transition:none;
+    }
+    .sector-tab { position:relative; }
+    .sector-tab.active::after {
+      width:100%;
+      transition:width 6s linear;
+    }
+    .sector-tab.progress-reset::after {
+      width:0; transition:none;
+    }
+
+    .panel-content { transition:opacity .3s ease, transform .3s ease; }
+    .panel-content.fading { opacity:0; transform:translateY(6px); }
+
+    .rp-header { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:1.25rem; }
+    .rp-eyebrow { font-family:var(--font-h); font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(31,22,40,.35); margin-bottom:.25rem; }
+    .rp-question { font-family:var(--font-h); font-weight:700; font-size:.9375rem; color:var(--ink); line-height:1.3; }
+    .sig-badge { flex-shrink:0; display:inline-flex; align-items:center; gap:.375rem; font-family:var(--font-h); font-size:.68rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#059669; background:rgba(5,150,105,.08); border:1px solid rgba(5,150,105,.2); padding:.3rem .7rem; border-radius:2rem; }
+    .sig-dot { width:6px; height:6px; border-radius:50%; background:#4ade80; animation:sigPulse 1.8s infinite; }
+    @keyframes sigPulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.4;transform:scale(1.5);} }
+
+    .rp-results { display:flex; flex-direction:column; gap:.875rem; margin-bottom:1.5rem; }
+    .result-item {}
+    .result-meta { display:flex; align-items:center; justify-content:space-between; margin-bottom:.375rem; }
+    .result-left { display:flex; align-items:center; gap:.625rem; }
+    .result-rank { width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-h); font-weight:800; font-size:.65rem; flex-shrink:0; }
+    .rank-1 { background:rgba(67,44,151,.1); color:var(--purple); }
+    .rank-2 { background:rgba(31,22,40,.06); color:rgba(31,22,40,.35); }
+    .rank-3 { background:rgba(31,22,40,.04); color:rgba(31,22,40,.2); }
+    .result-label { font-size:.8375rem; color:rgba(31,22,40,.65); font-weight:500; }
+    .result-pct { font-family:var(--font-h); font-weight:900; font-size:.875rem; }
+    .pct-win { color:var(--purple); }
+    .pct-mid { color:rgba(31,22,40,.35); }
+    .pct-low { color:rgba(31,22,40,.2); }
+    .bar-track { height:7px; background:rgba(31,22,40,.06); border-radius:7px; overflow:hidden; }
+    .bar-fill { height:100%; border-radius:7px; width:0; transition:width .9s cubic-bezier(.22,1,.36,1); }
+    .bar-win { background:linear-gradient(90deg, var(--purple), var(--blue)); }
+    .bar-mid { background:rgba(31,22,40,.15); }
+    .bar-low { background:rgba(31,22,40,.06); }
+
+    .rp-divider { height:1px; background:rgba(31,22,40,.07); margin-bottom:1.25rem; }
+    .rp-stats { display:grid; grid-template-columns:1fr 1px 1fr 1px 1fr; gap:.5rem; align-items:center; margin-bottom:1.25rem; }
+    .rp-stat-val { font-family:var(--font-h); font-weight:900; font-size:1.375rem; letter-spacing:-.03em; color:var(--ink); line-height:1; }
+    .rp-stat-val .accent { color:var(--purple); }
+    .rp-stat-label { font-size:.68rem; color:rgba(31,22,40,.35); margin-top:.2rem; line-height:1.3; }
+    .rp-divline { width:1px; background:rgba(31,22,40,.08); height:32px; margin:0 auto; }
+    .rp-insight { background:rgba(67,44,151,.05); border:1px solid rgba(67,44,151,.12); border-radius:.875rem; padding:.875rem 1rem; display:flex; align-items:flex-start; gap:.625rem; }
+    .rp-insight-icon { font-size:.9375rem; flex-shrink:0; margin-top:.05rem; }
+    .rp-insight-body { font-size:.78rem; line-height:1.55; color:rgba(31,22,40,.55); }
+    .rp-insight-body strong { color:var(--purple); font-weight:700; }
+
+    .hero-scroll {
+      margin-top:4rem;
+      display:flex; align-items:center; gap:.875rem;
+    }
+    .scroll-line { width:56px; height:1px; background:rgba(255,255,255,.15); }
+    .scroll-text {
+      font-size:.75rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+      color:rgba(255,255,255,.25);
+    }
+
+    /* ── Hero photo background (full bleed) ── */
+    .hero-photo-half {
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      z-index:0;
+    }
+    .hero-scene {
+      position:absolute; inset:0;
+      opacity:0; transition:opacity 1.4s ease;
+      background-size:cover; background-position:center;
+    }
+    .hero-scene.active { opacity:1; }
+    .scene-0 { background-color:#1a2d50; background-image:url('photo-npf.png'); background-size:cover; background-position:center; background-blend-mode:luminosity; }
+    .scene-1 { background-color:#0d2f1e; background-image:url('photo-hands.png'); background-size:cover; background-position:center; background-blend-mode:luminosity; }
+    .scene-2 { background-color:#1a1a40; background-image:url('photo-politics.png'); background-size:cover; background-position:center; background-blend-mode:luminosity; }
+    .scene-3 { background-color:#2a1200; background-image:url('photo-crowd.png'); background-size:cover; background-position:center; background-blend-mode:luminosity; }
+    .hero-scene::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 70% 90% at 15% 25%, rgba(255,255,255,.06) 0%, transparent 65%);
+    }
+    .hero-scene-overlay {
+      position:absolute; inset:0; z-index:1;
+      background:linear-gradient(to right,
+        rgba(10,5,24,.25) 0%,
+        rgba(15,8,32,.45) 35%,
+        rgba(22,12,40,.72) 62%,
+        rgba(26,16,48,.93) 82%,
+        rgba(26,16,48,1) 100%);
+    }
+    .hero-scene-label {
+      position:absolute; bottom:2rem; left:2rem; z-index:3;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .scene-label-text {
+      font-family:var(--font-h); font-size:.65rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:rgba(255,255,255,.4);
+    }
+    .hero-scene-dots { display:flex; gap:.5rem; }
+    .scene-dot {
+      height:4px; width:16px; border-radius:4px;
+      background:rgba(255,255,255,.2); cursor:pointer;
+      transition:all .4s cubic-bezier(.22,1,.36,1);
+    }
+    .scene-dot.active { width:28px; background:var(--blue); }
+
+    /* ─────────────────────────────────────────
+       LOGO MARQUEE
+    ───────────────────────────────────────── */
+    .logo-panel{background:var(--white);border-bottom:1px solid rgba(67,44,151,.08);padding:2rem 0;}
+    .logo-panel-label{font-size:.7rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:1.25rem;text-align:center;}
+    .logo-panel-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.75rem 3.5rem;}
+    .logo-panel-row img{height:42px;width:auto;object-fit:contain;filter:grayscale(100%) opacity(.5);transition:filter .2s;}
+    .logo-panel-row img:hover{filter:grayscale(100%) opacity(.8);}
+    .logo-item {
+      display:flex; align-items:center; justify-content:center;
+      width:180px; flex-shrink:0;
+    }
+    .logo-item img {
+      height:28px; width:auto; max-width:130px;
+      object-fit:contain;
+      filter:grayscale(100%) opacity(45%);
+      transition:filter .2s;
+    }
+    .logo-item img:hover { filter:grayscale(100%) opacity(80%); }
+
+    /* ─────────────────────────────────────────
+       PROBLEM
+    ───────────────────────────────────────── */
+    .problem-section { background:var(--white); }
+    .problem-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
+      margin-top:3.5rem;
+    }
+    .prob-card {
+      position:relative; overflow:hidden;
+      border-radius:var(--r-xl); padding:2.5rem;
+      border:1.5px solid rgba(67,44,151,.1);
+      transition:border-color .25s, transform .25s, box-shadow .25s;
+      background:var(--white);
+      text-align:center; display:flex; flex-direction:column; align-items:center;
+    }
+    .prob-card:hover { border-color:var(--purple); transform:translateY(-4px); box-shadow:var(--shadow-md); }
+    .prob-card::before {
+      content:''; position:absolute; inset:0; opacity:0;
+      background:linear-gradient(145deg, rgba(67,44,151,.04), transparent);
+      transition:opacity .25s;
+    }
+    .prob-card:hover::before { opacity:1; }
+    .prob-number {
+      font-family:var(--font-h); font-weight:900;
+      font-size:5rem; letter-spacing:-.06em; line-height:1;
+      color:rgba(67,44,151,.07);
+      position:absolute; top:1.25rem; right:1.75rem;
+    }
+    .prob-icon-wrap {
+      width:68px; height:68px; border-radius:var(--r-md);
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:1.5rem;
+    }
+    .prob-icon-wrap svg { width:34px; height:34px; }
+    .prob-tag {
+      display:inline-block; font-family:var(--font-h); font-size:.7rem;
+      font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+      padding:.25rem .625rem; border-radius:2rem; margin-bottom:.75rem;
+    }
+    .prob-title {
+      font-family:var(--font-h); font-weight:800; font-size:1.25rem;
+      color:var(--text); margin-bottom:.75rem; line-height:1.2;
+    }
+    .prob-body { font-size:.9375rem; line-height:1.65; color:var(--muted); }
+
+    /* card color variants */
+    .prob-card-1 .prob-icon-wrap { background:rgba(239,68,68,.08); }
+    .prob-card-1 .prob-icon-wrap svg { color:#ef4444; }
+    .prob-card-1 .prob-tag { color:#ef4444; background:rgba(239,68,68,.08); }
+
+    .prob-card-2 .prob-icon-wrap { background:rgba(234,179,8,.08); }
+    .prob-card-2 .prob-icon-wrap svg { color:#ca8a04; }
+    .prob-card-2 .prob-tag { color:#ca8a04; background:rgba(234,179,8,.08); }
+
+    .prob-card-3 .prob-icon-wrap { background:rgba(108,155,255,.1); }
+    .prob-card-3 .prob-icon-wrap svg { color:var(--blue); }
+    .prob-card-3 .prob-tag { color:var(--purple); background:rgba(67,44,151,.08); }
+
+    /* ─────────────────────────────────────────
+       STATS
+    ───────────────────────────────────────── */
+    .stats-section {
+      background:var(--purple);
+      position:relative; overflow:hidden;
+    }
+    .stats-section::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(rgba(255,255,255,.1) 1px, transparent 1px);
+      background-size:28px 28px;
+    }
+    .stats-section::after {
+      content:''; position:absolute;
+      top:-200px; left:50%; transform:translateX(-50%);
+      width:800px; height:500px;
+      background:radial-gradient(ellipse, rgba(108,155,255,.2) 0%, transparent 70%);
+    }
+    .stats-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      position:relative; z-index:1;
+    }
+    .stat-item {
+      padding:4rem 3rem; text-align:center;
+      border-right:1px solid rgba(255,255,255,.07);
+      position:relative;
+    }
+    .stat-item:last-child { border-right:none; }
+    .stat-num {
+      font-family:var(--font-h); font-weight:900;
+      font-size:clamp(3rem,5.5vw,4.5rem);
+      letter-spacing:-.035em; line-height:1; color:var(--white);
+      margin-bottom:.625rem;
+    }
+    .stat-num .accent { color:var(--blue); }
+    .stat-label {
+      font-size:.9375rem; line-height:1.5; color:rgba(255,255,255,.45);
+      max-width:180px; margin:0 auto;
+    }
+    .stat-divider {
+      width:32px; height:2px; background:var(--blue);
+      margin:.875rem auto 0; border-radius:2px;
+    }
+
+    /* ─────────────────────────────────────────
+       HOW IT WORKS — horizontal stepper
+    ───────────────────────────────────────── */
+    .how-section { background:var(--ghost); }
+
+    /* Tab row */
+    .hiw-tabs {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1rem; margin-top:3rem; margin-bottom:1.5rem;
+    }
+    .hiw-tab {
+      background:var(--white); border:1.5px solid rgba(67,44,151,.1);
+      border-radius:var(--r-lg); padding:1.25rem 1.5rem;
+      cursor:pointer; transition:border-color .2s, box-shadow .2s;
+      position:relative; overflow:hidden;
+    }
+    .hiw-tab:hover { border-color:var(--purple); }
+    .hiw-tab.active {
+      border-color:var(--purple);
+      box-shadow:0 4px 24px rgba(67,44,151,.12);
+    }
+    .hiw-tab-inner { display:flex; align-items:flex-start; gap:.875rem; margin-bottom:.875rem; }
+    .hiw-tab-num {
+      width:36px; height:36px; flex-shrink:0; border-radius:50%;
+      background:rgba(67,44,151,.08);
+      font-family:var(--font-h); font-weight:900; font-size:.8rem;
+      color:var(--purple); display:flex; align-items:center; justify-content:center;
+      transition:background .2s, color .2s;
+    }
+    .hiw-tab.active .hiw-tab-num {
+      background:linear-gradient(135deg,var(--purple),var(--mid));
+      color:#fff;
+    }
+    .hiw-tab-time { font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); margin-bottom:.2rem; }
+    .hiw-tab-title { font-family:var(--font-h); font-weight:700; font-size:.9375rem; color:var(--text); line-height:1.25; }
+    .hiw-tab.active .hiw-tab-title { color:var(--purple); }
+
+    /* Progress bar inside each tab */
+    .hiw-progress-bar { height:3px; background:rgba(67,44,151,.08); border-radius:3px; overflow:hidden; }
+    .hiw-progress-fill {
+      height:100%; width:0%; border-radius:3px;
+      background:linear-gradient(90deg,var(--purple),var(--blue));
+    }
+    .hiw-progress-fill.running {
+      transition:width 5s linear;
+      width:100%;
+    }
+
+    /* Content panel */
+    .hiw-panel {
+      background:var(--white); border:1.5px solid rgba(67,44,151,.1);
+      border-radius:var(--r-xl); overflow:hidden;
+      box-shadow:var(--shadow-sm);
+      position:relative; min-height:320px;
+    }
+    .hiw-pane {
+      display:none; grid-template-columns:1fr 1fr;
+      gap:3rem; align-items:center; padding:2.5rem 3rem;
+      animation:paneIn .4s cubic-bezier(.22,1,.36,1);
+    }
+    .hiw-pane.active { display:grid; }
+    @keyframes paneIn { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+    .hiw-pane-title { font-family:var(--font-h); font-weight:800; font-size:1.375rem; color:var(--text); margin-bottom:.75rem; line-height:1.2; }
+    .hiw-pane-body { font-size:.9375rem; line-height:1.7; color:var(--muted); }
+
+    /* ── Shared visual card style ── */
+    .upload-demo, .survey-demo, .results-demo {
+      background:var(--ghost); border:1px solid rgba(67,44,151,.09);
+      border-radius:var(--r-lg); padding:1.375rem;
+      display:flex; flex-direction:column; gap:.5rem;
+    }
+
+    /* Upload */
+    .upload-file {
+      display:flex; align-items:center; gap:.625rem;
+      padding:.625rem .875rem;
+      background:var(--white); border:1px solid rgba(67,44,151,.1);
+      border-radius:.625rem; font-size:.8125rem; font-weight:500; color:var(--text);
+      opacity:0; transform:translateX(-10px);
+      transition:opacity .35s ease, transform .35s ease;
+    }
+    .upload-file svg { color:var(--purple); flex-shrink:0; }
+    .hiw-pane.active .ud-1 { opacity:1; transform:none; transition-delay:.1s; }
+    .hiw-pane.active .ud-2 { opacity:1; transform:none; transition-delay:.22s; }
+    .hiw-pane.active .ud-3 { opacity:1; transform:none; transition-delay:.34s; }
+    .upload-check {
+      display:flex; align-items:center; gap:.5rem;
+      font-size:.775rem; font-weight:600; color:#059669; padding:.25rem .625rem;
+      opacity:0; transition:opacity .3s .5s ease;
+    }
+    .hiw-pane.active .upload-check { opacity:1; }
+
+    /* Survey */
+    .survey-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:.625rem; }
+    .survey-label { font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); }
+    .survey-badge { font-size:.68rem; font-weight:600; color:var(--mid); background:rgba(91,93,192,.1); padding:.2rem .6rem; border-radius:2rem; }
+    .survey-track { height:8px; background:rgba(67,44,151,.1); border-radius:8px; overflow:hidden; margin-bottom:.5rem; }
+    .survey-fill { height:100%; width:0; background:linear-gradient(90deg,var(--purple),var(--blue)); transition:width 2.2s cubic-bezier(.4,0,.2,1); border-radius:8px; }
+    .hiw-pane.active .survey-fill { width:100%; }
+    .survey-count { font-family:var(--font-h); font-weight:700; font-size:.8125rem; color:var(--text); margin-bottom:.875rem; }
+    .survey-segments { display:flex; align-items:flex-end; gap:.5rem; height:64px; }
+    .seg { display:flex; flex-direction:column; align-items:center; gap:.375rem; flex:1; height:100%; justify-content:flex-end; }
+    .seg-bar { width:100%; border-radius:4px 4px 0 0; background:var(--sc,var(--blue)); height:0; transition:height 1s cubic-bezier(.22,1,.36,1); }
+    .hiw-pane.active .seg:nth-child(1) .seg-bar { height:var(--sh); transition-delay:.2s; }
+    .hiw-pane.active .seg:nth-child(2) .seg-bar { height:var(--sh); transition-delay:.35s; }
+    .hiw-pane.active .seg:nth-child(3) .seg-bar { height:var(--sh); transition-delay:.5s; }
+    .hiw-pane.active .seg:nth-child(4) .seg-bar { height:var(--sh); transition-delay:.65s; }
+    .hiw-pane.active .seg:nth-child(5) .seg-bar { height:var(--sh); transition-delay:.8s; }
+    .seg span { font-size:.65rem; color:var(--faint); white-space:nowrap; }
+
+    /* Results */
+    .rd-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; }
+    .rd-title { font-family:var(--font-h); font-weight:700; font-size:.875rem; color:var(--text); }
+    .rd-winner { font-size:.7rem; font-weight:700; color:#059669; background:rgba(5,150,105,.08); padding:.25rem .625rem; border-radius:2rem; }
+    .rd-bars { display:flex; flex-direction:column; gap:.75rem; margin-bottom:.875rem; }
+    .rd-row { display:grid; grid-template-columns:70px 1fr 52px; gap:.625rem; align-items:center; }
+    .rd-lbl { font-size:.775rem; font-weight:500; color:var(--muted); }
+    .rd-track { height:8px; background:rgba(67,44,151,.07); border-radius:8px; overflow:hidden; }
+    .rd-fill { height:100%; border-radius:8px; width:0; transition:width .9s cubic-bezier(.22,1,.36,1); }
+    .hiw-pane.active .rdbar-1 { width:var(--rw); transition-delay:.15s; }
+    .hiw-pane.active .rdbar-2 { width:var(--rw); transition-delay:.3s; }
+    .hiw-pane.active .rdbar-3 { width:var(--rw); transition-delay:.45s; }
+    .rd-pct { font-family:var(--font-h); font-weight:800; font-size:.8rem; text-align:right; }
+    .rd-win { color:var(--purple); }
+    .rd-neu { color:var(--faint); }
+    .rd-low { color:rgba(31,22,40,.2); }
+    .rd-insight { display:flex; align-items:flex-start; gap:.5rem; padding:.625rem .875rem; background:rgba(67,44,151,.05); border-radius:.625rem; font-size:.775rem; color:var(--muted); line-height:1.5; }
+    .rd-insight svg { flex-shrink:0; margin-top:1px; }
+
+    @media(max-width:768px) {
+      .hiw-tabs { grid-template-columns:1fr; }
+      .hiw-pane.active { grid-template-columns:1fr; padding:2rem; }
+    }
+
+    /* ─────────────────────────────────────────
+       WHO WE SERVE — AUDIENCE CARDS
+    ───────────────────────────────────────── */
+    .serve-section { background:var(--ghost); }
+
+    .audience-grid {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:1.25rem;
+    }
+    .audience-card {
+      display:flex; align-items:flex-start; gap:1.375rem;
+      background:var(--white);
+      border:1.5px solid rgba(67,44,151,.08);
+      border-radius:var(--r-xl);
+      padding:2rem 2rem 2rem 2rem;
+      text-decoration:none; color:inherit;
+      transition:border-color .2s, transform .2s, box-shadow .2s;
+      position:relative;
+    }
+    .audience-card:hover {
+      border-color:var(--purple);
+      transform:translateY(-3px);
+      box-shadow:var(--shadow-md);
+    }
+    .audience-icon {
+      flex-shrink:0; width:52px; height:52px;
+      border-radius:var(--r-md);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .audience-icon svg { width:24px; height:24px; }
+    .audience-content { flex:1; }
+    .audience-tag {
+      display:inline-block; font-family:var(--font-h); font-size:.7rem;
+      font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+      padding:.2rem .625rem; border-radius:2rem; margin-bottom:.625rem;
+    }
+    .audience-title {
+      font-family:var(--font-h); font-weight:800; font-size:1.125rem;
+      color:var(--text); margin-bottom:.5rem; line-height:1.2;
+    }
+    .audience-body {
+      font-size:.9rem; line-height:1.65; color:var(--muted);
+      margin-bottom:.875rem;
+    }
+    .audience-clients {
+      font-size:.775rem; font-weight:600; letter-spacing:.02em;
+      color:var(--faint);
+    }
+    .audience-arrow {
+      flex-shrink:0; color:var(--purple); opacity:0;
+      transition:opacity .2s, transform .2s;
+      margin-top:.25rem;
+    }
+    .audience-card:hover .audience-arrow {
+      opacity:1; transform:translateX(3px);
+    }
+
+    /* Quote block (kept for vertical pages) */
+    .quote-block {
+      background:var(--ghost);
+      border-radius:var(--r-xl);
+      padding:2.5rem; position:relative; overflow:hidden;
+    }
+    .quote-block::before {
+      content:'\201C'; position:absolute;
+      top:-.5rem; left:1.25rem;
+      font-family:var(--font-h); font-size:8rem; font-weight:900; line-height:1;
+      color:rgba(67,44,151,.08);
+    }
+    .quote-accent {
+      width:32px; height:3px; border-radius:3px;
+      background:var(--grad-blue); margin-bottom:1.5rem;
+    }
+    .quote-text {
+      font-family:var(--font-h); font-style:italic; font-weight:600;
+      font-size:1.0625rem; line-height:1.65;
+      color:var(--text); margin-bottom:1.75rem; position:relative;
+    }
+    .quote-author { font-family:var(--font-h); font-weight:800; font-size:.9375rem; color:var(--text); }
+    .quote-role { font-size:.8125rem; color:var(--faint); margin-top:.25rem; }
+
+    @media (max-width:640px) { .audience-grid { grid-template-columns:1fr; } }
+
+    /* ─────────────────────────────────────────
+       DIFFERENTIATORS
+    ───────────────────────────────────────── */
+    .diff-section {
+      background:linear-gradient(145deg, #2D1F5E 0%, #432C97 60%, #5B5DC0 100%);
+      position:relative; overflow:hidden;
+    }
+    .diff-section .section-h { color:var(--white); }
+    .diff-section .section-sub { color:rgba(255,255,255,.6); }
+
+    /* Arrow pattern */
+    .diff-pattern {
+      position:absolute; inset:0; pointer-events:none; overflow:hidden;
+    }
+    .diff-pattern svg {
+      position:absolute; bottom:0; right:0;
+      width:600px; opacity:.04;
+    }
+
+    .diff-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1.5rem; margin-top:4rem;
+    }
+    .diff-card {
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:var(--r-xl); padding:2.5rem;
+      position:relative; overflow:hidden;
+      transition:border-color .25s, transform .25s;
+      text-align:center;
+    }
+    .diff-card::before {
+      content:''; position:absolute; inset:0; opacity:0;
+      background:linear-gradient(145deg, rgba(108,155,255,.06), transparent);
+      transition:opacity .25s;
+    }
+    .diff-card:hover { border-color:rgba(108,155,255,.3); transform:translateY(-4px); }
+    .diff-card:hover::before { opacity:1; }
+    .diff-icon-wrap {
+      width:72px; height:72px; border-radius:var(--r-md);
+      background:rgba(108,155,255,.1);
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 1.5rem;
+    }
+    .diff-icon-wrap svg { width:34px; height:34px; color:var(--blue); }
+    .diff-title {
+      font-family:var(--font-h); font-weight:900; font-size:1.5rem;
+      color:var(--white); margin-bottom:.75rem;
+    }
+    .diff-body { font-size:.9375rem; line-height:1.7; color:rgba(255,255,255,.8); }
+
+    /* ─────────────────────────────────────────
+       STRATEGIST
+    ───────────────────────────────────────── */
+    .strat-section { background:var(--ghost); }
+    .strat-centered { max-width:680px; margin:0 auto; text-align:center; }
+    .strat-points { margin-top:2rem; display:flex; flex-direction:column; gap:1rem; text-align:left; }
+    .strat-point { display:flex; gap:1rem; align-items:flex-start; }
+    .strat-point-dot { flex-shrink:0; width:8px; height:8px; border-radius:50%; background:var(--purple); margin-top:.55rem; }
+    .strat-point-text { font-size:.9375rem; line-height:1.7; color:var(--muted); }
+
+    /* ─────────────────────────────────────────
+       DASHBOARD SHOWCASE
+    ───────────────────────────────────────── */
+    .dashboard-showcase { position:relative; }
+    .dashboard-browser {
+      background:var(--white);
+      border-radius:var(--r-xl);
+      overflow:hidden;
+      box-shadow:var(--shadow-deep), 0 0 0 1px rgba(67,44,151,.08);
+    }
+    .browser-bar {
+      background:var(--ghost);
+      border-bottom:1px solid rgba(67,44,151,.08);
+      padding:.75rem 1.25rem;
+      display:flex; align-items:center; gap:1rem;
+    }
+    .browser-dots { display:flex; gap:.375rem; }
+    .browser-dots span {
+      width:10px; height:10px; border-radius:50%;
+      background:rgba(67,44,151,.15);
+    }
+    .browser-dots span:nth-child(1) { background:#ff5f57; }
+    .browser-dots span:nth-child(2) { background:#ffbd2e; }
+    .browser-dots span:nth-child(3) { background:#28c840; }
+    .browser-url {
+      font-family:var(--font-b); font-size:.8125rem; color:var(--faint);
+      background:var(--white); border:1px solid rgba(67,44,151,.1);
+      padding:.3rem 1rem; border-radius:2rem; flex:1; max-width:320px;
+    }
+    .browser-body img { width:100%; display:block; }
+    .dashboard-callouts {
+      position:absolute; inset:0; pointer-events:none;
+    }
+    .callout {
+      position:absolute;
+      background:var(--white);
+      border:1px solid rgba(67,44,151,.1);
+      border-radius:var(--r-md);
+      padding:1rem 1.25rem;
+      display:flex; align-items:center; gap:.875rem;
+      box-shadow:var(--shadow-md);
+      pointer-events:all;
+    }
+    .callout-left  { bottom:2.5rem; left:-1.5rem; }
+    .callout-right { top:40%; right:-1.5rem; }
+    .callout-icon  { font-size:1.25rem; flex-shrink:0; }
+    .callout-title { font-family:var(--font-h); font-weight:700; font-size:.875rem; color:var(--text); }
+    .callout-sub   { font-size:.75rem; color:var(--faint); margin-top:.125rem; }
+
+    /* ─────────────────────────────────────────
+       FORMATS
+    ───────────────────────────────────────── */
+    .formats-section { background:var(--white); }
+    .formats-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1rem; margin-top:3rem;
+    }
+    .format-card {
+      display:flex; align-items:center; gap:1.125rem;
+      padding:1.375rem 1.625rem;
+      border:1.5px solid rgba(67,44,151,.09);
+      border-radius:var(--r-lg);
+      transition:all .2s; cursor:default;
+    }
+    .format-card:hover {
+      border-color:var(--purple);
+      background:var(--ghost);
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-sm);
+    }
+    .format-icon {
+      width:40px; height:40px; flex-shrink:0;
+      background:var(--ghost);
+      border-radius:var(--r-sm);
+      display:flex; align-items:center; justify-content:center;
+      transition:background .2s;
+    }
+    .format-card:hover .format-icon { background:rgba(67,44,151,.08); }
+    .format-icon svg { width:20px; height:20px; color:var(--purple); }
+    .format-label {
+      font-family:var(--font-h); font-weight:700; font-size:.9375rem; color:var(--text);
+    }
+
+    /* ─────────────────────────────────────────
+       TESTIMONIALS
+    ───────────────────────────────────────── */
+    .testi-section { background:var(--ghost); }
+    .testi-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1.5rem; margin-top:3.5rem;
+    }
+    .testi-card {
+      background:var(--white);
+      border-radius:var(--r-xl); padding:2.25rem;
+      box-shadow:var(--shadow-sm);
+      border:1px solid rgba(67,44,151,.07);
+      display:flex; flex-direction:column;
+      transition:transform .25s, box-shadow .25s;
+    }
+    .testi-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+    .testi-stars {
+      display:flex; gap:.25rem; margin-bottom:1.25rem;
+    }
+    .testi-stars svg { width:16px; height:16px; color:#f59e0b; }
+    .testi-text {
+      font-size:.9375rem; line-height:1.75; color:var(--muted);
+      flex:1; margin-bottom:1.5rem;
+    }
+    .testi-divider { height:1px; background:rgba(67,44,151,.08); margin-bottom:1.25rem; }
+    .testi-author { font-family:var(--font-h); font-weight:800; font-size:.9375rem; color:var(--text); }
+    .testi-role { font-size:.8125rem; color:var(--faint); margin-top:.25rem; }
+
+    /* ─────────────────────────────────────────
+       FINAL CTA
+    ───────────────────────────────────────── */
+    .cta-section {
+      background:var(--purple);
+      position:relative; overflow:hidden; text-align:center;
+      padding:8rem 0;
+    }
+    .cta-photo-bg { display:none; }
+    .cta-section::before {
+      content:''; position:absolute; inset:0;
+      background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size:24px 24px;
+    }
+    .cta-orb {
+      position:absolute; border-radius:50%;
+      pointer-events:none; filter:blur(60px);
+    }
+    .cta-orb-1 {
+      width:500px; height:400px; top:-100px; left:50%; transform:translateX(-50%);
+      background:radial-gradient(circle, rgba(108,155,255,.2), transparent 70%);
+    }
+    .cta-orb-2 {
+      width:400px; height:300px; bottom:-80px; left:5%;
+      background:radial-gradient(circle, rgba(31,22,40,.4), transparent 70%);
+    }
+    .cta-inner { position:relative; z-index:1; }
+    .cta-h {
+      font-family:var(--font-h); font-weight:900;
+      font-size:clamp(2.25rem,4.5vw,3.75rem);
+      letter-spacing:-.03em; line-height:1.05;
+      color:var(--white); max-width:700px; margin:1rem auto 1.375rem;
+    }
+    .cta-sub {
+      font-size:1.0625rem; line-height:1.65;
+      color:rgba(255,255,255,.6); max-width:520px; margin:0 auto 3rem;
+    }
+    .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-white {
+      background:var(--white); color:var(--purple);
+      padding:.875rem 2rem; font-size:1rem;
+      box-shadow:0 4px 24px rgba(0,0,0,.2);
+    }
+    .btn-white:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(0,0,0,.25); }
+    .btn-white::after { background:rgba(67,44,151,.06); }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    .footer { background:var(--ink); padding:5rem 0 3rem; }
+    .footer-top {
+      display:grid; grid-template-columns:260px 1fr 1fr 1fr;
+      gap:3rem; padding-bottom:3.5rem;
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .footer-brand-name {
+      font-family:var(--font-h); font-weight:800; font-size:1.125rem;
+      color:var(--white); margin:.875rem 0 .75rem;
+    }
+    .footer-tagline { font-size:.875rem; line-height:1.6; color:rgba(255,255,255,.3); }
+    .footer-col-label {
+      font-family:var(--font-h); font-size:.7rem; font-weight:700;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:rgba(255,255,255,.25); margin-bottom:1.25rem;
+    }
+    .footer-links { list-style:none; display:flex; flex-direction:column; gap:.625rem; }
+    .footer-links a {
+      font-size:.875rem; color:rgba(255,255,255,.45);
+      text-decoration:none; transition:color .15s;
+    }
+    .footer-links a:hover { color:var(--white); }
+    .footer-bottom {
+      display:flex; align-items:center; justify-content:space-between;
+      padding-top:2.5rem; flex-wrap:wrap; gap:1rem;
+    }
+    .footer-copy { font-size:.8125rem; color:rgba(255,255,255,.25); }
+    .footer-legal { display:flex; gap:1.75rem; }
+    .footer-legal a { font-size:.8125rem; color:rgba(255,255,255,.25); text-decoration:none; transition:color .15s; }
+    .footer-legal a:hover { color:rgba(255,255,255,.6); }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width:1024px) {
+      .hero-layout { grid-template-columns:1fr; }
+      .hero-card-wrap { display:none; }
+      .strat-layout { grid-template-columns:1fr; gap:3rem; }
+    }
+    @media (max-width:900px) {
+      .problem-grid, .how-grid, .diff-grid, .formats-grid, .testi-grid,
+      .stats-grid { grid-template-columns:1fr; }
+      .stat-item { border-right:none; border-bottom:1px solid rgba(255,255,255,.07); padding:3rem 2rem; }
+      .stat-item:last-child { border-bottom:none; }
+      .tab-panel.active { grid-template-columns:1fr; gap:2.5rem; }
+      .how-grid::before { display:none; }
+      .footer-top { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:640px) {
+      .nav { padding:0 1rem; }
+      .nav-links { display:none; }
+      .container { padding:0 1.25rem; }
+      .section { padding:5rem 0; }
+      .footer-top { grid-template-columns:1fr; }
+      .footer-bottom { flex-direction:column; text-align:center; }
+    }
+    .nav-dropdown--single { width: 280px; grid-template-columns: 1fr; }
+  
+    /* ── NEWSLETTER STRIP ── */
+    .newsletter-section{background:var(--ghost);padding:4rem 0;border-top:1px solid rgba(67,44,151,.08);}
+    .newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .newsletter-copy{}
+    .newsletter-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+    .newsletter-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:nlPulse 2s infinite;}
+     nlPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+    .newsletter-sub{font-size:.9375rem;line-height:1.65;color:var(--muted);}
+    .newsletter-form{display:flex;flex-direction:column;gap:.75rem;}
+    .nl-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+    .nl-input{width:100%;padding:.75rem 1rem;font-family:var(--font-b);font-size:.9375rem;color:var(--ink);background:#fff;border:1.5px solid rgba(67,44,151,.15);border-radius:.625rem;outline:none;transition:border-color .15s,box-shadow .15s;}
+    .nl-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(67,44,151,.1);}
+    .nl-input::placeholder{color:var(--faint);}
+    .nl-submit{width:100%;padding:.875rem;font-family:var(--font-h);font-weight:700;font-size:1rem;color:#fff;background:var(--purple);border:none;border-radius:.625rem;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .nl-submit:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,44,151,.4);}
+    .nl-privacy{font-size:.72rem;color:var(--faint);text-align:center;}
+    (max-width:768px){.newsletter-inner{grid-template-columns:1fr;gap:2rem;}.nl-row{grid-template-columns:1fr;}}
+
+    </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAV
+══════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="/" class="nav-logo">
+    <img src="gp-logo-light.svg" alt="Grow Progress" class="nav-gp-logo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Rapid Message Testing</span>
+            <span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span>
+          </div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Audience Understanding</span>
+            <span class="nav-dd-desc">Map who your audience is and what they believe</span>
+          </div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Pulse Surveys</span>
+            <span class="nav-dd-desc">Real-time opinion tracking as events unfold</span>
+          </div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Persuasion Library</span>
+            <span class="nav-dd-desc">500+ studies searchable by topic and audience</span>
+          </div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-eyebrow">Methodology</span>
+            <span class="nav-dd-label">How It Works</span>
+            <span class="nav-dd-desc">The RCT science behind every GP study</span>
+          </div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon">
+            <svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="nav-dd-text">
+            <span class="nav-dd-label">Persuasion Sandbox</span>
+            <span class="nav-dd-desc">Self-serve message testing — launch in minutes</span>
+          </div>
+        </a>
+
+      </div>
+    </li>
+    <li class="has-dropdown">
+  <a href="#">Who we serve
+    <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <div class="nav-dropdown nav-dropdown--single">
+    <a href="politics.html" class="nav-dd-item">
+      <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span><span class="nav-dd-desc">Campaigns, PACs &amp; party committees</span></div>
+    </a>
+    <a href="advocacy.html" class="nav-dd-item">
+      <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span><span class="nav-dd-desc">Issue campaigns &amp; policy fights</span></div>
+    </a>
+    <a href="nonprofits.html" class="nav-dd-item">
+      <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+      <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span><span class="nav-dd-desc">Donors, programs &amp; community impact</span></div>
+    </a>
+    <a href="labor.html" class="nav-dd-item">
+      <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+      <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span><span class="nav-dd-desc">Contract campaigns &amp; member mobilization</span></div>
+    </a>
+  </div>
+</li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Sign In</a>
+    <a href="demo.html" class="btn btn-cta btn-sm">Request a Demo</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Photo background — fills left 54% of hero, fades right into dark gradient -->
+  <div class="hero-photo-half">
+    <div class="hero-scene scene-0 active" id="hero-scene-0"></div>
+    <div class="hero-scene scene-1" id="hero-scene-1"></div>
+    <div class="hero-scene scene-2" id="hero-scene-2"></div>
+    <div class="hero-scene scene-3" id="hero-scene-3"></div>
+    <div class="hero-scene-overlay"></div>
+    <div class="hero-scene-label">
+      <span class="scene-label-text" id="scene-label-text">Nonprofits</span>
+      <div class="hero-scene-dots">
+        <div class="scene-dot active" data-scene="0"></div>
+        <div class="scene-dot" data-scene="1"></div>
+        <div class="scene-dot" data-scene="2"></div>
+        <div class="scene-dot" data-scene="3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero-layout">
+
+      <!-- Left: headline + CTAs float over the photo -->
+      <div class="hero-left-text">
+        <div class="hero-eyebrow">
+          <span class="chip chip-blue">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="3" fill="currentColor"/><circle cx="6" cy="6" r="5.5" stroke="currentColor" stroke-width="1" opacity=".4"/></svg>
+            Message testing for campaigns, nonprofits &amp; advocacy
+          </span>
+        </div>
+        <h1 class="hero-h1">
+          Stop guessing.<br>
+          Start <span class="grad-text">persuading.</span>
+        </h1>
+        <p class="hero-sub">Grow Progress helps campaigns, nonprofits, and advocacy organizations discover what actually persuades their audiences — with rigorous message testing and audience research in days, not months.</p>
+        <div class="hero-ctas">
+          <a href="demo.html" class="btn btn-cta">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Request a Demo
+          </a>
+          <a href="#case-studies" class="btn btn-ghost">See Case Studies</a>
+        </div>
+      </div>
+
+      <!-- Right: results panel floats on the unified dark canvas -->
+      <div class="hero-card-wrap">
+        <div class="hero-float hero-float--top">
+          <span class="hero-float-dot"></span>
+          <span class="hero-float-label">Top message</span>
+          <span class="hero-float-val" id="float-top-val">+21 pts lift</span>
+        </div>
+        <div class="hero-float hero-float--bot">
+          <span class="hero-float-dot"></span>
+          <span class="hero-float-label">Audience</span>
+          <span class="hero-float-val" id="float-bot-val">n = 1,200 donors</span>
+        </div>
+        <div class="results-panel">
+          <div class="sector-tabs" id="sectorTabs">
+            <div class="sector-tab active" data-sector="0">Nonprofits</div>
+            <div class="sector-tab" data-sector="1">Advocacy</div>
+            <div class="sector-tab" data-sector="2">Campaigns</div>
+            <div class="sector-tab" data-sector="3">Labor</div>
+          </div>
+          <div class="panel-content" id="panelContent">
+            <div class="rp-header">
+              <div>
+                <div class="rp-eyebrow" id="rp-eyebrow">Fundraising Appeal · n=1,200</div>
+                <div class="rp-question" id="rp-question">Which message inspires first-time donors?</div>
+              </div>
+              <div class="sig-badge"><span class="sig-dot"></span>Significant</div>
+            </div>
+            <div class="rp-results">
+              <div class="result-item">
+                <div class="result-meta">
+                  <div class="result-left"><div class="result-rank rank-1">1</div><span class="result-label" id="frame-a">Donor impact story</span></div>
+                  <span class="result-pct pct-win" id="pct-a">+21 pts</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill bar-win" id="bar-a"></div></div>
+              </div>
+              <div class="result-item">
+                <div class="result-meta">
+                  <div class="result-left"><div class="result-rank rank-2">2</div><span class="result-label" id="frame-b">Community outcomes</span></div>
+                  <span class="result-pct pct-mid" id="pct-b">+8 pts</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill bar-mid" id="bar-b"></div></div>
+              </div>
+              <div class="result-item">
+                <div class="result-meta">
+                  <div class="result-left"><div class="result-rank rank-3">—</div><span class="result-label" id="frame-c" style="color:rgba(31,22,40,.25)">Control</span></div>
+                  <span class="result-pct pct-low" id="pct-c">—</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill bar-low" id="bar-c"></div></div>
+              </div>
+            </div>
+            <div class="rp-insight">
+              <span class="rp-insight-icon">💡</span>
+              <p class="rp-insight-body" id="rp-insight"><strong>Strategist note:</strong> The donor impact story drove strongest lift among 35–54 lapsed donors — recommend leading with this frame in reactivation emails.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     LOGO MARQUEE
+══════════════════════════════════════ -->
+<div class="logo-panel">
+  <div class="container">
+    <p class="logo-panel-label">Trusted by leading campaigns, nonprofits, and advocacy organizations</p>
+    <div class="logo-panel-row">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/SEIU.png" alt="SEIU">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/NEA-341x115.webp" alt="NEA">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/LCV-170x115.png" alt="LCV">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/Berlin-Rosen.png" alt="Berlin Rosen">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/Giffords-368x115.png" alt="Giffords">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/Galvanize-Action.png" alt="Galvanize Action">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/Texas-Democrats-v4-509x115.png" alt="Texas Democrats">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/Precision.png" alt="Precision">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     WHO WE SERVE  (moved up)
+══════════════════════════════════════ -->
+<section class="serve-section section" id="serve">
+  <div class="container">
+    <div class="serve-header reveal" style="text-align:center; max-width:640px; margin:0 auto 3.5rem;">
+      <div class="section-label"><span class="chip chip-purple">Who We Serve</span></div>
+      <h2 class="section-h">Built for organizations where<br>messaging decisions <em>matter most.</em></h2>
+      <p class="section-sub" style="margin:1rem auto 0;">We work across the full spectrum of cause-driven organizations — each with their own audiences, timelines, and stakes.</p>
+    </div>
+    <div class="audience-grid">
+
+      <a href="politics.html" class="audience-card reveal reveal-delay-1">
+        <div class="audience-icon" style="background:rgba(239,68,68,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="audience-content">
+          <div class="audience-tag" style="color:#dc2626; background:rgba(239,68,68,.08);">Campaigns &amp; PACs</div>
+          <h3 class="audience-title">Political Campaigns &amp; PACs</h3>
+          <p class="audience-body">Replace guesswork with proof at campaign speed. Test paid media, talking points, and creative before you spend a dollar.</p>
+        </div>
+        <div class="audience-arrow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </a>
+
+      <a href="advocacy.html" class="audience-card reveal reveal-delay-2">
+        <div class="audience-icon" style="background:rgba(67,44,151,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#432C97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="audience-content">
+          <div class="audience-tag" style="color:#432C97; background:rgba(67,44,151,.08);">Advocacy</div>
+          <h3 class="audience-title">Advocacy Organizations</h3>
+          <p class="audience-body">Run evidence-based campaigns without a six-figure research budget. Know what actually moves people on your issues.</p>
+        </div>
+        <div class="audience-arrow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </a>
+
+      <a href="nonprofits.html" class="audience-card reveal reveal-delay-3">
+        <div class="audience-icon" style="background:rgba(16,185,129,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="audience-content">
+          <div class="audience-tag" style="color:#059669; background:rgba(16,185,129,.08);">Nonprofits</div>
+          <h3 class="audience-title">Nonprofits</h3>
+          <p class="audience-body">Reach beyond your existing base. Discover which messages inspire new donors and supporters — not just the ones you already have.</p>
+        </div>
+        <div class="audience-arrow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </a>
+
+      <a href="labor.html" class="audience-card reveal reveal-delay-4">
+        <div class="audience-icon" style="background:rgba(245,158,11,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="audience-content">
+          <div class="audience-tag" style="color:#d97706; background:rgba(245,158,11,.08);">Labor</div>
+          <h3 class="audience-title">Labor Unions</h3>
+          <p class="audience-body">Speak to members and persuade the public at the same time. Test what resonates across a diverse membership and the communities you serve.</p>
+        </div>
+        <div class="audience-arrow">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PROBLEM  (moved down)
+══════════════════════════════════════ -->
+<section class="problem-section section" id="problem">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;max-width:640px;margin:0 auto 3.5rem;">
+      <div class="section-label"><span class="chip chip-purple">The Problem</span></div>
+      <h2 class="section-h">Most campaigns launch without knowing<br>if their messages <em>persuade anyone.</em></h2>
+      <p class="section-sub">Traditional research is slow, expensive, and measures what people already believe — not what changes their minds.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="prob-card prob-card-1 reveal reveal-delay-1">
+        <div class="prob-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v3l2 2"/></svg>
+        </div>
+        <span class="prob-tag">Flying blind</span>
+        <h3 class="prob-title">No visibility into what actually works</h3>
+        <p class="prob-body">Most messaging decisions are built on instinct and internal consensus. Without testing, there's no way to know if they're right.</p>
+      </div>
+      <div class="prob-card prob-card-2 reveal reveal-delay-2">
+        <div class="prob-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <span class="prob-tag">Too slow</span>
+        <h3 class="prob-title">Traditional polls take weeks</h3>
+        <p class="prob-body">By the time you have data, the moment has passed. Campaigns have expiration dates — your research methodology should match.</p>
+      </div>
+      <div class="prob-card prob-card-3 reveal reveal-delay-3">
+        <div class="prob-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <span class="prob-tag">Too expensive</span>
+        <h3 class="prob-title">$50–100k per traditional study</h3>
+        <p class="prob-body">A single traditional survey blows most research budgets. Most organizations can't afford to test before they launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     STATS
+══════════════════════════════════════ -->
+<section class="stats-section">
+  <div class="stats-grid container" style="padding:0 2rem;">
+    <div class="stat-item reveal">
+      <div class="stat-num"><span class="accent" data-count="200">0</span><span class="accent">%</span></div>
+      <div class="stat-divider"></div>
+      <p class="stat-label">Average increase in message effectiveness</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-num"><span data-count="24">0</span><span class="accent"> hrs</span></div>
+      <div class="stat-divider"></div>
+      <p class="stat-label">From test launch to actionable results</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-num"><span class="accent">2–4<span style="font-size:.65em">×</span></span></div>
+      <div class="stat-divider"></div>
+      <p class="stat-label">Average lift in persuasive impact over control</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════ -->
+<section class="how-section section" id="how">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;max-width:640px;margin:0 auto 3.5rem;">
+      <div class="section-label"><span class="chip chip-purple">How It Works</span></div>
+      <h2 class="section-h">From gut instinct to evidence<br>in as little as <em>24 hours.</em></h2>
+      <p class="section-sub">A simple, rigorous three-step process — with a research strategist alongside you the whole way.</p>
+    </div>
+    <!-- Step selector tabs -->
+    <div class="hiw-tabs" id="hiwTabs">
+
+      <div class="hiw-tab active" data-hiw="0">
+        <div class="hiw-tab-inner">
+          <div class="hiw-tab-num">01</div>
+          <div>
+            <div class="hiw-tab-time">Set up in 1 day</div>
+            <div class="hiw-tab-title">Upload your messages</div>
+          </div>
+        </div>
+        <div class="hiw-progress-bar"><div class="hiw-progress-fill" id="hiwProg0"></div></div>
+      </div>
+
+      <div class="hiw-tab" data-hiw="1">
+        <div class="hiw-tab-inner">
+          <div class="hiw-tab-num">02</div>
+          <div>
+            <div class="hiw-tab-time">Results in 24 hours</div>
+            <div class="hiw-tab-title">We run the experiment</div>
+          </div>
+        </div>
+        <div class="hiw-progress-bar"><div class="hiw-progress-fill" id="hiwProg1"></div></div>
+      </div>
+
+      <div class="hiw-tab" data-hiw="2">
+        <div class="hiw-tab-inner">
+          <div class="hiw-tab-num">03</div>
+          <div>
+            <div class="hiw-tab-time">Debrief in 1–2 days</div>
+            <div class="hiw-tab-title">Get recommendations</div>
+          </div>
+        </div>
+        <div class="hiw-progress-bar"><div class="hiw-progress-fill" id="hiwProg2"></div></div>
+      </div>
+
+    </div>
+
+    <!-- Content panel -->
+    <div class="hiw-panel" id="hiwPanel">
+
+      <!-- Panel 0: Upload -->
+      <div class="hiw-pane active" id="hiwPane0">
+        <div class="hiw-pane-copy">
+          <h3 class="hiw-pane-title">Upload your messages or ads</h3>
+          <p class="hiw-pane-body">Test multiple frames, creative concepts, or scripts at once. Your strategist helps you design the test so you're asking the right question — before a single response comes in.</p>
+        </div>
+        <div class="hiw-pane-visual">
+          <div class="upload-demo">
+            <div class="upload-file ud-1">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="8" height="10" rx="1.5" stroke="currentColor" stroke-width="1.25"/><path d="M4 4h4M4 6.5h4M4 9h2" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Message A — Personal story
+            </div>
+            <div class="upload-file ud-2">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="8" height="10" rx="1.5" stroke="currentColor" stroke-width="1.25"/><path d="M4 4h4M4 6.5h4M4 9h2" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Message B — Economic frame
+            </div>
+            <div class="upload-file ud-3">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="8" height="10" rx="1.5" stroke="currentColor" stroke-width="1.25"/><path d="M4 4h4M4 6.5h4M4 9h2" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+              Message C — Values frame
+            </div>
+            <div class="upload-check">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="2.5 7 5.5 10 11.5 4" stroke="#4ade80" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              3 messages ready to test
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 1: Survey -->
+      <div class="hiw-pane" id="hiwPane1">
+        <div class="hiw-pane-copy">
+          <h3 class="hiw-pane-title">We run a rigorous experiment</h3>
+          <p class="hiw-pane-body">We deploy a randomized controlled trial using a nationally representative or custom-targeted panel — the same methodology used in medical research. You get statistically valid results, fast.</p>
+        </div>
+        <div class="hiw-pane-visual">
+          <div class="survey-demo">
+            <div class="survey-header">
+              <span class="survey-label">Responses collecting…</span>
+              <span class="survey-badge">Nationally representative</span>
+            </div>
+            <div class="survey-track"><div class="survey-fill" id="surveyFill"></div></div>
+            <div class="survey-count" id="surveyCount">0 / 1,200</div>
+            <div class="survey-segments">
+              <div class="seg"><div class="seg-bar" style="--sh:72%;--sc:#6C9BFF;"></div><span>18–34</span></div>
+              <div class="seg"><div class="seg-bar" style="--sh:88%;--sc:#a78bfa;"></div><span>35–54</span></div>
+              <div class="seg"><div class="seg-bar" style="--sh:60%;--sc:#818cf8;"></div><span>55+</span></div>
+              <div class="seg"><div class="seg-bar" style="--sh:80%;--sc:#6C9BFF;"></div><span>Women</span></div>
+              <div class="seg"><div class="seg-bar" style="--sh:65%;--sc:#a78bfa;"></div><span>Men</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Results -->
+      <div class="hiw-pane" id="hiwPane2">
+        <div class="hiw-pane-copy">
+          <h3 class="hiw-pane-title">Get clear recommendations</h3>
+          <p class="hiw-pane-body">You leave every test with a clear brief on what worked, why, and what to do next — ready to share with leadership or your creative team. No research degree required.</p>
+        </div>
+        <div class="hiw-pane-visual">
+          <div class="results-demo">
+            <div class="rd-header">
+              <span class="rd-title">Message A — Personal story</span>
+              <span class="rd-winner">Winner ✓</span>
+            </div>
+            <div class="rd-bars">
+              <div class="rd-row">
+                <span class="rd-lbl">Message A</span>
+                <div class="rd-track"><div class="rd-fill rdbar-1" style="--rw:84%;background:linear-gradient(90deg,#6C9BFF,#a78bfa);"></div></div>
+                <span class="rd-pct rd-win">+21 pts</span>
+              </div>
+              <div class="rd-row">
+                <span class="rd-lbl">Message B</span>
+                <div class="rd-track"><div class="rd-fill rdbar-2" style="--rw:42%;background:rgba(67,44,151,.2);"></div></div>
+                <span class="rd-pct rd-neu">+7 pts</span>
+              </div>
+              <div class="rd-row">
+                <span class="rd-lbl">Control</span>
+                <div class="rd-track"><div class="rd-fill rdbar-3" style="--rw:20%;background:rgba(67,44,151,.08);"></div></div>
+                <span class="rd-pct rd-low">—</span>
+              </div>
+            </div>
+            <div class="rd-insight">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#432C97" stroke-width="1.25"/><path d="M7 6v4M7 4.5v.5" stroke="#432C97" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Strongest with women 35–54 · Recommend for paid media targeting
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     DIFFERENTIATORS
+══════════════════════════════════════ -->
+<section class="diff-section section">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;max-width:640px;margin:0 auto 3.5rem;">
+      <div class="section-label"><span class="chip chip-light">Why Grow Progress</span></div>
+      <h2 class="section-h" style="color:var(--white);">Science that's actually <em style="color:var(--blue);">usable.</em></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.7);">We don't just report numbers. We help you understand what they mean and what to do next.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card reveal reveal-delay-1">
+        <div class="diff-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+        </div>
+        <h3 class="diff-title">Trusted</h3>
+        <p class="diff-body">Scientific, transparent methodology — the same approach used by leading campaigns and advocacy organizations. Randomized Controlled Trials, not opinion polling.</p>
+      </div>
+      <div class="diff-card reveal reveal-delay-2">
+        <div class="diff-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h3 class="diff-title">Easy</h3>
+        <p class="diff-body">Full control over what to test, who to test, and how you communicate results to stakeholders. No research degree required — we built it for communicators, not scientists.</p>
+      </div>
+      <div class="diff-card reveal reveal-delay-3">
+        <div class="diff-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <h3 class="diff-title">Effective</h3>
+        <p class="diff-body">We don't just report numbers — we tell you what worked, why it worked, and how to apply it to your next campaign. Insights you can act on, not just admire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     STRATEGIST SUPPORT
+══════════════════════════════════════ -->
+<section class="strat-section section">
+  <div class="container">
+    <div class="strat-centered reveal">
+      <div class="section-label"><span class="chip chip-purple">Expert Support</span></div>
+      <h2 class="section-h">A research strategist,<br>not just <em>a platform.</em></h2>
+      <p class="section-sub">Every Grow Progress client works with a dedicated strategist who helps design, run, and interpret your tests — so you're never navigating the research alone.</p>
+      <div class="strat-points">
+        <div class="strat-point">
+          <div class="strat-point-dot"></div>
+          <p class="strat-point-text"><strong>Test design</strong> — Your strategist works with you upfront to make sure you're testing the right question in the right way, before a single survey goes out.</p>
+        </div>
+        <div class="strat-point">
+          <div class="strat-point-dot"></div>
+          <p class="strat-point-text"><strong>Results interpretation</strong> — They walk you through what the data means — not just what it says — and flag anything worth digging into for your specific goals.</p>
+        </div>
+        <div class="strat-point">
+          <div class="strat-point-dot"></div>
+          <p class="strat-point-text"><strong>Recommendations</strong> — You leave every test with a clear brief on what to do next, ready to share with leadership or your creative team.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TESTIMONIALS — hidden for now, back pocket
+══════════════════════════════════════ -->
+<!--
+<section class="testi-section section" id="case-studies">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label"><span class="chip chip-purple">What Clients Say</span></div>
+      <h2 class="section-h">Trusted by organizations<br>doing <em>important work.</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Grow Progress was a key partner to us on the Harris campaign. They enabled us to conduct large-scale content testing with the rapid turnaround necessary to support a presidential paid media program."</p>
+        <div class="testi-divider"></div>
+        <p class="testi-author">Meg Schwenzfeier</p>
+        <p class="testi-role">Chief Analytics Officer, Harris for President</p>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"We've used polling in the past and know there is broad but passive support for our cause. We need Grow Progress to show us how to reactivate that support."</p>
+        <div class="testi-divider"></div>
+        <p class="testi-author">Sarah Sheffer</p>
+        <p class="testi-role">VP for Strategic Outreach, Refugees International</p>
+      </div>
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testi-text">"Being able to quickly run tests was crucial to reaching our audiences. Speed helped us in pivotal moments during the campaign."</p>
+        <div class="testi-divider"></div>
+        <p class="testi-author">Chris</p>
+        <p class="testi-role">Creative Director, Priorities USA</p>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- ══════════════════════════════════════
+     FINAL CTA
+══════════════════════════════════════ -->
+<section class="cta-section" id="demo">
+  <div class="cta-photo-bg" aria-hidden="true"></div>
+  <div class="cta-orb cta-orb-1"></div>
+  <div class="cta-orb cta-orb-2"></div>
+  <div class="container cta-inner">
+    <div class="section-label"><span class="chip chip-light">Get Started</span></div>
+    <h2 class="cta-h">See how it works for your organization.</h2>
+    <p class="cta-sub">Talk to our team. We'll walk you through a real example and show exactly how testing would work for your campaigns and budget.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn btn-white btn-lg">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Request a Demo
+      </a>
+      <a href="#case-studies" class="btn btn-ghost btn-lg">Browse Case Studies</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="newsletter-copy">
+        <div class="newsletter-eyebrow">
+          <span class="newsletter-eyebrow-dot"></span>
+          Grow Progress Newsletter
+        </div>
+        <p class="newsletter-sub">Monthly insights from 500+ studies — what moves people, what does not, and what it means for your next campaign.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="return false;">
+        <div class="nl-row">
+          <input class="nl-input" type="text" placeholder="First name" autocomplete="given-name">
+          <input class="nl-input" type="text" placeholder="Last name" autocomplete="family-name">
+        </div>
+        <input class="nl-input" type="email" placeholder="Work email" autocomplete="email">
+        <button class="nl-submit" type="submit">Subscribe</button>
+        <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div>
+          <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        </div>
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="#">Rapid Message Testing</a></li>
+          <li><a href="#">Audience Understanding</a></li>
+          <li><a href="#">Persuasion Library</a></li>
+          <li><a href="#">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+          <li><a href="#">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="code-of-conduct.html">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── Hero rotating panel ── */
+  const sectors = [
+    { tab:'Nonprofits', eyebrow:'Fundraising Appeal · n=1,200', question:'Which message inspires first-time donors?', frameA:'Donor impact story', pctA:'+21 pts', wA:'86%', frameB:'Community outcomes', pctB:'+8 pts', wB:'44%', frameC:'Control', pctC:'—', wC:'22%', insight:'<strong>Strategist note:</strong> The donor impact story drove strongest lift among 35–54 lapsed donors — recommend leading with this frame in reactivation emails.', floatTop:'+21 pts lift', floatBot:'n = 1,200 donors' },
+    { tab:'Advocacy',   eyebrow:'Policy Campaign · n=1,400',    question:'What moves undecided voters on housing?',    frameA:'Values frame',        pctA:'+17 pts', wA:'78%', frameB:'Urgency frame',      pctB:'+5 pts',  wB:'38%', frameC:'Control', pctC:'—', wC:'25%', insight:'<strong>Strategist note:</strong> Values frame outperformed among suburban independents by 22 pts. Urgency framing showed backlash among 55+ audiences — avoid in that segment.', floatTop:'+17 pts lift', floatBot:'n = 1,400 voters' },
+    { tab:'Campaigns',  eyebrow:'Voter Outreach · n=1,600',     question:'Which message drives early vote intent?',    frameA:'Personal story',      pctA:'+18 pts', wA:'82%', frameB:'Economic impact',    pctB:'+6 pts',  wB:'41%', frameC:'Control', pctC:'—', wC:'28%', insight:'<strong>Strategist note:</strong> Personal story frame overperformed with women 45–64 by 27 pts. Recommend prioritising in pre-roll targeting for that segment.', floatTop:'+18 pts lift', floatBot:'n = 1,600 voters' },
+    { tab:'Labor',      eyebrow:'Member Mobilization · n=1,100', question:'Which message increases contract campaign support?', frameA:'Dignity & respect',   pctA:'+24 pts', wA:'89%', frameB:'Wages & benefits',   pctB:'+11 pts', wB:'56%', frameC:'Control', pctC:'—', wC:'27%', insight:'<strong>Strategist note:</strong> Dignity framing outperformed wages messaging across all age cohorts. Especially strong among members who joined in the last 2 years.', floatTop:'+24 pts lift', floatBot:'n = 1,100 members' }
+  ];
+  let heroCurrent = 0, heroTimer = null;
+
+  function animateHeroBars() {
+    ['bar-a','bar-b','bar-c'].forEach(id => { const el = document.getElementById(id); if(el){el.style.transition='none';el.style.width='0';} });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const s = sectors[heroCurrent];
+      const setBar = (id, w, delay) => setTimeout(() => { const el = document.getElementById(id); if(el){el.style.transition='width .9s cubic-bezier(.22,1,.36,1)';el.style.width=w;} }, delay);
+      setBar('bar-a', s.wA, 80); setBar('bar-b', s.wB, 200); setBar('bar-c', s.wC, 320);
+    }));
+  }
+
+  function switchHeroSector(idx) {
+    if (idx === heroCurrent) return;
+    const content = document.getElementById('panelContent');
+    if (!content) return;
+    content.classList.add('fading');
+    setTimeout(() => {
+      heroCurrent = idx;
+      const s = sectors[idx];
+      const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+      const setHTML = (id, val) => { const el = document.getElementById(id); if(el) el.innerHTML = val; };
+      set('rp-eyebrow', s.eyebrow); set('rp-question', s.question);
+      set('frame-a', s.frameA); set('frame-b', s.frameB); set('frame-c', s.frameC);
+      set('pct-a', s.pctA); set('pct-b', s.pctB); set('pct-c', s.pctC);
+      setHTML('rp-insight', s.insight);
+      set('float-top-val', s.floatTop);
+      set('float-bot-val', s.floatBot);
+      document.querySelectorAll('.sector-tab').forEach((t,i) => {
+        if (i === idx) {
+          t.classList.add('progress-reset');
+          t.classList.remove('active');
+          void t.offsetWidth;
+          t.classList.remove('progress-reset');
+          t.classList.add('active');
+        } else {
+          t.classList.remove('active');
+        }
+      });
+      // Sync left image panel
+      document.querySelectorAll('.hero-scene').forEach((s,i) => s.classList.toggle('active', i === idx));
+      document.querySelectorAll('.scene-dot').forEach((d,i) => d.classList.toggle('active', i === idx));
+      const labelEl = document.getElementById('scene-label-text');
+      if (labelEl) labelEl.textContent = sectors[idx].tab;
+      content.classList.remove('fading');
+      animateHeroBars();
+    }, 320);
+  }
+
+  document.querySelectorAll('.sector-tab').forEach((tab, i) => {
+    tab.addEventListener('click', () => { clearInterval(heroTimer); switchHeroSector(i); heroTimer = setInterval(() => switchHeroSector((heroCurrent+1) % sectors.length), 6000); });
+  });
+  document.querySelectorAll('.scene-dot').forEach((dot, i) => {
+    dot.addEventListener('click', () => { clearInterval(heroTimer); switchHeroSector(i); heroTimer = setInterval(() => switchHeroSector((heroCurrent+1) % sectors.length), 6000); });
+  });
+  setTimeout(animateHeroBars, 700);
+  // Seed initial progress bar
+  setTimeout(() => {
+    const firstTab = document.querySelector('.sector-tab.active');
+    if (firstTab) { firstTab.classList.remove('active'); void firstTab.offsetWidth; firstTab.classList.add('active'); }
+  }, 100);
+  setTimeout(() => { heroTimer = setInterval(() => switchHeroSector((heroCurrent+1) % sectors.length), 6000); }, 2500);
+
+  /* ── Nav scroll ── */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── Scroll reveal ── */
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ── How It Works stepper ── */
+  (function() {
+    let hiwActive = 0, hiwTimer = null, surveyTimer = null;
+    const DURATION = 5000;
+
+    function resetBars(idx) {
+      if (idx === 1) {
+        const fill = document.getElementById('surveyFill');
+        if (fill) { fill.style.transition = 'none'; fill.style.width = '0'; }
+        document.querySelectorAll('#hiwPane1 .seg-bar').forEach(b => { b.style.transition = 'none'; b.style.height = '0'; });
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if (fill) { fill.style.transition = ''; }
+          document.querySelectorAll('#hiwPane1 .seg-bar').forEach(b => { b.style.transition = ''; });
+        }));
+        clearInterval(surveyTimer);
+        let c = 0;
+        const el = document.getElementById('surveyCount');
+        surveyTimer = setInterval(() => {
+          c = Math.min(1200, c + Math.floor(Math.random()*55+25));
+          if (el) el.textContent = c.toLocaleString() + ' / 1,200';
+          if (c >= 1200) clearInterval(surveyTimer);
+        }, 60);
+      }
+      if (idx === 2) {
+        ['rdbar-1','rdbar-2','rdbar-3'].forEach(id => {
+          const el = document.querySelector('.'+id);
+          if (el) { el.style.transition='none'; el.style.width='0'; }
+        });
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          ['rdbar-1','rdbar-2','rdbar-3'].forEach(id => {
+            const el = document.querySelector('.'+id);
+            if (el) el.style.transition = '';
+          });
+        }));
+      }
+    }
+
+    function switchHIW(idx) {
+      // Tabs
+      document.querySelectorAll('.hiw-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+      // Progress bars: reset all, start active
+      document.querySelectorAll('.hiw-progress-fill').forEach((f,i) => {
+        f.style.transition = 'none'; f.style.width = i < idx ? '100%' : '0%';
+        f.classList.remove('running');
+      });
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const fill = document.getElementById('hiwProg'+idx);
+        if (fill) { fill.classList.add('running'); }
+      }));
+      // Panels
+      document.querySelectorAll('.hiw-pane').forEach((p,i) => p.classList.toggle('active', i===idx));
+      hiwActive = idx;
+      resetBars(idx);
+    }
+
+    function startTimer() {
+      clearInterval(hiwTimer);
+      hiwTimer = setInterval(() => {
+        switchHIW((hiwActive + 1) % 3);
+      }, DURATION);
+    }
+
+    // Manual clicks
+    document.querySelectorAll('.hiw-tab').forEach((tab, i) => {
+      tab.addEventListener('click', () => { switchHIW(i); startTimer(); });
+    });
+
+    // Auto-start when section scrolls into view
+    const hiwSection = document.getElementById('how');
+    if (hiwSection) {
+      const hiwObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { switchHIW(0); startTimer(); hiwObs.unobserve(e.target); }
+        });
+      }, { threshold: 0.3 });
+      hiwObs.observe(hiwSection);
+    }
+  })();
+
+  /* ── Counter animation ── */
+  function animateCount(el, target, duration = 1600) {
+    let start = null;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(ease * target);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  }
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = parseInt(el.dataset.count);
+        animateCount(el, target);
+        countObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+  /* ── Tabs ── */
+  document.querySelectorAll('.tab-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

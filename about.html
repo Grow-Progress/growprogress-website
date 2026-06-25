@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Grow Progress</title>
+  <meta name="description" content="Grow Progress builds the tools and runs the research that help causes, campaigns, and unions understand what actually moves people — and win with that knowledge.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --shadow-sm:0 1px 3px rgba(31,22,40,.08),0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:0 2px 8px rgba(31,22,40,.1),0 12px 40px rgba(31,22,40,.08);
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+    .section{padding:6rem 0;}
+    .chip{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.375rem .875rem;border-radius:2rem;}
+    .chip-purple{color:var(--purple);background:rgba(67,44,151,.08);border:1px solid rgba(67,44,151,.15);}
+    .chip-light{color:var(--lavender);background:rgba(220,210,255,.1);border:1px solid rgba(220,210,255,.2);}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.1s;} .reveal-delay-2{transition-delay:.2s;} .reveal-delay-3{transition-delay:.3s;} .reveal-delay-4{transition-delay:.4s;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s;}
+    .nav.scrolled{background:rgba(242,242,253,.95);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;color:var(--muted);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .has-dropdown{position:relative;}
+    .has-dropdown>a{display:flex;align-items:center;gap:.3rem;}
+    .has-dropdown>a svg{width:12px;height:12px;transition:transform .2s;flex-shrink:0;}
+    .has-dropdown:hover>a svg,.has-dropdown:focus-within>a svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:640px;background:#fff;border:1px solid rgba(67,44,151,.1);border-radius:1.25rem;box-shadow:0 8px 40px rgba(31,22,40,.12),0 2px 12px rgba(31,22,40,.06);padding:.75rem 1.25rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;opacity:0;pointer-events:none;transform:translateX(-50%) translateY(-8px);transition:opacity .18s ease,transform .18s ease;z-index:200;}
+    .has-dropdown:hover .nav-dropdown,.has-dropdown:focus-within .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav-dd-item{display:flex;align-items:flex-start;gap:.875rem;padding:.875rem;border-radius:.75rem;text-decoration:none;transition:background .15s;}
+    .nav-dd-item:hover{background:rgba(67,44,151,.05);}
+    .nav-dd-icon{width:36px;height:36px;border-radius:.625rem;background:rgba(67,44,151,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-dd-icon svg{width:18px;height:18px;color:#432C97;}
+    .nav-dd-text{display:flex;flex-direction:column;gap:.2rem;}
+    .nav-dd-label{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:#1F1628;line-height:1;}
+    .nav-dd-desc{font-size:.75rem;color:rgba(31,22,40,.45);line-height:1.4;}
+    .nav-dd-item.active{background:rgba(67,44,151,.07);}
+    .nav-dd-item.active .nav-dd-label{color:#432C97;}
+    .nav-dd-item--method{background:linear-gradient(135deg,rgba(67,44,151,.06) 0%,rgba(108,155,255,.04) 100%);border:1px solid rgba(67,44,151,.1);border-radius:.75rem;}
+    .nav-dd-item--method:hover{background:linear-gradient(135deg,rgba(67,44,151,.1) 0%,rgba(108,155,255,.08) 100%);}
+    .nav-dd-item--method .nav-dd-icon{background:var(--purple);}
+    .nav-dd-item--method .nav-dd-icon svg{color:#fff;}
+    .nav-dd-item--method .nav-dd-label{color:var(--purple);}
+    .nav-dd-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+    .nav-dropdown--single{width:280px;grid-template-columns:1fr;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:var(--muted);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── BUTTONS ── */
+    .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-weight:700;text-decoration:none;border:none;cursor:pointer;border-radius:var(--r-sm);transition:all .2s;}
+    .btn-primary{padding:.875rem 2rem;font-size:1rem;background:var(--blue);color:var(--ink);box-shadow:0 4px 20px rgba(108,155,255,.35);}
+    .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 28px rgba(108,155,255,.45);}
+    .btn-ghost-dark{padding:.875rem 1.75rem;font-size:1rem;background:var(--blue);color:var(--ink);border:1.5px solid var(--blue);}
+    .btn-ghost-dark:hover{background:#5a8fff;}
+    .btn-white{padding:.875rem 2rem;font-size:1rem;background:#fff;color:var(--purple);box-shadow:0 4px 20px rgba(0,0,0,.15);}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2);}
+
+    /* ── HERO (dark) ── */
+    .hero{min-height:82vh;display:flex;align-items:center;padding:9rem 0 6rem;background:linear-gradient(145deg,#2D1F5E 0%,#432C97 45%,#3a4db8 100%);position:relative;overflow:hidden;}
+    .hero-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(108,155,255,.08) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;}
+    .hero-glow{position:absolute;top:-10%;left:-5%;width:700px;height:700px;background:radial-gradient(ellipse,rgba(67,44,151,.45) 0%,transparent 60%);pointer-events:none;}
+    .hero-glow-2{position:absolute;bottom:-10%;right:-5%;width:500px;height:500px;background:radial-gradient(ellipse,rgba(108,155,255,.12) 0%,transparent 65%);pointer-events:none;}
+    .hero-inner{position:relative;z-index:1;max-width:800px;}
+    .hero h1{font-family:var(--font-h);font-weight:900;font-size:clamp(3rem,5.5vw,5rem);line-height:1.0;letter-spacing:-.035em;color:#fff;margin-bottom:1.5rem;}
+    .hero h1 em{font-style:italic;color:var(--blue);}
+    .hero-sub{font-size:1.1875rem;line-height:1.75;color:rgba(255,255,255,.55);max-width:600px;margin-bottom:3rem;}
+    .hero-divider{width:48px;height:3px;background:var(--blue);border-radius:2px;margin-bottom:2.5rem;}
+    .hero-meta{display:flex;gap:3rem;flex-wrap:wrap;}
+    .hero-meta-item{display:flex;flex-direction:column;gap:.3rem;}
+    .hero-meta-num{font-family:var(--font-h);font-weight:900;font-size:2.25rem;letter-spacing:-.04em;color:var(--blue);line-height:1;}
+    .hero-meta-lbl{font-size:.8125rem;color:rgba(255,255,255,.4);font-weight:500;letter-spacing:.03em;}
+    .hero-body{display:flex;flex-direction:column;gap:1.25rem;max-width:640px;border-top:1px solid rgba(255,255,255,.1);padding-top:2rem;margin-top:.5rem;}
+    .hero-body p{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.45);}
+
+    /* ── ORIGIN STORY ── */
+    .origin-section{background:var(--white);padding:7rem 0;}
+    .origin-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+    .origin-sticky{position:sticky;top:6rem;}
+    .origin-eyebrow{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:1.25rem;display:block;}
+    .origin-h{font-family:var(--font-h);font-weight:900;font-size:clamp(2rem,3vw,2.75rem);letter-spacing:-.03em;line-height:1.08;color:var(--ink);margin-bottom:1.5rem;}
+    .origin-h em{font-style:normal;color:var(--purple);}
+    .origin-lede{font-size:1.125rem;line-height:1.75;color:var(--muted);}
+    .origin-body{display:flex;flex-direction:column;gap:1.75rem;padding-top:.25rem;}
+    .origin-p{font-size:1rem;line-height:1.8;color:var(--muted);}
+    .origin-pullout{border-left:3px solid var(--blue);padding-left:1.5rem;margin:0;}
+    .origin-pullout p{font-family:var(--font-h);font-weight:700;font-size:1.125rem;line-height:1.55;color:var(--ink);letter-spacing:-.01em;}
+    .origin-founder-note{display:flex;align-items:center;gap:.875rem;margin-top:.5rem;}
+    .origin-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#432C97,#6C9BFF);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:900;font-size:.875rem;color:#fff;flex-shrink:0;}
+    .origin-founder-name{font-family:var(--font-h);font-weight:800;font-size:.9375rem;color:var(--ink);}
+    .origin-founder-title{font-size:.8125rem;color:var(--muted);}
+
+    /* ── BELIEFS ── */
+    .beliefs-section{background:var(--ghost);padding:6rem 0;}
+    .beliefs-header{text-align:center;margin-bottom:3.5rem;}
+    .beliefs-header .chip{margin-bottom:.875rem;}
+    .beliefs-header h2{font-family:var(--font-h);font-weight:900;font-size:clamp(2rem,3.5vw,2.875rem);letter-spacing:-.025em;line-height:1.07;color:var(--text);}
+    .beliefs-header h2 em{font-style:normal;color:var(--purple);}
+    .beliefs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .belief-card{background:var(--white);border:1.5px solid rgba(67,44,151,.07);border-radius:var(--r-xl);padding:2.25rem 2rem 2.5rem;transition:border-color .2s,transform .2s,box-shadow .2s;}
+    .belief-card:hover{border-color:rgba(67,44,151,.2);transform:translateY(-4px);box-shadow:var(--shadow-md);}
+    .belief-num{font-family:var(--font-h);font-weight:900;font-size:3.5rem;letter-spacing:-.05em;color:rgba(67,44,151,.1);line-height:1;margin-bottom:1.25rem;}
+    .belief-card h4{font-family:var(--font-h);font-weight:800;font-size:1.1875rem;color:var(--text);margin-bottom:.75rem;line-height:1.2;}
+    .belief-card p{font-size:.9375rem;line-height:1.75;color:var(--muted);}
+
+    /* ── STATS ── */
+    .stats-section{background:linear-gradient(135deg,#2D1F5E 0%,#432C97 60%,#5B5DC0 100%);padding:5rem 0;position:relative;overflow:hidden;}
+    .stats-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(108,155,255,.12) 1px,transparent 1px);background-size:28px 28px;}
+    .stats-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;}
+    .stat-num{font-family:var(--font-h);font-weight:900;font-size:clamp(1.75rem,3vw,2.75rem);letter-spacing:-.025em;color:var(--blue);margin-bottom:.375rem;line-height:1;}
+    .stat-label{font-size:.875rem;color:rgba(255,255,255,.5);line-height:1.45;}
+
+    /* ── FOUNDER FEATURE ── */
+    .founder-section{background:var(--white);padding:7rem 0;}
+    .founder-feature{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-bottom:5rem;}
+    .founder-photo-wrap{position:relative;}
+    .founder-photo{width:100%;aspect-ratio:4/5;border-radius:var(--r-xl);object-fit:cover;background:linear-gradient(145deg,#2D1F5E,#432C97);}
+    .founder-photo-placeholder{width:100%;aspect-ratio:4/5;border-radius:var(--r-xl);background:linear-gradient(145deg,#1F1628,#432C97);display:flex;align-items:center;justify-content:center;}
+    .founder-photo-placeholder-initials{font-family:var(--font-h);font-weight:900;font-size:5rem;color:rgba(108,155,255,.4);letter-spacing:-.05em;}
+    .founder-accent{position:absolute;bottom:-1.5rem;right:-1.5rem;width:80px;height:80px;border-radius:var(--r-xl);background:var(--blue);display:flex;align-items:center;justify-content:center;}
+    .founder-accent svg{width:36px;height:36px;color:var(--ink);}
+    .founder-copy{display:flex;flex-direction:column;gap:0;}
+    .founder-eyebrow{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;display:block;}
+    .founder-name{font-family:var(--font-h);font-weight:900;font-size:clamp(1.875rem,3vw,2.625rem);letter-spacing:-.03em;line-height:1.05;color:var(--ink);margin-bottom:.375rem;}
+    .founder-title{font-family:var(--font-h);font-weight:700;font-size:.9375rem;color:var(--purple);letter-spacing:.03em;text-transform:uppercase;margin-bottom:1.75rem;}
+    .founder-bio{font-size:1rem;line-height:1.8;color:var(--muted);margin-bottom:1rem;}
+    .founder-bio + .founder-bio{margin-top:0;}
+
+    /* ── SCIENCE ADVISORS ── */
+    .advisors-eyebrow{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:1.5rem;display:block;}
+    .advisors-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+    .advisor-card{background:var(--ghost);border:1.5px solid rgba(67,44,151,.07);border-radius:var(--r-xl);padding:2rem;display:flex;gap:1.5rem;align-items:flex-start;transition:border-color .2s,box-shadow .2s;}
+    .advisor-card:hover{border-color:rgba(67,44,151,.2);box-shadow:var(--shadow-md);}
+    .advisor-avatar{width:64px;height:64px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:900;font-size:1.125rem;color:#fff;}
+    .aa-blue{background:linear-gradient(135deg,#3a6fd8,#6C9BFF);}
+    .aa-mid{background:linear-gradient(135deg,#5B5DC0,#85B4FF);}
+    .advisor-info{flex:1;}
+    .advisor-name{font-family:var(--font-h);font-weight:800;font-size:1.125rem;color:var(--ink);margin-bottom:.2rem;}
+    .advisor-title{font-size:.8125rem;font-weight:600;color:var(--purple);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.625rem;}
+    .advisor-bio{font-size:.875rem;line-height:1.65;color:var(--muted);margin-bottom:.875rem;}
+    .advisor-tags{display:flex;flex-wrap:wrap;gap:.375rem;}
+    .advisor-tag{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:.3rem .625rem;border-radius:2rem;background:rgba(67,44,151,.07);color:var(--purple);}
+
+    /* ── TEAM ROW ── */
+    .team-more{margin-top:4rem;}
+    .team-more-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:1.5rem;display:block;}
+    .team-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+    .team-pill{display:flex;align-items:center;gap:1rem;background:var(--ghost);border:1.5px solid rgba(67,44,151,.07);border-radius:var(--r-lg);padding:1.25rem 1.5rem;transition:border-color .2s;}
+    .team-pill:hover{border-color:rgba(67,44,151,.2);}
+    .team-pill--open{border-style:dashed;border-color:rgba(67,44,151,.15);}
+    .tp-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:900;font-size:.875rem;color:#fff;flex-shrink:0;}
+    .tp-ghost{background:var(--ghost);border:2px dashed rgba(67,44,151,.2);color:var(--faint);}
+    .tp-purple{background:linear-gradient(135deg,#432C97,#6C9BFF);}
+    .tp-teal{background:linear-gradient(135deg,#1a6b5a,#34c0a0);}
+    .tp-info{display:flex;flex-direction:column;gap:.125rem;}
+    .tp-name{font-family:var(--font-h);font-weight:800;font-size:.9375rem;color:var(--ink);}
+    .tp-role{font-size:.8125rem;color:var(--muted);}
+    .tp-link{font-family:var(--font-h);font-weight:700;font-size:.8125rem;color:var(--purple);text-decoration:none;}
+    .tp-link:hover{text-decoration:underline;}
+
+    /* ── SOCIAL PROOF ── */
+    .proof-section{background:var(--ink);padding:7rem 0;position:relative;overflow:hidden;}
+    .proof-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(108,155,255,.07) 1px,transparent 1px);background-size:28px 28px;}
+    .proof-inner{position:relative;z-index:1;}
+    .proof-label{text-align:center;font-size:.8125rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:2rem;}
+    .proof-logos{display:flex;flex-wrap:wrap;gap:1.25rem 2.5rem;justify-content:center;align-items:center;margin-bottom:5rem;padding-bottom:5rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .proof-logos img{height:24px;width:auto;object-fit:contain;filter:grayscale(100%) brightness(10) opacity(25%);transition:filter .2s;}
+    .proof-logos img:hover{filter:grayscale(60%) brightness(5) opacity(55%);}
+    .testimonial-inner{max-width:760px;margin:0 auto;text-align:center;}
+    .testimonial-quote-mark{font-family:var(--font-h);font-size:7rem;font-weight:900;line-height:.6;color:rgba(108,155,255,.2);display:block;margin-bottom:1.25rem;}
+    .testimonial-text{font-family:var(--font-h);font-size:clamp(1.25rem,2.2vw,1.625rem);font-weight:700;line-height:1.55;color:#fff;letter-spacing:-.015em;margin-bottom:2rem;}
+    .testimonial-attr{display:flex;flex-direction:column;align-items:center;gap:.25rem;}
+    .testimonial-name{font-family:var(--font-h);font-weight:800;font-size:.9375rem;color:#fff;}
+    .testimonial-role{font-size:.875rem;color:rgba(255,255,255,.4);}
+
+    /* ── CTA ── */
+    .cta-section{background:var(--ghost);text-align:center;padding:7rem 0;position:relative;overflow:hidden;}
+    .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(67,44,151,.1) 0%,transparent 60%);}
+    .cta-inner{position:relative;z-index:1;}
+    .cta-h{font-family:var(--font-h);font-weight:900;font-size:clamp(2.25rem,4vw,3.5rem);letter-spacing:-.03em;line-height:1.05;color:var(--ink);max-width:640px;margin:.875rem auto 1.25rem;}
+    .cta-h em{font-style:normal;color:var(--purple);}
+    .cta-sub{font-size:1.0625rem;line-height:1.65;color:var(--muted);max-width:500px;margin:0 auto 2.75rem;}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .btn-purple{padding:.875rem 2rem;font-size:1rem;background:var(--purple);color:#fff;box-shadow:0 4px 20px rgba(67,44,151,.3);}
+    .btn-purple:hover{background:#5038b0;transform:translateY(-2px);}
+    .btn-outline{padding:.875rem 1.75rem;font-size:1rem;background:transparent;color:var(--purple);border:1.5px solid var(--purple);}
+    .btn-outline:hover{background:var(--purple);color:#fff;}
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section{background:var(--white);padding:4rem 0;border-top:1px solid rgba(67,44,151,.08);}
+    .newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .newsletter-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+    .newsletter-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:nlPulse 2s infinite;}
+    @keyframes nlPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+    .newsletter-title{font-family:var(--font-h);font-weight:800;font-size:1.375rem;color:var(--ink);margin-bottom:.5rem;}
+    .newsletter-sub{font-size:.9375rem;line-height:1.65;color:var(--muted);}
+    .newsletter-form{display:flex;flex-direction:column;gap:.75rem;}
+    .nl-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+    .nl-input{width:100%;padding:.75rem 1rem;font-family:var(--font-b);font-size:.9375rem;color:var(--ink);background:var(--ghost);border:1.5px solid rgba(67,44,151,.12);border-radius:.625rem;outline:none;transition:border-color .15s,box-shadow .15s;}
+    .nl-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(67,44,151,.1);}
+    .nl-input::placeholder{color:var(--faint);}
+    .nl-submit{width:100%;padding:.875rem;font-family:var(--font-h);font-weight:700;font-size:1rem;color:#fff;background:var(--purple);border:none;border-radius:.625rem;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .nl-submit:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,44,151,.4);}
+    .nl-privacy{font-size:.72rem;color:var(--faint);text-align:center;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px){
+      .origin-grid{grid-template-columns:1fr;gap:3rem;}
+      .origin-sticky{position:static;}
+      .founder-feature{grid-template-columns:1fr;gap:3rem;}
+      .founder-photo-wrap{max-width:400px;}
+      .beliefs-grid{grid-template-columns:1fr 1fr;}
+      .advisors-grid{grid-template-columns:1fr;}
+      .team-row{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:900px){
+      .stats-grid{grid-template-columns:repeat(2,1fr);}
+      .footer-top{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:640px){
+      .container{padding:0 1.25rem;}.section{padding:4rem 0;}
+      .beliefs-grid{grid-template-columns:1fr;}
+      .stats-grid{grid-template-columns:repeat(2,1fr);}
+      .footer-top{grid-template-columns:1fr;}
+      .newsletter-inner{grid-template-columns:1fr;gap:2rem;}
+      .nl-row{grid-template-columns:1fr;}
+      .team-row{grid-template-columns:1fr;}
+      .hero-meta{gap:1.75rem;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-light.svg" alt="Grow Progress" class="nav-gp-logo" id="navLogo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Rapid Message Testing</span><span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span></div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Audience Understanding</span><span class="nav-dd-desc">Map who your audience is and what they believe</span></div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Pulse Surveys</span><span class="nav-dd-desc">Real-time opinion tracking as events unfold</span></div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Library</span><span class="nav-dd-desc">500+ studies searchable by topic and audience</span></div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-eyebrow">Methodology</span><span class="nav-dd-label">How It Works</span><span class="nav-dd-desc">The RCT science behind every GP study</span></div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Sandbox</span><span class="nav-dd-desc">Self-serve message testing — launch in minutes</span></div>
+        </a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">Who We Serve
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown nav-dropdown--single">
+        <a href="politics.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span><span class="nav-dd-desc">Campaigns, PACs &amp; party committees</span></div>
+        </a>
+        <a href="advocacy.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span><span class="nav-dd-desc">Issue campaigns &amp; policy fights</span></div>
+        </a>
+        <a href="nonprofits.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span><span class="nav-dd-desc">Donors, programs &amp; community impact</span></div>
+        </a>
+        <a href="labor.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span><span class="nav-dd-desc">Contract campaigns &amp; member mobilization</span></div>
+        </a>
+      </div>
+    </li>
+    <li><a href="insights.html">Insights</a></li>
+    <li><a href="about.html" id="navAbout">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin" id="navSignin">Sign In</a>
+    <a href="demo.html" class="btn-nav">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO + WHY WE EXIST -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="reveal" style="margin-bottom:1.5rem;">
+        <span class="chip chip-light">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3" fill="currentColor"/><circle cx="5" cy="5" r="4.5" stroke="currentColor" stroke-width="1" opacity=".4"/></svg>
+          Our Mission
+        </span>
+      </div>
+      <h1 class="reveal reveal-delay-1">Persuasion science<br>for people who<br><em>give a damn.</em></h1>
+      <div class="hero-divider reveal reveal-delay-2"></div>
+      <p class="hero-sub reveal reveal-delay-2">We build the tools and run the research that help causes, campaigns, and unions understand what actually moves people — and win with that knowledge.</p>
+      <div class="hero-body reveal reveal-delay-3">
+        <p>Political campaigns, unions, and advocacy organizations spend billions of dollars every cycle trying to change minds. But most of that communication is built on intuition, tradition, and what worked last time. The research that could actually tell you which message works — and for whom — has always been there. It just wasn't accessible.</p>
+        <p>Randomized Controlled Trials — the same methodology used to approve drugs and test social programs — can tell you in 24 hours which message moves a persuadable voter. We built Grow Progress to put that tool in the hands of causes, not just corporations.</p>
+        <p>That's still the mission. Evidence-based messaging for everyone fighting for something worth fighting for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container cta-inner">
+    <span class="chip chip-purple reveal">Get Started</span>
+    <h2 class="cta-h reveal reveal-delay-1">Ready to know what <em>actually works?</em></h2>
+    <p class="cta-sub reveal reveal-delay-2">Join 100+ organizations that use evidence to communicate with confidence.</p>
+    <div class="cta-btns reveal reveal-delay-3">
+      <a href="demo.html" class="btn btn-purple">
+        Get a Demo
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="rapid-message-testing.html" class="btn btn-outline">See the Platform</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="newsletter-copy">
+        <div class="newsletter-eyebrow">
+          <span class="newsletter-eyebrow-dot"></span>
+          Grow Progress Newsletter
+        </div>
+        <div class="newsletter-title">What's actually moving people.</div>
+        <p class="newsletter-sub">Monthly insights from 500+ studies — which frames work, which flop, and what it means for your next campaign.</p>
+      </div>
+      <form class="newsletter-form" onsubmit="return false;">
+        <div class="nl-row">
+          <input class="nl-input" type="text" placeholder="First name" autocomplete="given-name">
+          <input class="nl-input" type="text" placeholder="Last name" autocomplete="family-name">
+        </div>
+        <input class="nl-input" type="email" placeholder="Work email" autocomplete="email">
+        <button class="nl-submit" type="submit">Subscribe</button>
+        <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="code-of-conduct.html">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav — swap logo + link colors on dark hero
+  const nav = document.getElementById('nav');
+  const navLogo = document.getElementById('navLogo');
+  const navAbout = document.getElementById('navAbout');
+  const navSignin = document.getElementById('navSignin');
+
+  function updateNav() {
+    const scrolled = window.scrollY > 60;
+    nav.classList.toggle('scrolled', scrolled);
+    navLogo.src = scrolled ? 'gp-logo-dark.svg' : 'gp-logo-light.svg';
+    nav.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = scrolled ? '' : 'rgba(255,255,255,.65)';
+    });
+    navAbout.style.color = scrolled ? 'var(--ink)' : '#fff';
+    navAbout.style.fontWeight = '600';
+    navSignin.style.color = scrolled ? '' : 'rgba(255,255,255,.65)';
+  }
+
+  window.addEventListener('scroll', updateNav, {passive:true});
+  updateNav();
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, {threshold:0.1});
+  revealEls.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

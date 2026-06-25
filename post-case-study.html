@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How a major labor union won member support — Case Study | Grow Progress</title>
+  <meta name="description" content="Dignity framing outperformed wages messaging by 13 points across all age cohorts. Here's what the data showed — and how the union used it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --blue-bright:#85B4FF;
+      --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --text:#1F1628; --muted:#6B5E8A; --faint:#9B8FBA;
+      --green:#059669; --green-light:#d1fae5; --green-bright:#4ade80;
+      --shadow-sm:0 1px 3px rgba(31,22,40,.08),0 4px 12px rgba(31,22,40,.06);
+      --shadow-md:0 2px 8px rgba(31,22,40,.1),0 12px 40px rgba(31,22,40,.08);
+      --r-sm:.5rem; --r-md:1rem; --r-lg:1.5rem; --r-xl:2rem;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;font-size:16px;}
+    body{font-family:var(--font-b);color:var(--text);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .container{max-width:1120px;margin:0 auto;padding:0 2rem;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.08s;} .reveal-delay-2{transition-delay:.16s;} .reveal-delay-3{transition-delay:.24s;}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s,color .3s;}
+    .nav.scrolled{background:rgba(242,242,253,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(67,44,151,.08);}
+    /* Dark hero nav state */
+    .nav--dark .nav-links a{color:rgba(255,255,255,.7);}
+    .nav--dark .nav-links a:hover{color:#fff;background:rgba(255,255,255,.1);}
+    .nav--dark .nav-links a.active{color:#fff;}
+    .nav--dark .nav-signin{color:rgba(255,255,255,.7);}
+    .nav--dark .nav-signin:hover{color:#fff;}
+    .nav--dark .btn-nav{background:rgba(255,255,255,.15);box-shadow:none;border:1px solid rgba(255,255,255,.25);}
+    .nav--dark .btn-nav:hover{background:rgba(255,255,255,.25);}
+    .nav.scrolled.nav--dark .nav-links a,
+    .nav.scrolled .nav-links a{color:var(--muted);}
+    .nav.scrolled.nav--dark .nav-links a:hover,
+    .nav.scrolled .nav-links a:hover{color:var(--ink);}
+    .nav.scrolled.nav--dark .nav-links a.active,
+    .nav.scrolled .nav-links a.active{color:var(--purple);}
+    .nav.scrolled.nav--dark .nav-signin,
+    .nav.scrolled .nav-signin{color:var(--muted);}
+    .nav.scrolled.nav--dark .nav-signin:hover,
+    .nav.scrolled .nav-signin:hover{color:var(--ink);}
+    .nav.scrolled.nav--dark .btn-nav,
+    .nav.scrolled .btn-nav{background:var(--purple);box-shadow:0 4px 14px rgba(67,44,151,.3);border:none;color:#fff;}
+    .nav.scrolled.nav--dark .btn-nav:hover,
+    .nav.scrolled .btn-nav:hover{background:#5038b0;}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .nav-links{display:flex;align-items:center;gap:.125rem;list-style:none;}
+    .nav-links a{padding:.5rem .875rem;font-size:.875rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:var(--r-sm);transition:color .15s,background .15s;}
+    .nav-links a:hover{color:var(--ink);background:rgba(67,44,151,.06);}
+    .nav-links a.active{color:var(--purple);font-weight:600;}
+    .nav-right{display:flex;align-items:center;gap:.75rem;}
+    .nav-signin{font-size:.875rem;color:var(--muted);text-decoration:none;padding:.5rem .875rem;border-radius:var(--r-sm);transition:color .15s;}
+    .nav-signin:hover{color:var(--ink);}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:var(--r-sm);text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+    .has-dropdown{position:relative;}
+    .has-dropdown > a{display:flex;align-items:center;gap:.3rem;}
+    .has-dropdown > a svg{width:12px;height:12px;transition:transform .2s;}
+    .has-dropdown:hover > a svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(-8px);width:640px;background:#fff;border:1px solid rgba(67,44,151,.1);border-radius:1.25rem;box-shadow:0 8px 40px rgba(31,22,40,.12);padding:.75rem 1.25rem 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:200;}
+    .has-dropdown:hover .nav-dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+    .nav-dropdown--single{width:280px;grid-template-columns:1fr;}
+    .nav-dd-item{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem;border-radius:.75rem;text-decoration:none;transition:background .15s;}
+    .nav-dd-item:hover{background:rgba(67,44,151,.05);}
+    .nav-dd-icon{width:36px;height:36px;border-radius:.5rem;background:var(--ghost);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-dd-icon svg{width:18px;height:18px;color:var(--purple);}
+    .nav-dd-text{display:flex;flex-direction:column;gap:.2rem;}
+    .nav-dd-label{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:var(--ink);}
+    .nav-dd-desc{font-size:.78rem;color:var(--faint);line-height:1.4;}
+    .nav-dd-eyebrow{font-size:.6rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:.2rem;}
+    .nav-dd-item--method{background:linear-gradient(135deg,rgba(67,44,151,.06) 0%,rgba(108,155,255,.04) 100%);border:1px solid rgba(67,44,151,.1);border-radius:.75rem;}
+    .nav-dd-item--method .nav-dd-icon{background:var(--purple);}
+    .nav-dd-item--method .nav-dd-icon svg{color:#fff;}
+    .nav-dd-item--method .nav-dd-label{color:var(--purple);}
+    @media(max-width:640px){.nav-links{display:none;}}
+
+    /* ── HERO ── */
+    .cs-hero{position:relative;padding:9rem 0 5rem;background:linear-gradient(135deg,#1A1030 0%,#2D1F5E 45%,#1F1628 100%);overflow:hidden;}
+    /* Dot grid overlay */
+    .cs-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;}
+    /* Ambient glow */
+    .cs-hero::after{content:'';position:absolute;top:-20%;right:-5%;width:700px;height:700px;background:radial-gradient(ellipse,rgba(108,155,255,.12) 0%,transparent 65%);pointer-events:none;}
+    .cs-hero-inner{position:relative;z-index:1;max-width:800px;}
+    .cs-chip{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .875rem;font-family:var(--font-h);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#4ade80;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);border-radius:2rem;margin-bottom:1.5rem;}
+    .cs-chip-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.5);}}
+    .cs-hero h1{font-family:var(--font-h);font-weight:900;font-size:clamp(2rem,4vw,3.125rem);letter-spacing:-.03em;line-height:1.08;color:#fff;margin-bottom:1.25rem;}
+    .cs-hero-sub{font-size:1.0625rem;line-height:1.7;color:rgba(255,255,255,.65);max-width:680px;margin-bottom:2.5rem;}
+    /* Inline stats row */
+    .cs-hero-stats{display:flex;align-items:stretch;gap:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);overflow:hidden;width:fit-content;}
+    .cs-hero-stat{padding:.875rem 1.75rem;text-align:center;border-right:1px solid rgba(255,255,255,.1);}
+    .cs-hero-stat:last-child{border-right:none;}
+    .cs-hero-stat-val{font-family:var(--font-h);font-weight:900;font-size:1.5rem;letter-spacing:-.03em;color:#fff;display:block;}
+    .cs-hero-stat-label{font-size:.72rem;font-weight:500;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.07em;display:block;margin-top:.2rem;}
+
+    /* ── COVER IMAGE ── */
+    .cs-cover{width:100%;height:420px;background:linear-gradient(135deg,rgba(67,44,151,.08),rgba(108,155,255,.06));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+    .cs-cover-ph{font-family:var(--font-h);font-weight:900;font-size:clamp(6rem,15vw,11rem);letter-spacing:-.05em;color:rgba(67,44,151,.08);user-select:none;pointer-events:none;line-height:1;}
+    .cs-cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+    /* Hide placeholder when image has a real src */
+    .cs-cover-img[src]:not([src=""]) ~ .cs-cover-ph{display:none;}
+
+    /* ── ARTICLE LAYOUT ── */
+    .cs-body-section{background:var(--white);padding:4rem 0 6rem;}
+    .cs-layout{display:grid;grid-template-columns:1fr 300px;gap:4rem;align-items:start;}
+
+    /* ── SIDEBAR ── */
+    .cs-sidebar{position:sticky;top:92px;}
+    .cs-results-card{background:#fff;border:1.5px solid rgba(5,150,105,.15);border-radius:var(--r-lg);overflow:hidden;box-shadow:0 4px 24px rgba(5,150,105,.08);}
+    .cs-results-card-header{height:4px;background:linear-gradient(90deg,#059669,#34d399);}
+    .cs-results-card-body{padding:1.5rem;}
+    .cs-results-title{font-family:var(--font-h);font-weight:800;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:1.25rem;}
+    .cs-results-stats{display:flex;flex-direction:column;gap:.875rem;margin-bottom:1.375rem;padding-bottom:1.375rem;border-bottom:1px solid rgba(5,150,105,.1);}
+    .cs-stat-row{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem;}
+    .cs-stat-num{font-family:var(--font-h);font-weight:900;font-size:1.625rem;letter-spacing:-.04em;color:var(--green);}
+    .cs-stat-label{font-size:.78rem;color:var(--muted);text-align:right;}
+    .cs-results-meta{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.375rem;padding-bottom:1.375rem;border-bottom:1px solid rgba(5,150,105,.1);}
+    .cs-meta-row{display:flex;flex-direction:column;gap:.3rem;}
+    .cs-meta-label{font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);}
+    .cs-meta-value{font-size:.875rem;font-weight:600;color:var(--ink);}
+    .cs-winning-frame{display:inline-flex;align-items:center;padding:.3rem .75rem;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.3);border-radius:2rem;font-size:.8125rem;font-weight:700;color:#059669;}
+    .cs-method-value{font-size:.8125rem;color:var(--muted);font-weight:500;}
+    .cs-sidebar-cta{display:block;width:100%;padding:.875rem 1rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.9375rem;border-radius:var(--r-sm);text-decoration:none;text-align:center;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .cs-sidebar-cta:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,44,151,.4);}
+
+    /* ── ARTICLE CONTENT ── */
+    .cs-article h2{font-family:var(--font-h);font-weight:800;font-size:1.5rem;letter-spacing:-.025em;color:var(--ink);margin-top:2.5rem;margin-bottom:.875rem;}
+    .cs-article h2:first-child{margin-top:0;}
+    .cs-article p{font-size:1rem;line-height:1.75;color:var(--muted);margin-bottom:1rem;}
+    .cs-article p:last-child{margin-bottom:0;}
+
+    /* Bar chart */
+    .cs-bar-chart{margin:2rem 0;display:flex;flex-direction:column;gap:.875rem;}
+    .cs-bar-row{display:flex;flex-direction:column;gap:.4rem;}
+    .cs-bar-label-row{display:flex;align-items:center;justify-content:space-between;}
+    .cs-bar-name{font-family:var(--font-h);font-weight:700;font-size:.875rem;color:var(--ink);}
+    .cs-bar-frame-label{font-size:.75rem;color:var(--faint);}
+    .cs-bar-val{font-family:var(--font-h);font-weight:900;font-size:.875rem;}
+    .cs-bar-track{height:36px;background:rgba(67,44,151,.06);border-radius:.375rem;overflow:hidden;position:relative;}
+    .cs-bar-fill{height:100%;border-radius:.375rem;display:flex;align-items:center;padding-left:.75rem;transition:width 1s cubic-bezier(.22,1,.36,1);}
+    /* Winner */
+    .cs-bar-row--winner .cs-bar-fill{background:linear-gradient(90deg,#059669,#34d399);}
+    .cs-bar-row--winner .cs-bar-val{color:#059669;}
+    .cs-bar-row--winner .cs-bar-track{border:1.5px solid rgba(5,150,105,.2);}
+    /* Runner up */
+    .cs-bar-row--second .cs-bar-fill{background:linear-gradient(90deg,var(--mid),var(--blue));}
+    .cs-bar-row--second .cs-bar-val{color:var(--mid);}
+    /* Control */
+    .cs-bar-row--control .cs-bar-fill{background:rgba(67,44,151,.15);width:8%!important;}
+    .cs-bar-row--control .cs-bar-val{color:var(--faint);}
+    .cs-bar-winner-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .6rem;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.25);border-radius:2rem;font-size:.65rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#059669;margin-left:.5rem;}
+
+    /* Subgroup table */
+    .cs-table-wrap{margin:1.5rem 0;overflow-x:auto;}
+    .cs-table{width:100%;border-collapse:collapse;font-size:.9rem;}
+    .cs-table th{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:.625rem 1rem;text-align:left;border-bottom:1.5px solid rgba(67,44,151,.1);}
+    .cs-table th:not(:first-child){text-align:center;}
+    .cs-table td{padding:.75rem 1rem;border-bottom:1px solid rgba(67,44,151,.06);color:var(--muted);font-size:.875rem;}
+    .cs-table td:first-child{font-weight:600;color:var(--ink);}
+    .cs-table td:not(:first-child){text-align:center;}
+    .cs-table tr:last-child td{border-bottom:none;}
+    .cs-table .cs-td-green{font-family:var(--font-h);font-weight:800;color:#059669;}
+    .cs-table .cs-td-mid{font-family:var(--font-h);font-weight:700;color:var(--mid);}
+
+    /* Pull quote */
+    .cs-blockquote{margin:2rem 0;padding:1.5rem 1.75rem;border-left:4px solid #4ade80;background:rgba(74,222,128,.04);border-radius:0 var(--r-md) var(--r-md) 0;}
+    .cs-blockquote p{font-family:var(--font-h);font-size:1.1875rem;font-weight:700;font-style:italic;line-height:1.5;color:var(--ink);margin-bottom:.625rem;}
+    .cs-blockquote cite{font-size:.8125rem;color:var(--faint);font-style:normal;}
+
+    /* Key takeaway callout */
+    .cs-callout{margin:2rem 0;padding:1.5rem 1.75rem;background:rgba(74,222,128,.06);border:1.5px solid rgba(74,222,128,.2);border-radius:var(--r-md);}
+    .cs-callout-label{display:flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#059669;margin-bottom:.75rem;}
+    .cs-callout-label::before{content:'';display:block;width:8px;height:8px;border-radius:50%;background:#4ade80;}
+    .cs-callout p{font-size:.9375rem;line-height:1.7;color:var(--ink);margin-bottom:0;}
+
+    /* ── NEWSLETTER ── */
+    .newsletter-section{background:var(--ghost);padding:4rem 0;border-top:1px solid rgba(67,44,151,.08);}
+    .newsletter-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .newsletter-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+    .newsletter-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:nlPulse 2s infinite;}
+    @keyframes nlPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+    .newsletter-sub{font-size:.9375rem;line-height:1.65;color:var(--muted);}
+    .newsletter-form{display:flex;flex-direction:column;gap:.75rem;}
+    .nl-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+    .nl-input{width:100%;padding:.75rem 1rem;font-family:var(--font-b);font-size:.9375rem;color:var(--ink);background:#fff;border:1.5px solid rgba(67,44,151,.15);border-radius:.625rem;outline:none;transition:border-color .15s,box-shadow .15s;}
+    .nl-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(67,44,151,.1);}
+    .nl-input::placeholder{color:var(--faint);}
+    .nl-submit{width:100%;padding:.875rem;font-family:var(--font-h);font-weight:700;font-size:1rem;color:#fff;background:var(--purple);border:none;border-radius:.625rem;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(67,44,151,.3);}
+    .nl-submit:hover{background:#5038b0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(67,44,151,.4);}
+    .nl-privacy{font-size:.72rem;color:var(--faint);text-align:center;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .cs-layout{grid-template-columns:1fr;}
+      .cs-sidebar{position:static;top:auto;}
+      .cs-results-card{margin-bottom:2rem;}
+      .footer-top{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:640px){
+      .container{padding:0 1.25rem;}
+      .cs-hero{padding:7rem 0 3.5rem;}
+      .cs-hero-stats{flex-direction:column;width:100%;}
+      .cs-hero-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);}
+      .cs-hero-stat:last-child{border-bottom:none;}
+      .newsletter-inner{grid-template-columns:1fr;gap:2rem;}
+      .nl-row{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav nav--dark" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-dark.svg" alt="Grow Progress" class="nav-gp-logo">
+  </a>
+  <ul class="nav-links">
+    <li class="has-dropdown">
+      <a href="#">Platform
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown">
+        <a href="rapid-message-testing.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19V6l12-3v13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19" r="3" stroke="currentColor" stroke-width="1.75"/><circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Rapid Message Testing</span><span class="nav-dd-desc">A/B test messages with RCTs — results in 24 hours</span></div>
+        </a>
+        <a href="audience-understanding.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Audience Understanding</span><span class="nav-dd-desc">Map who your audience is and what they believe</span></div>
+        </a>
+        <a href="pulse-surveys.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Pulse Surveys</span><span class="nav-dd-desc">Real-time opinion tracking as events unfold</span></div>
+        </a>
+        <a href="persuasion-library.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.75"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Library</span><span class="nav-dd-desc">500+ studies searchable by topic and audience</span></div>
+        </a>
+        <a href="how-it-works.html" class="nav-dd-item nav-dd-item--method">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.75"/><path d="M12 8v4l3 3" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-eyebrow">Methodology</span><span class="nav-dd-label">How It Works</span><span class="nav-dd-desc">The RCT science behind every GP study</span></div>
+        </a>
+        <a href="persuasion-sandbox.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Persuasion Sandbox</span><span class="nav-dd-desc">Self-serve message testing — launch in minutes</span></div>
+        </a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">Who We Serve
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="nav-dropdown nav-dropdown--single">
+        <a href="politics.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11l19-9-9 19-2-8-8-2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Political Campaigns</span></div>
+        </a>
+        <a href="advocacy.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="6" y1="1" x2="6" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="10" y1="1" x2="10" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><line x1="14" y1="1" x2="14" y2="4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Advocacy Organizations</span></div>
+        </a>
+        <a href="nonprofits.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Nonprofits</span></div>
+        </a>
+        <a href="labor.html" class="nav-dd-item">
+          <div class="nav-dd-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.75"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></div>
+          <div class="nav-dd-text"><span class="nav-dd-label">Labor Unions</span></div>
+        </a>
+      </div>
+    </li>
+    <li><a href="insights.html" class="active">Insights</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Log in</a>
+    <a href="demo.html" class="btn-nav">Get a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cs-hero">
+  <div class="container">
+    <div class="cs-hero-inner reveal">
+      <div class="cs-chip">
+        <span class="cs-chip-dot"></span>
+        Case Study &nbsp;·&nbsp; Labor &nbsp;·&nbsp; May 2026
+      </div>
+      <h1>How a major labor union won member support for a high-stakes contract campaign</h1>
+      <p class="cs-hero-sub">Dignity framing outperformed wages messaging by 13 points across all age cohorts. Here's what the data showed — and how the union used it.</p>
+      <div class="cs-hero-stats">
+        <div class="cs-hero-stat">
+          <span class="cs-hero-stat-val">+24 pts</span>
+          <span class="cs-hero-stat-label">Lift</span>
+        </div>
+        <div class="cs-hero-stat">
+          <span class="cs-hero-stat-val">n=1,100</span>
+          <span class="cs-hero-stat-label">Sample size</span>
+        </div>
+        <div class="cs-hero-stat">
+          <span class="cs-hero-stat-val">24h</span>
+          <span class="cs-hero-stat-label">Turnaround</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COVER IMAGE -->
+<div class="cs-cover">
+  <!-- replace src with cover image -->
+  <img src="" alt="" class="cs-cover-img">
+  <span class="cs-cover-ph">+24 pts</span>
+</div>
+
+<!-- ARTICLE BODY -->
+<section class="cs-body-section">
+  <div class="container">
+    <div class="cs-layout">
+
+      <!-- MAIN CONTENT -->
+      <article class="cs-article reveal">
+
+        <h2>The challenge</h2>
+        <p>In the months before a major contract renewal deadline, a large labor union representing over 100,000 service workers faced a critical communications challenge. Leadership had secured a strong package at the bargaining table — meaningful wage increases, improved healthcare provisions, and new workplace protections. But in preliminary conversations with organizers, member sentiment was lukewarm. Without visible member enthusiasm, management had leverage to drag out ratification or reopen negotiations.</p>
+        <p>The union's communications team had three candidate frames they believed could build support: one focused on wages and economic benefits, one centered on worker dignity and respect, and one emphasizing worker voice and collective control. Each had intuitive appeal. What they lacked was evidence about which would actually move members — particularly across a membership that spanned three generations with meaningfully different priorities.</p>
+        <p>They needed an answer fast. Ratification communications needed to go out within 96 hours.</p>
+
+        <h2>The approach</h2>
+        <p>Grow Progress designed a randomized controlled trial fielded to 1,100 union members across the organization's geographic footprint. Respondents were randomly assigned to one of three message conditions or a control group that received no persuasion message. All participants answered the same outcome question before and after their assigned message exposure, measuring shift in support for ratifying the contract.</p>
+        <p>The three frames tested were:</p>
+        <ul style="margin:.75rem 0 1rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;">
+          <li style="font-size:1rem;line-height:1.7;color:var(--muted);"><strong style="color:var(--ink);">Frame A — Dignity &amp; respect:</strong> Centered the contract as recognition of what members deserve — respect on the job, fair treatment, and the dignity every worker is owed.</li>
+          <li style="font-size:1rem;line-height:1.7;color:var(--muted);"><strong style="color:var(--ink);">Frame B — Wages &amp; benefits:</strong> Led with the economic gains — specific dollar amounts, healthcare cost savings, and improved retirement provisions.</li>
+          <li style="font-size:1rem;line-height:1.7;color:var(--muted);"><strong style="color:var(--ink);">Frame C — Worker control (control):</strong> Emphasized collective power and the union's role in giving workers a seat at the table — the baseline frame the union had used in prior campaigns.</li>
+        </ul>
+        <p>The study was fielded online and returned results within 24 hours of launch.</p>
+
+        <h2>Results</h2>
+        <p>The findings were unambiguous. Dignity framing produced the largest lift by a substantial margin — and the gap held across every subgroup tested.</p>
+
+        <div class="cs-bar-chart" id="barChart">
+          <div class="cs-bar-row cs-bar-row--winner">
+            <div class="cs-bar-label-row">
+              <span class="cs-bar-name">Frame A — Dignity &amp; respect <span class="cs-bar-winner-badge">Winner</span></span>
+              <span class="cs-bar-val">+24 pts</span>
+            </div>
+            <div class="cs-bar-track">
+              <div class="cs-bar-fill" style="width:0%" data-width="88%"></div>
+            </div>
+          </div>
+          <div class="cs-bar-row cs-bar-row--second">
+            <div class="cs-bar-label-row">
+              <span class="cs-bar-name">Frame B — Wages &amp; benefits</span>
+              <span class="cs-bar-val">+11 pts</span>
+            </div>
+            <div class="cs-bar-track">
+              <div class="cs-bar-fill" style="width:0%" data-width="44%"></div>
+            </div>
+          </div>
+          <div class="cs-bar-row cs-bar-row--control">
+            <div class="cs-bar-label-row">
+              <span class="cs-bar-name">Frame C — Worker control (baseline)</span>
+              <span class="cs-bar-val">Baseline</span>
+            </div>
+            <div class="cs-bar-track">
+              <div class="cs-bar-fill" style="width:0%" data-width="8%"></div>
+            </div>
+          </div>
+        </div>
+
+        <h2>What the data showed</h2>
+        <p>The dignity frame's dominance was not driven by any single demographic segment — it won across the board. The subgroup analysis by age cohort is particularly telling: even among younger members who conventional wisdom might predict would respond more strongly to economic framing, dignity language outperformed wages messaging by double digits.</p>
+
+        <div class="cs-table-wrap">
+          <table class="cs-table">
+            <thead>
+              <tr>
+                <th>Age cohort</th>
+                <th>Frame A (Dignity)</th>
+                <th>Frame B (Wages)</th>
+                <th>Margin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>18–34</td>
+                <td class="cs-td-green">+22 pts</td>
+                <td class="cs-td-mid">+10 pts</td>
+                <td>+12</td>
+              </tr>
+              <tr>
+                <td>35–54</td>
+                <td class="cs-td-green">+26 pts</td>
+                <td class="cs-td-mid">+12 pts</td>
+                <td>+14</td>
+              </tr>
+              <tr>
+                <td>55+</td>
+                <td class="cs-td-green">+23 pts</td>
+                <td class="cs-td-mid">+11 pts</td>
+                <td>+12</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>The consistency of the margin — 12 to 14 points across cohorts — suggests the finding is not an artifact of demographic composition. Dignity framing taps something durable across this membership, regardless of age or career stage. All results were statistically significant at p&lt;.05.</p>
+
+        <h2>How they used it</h2>
+        <p>Armed with the findings within 24 hours of fielding, the union's communications team rebuilt their ratification messaging from the ground up. Every member-facing email, text blast, and town hall talking point was reoriented around dignity and respect — with economic details present but secondary.</p>
+        <p>Organizers were given one-pagers that explained the frame rationale in plain language, so they could adapt the messaging in conversations with hesitant members without losing the core theme. The communications director also used the subgroup data to give regional leads confidence that the frame would hold in their specific membership populations.</p>
+        <p>The contract ratified with broad member support. Internal tracking showed a notable increase in positive member sentiment in the two weeks following the communications push — an outcome the union attributed in part to using language their members actually responded to, rather than language that felt right to leadership.</p>
+
+        <blockquote class="cs-blockquote">
+          <p>"We thought we knew what our members cared about. The data showed us something more specific — and more actionable. Running with the dignity frame instead of our default messaging made the difference between a squeaky ratification and a real mandate."</p>
+          <cite>— Communications Director, A Major Labor Union</cite>
+        </blockquote>
+
+        <div class="cs-callout">
+          <div class="cs-callout-label">Key takeaway</div>
+          <p>In labor contexts, dignity and respect framing consistently outperforms economic-benefit messaging — even when the economic benefits are strong. Members don't just want to know what they're getting; they want to feel that what they do matters and that they are treated as they deserve. Organizations that test before committing to a frame avoid the costly mistake of leading with the wrong story.</p>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="cs-sidebar reveal reveal-delay-1">
+        <div class="cs-results-card">
+          <div class="cs-results-card-header"></div>
+          <div class="cs-results-card-body">
+            <p class="cs-results-title">Results at a glance</p>
+            <div class="cs-results-stats">
+              <div class="cs-stat-row">
+                <span class="cs-stat-num">+24 pts</span>
+                <span class="cs-stat-label">Message lift</span>
+              </div>
+              <div class="cs-stat-row">
+                <span class="cs-stat-num">n=1,100</span>
+                <span class="cs-stat-label">Sample size</span>
+              </div>
+              <div class="cs-stat-row">
+                <span class="cs-stat-num">24h</span>
+                <span class="cs-stat-label">Field time</span>
+              </div>
+              <div class="cs-stat-row">
+                <span class="cs-stat-num">3</span>
+                <span class="cs-stat-label">Variants tested</span>
+              </div>
+            </div>
+            <div class="cs-results-meta">
+              <div class="cs-meta-row">
+                <span class="cs-meta-label">Winning frame</span>
+                <span class="cs-winning-frame">Dignity &amp; respect</span>
+              </div>
+              <div class="cs-meta-row">
+                <span class="cs-meta-label">GP Method</span>
+                <span class="cs-method-value">Randomized Controlled Trial</span>
+              </div>
+              <div class="cs-meta-row">
+                <span class="cs-meta-label">Sector</span>
+                <span class="cs-meta-value">Labor</span>
+              </div>
+              <div class="cs-meta-row">
+                <span class="cs-meta-label">Published</span>
+                <span class="cs-meta-value">May 2026</span>
+              </div>
+            </div>
+            <a href="rapid-message-testing.html" class="cs-sidebar-cta">Run a similar test →</a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div class="reveal">
+        <div class="newsletter-eyebrow">
+          <span class="newsletter-eyebrow-dot"></span>
+          Grow Progress Newsletter
+        </div>
+        <p class="newsletter-sub">Monthly insights from 500+ studies — what moves people, what does not, and what it means for your next campaign.</p>
+      </div>
+      <form class="newsletter-form reveal reveal-delay-1" onsubmit="return false;">
+        <div class="nl-row">
+          <input class="nl-input" type="text" placeholder="First name" autocomplete="given-name">
+          <input class="nl-input" type="text" placeholder="Last name" autocomplete="family-name">
+        </div>
+        <input class="nl-input" type="email" placeholder="Work email" autocomplete="email">
+        <button class="nl-submit" type="submit">Subscribe</button>
+        <p class="nl-privacy">No spam. Unsubscribe any time.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div>
+          <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        </div>
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
+      </div>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll — remove dark state past 40px
+  const nav = document.getElementById('nav');
+  function updateNav() {
+    if (window.scrollY > 40) {
+      nav.classList.remove('nav--dark');
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.add('nav--dark');
+      nav.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', updateNav, {passive:true});
+  updateNav();
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Animated bar chart — trigger when chart enters viewport
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.cs-bar-fill[data-width]').forEach(fill => {
+          // Small delay so animation is visible
+          setTimeout(() => {
+            fill.style.width = fill.dataset.width;
+          }, 120);
+        });
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const chart = document.getElementById('barChart');
+  if (chart) barObs.observe(chart);
+</script>
+</body>
+</html>

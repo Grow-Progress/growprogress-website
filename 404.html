@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — Grow Progress</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#1F1628; --purple:#432C97; --mid:#5B5DC0;
+      --blue:#6C9BFF; --lavender:#DCD2FF; --ghost:#F2F2FD; --white:#fff;
+      --muted:#6B5E8A; --faint:#9B8FBA;
+      --font-h:'Barlow',sans-serif; --font-b:'Work Sans',sans-serif;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{font-size:16px;height:100%;}
+    body{font-family:var(--font-b);color:var(--white);background:linear-gradient(135deg,#1A1030 0%,#2D1F5E 45%,#1F1628 100%);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+    /* Orbs */
+    .orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;}
+    .orb-1{width:600px;height:600px;top:-150px;right:-100px;background:radial-gradient(circle,rgba(108,155,255,.2) 0%,transparent 70%);}
+    .orb-2{width:500px;height:500px;bottom:-100px;left:-80px;background:radial-gradient(circle,rgba(91,93,192,.25) 0%,transparent 70%);}
+
+    /* Nav */
+    .nav{position:relative;z-index:10;height:68px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;}
+    .nav-gp-logo{height:36px;width:auto;display:block;}
+    .btn-nav{padding:.55rem 1.2rem;background:var(--purple);color:#fff;font-family:var(--font-h);font-weight:700;font-size:.875rem;border-radius:.5rem;text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(67,44,151,.3);}
+    .btn-nav:hover{background:#5038b0;transform:translateY(-1px);}
+
+    /* Main */
+    main{flex:1;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:3rem 2rem;}
+    .four-oh-four{text-align:center;max-width:560px;}
+
+    /* Big 404 */
+    .err-number{font-family:var(--font-h);font-weight:900;font-size:clamp(7rem,18vw,13rem);letter-spacing:-.06em;line-height:.9;background:linear-gradient(135deg,rgba(108,155,255,.25) 0%,rgba(220,210,255,.12) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.5rem;user-select:none;}
+
+    .err-chip{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:.35rem .875rem;border-radius:2rem;margin-bottom:1.5rem;}
+    .err-chip-dot{width:6px;height:6px;border-radius:50%;background:#f87171;}
+
+    .err-h{font-family:var(--font-h);font-weight:900;font-size:clamp(1.625rem,4vw,2.25rem);letter-spacing:-.03em;line-height:1.1;color:#fff;margin-bottom:1rem;}
+    .err-h em{font-style:italic;color:var(--lavender);}
+
+    .err-sub{font-size:1rem;line-height:1.7;color:rgba(255,255,255,.5);margin-bottom:2.5rem;}
+
+    /* Mini result bar — decorative */
+    .err-bar-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:1rem;padding:1.25rem 1.5rem;margin-bottom:2.5rem;text-align:left;}
+    .err-bar-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.875rem;}
+    .err-bar-item{display:flex;align-items:center;gap:.75rem;margin-bottom:.625rem;}
+    .err-bar-item:last-child{margin-bottom:0;}
+    .err-bar-name{font-size:.8125rem;color:rgba(255,255,255,.5);width:140px;flex-shrink:0;}
+    .err-bar-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;}
+    .err-bar-fill{height:100%;border-radius:6px;}
+    .fill-a{width:0;background:linear-gradient(90deg,var(--blue),#a78bfa);transition:width 1s .3s cubic-bezier(.22,1,.36,1);}
+    .fill-b{width:0;background:rgba(255,255,255,.2);transition:width 1s .5s cubic-bezier(.22,1,.36,1);}
+    .fill-c{width:0;background:rgba(255,255,255,.08);transition:width 1s .7s cubic-bezier(.22,1,.36,1);}
+    .err-bar-pct{font-family:var(--font-h);font-weight:700;font-size:.8125rem;width:48px;text-align:right;flex-shrink:0;}
+    .pct-a{color:var(--blue);}
+    .pct-b{color:rgba(255,255,255,.3);}
+    .pct-c{color:rgba(255,255,255,.15);}
+    .err-verdict{display:flex;align-items:center;gap:.5rem;margin-top:.875rem;font-family:var(--font-h);font-size:.72rem;font-weight:700;color:rgba(255,255,255,.25);}
+    .err-verdict-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.5);}
+
+    /* CTAs */
+    .err-ctas{display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap;}
+    .err-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;font-family:var(--font-h);font-weight:700;font-size:.9375rem;border-radius:.625rem;text-decoration:none;transition:all .2s;}
+    .err-btn--primary{background:var(--purple);color:#fff;box-shadow:0 4px 20px rgba(67,44,151,.35);}
+    .err-btn--primary:hover{background:#5038b0;transform:translateY(-2px);}
+    .err-btn--ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);}
+    .err-btn--ghost:hover{background:rgba(255,255,255,.1);color:#fff;}
+
+    /* Footer */
+    footer{position:relative;z-index:1;text-align:center;padding:2rem;font-size:.8125rem;color:rgba(255,255,255,.2);}
+  </style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="gp-logo-light.svg" alt="Grow Progress" class="nav-gp-logo">
+  </a>
+  <a href="demo.html" class="btn-nav">Get a Demo</a>
+</nav>
+
+<main>
+  <div class="four-oh-four">
+
+    <div class="err-number">404</div>
+
+    <div class="err-chip"><span class="err-chip-dot"></span>Test result: Page not found</div>
+
+    <h1 class="err-h">This page didn't<br><em>test well.</em></h1>
+    <p class="err-sub">Actually, it didn't test at all — it doesn't exist. But the good news is we ran the numbers on where you should go next.</p>
+
+    <div class="err-bar-wrap">
+      <div class="err-bar-label">Where to go from here · n = 1</div>
+      <div class="err-bar-item">
+        <span class="err-bar-name">Go to homepage</span>
+        <div class="err-bar-track"><div class="err-bar-fill fill-a" id="fillA"></div></div>
+        <span class="err-bar-pct pct-a">+89%</span>
+      </div>
+      <div class="err-bar-item">
+        <span class="err-bar-name">Browse insights</span>
+        <div class="err-bar-track"><div class="err-bar-fill fill-b" id="fillB"></div></div>
+        <span class="err-bar-pct pct-b">+42%</span>
+      </div>
+      <div class="err-bar-item">
+        <span class="err-bar-name">Stay on this page</span>
+        <div class="err-bar-track"><div class="err-bar-fill fill-c" id="fillC"></div></div>
+        <span class="err-bar-pct pct-c">—</span>
+      </div>
+      <div class="err-verdict"><span class="err-verdict-dot"></span>Statistically significant. We recommend the homepage.</div>
+    </div>
+
+    <div class="err-ctas">
+      <a href="index.html" class="err-btn err-btn--primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M3 12l7-7M3 12l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to home
+      </a>
+      <a href="insights.html" class="err-btn err-btn--ghost">Browse insights</a>
+      <a href="demo.html" class="err-btn err-btn--ghost">Get a demo</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>© 2026 Grow Progress. All rights reserved.</footer>
+
+<script>
+  setTimeout(() => {
+    document.getElementById('fillA').style.width = '89%';
+    document.getElementById('fillB').style.width = '42%';
+    document.getElementById('fillC').style.width = '8%';
+  }, 300);
+</script>
+</body>
+</html>
