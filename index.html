@@ -641,7 +641,7 @@
       background:var(--white); border:1.5px solid rgba(67,44,151,.1);
       border-radius:var(--r-lg); padding:1.25rem 1.5rem;
       cursor:pointer; transition:border-color .2s, box-shadow .2s;
-      position:relative; overflow:hidden;
+      position:relative; overflow:visible;
     }
     .hiw-tab:hover { border-color:var(--purple); }
     .hiw-tab.active {
@@ -668,6 +668,7 @@
     .hiw-progress-bar {
       position:absolute; top:0; left:0; right:0;
       height:4px; background:rgba(67,44,151,.12); overflow:hidden;
+      border-radius:var(--r-lg) var(--r-lg) 0 0;
     }
     .hiw-progress-fill {
       height:100%; width:0%; border-radius:0;
