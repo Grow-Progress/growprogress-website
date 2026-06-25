@@ -641,7 +641,7 @@
       background:var(--white); border:1.5px solid rgba(67,44,151,.1);
       border-radius:var(--r-lg); padding:1.25rem 1.5rem;
       cursor:pointer; transition:border-color .2s, box-shadow .2s;
-      position:relative; overflow:visible;
+      position:relative; overflow:hidden;
     }
     .hiw-tab:hover { border-color:var(--purple); }
     .hiw-tab.active {
@@ -664,14 +664,10 @@
     .hiw-tab-title { font-family:var(--font-h); font-weight:700; font-size:.9375rem; color:var(--text); line-height:1.25; }
     .hiw-tab.active .hiw-tab-title { color:var(--purple); }
 
-    /* Progress bar inside each tab — sits at top of card */
-    .hiw-progress-bar {
-      position:absolute; top:0; left:0; right:0;
-      height:4px; background:rgba(67,44,151,.12); overflow:hidden;
-      border-radius:var(--r-lg) var(--r-lg) 0 0;
-    }
+    /* Progress bar inside each tab */
+    .hiw-progress-bar { height:3px; background:rgba(67,44,151,.08); border-radius:3px; overflow:hidden; }
     .hiw-progress-fill {
-      height:100%; width:0%; border-radius:0;
+      height:100%; width:0%; border-radius:3px;
       background:linear-gradient(90deg,var(--purple),var(--blue));
     }
     .hiw-progress-fill.running {
