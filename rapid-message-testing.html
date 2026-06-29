@@ -250,23 +250,19 @@
   object-position: top;
   max-height: 340px;
 }
-/* Floating callout cards */
+/* Callout cards row below frame */
+.hero-callouts-row {
+  display: flex;
+  gap: .75rem;
+  margin-top: .75rem;
+}
 .hero-callout {
-  position: absolute;
+  flex: 1;
   background: #fff;
   border: 1px solid rgba(67,44,151,.1);
   border-radius: 1rem;
   padding: .875rem 1.125rem;
-  box-shadow: 0 8px 32px rgba(31,22,40,.12);
-  z-index: 2;
-}
-.hero-callout--subgroups {
-  top: 1.25rem;
-  left: -1.75rem;
-}
-.hero-callout--scale {
-  bottom: 1.25rem;
-  right: -1.75rem;
+  box-shadow: 0 4px 16px rgba(31,22,40,.08);
 }
 .callout-label {
   font-size: .6rem;
@@ -1102,20 +1098,6 @@
 
       <!-- RIGHT: product visual -->
       <div class="hero-visual">
-        <div class="hero-callout hero-callout--subgroups">
-          <div class="callout-label">Subgroups</div>
-          <div class="callout-tags">
-            <span class="callout-tag">Age</span>
-            <span class="callout-tag">Race</span>
-            <span class="callout-tag">Education</span>
-            <span class="callout-tag">Household Income</span>
-            <span class="callout-tag">Parental Status</span>
-            <span class="callout-tag">Party ID</span>
-            <span class="callout-tag">Urbanicity</span>
-            <span class="callout-tag">2024 Presidential Vote</span>
-            <span class="callout-tag callout-tag--more">And more…</span>
-          </div>
-        </div>
         <div class="product-frame">
           <div class="product-frame-bar">
             <div class="frame-dots">
@@ -1127,13 +1109,29 @@
           </div>
           <img src="rmt-screenshot-1.png" alt="RMT results dashboard">
         </div>
-        <div class="hero-callout hero-callout--scale">
-          <div class="callout-label">Message Effect</div>
-          <div class="scale-row"><span class="scale-dot scale-dot--backlash"></span><span class="scale-lbl">(−) Backlash</span></div>
-          <div class="scale-row"><span class="scale-dot scale-dot--neg-dir"></span><span class="scale-lbl">(−) Directional</span></div>
-          <div class="scale-row"><span class="scale-dot scale-dot--neutral"></span><span class="scale-lbl">No Measurable Effect</span></div>
-          <div class="scale-row"><span class="scale-dot scale-dot--pos-dir"></span><span class="scale-lbl">(+) Directional</span></div>
-          <div class="scale-row"><span class="scale-dot scale-dot--persuasive"></span><span class="scale-lbl">(+) Persuasive</span></div>
+        <div class="hero-callouts-row">
+          <div class="hero-callout">
+            <div class="callout-label">Subgroups</div>
+            <div class="callout-tags">
+              <span class="callout-tag">Age</span>
+              <span class="callout-tag">Race</span>
+              <span class="callout-tag">Education</span>
+              <span class="callout-tag">Household Income</span>
+              <span class="callout-tag">Parental Status</span>
+              <span class="callout-tag">Party ID</span>
+              <span class="callout-tag">Urbanicity</span>
+              <span class="callout-tag">2024 Presidential Vote</span>
+              <span class="callout-tag callout-tag--more">And more…</span>
+            </div>
+          </div>
+          <div class="hero-callout">
+            <div class="callout-label">Message Effect</div>
+            <div class="scale-row"><span class="scale-dot scale-dot--backlash"></span><span class="scale-lbl">(−) Backlash</span></div>
+            <div class="scale-row"><span class="scale-dot scale-dot--neg-dir"></span><span class="scale-lbl">(−) Directional</span></div>
+            <div class="scale-row"><span class="scale-dot scale-dot--neutral"></span><span class="scale-lbl">No Measurable Effect</span></div>
+            <div class="scale-row"><span class="scale-dot scale-dot--pos-dir"></span><span class="scale-lbl">(+) Directional</span></div>
+            <div class="scale-row"><span class="scale-dot scale-dot--persuasive"></span><span class="scale-lbl">(+) Persuasive</span></div>
+          </div>
         </div>
       </div>
 
