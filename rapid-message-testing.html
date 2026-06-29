@@ -254,6 +254,31 @@
   width: 100%;
   display: block;
 }
+/* Scrolling screenshot treatment */
+.screenshot-scroll-wrap {
+  height: 440px;
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.screenshot-scroll-track {
+  display: flex;
+  flex-direction: column;
+  animation: screenshotScroll 40s linear infinite;
+}
+.screenshot-scroll-track img {
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid rgba(67,44,151,.07);
+}
+.screenshot-scroll-wrap:hover .screenshot-scroll-track {
+  animation-play-state: paused;
+}
+@keyframes screenshotScroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
 /* Floating result badge */
 .hero-badge {
   position: absolute;
@@ -1053,7 +1078,7 @@
             Platform · Rapid Message Testing
           </span>
         </div>
-        <h1>Know which message wins ,<br>before you spend <em>a dollar.</em></h1>
+        <h1>Know which message wins<br>before you spend <em>a dollar.</em></h1>
         <p class="hero-sub">Unlike traditional surveys or A/B tests, our Randomized Controlled Trials tell you <em style="font-style:italic;">how to change</em> support, not just measure it. Results in 24 hours.</p>
                 <div class="hero-ctas">
           <a href="demo.html" class="btn btn-primary-dark">
@@ -1078,59 +1103,17 @@
             </div>
             <div class="frame-url">app.growprogress.ai</div>
           </div>
-          <div class="hero-mockup">
-  <div class="hm-topbar">
-    <div class="hm-title">Message Test Results</div>
-    <div class="hm-badge-sig">
-      <span class="hm-sig-dot"></span>Statistically significant
-    </div>
-  </div>
-  <div class="hm-question">"Which message increases support for clean energy jobs?"</div>
-  <div class="hm-results">
-    <div class="hm-result hm-result-win">
-      <div class="hm-result-meta">
-        <div class="hm-result-label">
-          <span class="hm-rank hm-rank-1">A</span>
-          Economic opportunity frame
-        </div>
-        <div class="hm-result-lift hm-lift-win">+18 pts</div>
-      </div>
-      <div class="hm-bar-track">
-        <div class="hm-bar-fill hm-bar-win" style="width:88%"></div>
-      </div>
-      <div class="hm-win-tag">✓ Winner</div>
-    </div>
-    <div class="hm-result">
-      <div class="hm-result-meta">
-        <div class="hm-result-label">
-          <span class="hm-rank hm-rank-2">B</span>
-          Future generations frame
-        </div>
-        <div class="hm-result-lift hm-lift-mid">+9 pts</div>
-      </div>
-      <div class="hm-bar-track">
-        <div class="hm-bar-fill hm-bar-mid" style="width:54%"></div>
-      </div>
-    </div>
-    <div class="hm-result">
-      <div class="hm-result-meta">
-        <div class="hm-result-label">
-          <span class="hm-rank hm-rank-3">C</span>
-          Control (no message)
-        </div>
-        <div class="hm-result-lift hm-lift-base">Baseline</div>
-      </div>
-      <div class="hm-bar-track">
-        <div class="hm-bar-fill hm-bar-base" style="width:22%"></div>
-      </div>
-    </div>
-  </div>
-  <div class="hm-footer">
-    <div class="hm-meta-pill">n = 1,400</div>
-    <div class="hm-meta-pill">24h turnaround</div>
-    <div class="hm-meta-pill">95% confidence</div>
-  </div>
-</div>
+          <div class="screenshot-scroll-wrap">
+            <div class="screenshot-scroll-track">
+              <img src="rmt-screenshot-1.png" alt="RMT results dashboard">
+              <img src="rmt-screenshot-2.png" alt="Subgroup performance waterfall">
+              <img src="rmt-screenshot-3.png" alt="Demographic breakdown">
+              <!-- Duplicate for seamless loop -->
+              <img src="rmt-screenshot-1.png" alt="RMT results dashboard">
+              <img src="rmt-screenshot-2.png" alt="Subgroup performance waterfall">
+              <img src="rmt-screenshot-3.png" alt="Demographic breakdown">
+            </div>
+          </div>
         </div>
         <div class="hero-badge">
           <div class="badge-top">
