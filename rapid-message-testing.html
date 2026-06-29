@@ -219,11 +219,6 @@
     0 4px 12px rgba(31,22,40,.08),
     0 24px 60px rgba(31,22,40,.14),
     0 48px 80px rgba(67,44,151,.08);
-  animation: heroFloat 6s ease-in-out infinite;
-}
-@keyframes heroFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
 }
 .product-frame-bar {
   background: #f5f3ff;
@@ -255,44 +250,85 @@
   object-position: top;
   max-height: 340px;
 }
-/* Floating winner badge */
-.hero-badge {
+/* Floating callout cards */
+.hero-callout {
   position: absolute;
-  bottom: 1.5rem;
-  right: -1.5rem;
   background: #fff;
   border: 1px solid rgba(67,44,151,.1);
   border-radius: 1rem;
-  padding: 1rem 1.25rem;
+  padding: .875rem 1.125rem;
   box-shadow: 0 8px 32px rgba(31,22,40,.12);
   z-index: 2;
-  animation: badgeFloat 5s ease-in-out infinite 1s;
-  min-width: 200px;
 }
-@keyframes badgeFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+.hero-callout--subgroups {
+  top: 1.25rem;
+  left: -1.75rem;
 }
-.badge-lbl-top { font-size: .65rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--faint); margin-bottom: .625rem; }
-.badge-winner-row { display: flex; align-items: center; gap: .5rem; margin-bottom: .375rem; }
-.badge-winner-dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
-.badge-winner-name { font-family: var(--font-h); font-weight: 800; font-size: .9375rem; color: var(--ink); }
-.badge-lift { font-family: var(--font-h); font-weight: 900; font-size: 1.5rem; color: #22c55e; letter-spacing: -.03em; line-height: 1; }
-.badge-lift span { font-size: .8125rem; color: var(--faint); font-weight: 500; margin-left: .25rem; }
-/* Floating time chip */
-.hero-chip-float {
-  position: absolute;
-  top: 1rem;
-  left: -1.5rem;
+.hero-callout--scale {
+  bottom: 1.25rem;
+  right: -1.75rem;
+}
+.callout-label {
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: .5rem;
+}
+.callout-tags {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+.callout-tag {
+  font-family: var(--font-h);
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+}
+.callout-tag::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
   background: var(--purple);
-  border-radius: .875rem;
-  padding: .625rem 1rem;
-  box-shadow: 0 4px 16px rgba(67,44,151,.4);
-  z-index: 2;
-  animation: badgeFloat 7s ease-in-out infinite .5s;
+  flex-shrink: 0;
 }
-.hcf-label { font-size: .62rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: .2rem; }
-.hcf-val { font-family: var(--font-h); font-weight: 800; font-size: .9375rem; color: #fff; }
+.callout-tag--more {
+  color: var(--faint);
+  font-style: italic;
+}
+.callout-tag--more::before { background: var(--faint); }
+/* Effect scale callout */
+.scale-row {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .3rem;
+}
+.scale-row:last-child { margin-bottom: 0; }
+.scale-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.scale-dot--backlash   { background: #ef4444; }
+.scale-dot--neg-dir    { background: #f59e0b; }
+.scale-dot--neutral    { background: #d1d5db; }
+.scale-dot--pos-dir    { background: #818cf8; }
+.scale-dot--persuasive { background: #22c55e; }
+.scale-lbl {
+  font-family: var(--font-h);
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
 
 /* Updated CTAs for light bg */
 .btn-primary-dark {
@@ -1066,9 +1102,19 @@
 
       <!-- RIGHT: product visual -->
       <div class="hero-visual">
-        <div class="hero-chip-float">
-          <div class="hcf-label">Results ready in</div>
-          <div class="hcf-val">24 hours</div>
+        <div class="hero-callout hero-callout--subgroups">
+          <div class="callout-label">Subgroups</div>
+          <div class="callout-tags">
+            <span class="callout-tag">Age</span>
+            <span class="callout-tag">Race</span>
+            <span class="callout-tag">Education</span>
+            <span class="callout-tag">Household Income</span>
+            <span class="callout-tag">Parental Status</span>
+            <span class="callout-tag">Party ID</span>
+            <span class="callout-tag">Urbanicity</span>
+            <span class="callout-tag">2024 Presidential Vote</span>
+            <span class="callout-tag callout-tag--more">And more…</span>
+          </div>
         </div>
         <div class="product-frame">
           <div class="product-frame-bar">
@@ -1081,13 +1127,13 @@
           </div>
           <img src="rmt-screenshot-1.png" alt="RMT results dashboard">
         </div>
-        <div class="hero-badge">
-          <div class="badge-lbl-top">Winner · Congressional Vote Choice</div>
-          <div class="badge-winner-row">
-            <span class="badge-winner-dot"></span>
-            <span class="badge-winner-name">One B — Defund First</span>
-          </div>
-          <div class="badge-lift">+6 pts <span>vs. control</span></div>
+        <div class="hero-callout hero-callout--scale">
+          <div class="callout-label">Message Effect</div>
+          <div class="scale-row"><span class="scale-dot scale-dot--backlash"></span><span class="scale-lbl">(−) Backlash</span></div>
+          <div class="scale-row"><span class="scale-dot scale-dot--neg-dir"></span><span class="scale-lbl">(−) Directional</span></div>
+          <div class="scale-row"><span class="scale-dot scale-dot--neutral"></span><span class="scale-lbl">No Measurable Effect</span></div>
+          <div class="scale-row"><span class="scale-dot scale-dot--pos-dir"></span><span class="scale-lbl">(+) Directional</span></div>
+          <div class="scale-row"><span class="scale-dot scale-dot--persuasive"></span><span class="scale-lbl">(+) Persuasive</span></div>
         </div>
       </div>
 
