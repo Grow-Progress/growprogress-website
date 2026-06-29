@@ -123,10 +123,9 @@
 
     /* ── HERO ── */
     .hero {
-  min-height: 88vh;
   display: flex;
-  align-items: center;
-  padding: 7rem 0 4rem;
+  align-items: flex-start;
+  padding: 8rem 0 0;
   background: linear-gradient(160deg, #F2F2FD 0%, #fff 50%, #F2F2FD 100%);
   position: relative;
   overflow: hidden;
@@ -153,14 +152,14 @@
   pointer-events: none;
 }
 .hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
   position: relative;
   z-index: 1;
+  width: 100%;
 }
-.hero-copy { max-width: 520px; }
+.hero-copy { max-width: 620px; }
 .hero-eyebrow { margin-bottom: 1.5rem; }
 .hero h1 {
   font-family: var(--font-h);
@@ -199,33 +198,22 @@
 }
 .hero-trust-logos img:hover { filter: grayscale(60%) opacity(60%); }
 
-/* Product visual, right side */
-.hero-visual { position: relative; }
-/* Glow behind the frame */
-.hero-visual::before {
-  content: '';
-  position: absolute;
-  inset: -10%;
-  background: radial-gradient(ellipse, rgba(67,44,151,.12) 0%, transparent 65%);
-  z-index: 0;
+/* Product visual, full-width below copy */
+.hero-visual {
+  position: relative;
+  width: 100%;
 }
 /* Browser frame */
 .product-frame {
   position: relative;
   z-index: 1;
   background: #fff;
-  border-radius: 1.25rem;
+  border-radius: 1.25rem 1.25rem 0 0;
   overflow: hidden;
   box-shadow:
     0 0 0 1px rgba(67,44,151,.1),
     0 4px 12px rgba(31,22,40,.08),
-    0 24px 60px rgba(31,22,40,.14),
-    0 48px 80px rgba(67,44,151,.08);
-  animation: heroFloat 6s ease-in-out infinite;
-}
-@keyframes heroFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+    0 -8px 40px rgba(67,44,151,.08);
 }
 .product-frame-bar {
   background: #f5f3ff;
@@ -346,8 +334,7 @@
 .btn-outline-light:hover { border-color: var(--purple); background: rgba(67,44,151,.04); }
 
 @media(max-width: 960px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
+  .hero-copy { max-width: 100%; }
 }
 
     /* ── LOGO STRIP ── */
