@@ -171,6 +171,46 @@
 .frame-url { flex:1; max-width:220px; background:#fff; border:1px solid rgba(67,44,151,.1); border-radius:1rem; padding:.25rem .75rem; font-size:.7rem; color:rgba(31,22,40,.4); }
 .product-frame img { width: 100%; display: block; object-fit: cover; object-position: top; max-height: 340px; }
 
+/* AU coded mockup */
+.au-app { display: grid; grid-template-columns: 164px 1fr; min-height: 340px; font-family: var(--font-b); }
+.au-sidebar { background: var(--ghost); border-right: 1px solid rgba(67,44,151,.08); padding: .875rem 0; }
+.au-sidebar-label { font-family: var(--font-h); font-size: .55rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); padding: 0 .875rem .5rem; }
+.au-seg-item { padding: .5rem .875rem; border-left: 3px solid transparent; display: flex; flex-direction: column; gap: .15rem; cursor: pointer; }
+.au-seg-item.active { background: rgba(67,44,151,.07); border-left-color: var(--purple); }
+.au-seg-item-name { font-family: var(--font-h); font-weight: 700; font-size: .72rem; color: var(--ink); line-height: 1.2; }
+.au-seg-item.active .au-seg-item-name { color: var(--purple); }
+.au-seg-item-pct { font-size: .6rem; color: var(--faint); }
+.au-detail { padding: 1.125rem 1.25rem; overflow: hidden; }
+.au-seg-header { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; margin-bottom: 1rem; }
+.au-seg-title { font-family: var(--font-h); font-weight: 800; font-size: .9rem; color: var(--ink); margin-bottom: .2rem; }
+.au-seg-desc { font-size: .65rem; color: var(--muted); line-height: 1.45; max-width: 220px; }
+.au-seg-badge { background: var(--ghost); border: 1px solid rgba(67,44,151,.1); border-radius: .625rem; padding: .375rem .75rem; text-align: center; flex-shrink: 0; }
+.au-seg-badge-num { font-family: var(--font-h); font-weight: 900; font-size: 1.2rem; color: var(--purple); line-height: 1; }
+.au-seg-badge-lbl { font-size: .58rem; color: var(--faint); margin-top: .15rem; }
+.au-block { margin-bottom: .875rem; }
+.au-block:last-child { margin-bottom: 0; }
+.au-block-title { font-family: var(--font-h); font-weight: 700; font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--faint); margin-bottom: .5rem; }
+.au-block-rule { border: none; border-top: 1px solid rgba(67,44,151,.08); margin: .875rem 0; }
+.au-values { display: flex; flex-wrap: wrap; gap: .3rem; }
+.au-val { display: inline-flex; align-items: center; gap: .3rem; font-family: var(--font-h); font-size: .7rem; font-weight: 700; border-radius: .4rem; padding: .3rem .625rem; border: 1.5px solid transparent; }
+.au-val-1 { background: rgba(67,44,151,.08); color: var(--purple); border-color: rgba(67,44,151,.15); }
+.au-val-2 { background: rgba(108,155,255,.1); color: #3b5ac9; border-color: rgba(108,155,255,.2); }
+.au-val-3 { background: rgba(22,163,74,.08); color: #15803d; border-color: rgba(22,163,74,.18); }
+.au-val-4 { background: rgba(180,83,9,.07); color: #92400e; border-color: rgba(180,83,9,.15); }
+.au-val-5 { background: rgba(91,93,192,.08); color: var(--mid); border-color: rgba(91,93,192,.15); }
+.au-worldview { display: flex; flex-direction: column; gap: .375rem; }
+.au-wv-item { display: flex; align-items: flex-start; gap: .5rem; padding: .5rem .75rem; background: var(--ghost); border-radius: .5rem; border: 1px solid rgba(67,44,151,.07); }
+.au-wv-q { font-family: Georgia, serif; font-size: 1.25rem; line-height: 1; color: var(--lavender); flex-shrink: 0; margin-top: -.08rem; }
+.au-wv-text { font-size: .7rem; color: var(--ink); line-height: 1.5; }
+.au-leader { display: grid; grid-template-columns: 1fr 1fr; gap: .625rem; }
+.au-leader-lbl { font-family: var(--font-h); font-size: .58rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .375rem; }
+.au-leader-lbl--pos { color: #15803d; }
+.au-leader-lbl--neg { color: #b91c1c; }
+.au-traits { display: flex; flex-wrap: wrap; gap: .25rem; }
+.au-trait { font-family: var(--font-h); font-size: .67rem; font-weight: 600; border-radius: 2rem; padding: .175rem .5rem; border: 1px solid transparent; }
+.au-trait--pos { background: #dcfce7; color: #15803d; border-color: #bbf7d0; }
+.au-trait--neg { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+
 /* Callout cards */
 .hero-callout { position: absolute; background: #fff; border: 1px solid rgba(67,44,151,.1); border-radius: .875rem; box-shadow: 0 4px 20px rgba(31,22,40,.1); z-index: 2; }
 .hero-callout--outputs { top: -3.5rem; right: -3rem; padding: .5rem .75rem; }
@@ -595,7 +635,85 @@
             <div class="frame-dots"><span class="fd-r"></span><span class="fd-y"></span><span class="fd-g"></span></div>
             <div class="frame-url">app.growprogress.ai</div>
           </div>
-          <img src="au-screenshot-1.png" alt="Audience Understanding dashboard">
+          <div class="au-app">
+            <aside class="au-sidebar">
+              <div class="au-sidebar-label">4 segments</div>
+              <div class="au-seg-item active">
+                <div class="au-seg-item-name">Patriotic optimists</div>
+                <div class="au-seg-item-pct">31% of audience</div>
+              </div>
+              <div class="au-seg-item">
+                <div class="au-seg-item-name">Community caregivers</div>
+                <div class="au-seg-item-pct">24% of audience</div>
+              </div>
+              <div class="au-seg-item">
+                <div class="au-seg-item-name">Pragmatic skeptics</div>
+                <div class="au-seg-item-pct">27% of audience</div>
+              </div>
+              <div class="au-seg-item">
+                <div class="au-seg-item-name">Disengaged observers</div>
+                <div class="au-seg-item-pct">18% of audience</div>
+              </div>
+            </aside>
+            <main class="au-detail">
+              <div class="au-seg-header">
+                <div>
+                  <div class="au-seg-title">Patriotic optimists</div>
+                  <div class="au-seg-desc">People who selected "I don't know" — persuadable on your issue.</div>
+                </div>
+                <div class="au-seg-badge">
+                  <div class="au-seg-badge-num">31%</div>
+                  <div class="au-seg-badge-lbl">of audience</div>
+                </div>
+              </div>
+              <div class="au-block">
+                <div class="au-block-title">Core values</div>
+                <div class="au-values">
+                  <div class="au-val au-val-1">Patriotism</div>
+                  <div class="au-val au-val-2">Enjoyment</div>
+                  <div class="au-val au-val-3">Safety</div>
+                  <div class="au-val au-val-4">Optimism</div>
+                  <div class="au-val au-val-5">Compassion</div>
+                </div>
+              </div>
+              <hr class="au-block-rule">
+              <div class="au-block">
+                <div class="au-block-title">How they see the world</div>
+                <div class="au-worldview">
+                  <div class="au-wv-item">
+                    <div class="au-wv-q">"</div>
+                    <div class="au-wv-text">Most people who want to get ahead can make it if they're willing to work hard.</div>
+                  </div>
+                  <div class="au-wv-item">
+                    <div class="au-wv-q">"</div>
+                    <div class="au-wv-text">It's important that every person in the world be treated equally, regardless of their race, sexuality, or religion.</div>
+                  </div>
+                </div>
+              </div>
+              <hr class="au-block-rule">
+              <div class="au-block">
+                <div class="au-block-title">Their ideal leader</div>
+                <div class="au-leader">
+                  <div>
+                    <div class="au-leader-lbl au-leader-lbl--pos">Should be</div>
+                    <div class="au-traits">
+                      <span class="au-trait au-trait--pos">Tough</span>
+                      <span class="au-trait au-trait--pos">Gets things done</span>
+                      <span class="au-trait au-trait--pos">Brave</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="au-leader-lbl au-leader-lbl--neg">Should not be</div>
+                    <div class="au-traits">
+                      <span class="au-trait au-trait--neg">Dishonest</span>
+                      <span class="au-trait au-trait--neg">Breaks the law</span>
+                      <span class="au-trait au-trait--neg">Immoral</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
         </div>
       </div>
     </div>
