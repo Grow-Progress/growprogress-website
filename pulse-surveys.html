@@ -163,6 +163,22 @@
     .btn-primary-dark:hover { background:#5038b0; transform:translateY(-2px); }
     .btn-outline-light { padding:.875rem 1.75rem; font-size:1rem; background:transparent; color:var(--purple); border:1.5px solid rgba(67,44,151,.25); }
     .btn-outline-light:hover { border-color:var(--purple); background:rgba(67,44,151,.04); }
+    /* Pulse hero chart */
+    .pulse-chart { padding: 1.25rem 1.375rem 1rem; background: #fff; font-family: var(--font-b); }
+    .pulse-chart-eyebrow { font-family: var(--font-h); font-size: .6rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); margin-bottom: .25rem; }
+    .pulse-chart-q { font-size: .78rem; color: var(--ink); line-height: 1.5; margin-bottom: 1.125rem; max-width: 520px; }
+    .pulse-chart-area { display: flex; gap: .75rem; align-items: flex-end; height: 160px; border-bottom: 1px solid rgba(67,44,151,.1); margin-bottom: .875rem; padding-bottom: 0; }
+    .pulse-bar-col { display: flex; flex-direction: column; align-items: center; gap: 0; flex: 1; height: 100%; justify-content: flex-end; position: relative; }
+    .pulse-bar-val { font-family: var(--font-h); font-size: .7rem; font-weight: 800; color: var(--ink); margin-bottom: .25rem; line-height: 1; }
+    .pulse-bar-body { width: 100%; border-radius: .3rem .3rem 0 0; position: relative; }
+    .pulse-bar-err { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 1px; background: rgba(31,22,40,.45); }
+    .pulse-bar-err::before, .pulse-bar-err::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); width: 7px; height: 1px; background: rgba(31,22,40,.45); }
+    .pulse-bar-err::before { top: 0; }
+    .pulse-bar-err::after { bottom: 0; }
+    .pulse-chart-legend { display: flex; flex-wrap: wrap; gap: .3rem .875rem; }
+    .pulse-legend-item { display: flex; align-items: center; gap: .35rem; font-size: .65rem; color: var(--muted); }
+    .pulse-legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+    .pulse-chart-foot { font-size: .6rem; color: var(--faint); margin-top: .5rem; text-align: right; }
     /* Callout cards */
     .hero-callout { position:absolute; background:#fff; border:1px solid rgba(67,44,151,.1); border-radius:.875rem; box-shadow:0 4px 20px rgba(31,22,40,.1); z-index:2; }
     .hero-callout--breakdowns { top: -3.5rem; right: -3rem; padding: .875rem 1.125rem; }
@@ -570,7 +586,55 @@
             <div class="frame-dots"><span class="fd-r"></span><span class="fd-y"></span><span class="fd-g"></span></div>
             <div class="frame-url">app.growprogress.ai</div>
           </div>
-          <img src="pulse-screenshot.png" alt="Pulse Surveys UI" style="width:100%;display:block;object-fit:cover;object-position:top;max-height:340px;">
+          <div class="pulse-chart">
+            <div class="pulse-chart-eyebrow">Iran War &amp; Prices</div>
+            <div class="pulse-chart-q">Since the United States began military operations in Iran in February, the average U.S. gas price has risen from around $3.00 to $4.48 per gallon. How much do you think the war in Iran is responsible for rising gas prices?</div>
+            <div class="pulse-chart-area">
+              <!-- Bar 1: 50%, teal -->
+              <div class="pulse-bar-col">
+                <div class="pulse-bar-val">50%</div>
+                <div class="pulse-bar-body" style="height:calc(160px * 0.50 - 1.25rem);background:#4BBFA0;">
+                  <div class="pulse-bar-err" style="height:14px;top:-14px;"></div>
+                </div>
+              </div>
+              <!-- Bar 2: 30%, purple -->
+              <div class="pulse-bar-col">
+                <div class="pulse-bar-val">30%</div>
+                <div class="pulse-bar-body" style="height:calc(160px * 0.30 - 1.25rem);background:#8B7BB5;">
+                  <div class="pulse-bar-err" style="height:12px;top:-12px;"></div>
+                </div>
+              </div>
+              <!-- Bar 3: 9%, tan -->
+              <div class="pulse-bar-col">
+                <div class="pulse-bar-val">9%</div>
+                <div class="pulse-bar-body" style="height:calc(160px * 0.09 - 1.25rem);background:#C4A96B;min-height:6px;">
+                  <div class="pulse-bar-err" style="height:10px;top:-10px;"></div>
+                </div>
+              </div>
+              <!-- Bar 4: 3%, yellow -->
+              <div class="pulse-bar-col">
+                <div class="pulse-bar-val">3%</div>
+                <div class="pulse-bar-body" style="height:calc(160px * 0.03 - 1.25rem);background:#E8C84A;min-height:6px;">
+                  <div class="pulse-bar-err" style="height:8px;top:-8px;"></div>
+                </div>
+              </div>
+              <!-- Bar 5: 7%, gray -->
+              <div class="pulse-bar-col">
+                <div class="pulse-bar-val">7%</div>
+                <div class="pulse-bar-body" style="height:calc(160px * 0.07 - 1.25rem);background:#ABABAB;min-height:6px;">
+                  <div class="pulse-bar-err" style="height:9px;top:-9px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="pulse-chart-legend">
+              <div class="pulse-legend-item"><div class="pulse-legend-swatch" style="background:#4BBFA0;"></div>The war is the main reason gas prices have gone up</div>
+              <div class="pulse-legend-item"><div class="pulse-legend-swatch" style="background:#8B7BB5;"></div>The war is one of several reasons gas prices have gone up</div>
+              <div class="pulse-legend-item"><div class="pulse-legend-swatch" style="background:#C4A96B;"></div>The war has played only a minor role in rising gas prices</div>
+              <div class="pulse-legend-item"><div class="pulse-legend-swatch" style="background:#E8C84A;"></div>The war has nothing to do with rising gas prices</div>
+              <div class="pulse-legend-item"><div class="pulse-legend-swatch" style="background:#ABABAB;"></div>Not sure</div>
+            </div>
+            <div class="pulse-chart-foot">Interviews: 789</div>
+          </div>
         </div>
         <div class="hero-callout hero-callout--breakdowns">
           <div class="callout-label">Results Breakdowns</div>
