@@ -231,15 +231,19 @@
 
     /* ── FOOTER ── */
     .footer{background:var(--ink);padding:3.5rem 0 2rem;}
-    .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
-    .footer-brand p{font-size:.875rem;color:rgba(255,255,255,.4);line-height:1.6;margin-top:.875rem;max-width:220px;}
-    .footer-col h4{font-family:var(--font-h);font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem;}
-    .footer-col a{display:block;font-size:.875rem;color:rgba(255,255,255,.55);text-decoration:none;margin-bottom:.5rem;transition:color .15s;}
-    .footer-col a:hover{color:#fff;}
-    .footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.3);}
-    @media(max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
-    @media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+    .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
+    .footer-tagline{font-size:.875rem;color:rgba(255,255,255,.3);line-height:1.6;}
+    .footer-col-label{font-family:var(--font-h);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem;}
+    .footer-links{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+    .footer-links a{font-size:.875rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;}
+    .footer-links a:hover{color:#fff;}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-copy{font-size:.8125rem;color:rgba(255,255,255,.25);}
+    .footer-legal{display:flex;gap:1.75rem;}
+    .footer-legal a{font-size:.8125rem;color:rgba(255,255,255,.25);text-decoration:none;transition:color .15s;}
+    .footer-legal a:hover{color:rgba(255,255,255,.6);}
+    @media(max-width:1024px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:480px){.footer-top{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -641,37 +645,50 @@
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;">
-        <p>The persuasion platform for causes that need to move people.</p>
+    <div class="footer-top">
+      <div>
+        <div>
+          <img src="gp-logo-light.svg" alt="Grow Progress" style="height:32px;width:auto;display:block;margin-bottom:.75rem;">
+        </div>
+        <p class="footer-tagline">The heart and science<br>of changing minds.</p>
       </div>
-      <div class="footer-col">
-        <h4>Platform</h4>
-        <a href="audience-understanding.html">Audience Understanding</a>
-        <a href="rapid-message-testing.html">Rapid Message Testing</a>
-        <a href="pulse-surveys.html">Pulse Surveys</a>
-        <a href="persuasion-library.html">Persuasion Library</a>
-        <a href="persuasion-sandbox.html">Persuasion Sandbox</a>
-        <a href="methodology.html">Our Methodology</a>
+      <div>
+        <p class="footer-col-label">Platform</p>
+        <ul class="footer-links">
+          <li><a href="audience-understanding.html">Audience Understanding</a></li>
+          <li><a href="rapid-message-testing.html">Rapid Message Testing</a></li>
+          <li><a href="pulse-surveys.html">Pulse Surveys</a></li>
+          <li><a href="persuasion-library.html">Persuasion Library</a></li>
+          <li><a href="persuasion-sandbox.html">Persuasion Sandbox</a></li>
+          <li><a href="methodology.html">Our Methodology</a></li>
+        </ul>
       </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="about.html">About</a>
-        <a href="who-we-serve.html">Who We Serve</a>
-        <a href="insights.html">Insights</a>
-        <a href="demo.html">Request a Demo</a>
+      <div>
+        <p class="footer-col-label">Who We Serve</p>
+        <ul class="footer-links">
+          <li><a href="politics.html">Political Campaigns &amp; PACs</a></li>
+          <li><a href="advocacy.html">Advocacy Organizations</a></li>
+          <li><a href="nonprofits.html">Nonprofits</a></li>
+          <li><a href="labor.html">Labor Unions</a></li>
+        </ul>
       </div>
-      <div class="footer-col">
-        <h4>Resources</h4>
-        <a href="insights.html">Research &amp; Insights</a>
-        <a href="persuasion-library.html">Persuasion Library</a>
-        <a href="methodology.html">Methodology</a>
+      <div>
+        <p class="footer-col-label">Company</p>
+        <ul class="footer-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="demo.html">Request a Demo</a></li>
+        </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2025 Grow Progress. All rights reserved.</span>
-      <span class="footer-copy">Privacy Policy · Terms of Service</span>
+      <p class="footer-copy">© 2026 Grow Progress. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="terms-and-conditions.html">Terms and Conditions</a>
+        <a href="code-of-conduct.html">Platform Code of Conduct</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+      </div>
     </div>
   </div>
 </footer>
