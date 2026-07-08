@@ -159,7 +159,7 @@
 
     /* Top: 3 problem pills */
     /* Challenge ruled list */
-    .challenge-layout{display:grid;grid-template-columns:180px 1fr;gap:0 3rem;margin-bottom:3.5rem;}
+    .challenge-layout{display:block;margin-bottom:3.5rem;}
     .challenge-left{border-right:2px solid rgba(67,44,151,.1);padding-right:2rem;padding-top:.25rem;}
     .challenge-left-label{font-family:var(--font-h);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);line-height:1.6;}
     .challenge-problems{display:flex;flex-direction:column;}
@@ -693,10 +693,7 @@
 
     <!-- Challenge ruled list -->
     <div class="challenge-layout reveal">
-      <div class="challenge-left">
-        <div class="challenge-left-label">What unions are<br>working around</div>
-      </div>
-      <div class="challenge-problems">
+<div class="challenge-problems">
         <div class="challenge-problem">
           <div class="cp-label">Misdiagnosis</div>
           <div class="cp-title">Knowing where support stands isn't the same as knowing how to move it.</div>
