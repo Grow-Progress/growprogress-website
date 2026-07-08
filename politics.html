@@ -164,6 +164,19 @@
     .ps-section{background:var(--white);padding:6rem 0 5rem;}
 
     /* Top: 3 problem pills */
+    /* Accordion */
+    .accordion{max-width:680px;margin:0 auto 3.5rem;border-top:1px solid rgba(67,44,151,.12);}
+    .accordion-item{border-bottom:1px solid rgba(67,44,151,.12);}
+    .accordion-trigger{width:100%;background:none;border:none;cursor:pointer;padding:1.5rem 0;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;text-align:left;}
+    .accordion-trigger:focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:2px;}
+    .accordion-trigger-left{display:flex;align-items:center;gap:1rem;}
+    .accordion-tag{font-family:var(--font-h);font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);background:rgba(67,44,151,.07);border-radius:2rem;padding:.25rem .625rem;flex-shrink:0;}
+    .accordion-title{font-family:var(--font-h);font-weight:800;font-size:1.05rem;color:var(--ink);line-height:1.2;}
+    .accordion-chevron{width:20px;height:20px;flex-shrink:0;color:var(--faint);transition:transform .25s cubic-bezier(.4,0,.2,1);}
+    .accordion-item.open .accordion-chevron{transform:rotate(180deg);}
+    .accordion-item.open .accordion-title{color:var(--purple);}
+    .accordion-body{overflow:hidden;max-height:0;transition:max-height .3s cubic-bezier(.4,0,.2,1);}
+    .accordion-body-inner{padding:0 0 1.5rem 0;font-size:.9375rem;color:var(--muted);line-height:1.7;max-width:560px;}
     .problem-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:3.5rem;}
     .prob-pill{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.875rem;padding:1.75rem 1.5rem;border-radius:var(--r-lg);border:1.5px solid transparent;transition:border-color .2s,box-shadow .2s,transform .2s;}
     .prob-pill:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);}
@@ -693,36 +706,42 @@
       <p>Traditional research measures opinion, not persuasion, and it is too late to be actionable.</p>
     </div>
 
-    <!-- 3 Problem pills -->
-    <div class="problem-row">
-      <div class="prob-pill pp-1 reveal reveal-delay-1">
-        <div class="prob-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        </div>
-        <div>
-          <div class="prob-label">No visibility</div>
-          <div class="prob-title">Spending blind on paid media</div>
-          <div class="prob-body">Six-figure ad buys chosen by committee, with no data on whether they move persuadable voters.</div>
-        </div>
-      </div>
-      <div class="prob-pill pp-2 reveal reveal-delay-2">
-        <div class="prob-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div>
-          <div class="prob-label">Too slow</div>
-          <div class="prob-title">Traditional polls can't keep up</div>
-          <div class="prob-body">3–6 weeks and $50–100k. Your campaign timeline doesn't have room for that feedback loop.</div>
+    <!-- Accordion -->
+    <div class="accordion reveal">
+      <div class="accordion-item open">
+        <button class="accordion-trigger" aria-expanded="true">
+          <div class="accordion-trigger-left">
+            <span class="accordion-tag">No visibility</span>
+            <span class="accordion-title">Spending blind on paid media</span>
+          </div>
+          <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 8 10 13 15 8"/></svg>
+        </button>
+        <div class="accordion-body" style="max-height:200px;">
+          <div class="accordion-body-inner">Six-figure ad buys chosen by committee, with no data on whether they move persuadable voters.</div>
         </div>
       </div>
-      <div class="prob-pill pp-3 reveal reveal-delay-3">
-        <div class="prob-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          <div class="accordion-trigger-left">
+            <span class="accordion-tag">Too slow</span>
+            <span class="accordion-title">Traditional polls can't keep up</span>
+          </div>
+          <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 8 10 13 15 8"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">3–6 weeks and $50–100k. Your campaign timeline doesn't have room for that feedback loop.</div>
         </div>
-        <div>
-          <div class="prob-label">Prove ROI</div>
-          <div class="prob-title">Funders want evidence, not instinct</div>
-          <div class="prob-body">Major donors and PAC investors are asking for proof that creative decisions are grounded in data.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false">
+          <div class="accordion-trigger-left">
+            <span class="accordion-tag">Prove ROI</span>
+            <span class="accordion-title">Funders want evidence, not instinct</span>
+          </div>
+          <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 8 10 13 15 8"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">Major donors and PAC investors are asking for proof that creative decisions are grounded in data.</div>
         </div>
       </div>
     </div>
@@ -1185,6 +1204,27 @@
     }
   });
 })();
+
+  // Accordion
+  document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.accordion-item');
+      const body = item.querySelector('.accordion-body');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.accordion-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.accordion-body').style.maxHeight = '0';
+        i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+      });
+      // Open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
 </script>
 </body>
 </html>
