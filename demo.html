@@ -129,6 +129,37 @@
     .success-link--ghost{border:1.5px solid rgba(67,44,151,.2);color:var(--purple);}
     .success-link--ghost:hover{background:rgba(67,44,151,.05);}
 
+    /* ── HUBSPOT FORM OVERRIDES ── */
+    #hubspot-form-wrap .hs-form{display:flex;flex-direction:column;gap:1.25rem;}
+    #hubspot-form-wrap .hs-form-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:0;}
+    #hubspot-form-wrap .hs-form-field label{font-family:var(--font-h);font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+    #hubspot-form-wrap .hs-input,
+    #hubspot-form-wrap input[type="text"],
+    #hubspot-form-wrap input[type="email"],
+    #hubspot-form-wrap input[type="tel"],
+    #hubspot-form-wrap select,
+    #hubspot-form-wrap textarea{width:100%!important;padding:.8125rem 1rem!important;font-family:var(--font-b)!important;font-size:.9375rem!important;color:var(--ink)!important;background:#fff!important;border:1.5px solid rgba(67,44,151,.15)!important;border-radius:.625rem!important;outline:none!important;transition:border-color .15s,box-shadow .15s!important;appearance:none!important;box-sizing:border-box!important;min-height:48px!important;}
+    #hubspot-form-wrap .hs-input:focus,
+    #hubspot-form-wrap input:focus,
+    #hubspot-form-wrap select:focus,
+    #hubspot-form-wrap textarea:focus{border-color:var(--purple)!important;box-shadow:0 0 0 3px rgba(67,44,151,.1)!important;}
+    #hubspot-form-wrap select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%239B8FBA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E")!important;background-repeat:no-repeat!important;background-position:right 1rem center!important;padding-right:2.5rem!important;cursor:pointer!important;}
+    #hubspot-form-wrap textarea{resize:vertical;min-height:100px!important;}
+    #hubspot-form-wrap .hs-button,
+    #hubspot-form-wrap input[type="submit"],
+    #hubspot-form-wrap .hs-button.primary{width:100%!important;padding:1rem!important;font-family:var(--font-h)!important;font-weight:800!important;font-size:1.0625rem!important;color:#fff!important;background:var(--purple)!important;border:none!important;border-radius:.75rem!important;cursor:pointer!important;transition:background .2s,transform .2s,box-shadow .2s!important;box-shadow:0 4px 20px rgba(67,44,151,.35)!important;letter-spacing:.01em!important;display:block!important;visibility:visible!important;opacity:1!important;margin-top:.5rem!important;}
+    #hubspot-form-wrap .hs-button:hover,
+    #hubspot-form-wrap input[type="submit"]:hover{background:#5038b0!important;transform:translateY(-2px)!important;}
+    #hubspot-form-wrap .hs-recaptcha,
+    #hubspot-form-wrap .g-recaptcha{transform:scale(.85);transform-origin:left center;margin-bottom:.5rem;}
+    #hubspot-form-wrap .hs-error-msgs{margin-top:.25rem;}
+    #hubspot-form-wrap .hs-error-msgs li{font-size:.8rem;color:#dc2626;list-style:none;}
+    #hubspot-form-wrap .inputs-list{list-style:none;padding:0;}
+    #hubspot-form-wrap .inputs-list li{margin-bottom:.375rem;}
+    #hubspot-form-wrap fieldset{max-width:100%!important;border:none!important;padding:0!important;}
+    #hubspot-form-wrap fieldset.form-columns-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    #hubspot-form-wrap .hs_submit{margin-top:.25rem;}
+
     /* ── FOOTER ── */
     .footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(255,255,255,.07);}
     .footer-top{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07);}
