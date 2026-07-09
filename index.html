@@ -467,12 +467,14 @@
     /* ─────────────────────────────────────────
        LOGO MARQUEE
     ───────────────────────────────────────── */
-    .logo-panel{background:var(--white);border-bottom:1px solid rgba(67,44,151,.08);padding:2rem 0;}
+    .logo-panel{background:var(--white);border-bottom:1px solid rgba(67,44,151,.08);padding:2rem 0;overflow:hidden;}
     .logo-panel-label{font-size:.7rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:1.25rem;text-align:center;}
-    .logo-panel-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.75rem 3.5rem;}
-    .logo-panel-row img{height:42px;width:auto;object-fit:contain;filter:grayscale(100%) opacity(.5);transition:filter .2s;}
-    .logo-panel-row img:hover{filter:grayscale(100%) opacity(.8);}
-    .logo-text{font-family:var(--font-h);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);opacity:.4;transition:opacity .2s;white-space:nowrap;}
+    .logo-marquee-wrap{overflow:hidden;-webkit-mask:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);mask:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);}
+    .logo-marquee-track{display:flex;align-items:center;gap:3.5rem;width:max-content;animation:marquee 40s linear infinite;}
+    .logo-marquee-track:hover{animation-play-state:paused;}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .logo-marquee-track img{height:38px;width:auto;max-width:140px;object-fit:contain;flex-shrink:0;opacity:.85;transition:opacity .2s;}
+    .logo-marquee-track img:hover{opacity:1;}
     .logo-item {
       display:flex; align-items:center; justify-content:center;
       width:180px; flex-shrink:0;
@@ -1380,17 +1382,80 @@
      LOGO MARQUEE
 ══════════════════════════════════════ -->
 <div class="logo-panel">
-  <div class="container">
-    <p class="logo-panel-label">Trusted by leading campaigns, nonprofits, and advocacy organizations</p>
-    <div class="logo-panel-row">
-      <img src="https://growprogress.ai/wp-content/uploads/2024/05/SEIU.png" alt="SEIU">
+  <p class="logo-panel-label">Trusted by leading campaigns, nonprofits, and advocacy organizations</p>
+  <div class="logo-marquee-wrap">
+    <div class="logo-marquee-track" id="marqueeTrack">
+      <img src="https://logo.clearbit.com/harrisforrpresident.com" alt="Harris for President">
+      <img src="https://logo.clearbit.com/texasdemocrats.org" alt="Texas Democrats">
+      <img src="https://logo.clearbit.com/progressnow.org" alt="Progress Now">
+      <img src="https://logo.clearbit.com/changemediagroup.com" alt="Change Media Group">
+      <img src="https://logo.clearbit.com/edf.org" alt="EDF">
+      <img src="https://logo.clearbit.com/equisresearch.com" alt="Equis Research">
+      <img src="https://logo.clearbit.com/lcv.org" alt="League of Conservation Voters">
+      <img src="https://logo.clearbit.com/prioritiesusa.org" alt="Priorities USA">
+      <img src="https://logo.clearbit.com/feedingamerica.org" alt="Feeding America">
+      <img src="https://logo.clearbit.com/communitychange.org" alt="Community Change Action">
       <img src="https://growprogress.ai/wp-content/uploads/2024/06/NEA-341x115.webp" alt="NEA">
-      <img src="https://growprogress.ai/wp-content/uploads/2024/05/Galvanize-Action.png" alt="Galvanize Action">
-      <span class="logo-text">Brennan Center</span>
-      <span class="logo-text">Feeding America</span>
-      <span class="logo-text">Orchestra</span>
-      <span class="logo-text">Earthjustice</span>
-      <span class="logo-text">AFL-CIO</span>
+      <img src="https://logo.clearbit.com/ohiodems.org" alt="Ohio Democratic Party">
+      <img src="https://logo.clearbit.com/aft.org" alt="AFT">
+      <img src="https://logo.clearbit.com/forwardmajority.org" alt="Forward Majority">
+      <img src="https://logo.clearbit.com/standupamerica.org" alt="Stand Up America">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/AFSCME.png" alt="AFSCME">
+      <img src="https://logo.clearbit.com/plannedparenthood.org" alt="Planned Parenthood">
+      <img src="https://logo.clearbit.com/aclu.org" alt="ACLU">
+      <img src="https://logo.clearbit.com/brennancenter.org" alt="Brennan Center for Justice">
+      <img src="https://logo.clearbit.com/dccc.org" alt="DCCC">
+      <img src="https://logo.clearbit.com/precisionstrats.com" alt="Precision">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/Galvanize-Action.png" alt="Galvanize USA">
+      <img src="https://logo.clearbit.com/everytown.org" alt="Everytown for Gun Safety">
+      <img src="https://logo.clearbit.com/newblueinteractive.com" alt="NewBlue Interactive">
+      <img src="https://logo.clearbit.com/voteamerica.com" alt="VoteAmerica">
+      <img src="https://logo.clearbit.com/winningmark.com" alt="WinningMark">
+      <img src="https://logo.clearbit.com/impactresearch.com" alt="Impact Research">
+      <img src="https://logo.clearbit.com/naral.org" alt="NARAL Pro-Choice America">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/SEIU.png" alt="SEIU">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/New-Media-Firm-1-535x115.png" alt="The New Media Firm">
+      <img src="https://logo.clearbit.com/foglamp.com" alt="Foglamp">
+      <img src="https://logo.clearbit.com/gqrr.com" alt="GQR">
+      <img src="https://logo.clearbit.com/moveon.org" alt="MoveOn">
+      <img src="https://logo.clearbit.com/parentstogether.org" alt="Parents Together">
+      <img src="https://logo.clearbit.com/abetterwisconsin.org" alt="A Better Wisconsin Together">
+      <!-- Duplicate set for seamless loop -->
+      <img src="https://logo.clearbit.com/harrisforrpresident.com" alt="Harris for President">
+      <img src="https://logo.clearbit.com/texasdemocrats.org" alt="Texas Democrats">
+      <img src="https://logo.clearbit.com/progressnow.org" alt="Progress Now">
+      <img src="https://logo.clearbit.com/changemediagroup.com" alt="Change Media Group">
+      <img src="https://logo.clearbit.com/edf.org" alt="EDF">
+      <img src="https://logo.clearbit.com/equisresearch.com" alt="Equis Research">
+      <img src="https://logo.clearbit.com/lcv.org" alt="League of Conservation Voters">
+      <img src="https://logo.clearbit.com/prioritiesusa.org" alt="Priorities USA">
+      <img src="https://logo.clearbit.com/feedingamerica.org" alt="Feeding America">
+      <img src="https://logo.clearbit.com/communitychange.org" alt="Community Change Action">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/NEA-341x115.webp" alt="NEA">
+      <img src="https://logo.clearbit.com/ohiodems.org" alt="Ohio Democratic Party">
+      <img src="https://logo.clearbit.com/aft.org" alt="AFT">
+      <img src="https://logo.clearbit.com/forwardmajority.org" alt="Forward Majority">
+      <img src="https://logo.clearbit.com/standupamerica.org" alt="Stand Up America">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/AFSCME.png" alt="AFSCME">
+      <img src="https://logo.clearbit.com/plannedparenthood.org" alt="Planned Parenthood">
+      <img src="https://logo.clearbit.com/aclu.org" alt="ACLU">
+      <img src="https://logo.clearbit.com/brennancenter.org" alt="Brennan Center for Justice">
+      <img src="https://logo.clearbit.com/dccc.org" alt="DCCC">
+      <img src="https://logo.clearbit.com/precisionstrats.com" alt="Precision">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/Galvanize-Action.png" alt="Galvanize USA">
+      <img src="https://logo.clearbit.com/everytown.org" alt="Everytown for Gun Safety">
+      <img src="https://logo.clearbit.com/newblueinteractive.com" alt="NewBlue Interactive">
+      <img src="https://logo.clearbit.com/voteamerica.com" alt="VoteAmerica">
+      <img src="https://logo.clearbit.com/winningmark.com" alt="WinningMark">
+      <img src="https://logo.clearbit.com/impactresearch.com" alt="Impact Research">
+      <img src="https://logo.clearbit.com/naral.org" alt="NARAL Pro-Choice America">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/05/SEIU.png" alt="SEIU">
+      <img src="https://growprogress.ai/wp-content/uploads/2024/06/New-Media-Firm-1-535x115.png" alt="The New Media Firm">
+      <img src="https://logo.clearbit.com/foglamp.com" alt="Foglamp">
+      <img src="https://logo.clearbit.com/gqrr.com" alt="GQR">
+      <img src="https://logo.clearbit.com/moveon.org" alt="MoveOn">
+      <img src="https://logo.clearbit.com/parentstogether.org" alt="Parents Together">
+      <img src="https://logo.clearbit.com/abetterwisconsin.org" alt="A Better Wisconsin Together">
     </div>
   </div>
 </div>
