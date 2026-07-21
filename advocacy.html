@@ -219,7 +219,7 @@
     ═══════════════════════════════════════ */
     .timeline-section{background:var(--white);padding:6rem 0;}
 
-    .tl-stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;position:relative;margin-top:3.5rem;}
+    .tl-stage-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;position:relative;margin-top:3.5rem;}
 
     .tl-stage-grid::before{
       content:'';
@@ -242,12 +242,14 @@
       opacity:0;
       transform:translateY(32px);
       transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1),box-shadow .25s;
+      min-width:0;
     }
     .tl-stage.visible{opacity:1;transform:translateY(0);}
     .tl-stage:nth-child(1){transition-delay:.05s;}
     .tl-stage:nth-child(2){transition-delay:.15s;}
     .tl-stage:nth-child(3){transition-delay:.25s;}
     .tl-stage:nth-child(4){transition-delay:.35s;}
+    .tl-stage:nth-child(5){transition-delay:.45s;}
 
     .tl-badge{
       width:54px;height:54px;
@@ -377,6 +379,7 @@
       .case-image{min-height:240px;}
       .tl-stage-grid{grid-template-columns:repeat(2,1fr);}
       .tl-stage-grid::before{display:none;}
+      .tl-stage:last-child{grid-column:1/-1;max-width:calc(50% - .75rem);margin:0 auto;}
     }
     @media(max-width:900px){
       .compare-grid{grid-template-columns:1fr;}.compare-divider{display:none;}
@@ -387,6 +390,7 @@
     @media(max-width:640px){
       .container{padding:0 1.25rem;}.section{padding:4rem 0;}
       .tl-stage-grid{grid-template-columns:1fr;}
+      .tl-stage:last-child{max-width:none;margin:0;}
       .test-grid{grid-template-columns:1fr 1fr;}
       .footer-top{grid-template-columns:1fr;}
     }
@@ -774,7 +778,7 @@
   <div class="container" style="position:relative;z-index:1;">
     <div class="sh sh-center reveal">
       <span class="chip chip-light">Audience Targeting</span>
-      <h2 style="color:#fff;">Reach every audience<br>with the message that <em style="color:var(--blue);">moves them.</em></h2>
+      <h2 style="color:#fff;">Reach every audience<br>with a message that <em style="color:var(--blue);">moves them.</em></h2>
       <p style="color:rgba(255,255,255,.5);">Different audiences respond to different frames. Grow Progress maps your landscape, from persuadable swing voters to mobilizable base, so every dollar of media spend is backed by evidence.</p>
     </div>
     <div class="audience-targets-grid reveal">
@@ -813,7 +817,7 @@
       <p>The strongest advocacy organizations build a continuous evidence loop from launch through legislative close.</p>
     </div>
 
-    <div class="tl-stage-grid" id="tlGrid" style="grid-template-columns:repeat(5,1fr);">
+    <div class="tl-stage-grid" id="tlGrid">
 
       <div class="tl-stage tl-s1">
         <div class="tl-badge">01</div>
@@ -863,7 +867,7 @@
         </div>
       </div>
 
-      <div class="tl-stage" style="opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.22,1,.36,1) .45s,transform .6s cubic-bezier(.22,1,.36,1) .45s;">
+      <div class="tl-stage">
         <div class="tl-badge" style="background:linear-gradient(135deg,#a78bfa,#DCD2FF);box-shadow:0 0 0 6px rgba(167,139,250,.12),0 4px 16px rgba(167,139,250,.3);">05</div>
         <div class="tl-card">
           <div class="tl-stage-label">Legislative Close</div>
