@@ -122,7 +122,7 @@
     .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2);}
 
     /* ── HERO ── */
-    .hero { min-height:88vh; display:flex; align-items:center; padding:7rem 0 4rem; background:linear-gradient(160deg,#F2F2FD 0%,#fff 50%,#F2F2FD 100%); position:relative; overflow:hidden; }
+    .hero { display:flex; align-items:center; padding:8rem 0 8.7rem; background:linear-gradient(160deg,#F2F2FD 0%,#fff 50%,#F2F2FD 100%); position:relative; overflow:hidden; }
     .hero::before { content:''; position:absolute; top:-20%; left:-10%; width:600px; height:600px; background:radial-gradient(ellipse,rgba(67,44,151,.07) 0%,transparent 70%); pointer-events:none; }
     .hero::after { content:''; position:absolute; bottom:-10%; right:-5%; width:500px; height:500px; background:radial-gradient(ellipse,rgba(108,155,255,.06) 0%,transparent 70%); pointer-events:none; }
     .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; position:relative; z-index:1; }
@@ -194,6 +194,21 @@
     .logos-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.5rem 3rem;}
     .logos-row img{height:28px;width:auto;object-fit:contain;filter:grayscale(100%) opacity(40%);transition:filter .2s;}
     .logos-row img:hover{filter:grayscale(100%) opacity(70%);}
+
+    /* ── TRUSTED-BY LOGO BAR (static version of homepage marquee) ── */
+    .logo-panel{background:var(--ghost);border-top:1px solid rgba(67,44,151,.07);border-bottom:1px solid rgba(67,44,151,.07);padding:2.5rem 0;}
+    .logo-panel-label{font-size:.7rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);margin-bottom:1.75rem;text-align:center;}
+    .logo-static-rows{display:flex;flex-direction:column;gap:1.75rem;max-width:1120px;margin:0 auto;}
+    /* Fixed column counts (not flex-wrap) so a row never reflows and strands a lone logo on its own line */
+    .logo-static-row{display:grid;align-items:center;justify-items:center;gap:1.75rem 1.5rem;}
+    .logo-static-row--7{grid-template-columns:repeat(7,1fr);}
+    .logo-static-row--6{grid-template-columns:repeat(6,1fr);}
+    .logo-static-row img{height:56px;width:auto;max-width:100%;object-fit:contain;opacity:.85;transition:opacity .2s;}
+    .logo-static-row img:hover{opacity:1;}
+    @media(max-width:640px){
+      .logo-static-row--7,.logo-static-row--6{grid-template-columns:repeat(4,1fr);gap:1.25rem .75rem;}
+      .logo-static-row img{height:40px;}
+    }
 
     /* ── SECTION HEADER ── */
     .sh{margin-bottom:3.5rem;}
@@ -674,6 +689,42 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════════════
+     TRUSTED BY (static logo bar)
+══════════════════════════════════════ -->
+<div class="logo-panel">
+  <p class="logo-panel-label">Trusted by leading campaigns, nonprofits, labor unions, and advocacy organizations</p>
+  <div class="container">
+    <div class="logo-static-rows">
+    <div class="logo-static-row logo-static-row--7">
+      <img src="client-logos/SEIU.png" alt="SEIU">
+      <img src="client-logos/national-education-association-nea-logo-png_seeklogo-317887.png" alt="NEA">
+      <img src="client-logos/cropped-GALU-logo-small.png.webp" alt="Galvanize Action">
+      <img src="client-logos/Progress now.png" alt="Progress Now">
+      <img src="client-logos/Equis .png" alt="Equis Research">
+      <img src="client-logos/Feeding america.svg" alt="Feeding America">
+      <img src="client-logos/Forward Majority Logo_Transparent.svg" alt="Forward Majority">
+    </div>
+    <div class="logo-static-row logo-static-row--7">
+      <img src="client-logos/Brennan_Center_for_Justice_logo.svg" alt="Brennan Center for Justice">
+      <img src="client-logos/a-better-wisconsin-together-pf-logo.webp" alt="A Better Wisconsin Together">
+      <img src="client-logos/World-Central-Kitchen-Logo-Vector.svg-.png" alt="World Central Kitchen">
+      <img src="client-logos/CLF_logolockup_horizontal_fullcolor.png.webp" alt="Conservation Law Foundation">
+      <img src="client-logos/ACLU-LOGO.png" alt="ACLU">
+      <img src="client-logos/US_Democratic_Party_Logo.svg.png" alt="Democratic Party">
+      <img src="client-logos/AFL-CIO-seal.svg" alt="AFL-CIO">
+    </div>
+    <div class="logo-static-row logo-static-row--6">
+      <img src="client-logos/ej_logo.svg" alt="Earthjustice">
+      <img src="client-logos/EDF_color_webRGB_2022.png" alt="EDF">
+      <img src="client-logos/RI_Logo_Night-1.png" alt="Refugees International">
+      <img src="client-logos/Orchestra Logo.svg" alt="Orchestra">
+      <img src="client-logos/GSG Logo.svg" alt="GSG">
+      <img src="client-logos/charity_water_logo-3_large.png.avif" alt="charity: water">
+    </div>
+    </div>
+  </div>
+</div>
 
 <!-- WHAT IS A PULSE SURVEY -->
 <section class="what-section">
