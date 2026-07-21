@@ -446,7 +446,10 @@
     .logo-static-row img{height:56px;width:auto;max-width:100%;object-fit:contain;opacity:.85;transition:opacity .2s;}
     .logo-static-row img:hover{opacity:1;}
     @media(max-width:640px){
-      .logo-static-row--7,.logo-static-row--6{grid-template-columns:repeat(4,1fr);gap:1.25rem .75rem;}
+      /* Flatten the 7/7/6 row grouping into one continuous grid so all 20 logos
+         fill exactly 5 even rows of 4, instead of each group leaving its own short row */
+      .logo-static-rows{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem .75rem;}
+      .logo-static-row{display:contents;}
       .logo-static-row img{height:40px;}
     }
 
