@@ -548,7 +548,7 @@
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
   }, {threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible'); else obs.observe(el); });
 
   // Sidebar active TOC link on scroll
   const headings = document.querySelectorAll('.post-body h2[id]');

@@ -1082,7 +1082,7 @@
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
   }, {threshold:0.1});
-  revealEls.forEach(el => obs.observe(el));
+  revealEls.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible'); else obs.observe(el); });
 
   // Timeline card reveal (uses its own class .tl-stage)
   const tlStages = document.querySelectorAll('.tl-stage');

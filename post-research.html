@@ -793,7 +793,7 @@
       }
     });
   }, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible'); else obs.observe(el); });
 </script>
 <script>
 (function(){
