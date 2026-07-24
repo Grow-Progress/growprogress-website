@@ -102,11 +102,11 @@
     .tour-step.active .tour-step-progress{opacity:1;}
 
     .tour-diagram-wrap{position:sticky;top:calc(68px + 2rem);height:calc(100vh - 68px - 4rem);display:flex;align-items:center;padding-left:3rem;border-left:1px solid rgba(67,44,151,.08);}
-    .tour-diagram{width:100%;max-width:460px;}
+    .tour-diagram{width:100%;max-width:460px;display:grid;align-items:center;}
 
-    .diag{display:none;animation:fadeIn .35s ease;}
-    .diag.active{display:block;}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+    .diag{grid-area:1/1;opacity:0;transform:translateY(12px);transition:opacity .5s cubic-bezier(.4,0,.2,1),transform .5s cubic-bezier(.4,0,.2,1);pointer-events:none;}
+    .diag.active{opacity:1;transform:none;pointer-events:auto;}
+    @media (prefers-reduced-motion: reduce){.diag{transition:opacity .2s ease;transform:none;}}
 
     .diag-card{background:var(--ghost);border-radius:1.5rem;padding:1.75rem;border:1px solid rgba(67,44,151,.08);}
     .diag-label{font-family:var(--font-h);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:1.25rem;}
