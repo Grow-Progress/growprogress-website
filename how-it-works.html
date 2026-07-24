@@ -114,7 +114,8 @@
     .people-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;}
     .person{width:100%;aspect-ratio:1;border-radius:50%;}
     .person--rep{background:var(--lavender);}
-    .person--grey{background:rgba(155,143,186,.3);}
+    .person--grey{background:rgba(155,143,186,.13);}
+    .person--target{background:var(--purple);}
     .person--control{background:rgba(220,210,255,.5);}
     .person--test{background:var(--purple);}
 
@@ -825,7 +826,7 @@
     }
   }
   buildGrid('panel-grid', 100, 100, 'person--rep');
-  buildGrid('targeted-grid', 100, 68, 'person--rep');
+  buildGrid('targeted-grid', 100, 45, 'person--target');
   buildGrid('control-people', 25, 25, 'person--control');
   buildGrid('test-people', 25, 25, 'person--test');
 
